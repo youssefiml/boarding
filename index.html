@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,7 +10,7 @@
         const key = 'boarding-theme';
         const path = window.location.pathname;
         const forceLightAuth = path.startsWith('/login') || path.startsWith('/register');
-        let mode = 'light';
+        let mode = forceLightAuth ? 'light' : 'dark';
 
         if (!forceLightAuth) {
           try {
@@ -25,7 +25,7 @@
               mode = 'dark';
             }
           } catch {
-            mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            mode = 'dark';
           }
         }
 
@@ -39,4 +39,5 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+
 
