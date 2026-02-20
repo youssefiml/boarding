@@ -27,19 +27,9 @@ function AuthIllustration({ compact = false }: AuthIllustrationProps) {
       </div>
 
       <figcaption className="mt-5 text-center">
-        <img
-          src={boardingLogo}
-          alt={`${APP_NAME} logo`}
-          className={`mx-auto h-auto w-full object-contain ${compact ? 'max-w-[220px]' : 'max-w-[330px]'}`}
-        />
         <p className="mt-2 text-sm leading-6 text-slate-600">
           Unify onboarding, matching, and placement actions in one focused student workspace.
         </p>
-        <div className="mt-4 flex items-center justify-center gap-2">
-          <span className="h-2.5 w-7 rounded-full bg-emerald-500" />
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-300" />
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-200" />
-        </div>
       </figcaption>
     </figure>
   );
