@@ -1,0 +1,15 @@
+.empty-state {
+  @apply flex flex-col items-center rounded-2xl border border-dashed border-slate-300 bg-slate-50/85 px-6 py-10 text-center;
+}
+
+.empty-state__title {
+  @apply text-lg font-semibold text-slate-900;
+}
+
+.empty-state__description {
+  @apply mt-2 max-w-md text-sm leading-6 text-slate-600;
+}
+
+.empty-state__action {
+  @apply mt-5;
+}

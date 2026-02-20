@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/boarding-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BOARDING AGENCY</title>
+    <script>
+      (() => {
+        const key = 'boarding-theme';
+        const path = window.location.pathname;
+        const forceLightAuth = path.startsWith('/login') || path.startsWith('/register');
+        let mode = 'light';
+
+        if (!forceLightAuth) {
+          try {
+            const stored = localStorage.getItem(key);
+            if (stored) {
+              const parsed = JSON.parse(stored);
+              const savedMode = parsed?.state?.mode;
+              if (savedMode === 'light' || savedMode === 'dark') {
+                mode = savedMode;
+              }
+            } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+              mode = 'dark';
+            }
+          } catch {
+            mode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+        }
+
+        document.documentElement.dataset.theme = mode;
+        document.documentElement.classList.toggle('dark', mode === 'dark');
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

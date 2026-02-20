@@ -1,0 +1,70 @@
+.app-sidebar {
+  @apply hidden shrink-0 rounded-3xl border border-slate-200/90 bg-white/95 p-4 shadow-panel animate-fade-in-up lg:flex lg:flex-col;
+  width: 286px;
+}
+
+.app-sidebar__brand-card {
+  @apply rounded-2xl border border-brand-100 bg-gradient-to-br from-brand-50 via-white to-accent-50 p-4;
+}
+
+.app-sidebar__brand-name {
+  @apply font-display text-xl font-semibold tracking-tight text-slate-900;
+}
+
+.app-sidebar__brand-subtitle {
+  @apply text-xs text-slate-500;
+}
+
+.app-sidebar__nav {
+  @apply mt-5 flex flex-1 flex-col gap-1.5;
+}
+
+.app-sidebar__nav-link {
+  @apply flex items-center justify-between rounded-xl border px-3 py-2.5 text-sm font-semibold transition-all;
+}
+
+.app-sidebar__nav-link.is-active {
+  @apply border-brand-200 bg-brand-50 text-brand-700 shadow-sm;
+}
+
+.app-sidebar__nav-link.is-inactive {
+  @apply border-transparent text-slate-600 hover:border-slate-200 hover:bg-slate-50 hover:text-slate-900;
+}
+
+.app-sidebar__nav-link-main {
+  @apply flex items-center gap-2.5;
+}
+
+.app-sidebar__nav-icon {
+  @apply h-4 w-4 shrink-0;
+}
+
+.app-sidebar__nav-hint {
+  @apply font-medium uppercase text-slate-400 transition-colors group-hover:text-slate-500;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+.app-sidebar__security {
+  @apply rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3;
+}
+
+.app-sidebar__security-title {
+  @apply text-xs font-semibold uppercase tracking-wide text-slate-500;
+}
+
+.app-sidebar__security-text {
+  @apply mt-1 text-xs text-slate-600;
+}
+
+.app-sidebar__logout-wrap {
+  @apply mt-4 pt-1;
+}
+
+.app-sidebar__logout-button {
+  @apply w-full;
+}
+
+.app-sidebar__logout-icon {
+  @apply h-4 w-4;
+}

@@ -1,0 +1,95 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --surface-page: #f4f7fd;
+  --surface-card: #ffffff;
+  --ink-primary: #101828;
+  --ink-muted: #475467;
+  --ring-brand: #2868f0;
+  --surface-radial-brand: rgba(40, 104, 240, 0.22);
+  --surface-radial-accent: rgba(29, 158, 144, 0.2);
+  --surface-grid: rgba(16, 24, 40, 0.03);
+  --selection-bg: rgba(78, 140, 255, 0.24);
+}
+
+:root[data-theme='dark'],
+.dark {
+  color-scheme: dark;
+  --surface-page: #020617;
+  --surface-card: #0f172a;
+  --ink-primary: #e2e8f0;
+  --ink-muted: #94a3b8;
+  --ring-brand: #67a2ff;
+  --surface-radial-brand: rgba(59, 130, 246, 0.24);
+  --surface-radial-accent: rgba(16, 185, 129, 0.2);
+  --surface-grid: rgba(148, 163, 184, 0.08);
+  --selection-bg: rgba(96, 165, 250, 0.34);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Public Sans', 'Segoe UI', sans-serif;
+  color: var(--ink-primary);
+  background:
+    radial-gradient(circle at 0% 0%, var(--surface-radial-brand), transparent 36%),
+    radial-gradient(circle at 100% 0%, var(--surface-radial-accent), transparent 34%),
+    linear-gradient(var(--surface-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--surface-grid) 1px, transparent 1px),
+    var(--surface-page);
+  background-size: auto, auto, 42px 42px, 42px 42px, auto;
+  transition:
+    color 180ms ease-out,
+    background-color 180ms ease-out;
+}
+
+#root {
+  isolation: isolate;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ring-brand);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--selection-bg);
+}

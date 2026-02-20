@@ -1,0 +1,7 @@
+.progress-bar {
+  @apply h-2.5 w-full overflow-hidden rounded-full bg-slate-200;
+}
+
+.progress-bar__fill {
+  @apply h-full rounded-full bg-gradient-to-r from-brand-500 via-brand-400 to-accent-500 transition-all duration-500;
+}

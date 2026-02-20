@@ -1,0 +1,21 @@
+.pagination {
+  @apply mt-5 flex flex-col items-stretch gap-2;
+}
+
+.pagination__button {
+  @apply w-full;
+}
+
+.pagination__counter {
+  @apply text-center text-sm text-slate-600;
+}
+
+@media (min-width: 640px) {
+  .pagination {
+    @apply flex-row items-center justify-end;
+  }
+
+  .pagination__button {
+    width: auto;
+  }
+}

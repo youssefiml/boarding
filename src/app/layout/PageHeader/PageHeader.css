@@ -1,0 +1,20 @@
+.page-header {
+  @apply mb-5 flex animate-fade-in-up flex-col gap-3 sm:mb-7 sm:flex-row sm:items-center sm:justify-between;
+}
+
+.page-header__kicker {
+  @apply text-xs font-semibold uppercase text-brand-600;
+  letter-spacing: 0.14em;
+}
+
+.page-header__title {
+  @apply mt-1 font-display text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl;
+}
+
+.page-header__subtitle {
+  @apply mt-1 text-sm leading-6 text-slate-600;
+}
+
+.page-header__action {
+  @apply w-full sm:w-auto;
+}

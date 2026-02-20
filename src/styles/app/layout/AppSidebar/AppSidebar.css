@@ -1,0 +1,77 @@
+﻿.app-sidebar {
+  @apply sticky top-4 z-30 hidden shrink-0 self-start xl:flex;
+  width: 64px;
+  height: calc(100vh - 2rem);
+}
+
+.app-sidebar__rail {
+  @apply flex h-full w-full flex-col rounded-3xl border border-slate-200/90 bg-white/95 px-2 py-3 shadow-panel transition-colors dark:border-slate-700/90 dark:bg-slate-900/90;
+}
+
+.app-sidebar__rail-logo {
+  @apply mx-auto flex h-11 w-11 items-center justify-center;
+}
+
+.app-sidebar__rail-logo-image {
+  @apply h-11 w-11 object-cover;
+  object-position: 22% 50%;
+}
+
+.app-sidebar__rail-nav {
+  @apply mt-4 flex flex-1 flex-col items-center gap-1.5 overflow-visible pb-1;
+}
+
+.app-sidebar__rail-link {
+  @apply relative grid h-10 w-10 place-items-center rounded-xl border transition-all duration-200;
+}
+
+.app-sidebar__rail-link.is-active {
+  @apply border-brand-200 bg-brand-50 text-brand-700 shadow-sm dark:border-brand-500/60 dark:bg-brand-500/20 dark:text-brand-100;
+}
+
+.app-sidebar__rail-link.is-inactive {
+  @apply border-transparent text-slate-500 hover:border-slate-200 hover:bg-slate-50 hover:text-slate-800 dark:text-slate-400 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-100;
+}
+
+.app-sidebar__rail-button {
+  @apply bg-transparent;
+}
+
+.app-sidebar__rail-icon {
+  @apply h-[18px] w-[18px];
+}
+
+.app-sidebar__tooltip {
+  @apply pointer-events-none absolute left-[calc(100%+12px)] top-1/2 z-50 rounded-md bg-slate-900 px-2.5 py-2 text-xs font-semibold text-white opacity-0 shadow-lg transition-all duration-200;
+  transform: translate(-8px, -50%);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.app-sidebar__tooltip::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 50%;
+  width: 6px;
+  height: 10px;
+  background: rgb(15 23 42);
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
+  transform: translateY(-50%);
+}
+
+.app-sidebar__rail-link:hover .app-sidebar__tooltip,
+.app-sidebar__rail-link:focus-visible .app-sidebar__tooltip {
+  @apply opacity-100;
+  transform: translate(0, -50%);
+}
+
+.app-sidebar__rail-footer {
+  @apply mt-3 border-t border-slate-200/80 pt-3 dark:border-slate-700/80;
+}
+
+.app-sidebar__rail-footer .app-sidebar__rail-link + .app-sidebar__rail-link {
+  @apply mt-1.5;
+}
+
+

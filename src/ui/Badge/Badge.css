@@ -1,0 +1,19 @@
+.badge {
+  @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold tracking-wide;
+}
+
+.badge--brand {
+  @apply border border-brand-200 bg-brand-50 text-brand-800;
+}
+
+.badge--success {
+  @apply border border-emerald-200 bg-emerald-50 text-emerald-800;
+}
+
+.badge--warning {
+  @apply border border-amber-200 bg-amber-50 text-amber-800;
+}
+
+.badge--neutral {
+  @apply border border-slate-200 bg-slate-50 text-slate-700;
+}
