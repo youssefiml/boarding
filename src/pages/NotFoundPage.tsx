@@ -5,7 +5,7 @@ import { Button } from '@/ui/Button/Button';
 
 export function NotFoundPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
+    <div className="flex min-h-dvh items-center justify-center px-4">
       <div className="max-w-md rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-panel">
         <p className="text-sm font-semibold uppercase tracking-wide text-brand-600">404</p>
         <h1 className="mt-2 font-display text-4xl text-slate-900">Page not found</h1>
@@ -17,4 +17,5 @@ export function NotFoundPage() {
     </div>
   );
 }
+
 

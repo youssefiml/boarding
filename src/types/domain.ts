@@ -22,6 +22,8 @@ export interface StudentProfile {
   educationLevel: 'high_school' | 'bachelor' | 'master' | 'other';
   fieldOfStudy: string;
   graduationYear: string;
+  expectedInternshipDuration?: '3_months' | '6_months' | '12_months' | 'flexible';
+  availabilityStartDate?: string;
   preferredCountry: string;
   preferredIndustry: string;
   languages: string;

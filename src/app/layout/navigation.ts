@@ -9,6 +9,7 @@ export interface NavigationItem {
 
 export type NavigationIcon =
   | 'dashboard'
+  | 'profile'
   | 'onboarding'
   | 'matching'
   | 'appointments'
@@ -18,6 +19,7 @@ export type NavigationIcon =
 
 const navigationIconPaths: Record<NavigationIcon, string> = {
   dashboard: 'M3.5 3.5h7v7h-7z M13.5 3.5h7v4.5h-7z M13.5 10.5h7v10h-7z M3.5 13.5h7v7h-7z',
+  profile: 'M12 12a4 4 0 1 0 0-8a4 4 0 0 0 0 8z M4 20a8 8 0 0 1 16 0',
   onboarding: 'M8 3.5h8 M9 3.5v2 M15 3.5v2 M5 7.5h14 M5.5 6h13a1.5 1.5 0 0 1 1.5 1.5V19a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 19V7.5A1.5 1.5 0 0 1 5.5 6z M9.5 13.5l2 2 4-4',
   matching: 'M10 4.5a5.5 5.5 0 1 0 0 11a5.5 5.5 0 0 0 0-11z M14.5 14.5L20 20',
   appointments:
@@ -30,6 +32,7 @@ const navigationIconPaths: Record<NavigationIcon, string> = {
 
 export const navigationItems: NavigationItem[] = [
   { label: 'Dashboard', path: ROUTES.dashboard, hint: 'Overview', icon: 'dashboard' },
+  { label: 'Profile', path: ROUTES.profile, hint: 'Readiness', icon: 'profile' },
   { label: 'Onboarding', path: ROUTES.onboarding, hint: 'Setup', icon: 'onboarding' },
   { label: 'Matching', path: ROUTES.matching, hint: 'Opportunities', icon: 'matching' },
   { label: 'Appointments', path: ROUTES.appointments, hint: 'Schedule', icon: 'appointments' },

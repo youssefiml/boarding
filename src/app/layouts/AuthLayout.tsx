@@ -40,7 +40,7 @@ export function AuthLayout() {
   const isLogin = location.pathname.includes('/login');
 
   return (
-    <div className="relative min-h-screen overflow-hidden px-3 py-4 sm:px-5 sm:py-8 lg:px-8">
+    <div className="relative min-h-dvh overflow-hidden px-3 py-4 sm:px-5 sm:py-8 lg:px-8">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(143,214,184,0.45),transparent_36%),radial-gradient(circle_at_bottom_right,_rgba(29,158,144,0.22),transparent_34%),linear-gradient(135deg,_#e8f6ee_0%,_#eef8f4_50%,_#f7fbff_100%)]" />
 
       <div className="mx-auto w-full max-w-6xl">
@@ -81,5 +81,6 @@ export function AuthLayout() {
     </div>
   );
 }
+
 
 

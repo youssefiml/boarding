@@ -21,19 +21,20 @@ export const onboardingSteps = [
   {
     id: 'personal',
     title: 'Personal information',
-    description: 'Basic details used by recruiters and placement agents.',
+    description:
+      'Recruiters use this information to evaluate your profile. Make sure it is accurate and up to date.',
     fields: ['firstName', 'lastName', 'email', 'phone'] as const,
   },
   {
     id: 'education',
-    title: 'Academic profile',
-    description: 'Your education and specialization fit.',
+    title: 'Education',
+    description: 'Your academic background helps us align you with companies that match your learning track.',
     fields: ['educationLevel', 'fieldOfStudy', 'graduationYear'] as const,
   },
   {
     id: 'preferences',
-    title: 'Placement preferences',
-    description: 'Country, industry and practical support expectations.',
+    title: 'Preferences',
+    description: 'Define your destination, industry, and support needs so your matching quality improves.',
     fields: ['preferredCountry', 'preferredIndustry', 'languages', 'housingSupportNeeded', 'bio'] as const,
   },
 ] as const;

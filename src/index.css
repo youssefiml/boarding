@@ -93,3 +93,9 @@ textarea {
 ::selection {
   background: var(--selection-bg);
 }
+@media (max-width: 767px) {
+  body {
+    background: var(--surface-page);
+    background-size: auto;
+  }
+}

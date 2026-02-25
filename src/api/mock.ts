@@ -129,6 +129,8 @@ let profileStore: StudentProfile = {
   educationLevel: 'bachelor',
   fieldOfStudy: 'Business Administration',
   graduationYear: '2027',
+  expectedInternshipDuration: '6_months',
+  availabilityStartDate: inDays(28).slice(0, 10),
   preferredCountry: 'Germany',
   preferredIndustry: 'Hospitality',
   languages: 'English, French',
