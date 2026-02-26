@@ -693,7 +693,9 @@ export function MessagingPage() {
 
   return (
     <div>
-      <PageHeader title="Messaging" subtitle="Keep placement conversations calm, clear, and action oriented." />
+      <div className="hidden md:block">
+        <PageHeader title="Messaging" subtitle="Keep placement conversations calm, clear, and action oriented." />
+      </div>
 
       <div className="grid gap-3 sm:gap-4 lg:grid-cols-[minmax(260px,0.34fr)_minmax(0,1fr)] xl:grid-cols-[minmax(260px,0.25fr)_minmax(0,0.5fr)_minmax(280px,0.25fr)]">
         <Card className={cn('lg:min-h-[620px] min-w-0 p-3 sm:p-4', shouldShowThreadList ? 'block' : 'hidden lg:block')}>
@@ -814,8 +816,8 @@ export function MessagingPage() {
         <Card className={cn('lg:min-h-[620px] min-w-0 p-3 sm:p-4', shouldShowConversation ? 'flex flex-col' : 'hidden lg:flex lg:flex-col')}>
           {selectedThread ? (
             <>
-              <div className="flex items-start justify-between gap-3 border-b border-slate-200 pb-3 dark:border-slate-700">
-                <div className="flex items-start gap-3">
+              <div className="flex flex-col gap-3 border-b border-slate-200 pb-3 dark:border-slate-700 md:flex-row md:items-start md:justify-between">
+                <div className="flex min-w-0 items-start gap-3">
                   {!isDesktop ? (
                     <Button
                       type="button"
@@ -833,20 +835,22 @@ export function MessagingPage() {
                     {companyInitials(selectedThread.companyName)}
                   </div>
 
-                  <div>
-                    <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">{selectedThread.companyName}</h2>
-                    <div className="mt-1 flex items-center gap-2">
+                  <div className="min-w-0">
+                    <h2 className="truncate text-base font-semibold text-slate-900 dark:text-slate-100">{selectedThread.companyName}</h2>
+                    <div className="mt-1 flex flex-wrap items-center gap-2">
                       <Badge variant={conversationStatus.variant}>{conversationStatus.label}</Badge>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">Updated {formatDateTime(selectedThread.updatedAt)}</p>
+                      <p className="hidden text-xs text-slate-500 dark:text-slate-400 sm:block">
+                        Updated {formatDateTime(selectedThread.updatedAt)}
+                      </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="grid w-full gap-2 sm:flex sm:w-auto sm:flex-wrap sm:items-center sm:justify-end">
-                  <Button type="button" variant="outline" size="sm" className="w-full sm:w-auto" onClick={openCompanyDetails}>
+                <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 md:w-auto md:grid-cols-1">
+                  <Button type="button" variant="outline" size="sm" className="hidden w-full sm:inline-flex md:w-auto" onClick={openCompanyDetails}>
                     View company
                   </Button>
-                  <Button type="button" size="sm" className="w-full sm:w-auto" onClick={openInterviewBooking}>
+                  <Button type="button" size="sm" className="w-full md:w-auto" onClick={openInterviewBooking}>
                     Book interview
                   </Button>
                 </div>

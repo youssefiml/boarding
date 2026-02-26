@@ -884,20 +884,20 @@ export function ProfilePage() {
   }
 
   return (
-    <div>
+    <div className="-mx-3 overflow-x-hidden px-4 text-[15px] leading-6 md:mx-0 md:px-0">
       <PageHeader title="Profile" subtitle="Optimize your profile to increase matching quality and interview conversion." />
 
-      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_290px]">
-        <div className="space-y-4 pb-32 md:pb-6">
-          <Card className="p-4 sm:p-5">
-            <div className="flex flex-wrap items-start justify-between gap-3">
-              <div>
+      <div className="grid min-w-0 gap-4 md:gap-5 xl:grid-cols-[minmax(0,1fr)_290px]">
+        <div className="min-w-0 space-y-4 pb-32 md:space-y-5 md:pb-6">
+          <Card className="p-4 md:p-5">
+            <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+              <div className="min-w-0">
                 <p className="text-xs font-semibold uppercase tracking-[0.1em] text-brand-600">Profile strength</p>
                 <p className="mt-1 text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-100">{profileStrength}%</p>
-                <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">Placement readiness based on completion and quality signals.</p>
+                <p className="mt-1 text-[15px] leading-6 text-slate-600 dark:text-slate-300">Placement readiness based on completion and quality signals.</p>
               </div>
 
-              <div className="w-full space-y-2 text-left sm:w-auto sm:text-right">
+              <div className="w-full space-y-2 text-left md:w-auto md:text-right">
                 <Button type="button" variant="secondary" size="sm" onClick={handleImproveProfile}>
                   Improve profile
                 </Button>
@@ -947,31 +947,31 @@ export function ProfilePage() {
             </div>
           </Card>
 
-          <form className="space-y-4" noValidate onSubmit={handleSubmit((values) => persistProfile(values, { manual: true }))}>
+          <form className="space-y-4 md:space-y-5" noValidate onSubmit={handleSubmit((values) => persistProfile(values, { manual: true }))}>
             <Card id="profile-section-overview" className={sectionClasses('overview')}>
               <button
                 type="button"
-                className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-4 text-left sm:px-5"
+                className="flex w-full flex-col items-start gap-2 px-4 py-4 text-left sm:px-5 md:flex-row md:items-center md:justify-between"
                 onClick={() => toggleSection('overview')}
                 aria-expanded={expandedSections.overview}
                 aria-controls="profile-panel-overview"
               >
                 <div className="min-w-0">
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Profile overview</h2>
-                  <p className="mt-1 truncate text-sm text-slate-600 dark:text-slate-300">
+                  <p className="mt-1 break-words text-[15px] leading-6 text-slate-600 dark:text-slate-300">
                     {displayedAvatarUrl ? 'Photo uploaded and ready' : 'No photo uploaded yet'}  -  {personalSummary}
                   </p>
                 </div>
-                <span className="inline-flex min-h-8 items-center rounded-full border border-slate-300 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600 dark:border-slate-600 dark:text-slate-300">
+                <span className="inline-flex min-h-8 self-start items-center rounded-full border border-slate-300 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600 md:self-auto dark:border-slate-600 dark:text-slate-300">
                   {expandedSections.overview ? 'Collapse' : 'Expand'}
                 </span>
               </button>
 
               {expandedSections.overview ? (
                 <div id="profile-panel-overview" className="border-t border-slate-200 px-4 py-4 dark:border-slate-700 sm:px-5">
-                  <div className="grid gap-4 lg:grid-cols-[220px_minmax(0,1fr)]">
+                  <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,220px)_minmax(0,1fr)]">
                     <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/65">
-                      <div className="mx-auto flex h-36 w-36 items-center justify-center overflow-hidden rounded-full border-2 border-brand-300 bg-brand-100 text-3xl font-semibold text-brand-700 dark:border-brand-400/70 dark:bg-brand-500/20 dark:text-brand-100">
+                      <div className="mx-auto flex h-28 w-28 items-center justify-center overflow-hidden rounded-full border-2 border-brand-300 bg-brand-100 text-2xl font-semibold text-brand-700 sm:h-36 sm:w-36 sm:text-3xl dark:border-brand-400/70 dark:bg-brand-500/20 dark:text-brand-100">
                         {displayedAvatarUrl ? (
                           <img
                             src={displayedAvatarUrl}
@@ -1060,16 +1060,16 @@ export function ProfilePage() {
             <Card id="profile-section-personal" className={sectionClasses('personal')}>
               <button
                 type="button"
-                className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-4 text-left sm:px-5"
+                className="flex w-full flex-col items-start gap-2 px-4 py-4 text-left sm:px-5 md:flex-row md:items-center md:justify-between"
                 onClick={() => toggleSection('personal')}
                 aria-expanded={expandedSections.personal}
                 aria-controls="profile-panel-personal"
               >
                 <div className="min-w-0">
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Personal information</h2>
-                  <p className="mt-1 truncate text-sm text-slate-600 dark:text-slate-300">{personalSummary}</p>
+                  <p className="mt-1 break-words text-[15px] leading-6 text-slate-600 dark:text-slate-300">{personalSummary}</p>
                 </div>
-                <span className="inline-flex min-h-8 items-center rounded-full border border-slate-300 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600 dark:border-slate-600 dark:text-slate-300">
+                <span className="inline-flex min-h-8 self-start items-center rounded-full border border-slate-300 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600 md:self-auto dark:border-slate-600 dark:text-slate-300">
                   {expandedSections.personal ? 'Collapse' : 'Expand'}
                 </span>
               </button>
@@ -1111,16 +1111,16 @@ export function ProfilePage() {
             <Card id="profile-section-academic" className={sectionClasses('academic')}>
               <button
                 type="button"
-                className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-4 text-left sm:px-5"
+                className="flex w-full flex-col items-start gap-2 px-4 py-4 text-left sm:px-5 md:flex-row md:items-center md:justify-between"
                 onClick={() => toggleSection('academic')}
                 aria-expanded={expandedSections.academic}
                 aria-controls="profile-panel-academic"
               >
                 <div className="min-w-0">
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Academic profile</h2>
-                  <p className="mt-1 truncate text-sm text-slate-600 dark:text-slate-300">{academicSummary}</p>
+                  <p className="mt-1 break-words text-[15px] leading-6 text-slate-600 dark:text-slate-300">{academicSummary}</p>
                 </div>
-                <span className="inline-flex min-h-8 items-center rounded-full border border-slate-300 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600 dark:border-slate-600 dark:text-slate-300">
+                <span className="inline-flex min-h-8 self-start items-center rounded-full border border-slate-300 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600 md:self-auto dark:border-slate-600 dark:text-slate-300">
                   {expandedSections.academic ? 'Collapse' : 'Expand'}
                 </span>
               </button>
@@ -1175,16 +1175,16 @@ export function ProfilePage() {
             <Card id="profile-section-preferences" className={sectionClasses('preferences')}>
               <button
                 type="button"
-                className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-4 text-left sm:px-5"
+                className="flex w-full flex-col items-start gap-2 px-4 py-4 text-left sm:px-5 md:flex-row md:items-center md:justify-between"
                 onClick={() => toggleSection('preferences')}
                 aria-expanded={expandedSections.preferences}
                 aria-controls="profile-panel-preferences"
               >
                 <div className="min-w-0">
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Placement preferences</h2>
-                  <p className="mt-1 truncate text-sm text-slate-600 dark:text-slate-300">{preferencesSummary}</p>
+                  <p className="mt-1 break-words text-[15px] leading-6 text-slate-600 dark:text-slate-300">{preferencesSummary}</p>
                 </div>
-                <span className="inline-flex min-h-8 items-center rounded-full border border-slate-300 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600 dark:border-slate-600 dark:text-slate-300">
+                <span className="inline-flex min-h-8 self-start items-center rounded-full border border-slate-300 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600 md:self-auto dark:border-slate-600 dark:text-slate-300">
                   {expandedSections.preferences ? 'Collapse' : 'Expand'}
                 </span>
               </button>
@@ -1303,16 +1303,16 @@ export function ProfilePage() {
             <Card id="profile-section-documents" className={sectionClasses('documents')}>
               <button
                 type="button"
-                className="flex w-full flex-wrap items-center justify-between gap-3 px-4 py-4 text-left sm:px-5"
+                className="flex w-full flex-col items-start gap-2 px-4 py-4 text-left sm:px-5 md:flex-row md:items-center md:justify-between"
                 onClick={() => toggleSection('documents')}
                 aria-expanded={expandedSections.documents}
                 aria-controls="profile-panel-documents"
               >
                 <div className="min-w-0">
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Documents</h2>
-                  <p className="mt-1 truncate text-sm text-slate-600 dark:text-slate-300">{documentsSummary}</p>
+                  <p className="mt-1 break-words text-[15px] leading-6 text-slate-600 dark:text-slate-300">{documentsSummary}</p>
                 </div>
-                <span className="inline-flex min-h-8 items-center rounded-full border border-slate-300 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600 dark:border-slate-600 dark:text-slate-300">
+                <span className="inline-flex min-h-8 self-start items-center rounded-full border border-slate-300 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600 md:self-auto dark:border-slate-600 dark:text-slate-300">
                   {expandedSections.documents ? 'Collapse' : 'Expand'}
                 </span>
               </button>
@@ -1362,7 +1362,7 @@ export function ProfilePage() {
 
                   {resumeMeta.fileName ? (
                     <div className="rounded-xl border border-emerald-200 bg-emerald-50/80 p-3 dark:border-emerald-500/35 dark:bg-emerald-500/10">
-                      <p className="text-sm font-semibold text-emerald-900 dark:text-emerald-100">{resumeMeta.fileName}</p>
+                      <p className="break-words text-sm font-semibold text-emerald-900 dark:text-emerald-100">{resumeMeta.fileName}</p>
                       <p className="mt-1 text-xs text-emerald-800 dark:text-emerald-200">
                         Uploaded {resumeMeta.uploadedAt ? formatDateTime(resumeMeta.uploadedAt) : 'recently'}
                       </p>
