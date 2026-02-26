@@ -388,7 +388,7 @@ export function AppointmentsPage() {
                 </p>
               </div>
 
-              <div className="inline-flex rounded-xl border border-slate-200 bg-slate-100/70 p-1 dark:border-slate-700 dark:bg-slate-800/85">
+              <div className="inline-flex w-full overflow-x-auto rounded-xl border border-slate-200 bg-slate-100/70 p-1 sm:w-auto dark:border-slate-700 dark:bg-slate-800/85">
                 {(Object.keys(timelineFilterLabels) as AppointmentTimelineFilter[]).map((filterValue) => (
                   <button
                     key={filterValue}
@@ -398,7 +398,7 @@ export function AppointmentsPage() {
                       setPage(1);
                     }}
                     className={cn(
-                      'rounded-lg px-3 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900',
+                      'shrink-0 rounded-lg px-3 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900',
                       timelineFilter === filterValue
                         ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-slate-100'
                         : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100'
@@ -519,6 +519,7 @@ export function AppointmentsPage() {
                                 type="button"
                                 variant="outline"
                                 size="sm"
+                                className="flex-1 sm:flex-none"
                                 onClick={() => prefillForReschedule(appointment)}
                               >
                                 Reschedule
@@ -528,6 +529,7 @@ export function AppointmentsPage() {
                                 type="button"
                                 variant="ghost"
                                 size="sm"
+                                className="flex-1 sm:flex-none"
                                 onClick={() => {
                                   toast('Cancellation request sent to your advisor.');
                                 }}
@@ -536,7 +538,7 @@ export function AppointmentsPage() {
                               </Button>
 
                               <a
-                                className="inline-flex min-h-9 items-center justify-center rounded-lg border border-slate-200 px-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-slate-900"
+                                className="inline-flex min-h-9 flex-1 items-center justify-center rounded-lg border border-slate-200 px-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:flex-none dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800 dark:focus-visible:ring-offset-slate-900"
                                 href={createCalendarLink(appointment)}
                                 target="_blank"
                                 rel="noreferrer"

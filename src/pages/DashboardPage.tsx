@@ -414,7 +414,7 @@ export function DashboardPage() {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.1em] text-brand-600">Placement status</p>
-            <h2 className="mt-1 text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">{stageLabel}</h2>
+            <h2 className="mt-1 text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl dark:text-slate-100">{stageLabel}</h2>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">Stage {currentStage} of {pipelineSteps.length}</p>
           </div>
           <Badge variant={actionCount === 0 ? 'success' : actionCount <= 2 ? 'warning' : 'neutral'}>
@@ -435,8 +435,9 @@ export function DashboardPage() {
           </div>
         </div>
 
-        <div className="mt-4 flex flex-wrap items-center gap-3">
+        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
           <Button
+            className="w-full sm:w-auto"
             onClick={() => {
               navigate(primaryActionRoute);
             }}
@@ -528,7 +529,7 @@ export function DashboardPage() {
               <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-200">{featuredMatch.description}</p>
 
               <Button
-                className="mt-4"
+                className="mt-4 w-full sm:w-auto"
                 onClick={() => {
                   navigate(ROUTES.matching);
                 }}

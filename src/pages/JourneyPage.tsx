@@ -356,7 +356,7 @@ export function JourneyPage() {
     <div>
       <PageHeader title="Journey" subtitle="Track where you stand, what comes next, and the actions that keep momentum." />
 
-      <div className="space-y-4 pb-24 sm:pb-0">
+      <div className="space-y-4 pb-28 sm:pb-0">
         <Card className="p-4 sm:p-5">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -634,7 +634,7 @@ export function JourneyPage() {
         </div>
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-3 py-3 shadow-lg backdrop-blur sm:hidden dark:border-slate-700 dark:bg-slate-900/95">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 shadow-lg backdrop-blur sm:hidden dark:border-slate-700 dark:bg-slate-900/95">
         <div className="mx-auto w-full max-w-[720px]">
           <Button className="w-full" type="button" onClick={handleSummaryAction}>
             {summaryAction.label}

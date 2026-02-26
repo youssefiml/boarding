@@ -695,8 +695,8 @@ export function MessagingPage() {
     <div>
       <PageHeader title="Messaging" subtitle="Keep placement conversations calm, clear, and action oriented." />
 
-      <div className="grid gap-4 lg:grid-cols-[minmax(260px,0.34fr)_minmax(0,1fr)] 2xl:grid-cols-[minmax(260px,0.25fr)_minmax(0,0.5fr)_minmax(280px,0.25fr)]">
-        <Card className={cn('lg:min-h-[620px] min-w-0 p-4', shouldShowThreadList ? 'block' : 'hidden lg:block')}>
+      <div className="grid gap-3 sm:gap-4 lg:grid-cols-[minmax(260px,0.34fr)_minmax(0,1fr)] 2xl:grid-cols-[minmax(260px,0.25fr)_minmax(0,0.5fr)_minmax(280px,0.25fr)]">
+        <Card className={cn('lg:min-h-[620px] min-w-0 p-3 sm:p-4', shouldShowThreadList ? 'block' : 'hidden lg:block')}>
           <div className="mb-4 space-y-3">
             <div>
               <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">Inbox</h2>
@@ -712,14 +712,14 @@ export function MessagingPage() {
               placeholder="Company or message"
             />
 
-            <div className="flex w-full items-center gap-1 overflow-x-auto rounded-xl border border-slate-200 bg-slate-50 p-1 dark:border-slate-700 dark:bg-slate-800/70">
+            <div className="grid w-full grid-cols-2 gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1 sm:flex sm:items-center sm:overflow-x-auto dark:border-slate-700 dark:bg-slate-800/70">
               {threadTabs.map((tab) => (
                 <button
                   key={tab.id}
                   type="button"
                   onClick={() => setThreadTab(tab.id)}
                   className={cn(
-                    'shrink-0 rounded-lg px-2.5 py-1.5 text-center text-xs font-semibold uppercase tracking-[0.08em] whitespace-nowrap transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900',
+                    'w-full rounded-lg px-2.5 py-1.5 text-center text-xs font-semibold uppercase tracking-[0.08em] whitespace-nowrap transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:w-auto sm:shrink-0 dark:focus-visible:ring-offset-slate-900',
                     threadTab === tab.id
                       ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-slate-100'
                       : 'text-slate-500 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100'
@@ -811,7 +811,7 @@ export function MessagingPage() {
           ) : null}
         </Card>
 
-        <Card className={cn('lg:min-h-[620px] min-w-0 p-4', shouldShowConversation ? 'flex flex-col' : 'hidden lg:flex lg:flex-col')}>
+        <Card className={cn('lg:min-h-[620px] min-w-0 p-3 sm:p-4', shouldShowConversation ? 'flex flex-col' : 'hidden lg:flex lg:flex-col')}>
           {selectedThread ? (
             <>
               <div className="flex items-start justify-between gap-3 border-b border-slate-200 pb-3 dark:border-slate-700">
@@ -842,11 +842,11 @@ export function MessagingPage() {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-end gap-2">
-                  <Button type="button" variant="outline" size="sm" onClick={openCompanyDetails}>
+                <div className="grid w-full gap-2 sm:flex sm:w-auto sm:flex-wrap sm:items-center sm:justify-end">
+                  <Button type="button" variant="outline" size="sm" className="w-full sm:w-auto" onClick={openCompanyDetails}>
                     View company
                   </Button>
-                  <Button type="button" size="sm" onClick={openInterviewBooking}>
+                  <Button type="button" size="sm" className="w-full sm:w-auto" onClick={openInterviewBooking}>
                     Book interview
                   </Button>
                 </div>
@@ -864,7 +864,7 @@ export function MessagingPage() {
                     setShowJumpToLatest(false);
                   }
                 }}
-                className="relative mt-4 flex-1 overflow-y-auto pr-1"
+                className="relative mt-4 pr-1 lg:flex-1 lg:overflow-y-auto"
               >
                 {isLoadingMessages ? (
                   <div className="space-y-2">
@@ -901,7 +901,7 @@ export function MessagingPage() {
                         <article
                           key={entry.key}
                           className={cn(
-                            'group max-w-[70%] rounded-xl border px-3 py-2 transition-shadow',
+                            'group max-w-[86%] rounded-xl border px-3 py-2 transition-shadow sm:max-w-[75%] lg:max-w-[70%]',
                             isStudent
                               ? 'ml-auto border-brand-500/60 bg-brand-600 text-white'
                               : 'mr-auto border-slate-200 bg-slate-50 text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100',
@@ -1065,7 +1065,7 @@ export function MessagingPage() {
           )}
         </Card>
 
-        <Card className="hidden min-w-0 p-4 2xl:block 2xl:min-h-[620px]">
+        <Card className="hidden min-w-0 p-3 sm:p-4 2xl:block 2xl:min-h-[620px]">
           <div className="mb-3">
             <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">Context</h2>
             <p className="text-xs text-slate-500 dark:text-slate-300">Keep placement details visible while you chat.</p>

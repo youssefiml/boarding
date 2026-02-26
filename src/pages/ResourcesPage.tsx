@@ -506,7 +506,7 @@ export function ResourcesPage() {
           </Button>
         </div>
 
-        <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+        <div className="-mx-1 mt-3 flex gap-2 overflow-x-auto px-1 pb-1">
           {categoryFilters.map((filter) => (
             <button
               key={filter.id}
@@ -837,7 +837,7 @@ export function ResourcesPage() {
             aria-label="Close filters"
           />
 
-          <div className="absolute inset-x-0 bottom-0 max-h-[78vh] overflow-y-auto rounded-t-2xl border border-slate-700 bg-slate-900 p-4 shadow-2xl">
+          <div className="absolute inset-x-0 bottom-0 max-h-[78vh] overflow-y-auto rounded-t-2xl border border-slate-700 bg-slate-900 p-4 pb-[calc(env(safe-area-inset-bottom)+1rem)] shadow-2xl">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="text-base font-semibold text-slate-100">Filters</h2>
               <Button type="button" variant="ghost" size="sm" onClick={() => setMobileFiltersOpen(false)}>
@@ -901,7 +901,7 @@ export function ResourcesPage() {
       ) : null}
 
       {previewResource ? (
-        <div className="fixed inset-0 z-[60] p-4" role="dialog" aria-modal="true" aria-label="Resource preview">
+        <div className="fixed inset-0 z-[60] p-3 sm:p-4" role="dialog" aria-modal="true" aria-label="Resource preview">
           <button
             type="button"
             className="absolute inset-0 bg-slate-950/70"
@@ -909,7 +909,7 @@ export function ResourcesPage() {
             aria-label="Close resource preview"
           />
 
-          <div className="relative mx-auto mt-8 w-full max-w-2xl rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl dark:border-slate-700 dark:bg-slate-900 sm:p-5">
+          <div className="relative mx-auto mt-4 max-h-[88dvh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl dark:border-slate-700 dark:bg-slate-900 sm:mt-8 sm:p-5">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <div className="flex min-w-0 flex-wrap items-center gap-2">

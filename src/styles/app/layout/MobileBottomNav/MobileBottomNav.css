@@ -27,6 +27,5 @@
 }
 
 .mobile-bottom-nav__label {
-  @apply truncate text-[10px] font-semibold uppercase tracking-[0.08em];
+  @apply truncate text-[10px] font-semibold uppercase tracking-[0.06em];
 }
-

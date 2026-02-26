@@ -134,7 +134,7 @@ function ScoreBar({ score }: { score: number }) {
   const tone = scoreTone(score);
 
   return (
-    <div className="min-w-[132px] space-y-1">
+    <div className="w-full space-y-1 sm:min-w-[132px] sm:w-auto">
       <div className="flex items-center justify-between text-xs">
         <span className={cn('font-semibold', tone.text)}>{score}%</span>
         <span className="text-slate-500 dark:text-slate-400">match</span>
@@ -506,7 +506,7 @@ export function MatchingPage() {
               Compare ({compareIds.length})
             </Button>
 
-            <Button type="button" variant="outline" className="sm:hidden" onClick={() => setIsMobileFilterOpen(true)}>
+            <Button type="button" variant="outline" className="w-full sm:hidden" onClick={() => setIsMobileFilterOpen(true)}>
               Filters
             </Button>
           </div>
@@ -625,7 +625,7 @@ export function MatchingPage() {
                             <Button type="button" size="sm" variant="outline" className="flex-1 sm:flex-none" onClick={showView}>
                               View
                             </Button>
-                            <Button type="button" size="sm" onClick={requestInterview}>
+                            <Button type="button" size="sm" className="flex-1 sm:flex-none" onClick={requestInterview}>
                               Request interview
                             </Button>
                             <Button
@@ -792,7 +792,7 @@ export function MatchingPage() {
             aria-label="Close comparison"
           />
 
-          <div className="relative mx-auto mt-10 w-full max-w-5xl rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl dark:border-slate-700 dark:bg-slate-900">
+          <div className="relative mx-auto mt-6 max-h-[88dvh] w-full max-w-5xl overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl dark:border-slate-700 dark:bg-slate-900">
             <div className="mb-3 flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Compare matches</h2>

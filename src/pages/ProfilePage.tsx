@@ -888,7 +888,7 @@ export function ProfilePage() {
       <PageHeader title="Profile" subtitle="Optimize your profile to increase matching quality and interview conversion." />
 
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_290px]">
-        <div className="space-y-4 pb-24">
+        <div className="space-y-4 pb-28">
           <Card className="p-4 sm:p-5">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
@@ -1393,8 +1393,8 @@ export function ProfilePage() {
               ) : null}
             </Card>
 
-            <div className="sticky bottom-3 z-30 pt-1">
-              <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white/95 p-3 shadow-lg backdrop-blur dark:border-slate-700 dark:bg-slate-900/95">
+            <div className="pt-1 sm:sticky sm:bottom-3 sm:z-30">
+              <div className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white/95 p-3 shadow-lg backdrop-blur sm:flex-row sm:flex-wrap sm:items-center sm:justify-between dark:border-slate-700 dark:bg-slate-900/95">
                 <button
                   type="button"
                   className="text-xs font-medium text-slate-500 underline-offset-2 transition hover:text-rose-700 hover:underline dark:text-slate-400 dark:hover:text-rose-300"
@@ -1403,7 +1403,7 @@ export function ProfilePage() {
                   Delete account
                 </button>
 
-                <div className="flex flex-wrap items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3 sm:justify-end">
                   <span className="inline-flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300">
                     <span
                       className={cn(
@@ -1418,7 +1418,7 @@ export function ProfilePage() {
                     />
                     <span>{saveStateLabel}</span>
                   </span>
-                  <Button type="button" onClick={handleManualSave} isLoading={isSubmitting || saveState === 'saving'}>
+                  <Button type="button" className="w-full sm:w-auto" onClick={handleManualSave} isLoading={isSubmitting || saveState === 'saving'}>
                     Save changes
                   </Button>
                 </div>

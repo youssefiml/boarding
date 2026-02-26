@@ -213,7 +213,7 @@ export function OnboardingPage() {
         subtitle="Complete your profile with guided steps designed to maximize completion and match quality."
       />
 
-      <div className="grid gap-5 pb-24 sm:pb-0 xl:grid-cols-[minmax(0,720px)_280px] xl:justify-center">
+      <div className="grid gap-5 pb-28 sm:pb-0 xl:grid-cols-[minmax(0,720px)_280px] xl:justify-center">
         <div className="mx-auto w-full max-w-[720px] space-y-4 xl:mx-0">
           <section className="rounded-2xl border border-slate-200 bg-white/95 p-4 shadow-sm dark:border-slate-700 dark:bg-slate-900/85 sm:p-5">
             <div className="flex flex-wrap items-start justify-between gap-3">
@@ -264,7 +264,7 @@ export function OnboardingPage() {
                       </span>
                       <span
                         className={cn(
-                          'text-xs font-medium leading-5',
+                          'max-[430px]:hidden text-[11px] font-medium leading-5 sm:text-xs',
                           isCurrent ? 'text-slate-900 dark:text-slate-100' : 'text-slate-500 dark:text-slate-400'
                         )}
                       >
@@ -379,7 +379,7 @@ export function OnboardingPage() {
         </aside>
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-3 py-3 shadow-lg backdrop-blur sm:hidden dark:border-slate-700 dark:bg-slate-900/95">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 px-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 shadow-lg backdrop-blur sm:hidden dark:border-slate-700 dark:bg-slate-900/95">
         <div className="mx-auto flex w-full max-w-[720px] items-center gap-3">
           <Button
             type="button"
