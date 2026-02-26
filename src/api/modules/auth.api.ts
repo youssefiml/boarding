@@ -1,6 +1,7 @@
 import { apiClient, extractData } from '@/api/client';
 import { AUTH_ENDPOINTS } from '@/api/endpoints';
 import { isDemoMode, mockApi } from '@/api/mock';
+import { normalizeLoginPayload, normalizeRegisterPayload } from '@/features/auth/normalization';
 import type {
   ApiEnvelope,
   AuthSession,
@@ -11,11 +12,13 @@ import type {
 import type { StudentUser } from '@/types/domain';
 
 async function login(payload: LoginPayload) {
+  const normalizedPayload = normalizeLoginPayload(payload);
+
   if (isDemoMode) {
-    return mockApi.login(payload);
+    return mockApi.login(normalizedPayload);
   }
 
-  const response = await apiClient.post<ApiEnvelope<AuthSession> | AuthSession>(AUTH_ENDPOINTS.login, payload, {
+  const response = await apiClient.post<ApiEnvelope<AuthSession> | AuthSession>(AUTH_ENDPOINTS.login, normalizedPayload, {
     skipGlobalError: true,
   });
 
@@ -23,11 +26,13 @@ async function login(payload: LoginPayload) {
 }
 
 async function register(payload: RegisterPayload) {
+  const normalizedPayload = normalizeRegisterPayload(payload);
+
   if (isDemoMode) {
-    return mockApi.register(payload);
+    return mockApi.register(normalizedPayload);
   }
 
-  const response = await apiClient.post<ApiEnvelope<AuthSession> | AuthSession>(AUTH_ENDPOINTS.register, payload, {
+  const response = await apiClient.post<ApiEnvelope<AuthSession> | AuthSession>(AUTH_ENDPOINTS.register, normalizedPayload, {
     skipGlobalError: true,
   });
 

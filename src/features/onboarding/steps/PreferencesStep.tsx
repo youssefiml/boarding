@@ -1,4 +1,4 @@
-﻿import { Input } from '@/ui/Input/Input';
+import { Input } from '@/ui/Input/Input';
 import { TextArea } from '@/ui/TextArea/TextArea';
 import type { OnboardingStepProps } from '@/features/onboarding/steps/StepProps';
 

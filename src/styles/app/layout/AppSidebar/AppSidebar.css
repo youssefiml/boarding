@@ -1,4 +1,4 @@
-﻿.app-sidebar {
+.app-sidebar {
   @apply sticky top-4 z-30 hidden shrink-0 self-start xl:flex;
   height: calc(100dvh - 2rem);
   width: 260px;

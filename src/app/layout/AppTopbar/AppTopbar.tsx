@@ -1,4 +1,4 @@
-﻿import '@/styles/app/layout/AppTopbar/AppTopbar.css';
+import '@/styles/app/layout/AppTopbar/AppTopbar.css';
 import { Link, useLocation } from 'react-router-dom';
 
 import { ROUTES } from '@/app/routes';

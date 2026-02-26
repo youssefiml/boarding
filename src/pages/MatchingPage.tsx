@@ -534,7 +534,7 @@ export function MatchingPage() {
 
             <Card className="p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 dark:text-slate-300">Decision actions</p>
-              <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-slate-100">{savedIds.length} saved · {compareIds.length} comparing</p>
+              <p className="mt-2 text-lg font-semibold text-slate-900 dark:text-slate-100">{savedIds.length} saved  -  {compareIds.length} comparing</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">Select 2 to 3 companies and run compare.</p>
             </Card>
           </div>
@@ -591,7 +591,7 @@ export function MatchingPage() {
                             <div>
                               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-700 dark:text-brand-300">Featured match</p>
                               <h3 className="mt-1 text-lg font-semibold text-slate-900 dark:text-slate-100">{item.match.companyName}</h3>
-                              <p className="text-sm text-slate-600 dark:text-slate-300">{item.match.location} · {titleCase(item.match.industry)}</p>
+                              <p className="text-sm text-slate-600 dark:text-slate-300">{item.match.location}  -  {titleCase(item.match.industry)}</p>
                             </div>
 
                             <div className="flex items-start gap-3">
@@ -675,7 +675,7 @@ export function MatchingPage() {
                             <div className="flex items-start justify-between gap-3">
                               <div>
                                 <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">{item.match.companyName}</h3>
-                                <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{item.match.location} · {titleCase(item.match.industry)}</p>
+                                <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{item.match.location}  -  {titleCase(item.match.industry)}</p>
                               </div>
 
                               <label className="hidden cursor-pointer items-center gap-2 rounded-md border border-slate-300 px-2 py-1 text-xs font-semibold text-slate-600 sm:inline-flex dark:border-slate-600 dark:text-slate-200">

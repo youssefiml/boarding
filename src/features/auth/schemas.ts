@@ -1,21 +1,57 @@
 import { z } from 'zod';
+import { normalizeAuthEmail, normalizeAuthPassword, normalizePersonName } from '@/features/auth/normalization';
+
+export const authEmailSchema = z
+  .string()
+  .transform((value) => normalizeAuthEmail(value))
+  .pipe(z.string().min(1, 'Email is required').email('Enter a valid email address'));
+
+export const authPasswordSchema = z
+  .string()
+  .transform((value) => normalizeAuthPassword(value))
+  .pipe(z.string().min(8, 'Password must contain at least 8 characters'));
+
+const fullNameSchema = z
+  .string()
+  .transform((value) => normalizePersonName(value))
+  .pipe(z.string().min(2, 'Full name is required'));
 
 export const loginSchema = z.object({
-  email: z.string().email('Enter a valid email address'),
-  password: z.string().min(8, 'Password must contain at least 8 characters'),
+  email: authEmailSchema,
+  password: authPasswordSchema,
 });
 
 export const registerSchema = z
   .object({
-    firstName: z.string().min(2, 'First name is required'),
-    lastName: z.string().min(2, 'Last name is required'),
-    email: z.string().email('Enter a valid email address'),
-    password: z.string().min(8, 'Password must contain at least 8 characters'),
-    confirmPassword: z.string().min(8, 'Confirm your password'),
+    fullName: fullNameSchema,
+    email: authEmailSchema,
+    password: authPasswordSchema,
+    acceptTerms: z.boolean(),
   })
-  .refine((values) => values.password === values.confirmPassword, {
-    path: ['confirmPassword'],
-    message: 'Passwords must match',
+  .superRefine((values, context) => {
+    if (!/[A-Z]/.test(values.password)) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['password'],
+        message: 'Password must include at least 1 uppercase letter',
+      });
+    }
+
+    if (!/\d/.test(values.password)) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['password'],
+        message: 'Password must include at least 1 number',
+      });
+    }
+
+    if (!values.acceptTerms) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['acceptTerms'],
+        message: 'You must accept Terms and Privacy',
+      });
+    }
   });
 
 export type LoginFormValues = z.infer<typeof loginSchema>;

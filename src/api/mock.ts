@@ -1,4 +1,5 @@
 import type {
+  ApiErrorPayload,
   ApiEnvelope,
   AppointmentsQuery,
   AppointmentsResponse,
@@ -34,6 +35,14 @@ import type {
 
 export const isDemoMode = import.meta.env.VITE_DEMO_MODE === 'true';
 
+type MockAxiosError = Error & {
+  isAxiosError: true;
+  response: {
+    status: number;
+    data: ApiErrorPayload;
+  };
+};
+
 function sleep(ms = 250) {
   return new Promise<void>((resolve) => {
     window.setTimeout(resolve, ms);
@@ -58,6 +67,22 @@ function readFileAsDataUrl(file: File) {
 
 function randomId(prefix: string) {
   return `${prefix}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+function createMockApiError(status: number, code: string, message: string, fieldErrors?: Record<string, string[]>) {
+  const error = new Error(message) as MockAxiosError;
+  error.name = 'MockAxiosError';
+  error.isAxiosError = true;
+  error.response = {
+    status,
+    data: {
+      code,
+      message,
+      fieldErrors,
+    },
+  };
+
+  return error;
 }
 
 function computeProfileCompletion(profile: StudentProfile | ProfilePayload): number {
@@ -119,6 +144,15 @@ let studentUserStore: StudentUser = {
   profileCompletion: 72,
   status: 'active',
 };
+
+const accountStore = new Map<
+  string,
+  {
+    firstName: string;
+    lastName: string;
+    password: string;
+  }
+>([['student@boarding.dev', { firstName: 'Demo', lastName: 'Student', password: 'admin1234' }]]);
 
 let profileStore: StudentProfile = {
   id: 'profile-001',
@@ -316,21 +350,33 @@ const resourceStore: ResourceItem[] = [
 export const mockApi = {
   async login(payload: LoginPayload): Promise<AuthSession> {
     await sleep();
-    const [firstChunk = 'Student', secondChunk = 'User'] = payload.email.split('@')[0].split(/[._-]/);
-    const firstName = firstChunk.charAt(0).toUpperCase() + firstChunk.slice(1);
-    const lastName = secondChunk.charAt(0).toUpperCase() + secondChunk.slice(1);
+    const email = payload.email.trim().toLowerCase();
+    const password = payload.password.trim();
+
+    if (!email || !password || password.length < 8) {
+      throw createMockApiError(400, 'VALIDATION_ERROR', 'Please review your inputs.', {
+        email: !email ? ['Email is required'] : [],
+        password: !password ? ['Password is required'] : password.length < 8 ? ['Password must contain at least 8 characters'] : [],
+      });
+    }
+
+    const account = accountStore.get(email);
+
+    if (!account || account.password !== password) {
+      throw createMockApiError(401, 'INVALID_CREDENTIALS', 'Invalid email or password.');
+    }
 
     studentUserStore = {
       ...studentUserStore,
-      email: payload.email,
-      firstName,
-      lastName,
+      email,
+      firstName: account.firstName,
+      lastName: account.lastName,
     };
     profileStore = {
       ...profileStore,
-      email: payload.email,
-      firstName,
-      lastName,
+      email,
+      firstName: account.firstName,
+      lastName: account.lastName,
     };
 
     return {
@@ -342,19 +388,51 @@ export const mockApi = {
 
   async register(payload: RegisterPayload): Promise<AuthSession> {
     await sleep();
+    const email = payload.email.trim().toLowerCase();
+    const password = payload.password.trim();
+    const firstName = payload.firstName.trim();
+    const lastName = payload.lastName.trim();
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+
+    if (!email || !password || password.length < 8 || !firstName || !lastName || !hasUppercase || !hasNumber) {
+      throw createMockApiError(400, 'VALIDATION_ERROR', 'Please review your inputs.', {
+        email: !email ? ['Email is required'] : [],
+        password: !password
+          ? ['Password is required']
+          : password.length < 8
+            ? ['Password must contain at least 8 characters']
+            : !hasUppercase
+              ? ['Password must include at least 1 uppercase letter']
+              : !hasNumber
+                ? ['Password must include at least 1 number']
+                : [],
+      });
+    }
+
+    if (accountStore.has(email)) {
+      throw createMockApiError(409, 'EMAIL_EXISTS', 'Email already exists.');
+    }
+
+    accountStore.set(email, {
+      firstName,
+      lastName,
+      password,
+    });
+
     studentUserStore = {
       ...studentUserStore,
-      firstName: payload.firstName,
-      lastName: payload.lastName,
-      email: payload.email,
+      firstName,
+      lastName,
+      email,
       status: 'active',
     };
 
     profileStore = {
       ...profileStore,
-      firstName: payload.firstName,
-      lastName: payload.lastName,
-      email: payload.email,
+      firstName,
+      lastName,
+      email,
     };
 
     return {

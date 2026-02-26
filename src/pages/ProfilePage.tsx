@@ -396,20 +396,20 @@ export function ProfilePage() {
   const personalSummary = useMemo(() => {
     const fullName = `${liveValues.firstName} ${liveValues.lastName}`.trim() || 'No name yet';
     const email = liveValues.email || 'No email';
-    return `${fullName} • ${email}`;
+    return `${fullName}  -  ${email}`;
   }, [liveValues.email, liveValues.firstName, liveValues.lastName]);
 
   const academicSummary = useMemo(() => {
     const education = educationLabel(liveValues.educationLevel);
     const year = liveValues.graduationYear || 'No graduation year';
     const duration = durationLabel(liveValues.expectedInternshipDuration);
-    return `${education}, ${year} • ${duration}`;
+    return `${education}, ${year}  -  ${duration}`;
   }, [liveValues.educationLevel, liveValues.expectedInternshipDuration, liveValues.graduationYear]);
 
   const preferencesSummary = useMemo(() => {
     const countries = liveValues.preferredCountries.length ? liveValues.preferredCountries.join(', ') : 'No countries';
     const industries = liveValues.preferredIndustries.length ? liveValues.preferredIndustries.join(', ') : 'No industries';
-    return `${countries} • ${industries}`;
+    return `${countries}  -  ${industries}`;
   }, [liveValues.preferredCountries, liveValues.preferredIndustries]);
 
   const documentsSummary = useMemo(() => {
@@ -959,7 +959,7 @@ export function ProfilePage() {
                 <div className="min-w-0">
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Profile overview</h2>
                   <p className="mt-1 truncate text-sm text-slate-600 dark:text-slate-300">
-                    {displayedAvatarUrl ? 'Photo uploaded and ready' : 'No photo uploaded yet'} • {personalSummary}
+                    {displayedAvatarUrl ? 'Photo uploaded and ready' : 'No photo uploaded yet'}  -  {personalSummary}
                   </p>
                 </div>
                 <span className="inline-flex min-h-8 items-center rounded-full border border-slate-300 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600 dark:border-slate-600 dark:text-slate-300">
@@ -1295,7 +1295,7 @@ export function ProfilePage() {
                     label="Short bio"
                     {...register('bio')}
                     error={errors.bio?.message}
-                    hint={`${liveValues.bio.length}/500 characters · 2 to 4 sentences recommended`}
+                    hint={`${liveValues.bio.length}/500 characters  -  2 to 4 sentences recommended`}
                   />
                 </div>
               ) : null}

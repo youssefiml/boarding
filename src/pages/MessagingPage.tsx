@@ -195,7 +195,7 @@ export function MessagingPage() {
   const { threadId } = useParams<{ threadId: string }>();
   const navigate = useNavigate();
 
-  const [isDesktop, setIsDesktop] = useState(desktopMedia);
+  const [isDesktop, setIsDesktop] = useState(() => desktopMedia());
 
   const [threads, setThreads] = useState<MessageThreadsResponse | null>(null);
   const [messages, setMessages] = useState<MessagesResponse | null>(null);
@@ -305,8 +305,6 @@ export function MessagingPage() {
     const onChange = (event: MediaQueryListEvent) => {
       setIsDesktop(event.matches);
     };
-
-    setIsDesktop(media.matches);
 
     if (typeof media.addEventListener === 'function') {
       media.addEventListener('change', onChange);
@@ -473,7 +471,7 @@ export function MessagingPage() {
     return hasInterviewSignal(lastInbound.content);
   }, [combinedMessages]);
 
-  const scrollToBottom = useCallback((behavior: ScrollBehavior = 'smooth') => {
+  const scrollToBottom = useCallback((behavior: 'auto' | 'smooth' = 'smooth') => {
     if (!chatScrollRef.current) {
       return;
     }
@@ -714,14 +712,14 @@ export function MessagingPage() {
               placeholder="Company or message"
             />
 
-            <div className="grid w-full grid-cols-2 gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1 dark:border-slate-700 dark:bg-slate-800/70">
+            <div className="flex w-full items-center gap-1 overflow-x-auto rounded-xl border border-slate-200 bg-slate-50 p-1 dark:border-slate-700 dark:bg-slate-800/70">
               {threadTabs.map((tab) => (
                 <button
                   key={tab.id}
                   type="button"
                   onClick={() => setThreadTab(tab.id)}
                   className={cn(
-                    'rounded-lg px-2 py-1.5 text-center text-xs font-semibold uppercase tracking-[0.08em] whitespace-nowrap transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900',
+                    'shrink-0 rounded-lg px-2.5 py-1.5 text-center text-xs font-semibold uppercase tracking-[0.08em] whitespace-nowrap transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900',
                     threadTab === tab.id
                       ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-slate-100'
                       : 'text-slate-500 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100'
@@ -964,7 +962,7 @@ export function MessagingPage() {
                         setShowJumpToLatest(false);
                       }}
                     >
-                      New messages · Jump to latest
+                      New messages - Jump to latest
                     </Button>
                   </div>
                 ) : null}
@@ -1087,5 +1085,3 @@ export function MessagingPage() {
     </div>
   );
 }
-
-

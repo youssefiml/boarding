@@ -1,4 +1,4 @@
-﻿
+
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -228,7 +228,7 @@ function mobileViewport() {
 export function DashboardPage() {
   const navigate = useNavigate();
 
-  const [isMobileView, setIsMobileView] = useState(mobileViewport);
+  const [isMobileView, setIsMobileView] = useState(() => mobileViewport());
   const [summary, setSummary] = useState<DashboardSummary | null>(null);
   const [topMatches, setTopMatches] = useState<CompanyMatch[]>([]);
   const [scoreBands, setScoreBands] = useState<ScoreBands>({
@@ -293,8 +293,6 @@ export function DashboardPage() {
     const onChange = (event: MediaQueryListEvent) => {
       setIsMobileView(event.matches);
     };
-
-    setIsMobileView(media.matches);
 
     if (typeof media.addEventListener === 'function') {
       media.addEventListener('change', onChange);
@@ -525,7 +523,7 @@ export function DashboardPage() {
             <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-800/65">
               <p className="text-base font-semibold text-slate-900 dark:text-slate-100">{featuredMatch.companyName}</p>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                {toTitleCase(featuredMatch.industry)} • {featuredMatch.location}
+                {toTitleCase(featuredMatch.industry)} - {featuredMatch.location}
               </p>
               <p className="mt-2 text-sm leading-6 text-slate-700 dark:text-slate-200">{featuredMatch.description}</p>
 
@@ -550,7 +548,7 @@ export function DashboardPage() {
                         <span className="text-xs font-semibold text-slate-600 dark:text-slate-300">#{index + 2}</span>
                       </div>
                       <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">
-                        {toTitleCase(match.industry)} • {match.location} • {statusLabelByMatch[match.status]}
+                        {toTitleCase(match.industry)} - {match.location} - {statusLabelByMatch[match.status]}
                       </p>
                     </li>
                   ))}

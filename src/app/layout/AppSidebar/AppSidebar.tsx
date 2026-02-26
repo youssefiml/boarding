@@ -1,4 +1,4 @@
-﻿import '@/styles/app/layout/AppSidebar/AppSidebar.css';
+import '@/styles/app/layout/AppSidebar/AppSidebar.css';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';

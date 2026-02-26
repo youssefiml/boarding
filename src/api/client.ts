@@ -4,7 +4,7 @@ import type { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import { AUTH_ENDPOINTS } from '@/api/endpoints';
 import { useAuthStore } from '@/stores/auth.store';
 import { useUiStore } from '@/stores/ui.store';
-import type { ApiEnvelope, AuthTokens } from '@/types/api';
+import type { ApiEnvelope, ApiErrorPayload, AuthTokens } from '@/types/api';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:5000/api';
 
@@ -52,6 +52,37 @@ function setAuthHeader(config: AxiosRequestConfig, token: string) {
 function normalizeApiError(error: unknown) {
   if (axios.isAxiosError(error)) {
     const responseData = error.response?.data;
+    const status = error.response?.status;
+    const payload = parseErrorPayload(responseData);
+    const code = normalizeErrorCode(payload?.code);
+
+    if (!error.response || error.code === 'ERR_NETWORK') {
+      return 'Network error. Retry.';
+    }
+
+    if (status === 401 || code === 'INVALID_CREDENTIALS' || code === 'AUTH_INVALID_CREDENTIALS') {
+      return 'Invalid email or password.';
+    }
+
+    if (status === 409 || code === 'EMAIL_EXISTS' || code === 'AUTH_EMAIL_EXISTS') {
+      return 'Email already exists. Try logging in.';
+    }
+
+    if (status === 400 || code === 'VALIDATION_ERROR') {
+      const fieldMessage = firstFieldError(payload?.fieldErrors);
+
+      if (fieldMessage) {
+        return fieldMessage;
+      }
+    }
+
+    if (typeof payload?.message === 'string' && payload.message.trim().length > 0) {
+      return payload.message;
+    }
+
+    if (status && status >= 500) {
+      return 'Server error. Try later.';
+    }
 
     if (typeof responseData === 'string' && responseData.trim().length > 0) {
       return responseData;
@@ -71,6 +102,50 @@ function normalizeApiError(error: unknown) {
   }
 
   return 'Unexpected error. Please try again.';
+}
+
+function parseErrorPayload(value: unknown): ApiErrorPayload | null {
+  if (typeof value !== 'object' || value === null) {
+    return null;
+  }
+
+  const payload = value as ApiErrorPayload & { error?: ApiErrorPayload };
+
+  if (payload.error && typeof payload.error === 'object') {
+    return {
+      ...payload,
+      ...payload.error,
+      fieldErrors: payload.error.fieldErrors ?? payload.fieldErrors,
+    };
+  }
+
+  return payload;
+}
+
+function normalizeErrorCode(value?: string) {
+  if (!value) {
+    return '';
+  }
+
+  return value.trim().toUpperCase();
+}
+
+function firstFieldError(fieldErrors?: Record<string, string[]>) {
+  if (!fieldErrors || typeof fieldErrors !== 'object') {
+    return '';
+  }
+
+  for (const errors of Object.values(fieldErrors)) {
+    if (Array.isArray(errors)) {
+      const first = errors.find((item) => typeof item === 'string' && item.trim().length > 0);
+
+      if (first) {
+        return first;
+      }
+    }
+  }
+
+  return '';
 }
 
 function notifyRefreshSubscribers(token: string | null) {

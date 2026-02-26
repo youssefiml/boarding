@@ -1,4 +1,4 @@
-﻿import { Input } from '@/ui/Input/Input';
+import { Input } from '@/ui/Input/Input';
 import { Select } from '@/ui/Select/Select';
 import type { OnboardingStepProps } from '@/features/onboarding/steps/StepProps';
 

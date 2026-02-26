@@ -1,4 +1,4 @@
-﻿import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
@@ -6,11 +6,14 @@ import { toast } from 'react-hot-toast';
 import { authApi } from '@/api/modules/auth.api';
 import { normalizeApiError } from '@/api/client';
 import { ROUTES } from '@/app/routes';
+import { AuthField } from '@/features/auth/components/AuthField';
+import { AuthFormShell } from '@/features/auth/components/AuthFormShell';
+import { AuthPasswordField } from '@/features/auth/components/AuthPasswordField';
+import { AuthPrimaryButton } from '@/features/auth/components/AuthPrimaryButton';
+import { normalizeLoginPayload } from '@/features/auth/normalization';
 import { loginSchema } from '@/features/auth/schemas';
 import type { LoginFormValues } from '@/features/auth/schemas';
 import { useAuthStore } from '@/stores/auth.store';
-import { Button } from '@/ui/Button/Button';
-import { Input } from '@/ui/Input/Input';
 
 const DEV_QUICK_LOGIN = {
   email: 'student@boarding.dev',
@@ -24,6 +27,8 @@ export function LoginPage() {
   const {
     register,
     handleSubmit,
+    clearErrors,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -34,10 +39,13 @@ export function LoginPage() {
   });
 
   const onSubmit = async (values: LoginFormValues) => {
+    const normalizedValues = normalizeLoginPayload(values);
+    clearErrors('root');
+
     if (
       import.meta.env.DEV &&
-      values.email === DEV_QUICK_LOGIN.email &&
-      values.password === DEV_QUICK_LOGIN.password
+      normalizedValues.email === DEV_QUICK_LOGIN.email &&
+      normalizedValues.password === DEV_QUICK_LOGIN.password
     ) {
       setSession({
         accessToken: 'dev-access-token',
@@ -57,40 +65,69 @@ export function LoginPage() {
     }
 
     try {
-      const session = await authApi.login(values);
+      const session = await authApi.login(normalizedValues);
       setSession(session);
       toast.success('Welcome back.');
       navigate(ROUTES.dashboard, { replace: true });
     } catch (error) {
-      toast.error(normalizeApiError(error));
+      const message = normalizeApiError(error);
+
+      if (message === 'Invalid email or password.') {
+        setError('password', {
+          type: 'server',
+          message,
+        });
+        return;
+      }
+
+      setError('root', {
+        type: 'server',
+        message,
+      });
     }
   };
 
   return (
-    <div>
+    <AuthFormShell
+      title="Sign in"
+      subtitle="Continue your placement journey."
+      footer={
+        <>
+          New on BOARDING?{' '}
+          <Link className="font-semibold text-brand-700 hover:text-brand-800" to={ROUTES.register}>
+            Create account
+          </Link>
+        </>
+      }
+    >
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
-        <Input
-          label="Username or email"
+        <AuthField
+          label="Email"
           type="email"
           autoComplete="email"
-          placeholder="student@example.com"
+          placeholder="name@email.com"
           {...register('email')}
           error={errors.email?.message}
         />
-        <Input
+
+        <AuthPasswordField
           label="Password"
-          type="password"
           autoComplete="current-password"
           placeholder="********"
+          labelAction={
+            <a className="hover:text-brand-800" href="mailto:support@boarding.dev">
+              Forgot password?
+            </a>
+          }
           {...register('password')}
           error={errors.password?.message}
         />
 
-        <p className="text-right text-xs font-medium text-slate-500">Need help with password? Contact support.</p>
+        {errors.root?.message ? <p className="text-sm font-medium text-rose-700">{errors.root.message}</p> : null}
 
-        <Button className="mt-1 w-full" type="submit" isLoading={isSubmitting}>
+        <AuthPrimaryButton className="mt-1" type="submit" isLoading={isSubmitting}>
           Sign in
-        </Button>
+        </AuthPrimaryButton>
       </form>
 
       {import.meta.env.DEV ? (
@@ -100,13 +137,6 @@ export function LoginPage() {
           <p>Password: {DEV_QUICK_LOGIN.password}</p>
         </div>
       ) : null}
-
-      <p className="mt-5 text-center text-sm text-slate-600">
-        New on BOARDING?{' '}
-        <Link className="font-semibold text-brand-700 hover:text-brand-800" to={ROUTES.register}>
-          Create account
-        </Link>
-      </p>
-    </div>
+    </AuthFormShell>
   );
 }

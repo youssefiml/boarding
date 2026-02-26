@@ -109,7 +109,9 @@ export function OnboardingPage() {
       window.clearTimeout(autosaveTimerRef.current);
     }
 
-    setSaveState('saving');
+    const savingIndicatorTimer = window.setTimeout(() => {
+      setSaveState('saving');
+    }, 0);
 
     autosaveTimerRef.current = window.setTimeout(() => {
       mergeDraft(liveValues);
@@ -117,6 +119,8 @@ export function OnboardingPage() {
     }, 450);
 
     return () => {
+      window.clearTimeout(savingIndicatorTimer);
+
       if (autosaveTimerRef.current) {
         window.clearTimeout(autosaveTimerRef.current);
       }
@@ -177,7 +181,7 @@ export function OnboardingPage() {
     setCurrentStep(Math.max(0, safeCurrentStep - 1));
   }, [safeCurrentStep, setCurrentStep]);
 
-  const onSubmit = async (values: OnboardingFormValues) => {
+  const onSubmit = useCallback(async (values: OnboardingFormValues) => {
     try {
       await profileApi.updateProfile(values);
       resetDraft();
@@ -187,7 +191,7 @@ export function OnboardingPage() {
     } catch {
       toast.error('Unable to submit onboarding right now.');
     }
-  };
+  }, [navigate, resetDraft]);
 
   const handlePrimaryAction = useCallback(() => {
     if (isLastStep) {

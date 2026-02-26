@@ -1,4 +1,4 @@
-﻿import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import { AppSidebar } from '@/app/layout/AppSidebar/AppSidebar';
 import { AppTopbar } from '@/app/layout/AppTopbar/AppTopbar';

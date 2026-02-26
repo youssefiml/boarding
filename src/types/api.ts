@@ -16,6 +16,12 @@ export interface ApiEnvelope<T> {
   message?: string;
 }
 
+export interface ApiErrorPayload {
+  code?: string;
+  message?: string;
+  fieldErrors?: Record<string, string[]>;
+}
+
 export interface PaginationMeta {
   page: number;
   pageSize: number;

@@ -1,4 +1,4 @@
-﻿import { useEffect } from 'react';
+import { useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';

@@ -1,6 +1,7 @@
 import { apiClient, extractData } from '@/api/client';
 import { MESSAGING_ENDPOINTS } from '@/api/endpoints';
 import { isDemoMode, mockApi } from '@/api/mock';
+import { parseMessagesResponse, parseMessageThreadsResponse } from '@/api/responseGuards';
 import type {
   ApiEnvelope,
   MessagesResponse,
@@ -12,7 +13,8 @@ import type { ChatMessage } from '@/types/domain';
 
 async function listThreads(params: MessageThreadsQuery) {
   if (isDemoMode) {
-    return mockApi.listThreads(params);
+    const data = await mockApi.listThreads(params);
+    return parseMessageThreadsResponse(data);
   }
 
   const response = await apiClient.get<ApiEnvelope<MessageThreadsResponse> | MessageThreadsResponse>(
@@ -22,12 +24,13 @@ async function listThreads(params: MessageThreadsQuery) {
     }
   );
 
-  return extractData(response.data);
+  return parseMessageThreadsResponse(extractData(response.data));
 }
 
 async function listMessages(threadId: string, page = 1, pageSize = 20) {
   if (isDemoMode) {
-    return mockApi.listMessages(threadId, page, pageSize);
+    const data = await mockApi.listMessages(threadId, page, pageSize);
+    return parseMessagesResponse(data);
   }
 
   const response = await apiClient.get<ApiEnvelope<MessagesResponse> | MessagesResponse>(
@@ -37,7 +40,7 @@ async function listMessages(threadId: string, page = 1, pageSize = 20) {
     }
   );
 
-  return extractData(response.data);
+  return parseMessagesResponse(extractData(response.data));
 }
 
 async function sendMessage(threadId: string, payload: SendMessagePayload) {

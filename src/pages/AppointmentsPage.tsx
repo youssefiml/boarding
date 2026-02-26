@@ -368,7 +368,7 @@ export function AppointmentsPage() {
         action={
           <div className="flex w-full flex-wrap items-center justify-end gap-2 sm:w-auto">
             <span className="inline-flex min-h-9 items-center rounded-full border border-slate-300/85 bg-white/75 px-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600 dark:border-slate-600/85 dark:bg-slate-800/85 dark:text-slate-200">
-              {summaryStats.upcoming} upcoming · {summaryStats.completed} completed
+              {summaryStats.upcoming} upcoming  -  {summaryStats.completed} completed
             </span>
             <Button className="w-full sm:w-auto" type="button" onClick={() => focusBookingPanel()}>
               Book new appointment
