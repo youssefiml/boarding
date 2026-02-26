@@ -56,7 +56,7 @@ export function PersonalInfoStep({ register, errors, watch, setValue }: Onboardi
   });
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <div className="app-form-grid">
       <Input label="First name" placeholder="Sara" {...register('firstName')} error={errors.firstName?.message} />
       <Input label="Last name" placeholder="Meyer" {...register('lastName')} error={errors.lastName?.message} />
       <Input

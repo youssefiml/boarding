@@ -23,11 +23,11 @@ export const AuthField = forwardRef<HTMLInputElement, AuthFieldProps>(function A
 
   return (
     <div className="space-y-2">
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
         <label htmlFor={inputId} className="text-sm font-semibold text-slate-800">
           {label}
         </label>
-        {labelAction ? <div className="text-xs font-semibold text-brand-700">{labelAction}</div> : null}
+        {labelAction ? <div className="text-xs font-semibold text-brand-700 sm:text-right">{labelAction}</div> : null}
       </div>
 
       <div className="relative">

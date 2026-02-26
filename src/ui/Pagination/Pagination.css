@@ -10,7 +10,7 @@
   @apply text-center text-sm text-slate-600;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .pagination {
     @apply flex-row items-center justify-end;
   }

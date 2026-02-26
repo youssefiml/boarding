@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
@@ -18,6 +18,7 @@ export function AppProviders({ children }: AppProvidersProps) {
   const lastError = useUiStore((state) => state.lastError);
   const clearError = useUiStore((state) => state.clearError);
   const themeMode = useThemeStore((state) => state.mode);
+  const [isCompactViewport, setIsCompactViewport] = useState(false);
   const isAuthRoute = location.pathname.startsWith(ROUTES.login) || location.pathname.startsWith(ROUTES.register);
   const appliedThemeMode: ThemeMode = isAuthRoute ? 'light' : themeMode;
 
@@ -36,13 +37,46 @@ export function AppProviders({ children }: AppProvidersProps) {
     root.dataset.theme = appliedThemeMode;
   }, [appliedThemeMode]);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const media = window.matchMedia('(max-width: 767px)');
+    setIsCompactViewport(media.matches);
+
+    const onChange = (event: MediaQueryListEvent) => {
+      setIsCompactViewport(event.matches);
+    };
+
+    if (typeof media.addEventListener === 'function') {
+      media.addEventListener('change', onChange);
+      return () => media.removeEventListener('change', onChange);
+    }
+
+    media.addListener(onChange);
+    return () => media.removeListener(onChange);
+  }, []);
+
   const toastStyle = getToastStyle(appliedThemeMode);
 
   return (
     <>
       {children}
       <Toaster
-        position="top-right"
+        position={isCompactViewport ? 'top-center' : 'top-right'}
+        containerStyle={
+          isCompactViewport
+            ? {
+                top: 8,
+                left: 8,
+                right: 8,
+              }
+            : {
+                top: 14,
+                right: 14,
+              }
+        }
         toastOptions={{
           duration: 3500,
           style: toastStyle,
@@ -62,6 +96,7 @@ function getToastStyle(themeMode: ThemeMode) {
       fontSize: '0.9rem',
       borderRadius: '14px',
       boxShadow: '0 20px 50px -28px rgba(2, 6, 23, 0.75)',
+      maxWidth: 'min(420px, calc(100vw - 1.25rem))',
     };
   }
 
@@ -72,6 +107,7 @@ function getToastStyle(themeMode: ThemeMode) {
     fontSize: '0.9rem',
     borderRadius: '14px',
     boxShadow: '0 18px 45px -26px rgba(15, 23, 42, 0.45)',
+    maxWidth: 'min(420px, calc(100vw - 1.25rem))',
   };
 }
 

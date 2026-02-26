@@ -3,7 +3,7 @@
 }
 
 .app-topbar__row {
-  @apply flex flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between;
+  @apply flex items-center justify-between gap-2.5;
 }
 
 .app-topbar__title-wrap {
@@ -32,7 +32,7 @@
 }
 
 .app-topbar__actions {
-  @apply flex w-full items-center justify-end gap-2 sm:w-auto sm:gap-3;
+  @apply flex w-auto shrink-0 items-center justify-end gap-2 sm:gap-3;
 }
 
 .app-topbar__theme-toggle {
@@ -105,7 +105,7 @@
 }
 
 .app-topbar__setup-link {
-  @apply hidden min-h-11 items-center justify-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-center text-xs font-semibold text-amber-900 shadow-sm transition-colors hover:bg-amber-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-100 dark:border-amber-500/60 dark:bg-amber-500/10 dark:text-amber-200 dark:hover:bg-amber-500/20 dark:focus-visible:ring-amber-700/40 sm:inline-flex;
+  @apply hidden min-h-11 items-center justify-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-center text-xs font-semibold text-amber-900 shadow-sm transition-colors hover:bg-amber-100 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-amber-100 dark:border-amber-500/60 dark:bg-amber-500/10 dark:text-amber-200 dark:hover:bg-amber-500/20 dark:focus-visible:ring-amber-700/40 md:inline-flex;
 }
 
 .app-topbar__setup-dot {
@@ -134,8 +134,11 @@
 }
 
 .app-topbar__mobile-panel {
-  @apply fixed inset-y-0 left-0 z-50 flex max-w-sm flex-col border-r border-slate-200 bg-white p-4 shadow-panel xl:hidden dark:border-slate-700 dark:bg-slate-900;
-  width: min(360px, 90vw);
+  @apply fixed inset-y-0 right-0 z-50 flex max-w-sm flex-col border-l border-slate-200 bg-white p-4 shadow-panel xl:hidden dark:border-slate-700 dark:bg-slate-900;
+  width: min(420px, 100vw);
+  max-width: 100vw;
+  padding-top: max(1rem, env(safe-area-inset-top));
+  padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);
 }
 
 .app-topbar__mobile-header {
@@ -214,6 +217,12 @@
 
   .app-topbar__setup-pill {
     font-size: 11px;
+  }
+}
+
+@media (min-width: 768px) {
+  .app-topbar__setup-link {
+    @apply inline-flex;
   }
 }
 

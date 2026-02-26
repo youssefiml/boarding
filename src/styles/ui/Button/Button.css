@@ -38,12 +38,18 @@
 }
 
 .ui-button--md {
-  @apply min-h-12 px-5 text-sm;
+  @apply min-h-11 px-4 text-sm md:min-h-12 md:px-5;
 }
 
 .ui-button--lg {
-  @apply px-6 text-base;
-  min-height: 3.25rem;
+  @apply min-h-12 px-5 text-sm md:px-6 md:text-base;
+  min-height: 3rem;
+}
+
+@media (min-width: 768px) {
+  .ui-button--lg {
+    min-height: 3.25rem;
+  }
 }
 
 .ui-button__spinner {

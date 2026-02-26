@@ -4,10 +4,10 @@ import type { OnboardingStepProps } from '@/features/onboarding/steps/StepProps'
 
 export function EducationStep({ register, errors }: OnboardingStepProps) {
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <div className="app-form-grid">
       <Select
         label="Education level"
-        className="sm:col-span-2"
+        className="md:col-span-2"
         {...register('educationLevel')}
         error={errors.educationLevel?.message}
       >
@@ -19,7 +19,7 @@ export function EducationStep({ register, errors }: OnboardingStepProps) {
       <Input
         label="Field of study"
         placeholder="Computer Science"
-        className="sm:col-span-2"
+        className="md:col-span-2"
         {...register('fieldOfStudy')}
         error={errors.fieldOfStudy?.message}
       />
@@ -28,7 +28,7 @@ export function EducationStep({ register, errors }: OnboardingStepProps) {
         inputMode="numeric"
         maxLength={4}
         placeholder="2027"
-        className="sm:col-span-2"
+        className="md:col-span-2"
         {...register('graduationYear')}
         error={errors.graduationYear?.message}
       />

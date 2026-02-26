@@ -491,7 +491,7 @@ export function ResourcesPage() {
       />
 
       <Card className="mb-4 p-4 sm:p-5">
-        <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+        <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
           <Input
             label="Search resources"
             value={searchQuery}
@@ -501,7 +501,7 @@ export function ResourcesPage() {
             placeholder="Search housing, visa, health, contracts..."
           />
 
-          <Button type="button" variant="outline" className="sm:hidden" onClick={() => setMobileFiltersOpen(true)}>
+          <Button type="button" variant="outline" className="md:hidden" onClick={() => setMobileFiltersOpen(true)}>
             Filters
           </Button>
         </div>
@@ -578,7 +578,7 @@ export function ResourcesPage() {
                     <p className="text-sm text-slate-600 dark:text-slate-300">No essential resources match current filters.</p>
                   </Card>
                 ) : (
-                  <div className="grid gap-3 lg:grid-cols-2">
+                  <div className="grid gap-3 md:grid-cols-2">
                     {essentialResources.map((item) => {
                       const isSaved = savedResourceIds.includes(item.resource.id);
                       const isRecommended = recommendedResourceIds.has(item.resource.id);
@@ -648,7 +648,7 @@ export function ResourcesPage() {
                     <p className="text-sm text-slate-600 dark:text-slate-300">No resources in this section for current filters.</p>
                   </Card>
                 ) : (
-                  <div className="grid gap-3 lg:grid-cols-2">
+                  <div className="grid gap-3 md:grid-cols-2">
                     {duringInternshipResources.map((item) => {
                       const category = categoryMeta[item.resource.category];
                       const isSaved = savedResourceIds.includes(item.resource.id);
@@ -716,7 +716,7 @@ export function ResourcesPage() {
                     <p className="text-sm text-slate-600 dark:text-slate-300">No emergency resources available for this filter.</p>
                   </Card>
                 ) : (
-                  <div className="grid gap-3 lg:grid-cols-2">
+                  <div className="grid gap-3 md:grid-cols-2">
                     {emergencyResources.map((item) => {
                       const category = categoryMeta[item.resource.category];
                       const isSaved = savedResourceIds.includes(item.resource.id);
@@ -829,7 +829,7 @@ export function ResourcesPage() {
       </div>
 
       {mobileFiltersOpen ? (
-        <div className="fixed inset-0 z-50 sm:hidden" role="dialog" aria-modal="true" aria-label="Filters">
+        <div className="fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true" aria-label="Filters">
           <button
             type="button"
             className="absolute inset-0 bg-slate-950/60"
@@ -901,7 +901,7 @@ export function ResourcesPage() {
       ) : null}
 
       {previewResource ? (
-        <div className="fixed inset-0 z-[60] p-3 sm:p-4" role="dialog" aria-modal="true" aria-label="Resource preview">
+        <div className="fixed inset-0 z-[60] p-3 md:p-4" role="dialog" aria-modal="true" aria-label="Resource preview">
           <button
             type="button"
             className="absolute inset-0 bg-slate-950/70"
@@ -909,7 +909,7 @@ export function ResourcesPage() {
             aria-label="Close resource preview"
           />
 
-          <div className="relative mx-auto mt-4 max-h-[88dvh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl dark:border-slate-700 dark:bg-slate-900 sm:mt-8 sm:p-5">
+          <div className="app-modal-panel relative mx-auto mt-4 overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl dark:border-slate-700 dark:bg-slate-900 sm:mt-8 sm:p-5">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <div className="flex min-w-0 flex-wrap items-center gap-2">

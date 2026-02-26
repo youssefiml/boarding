@@ -15,6 +15,9 @@
   --surface-radial-accent: rgba(29, 158, 144, 0.2);
   --surface-grid: rgba(16, 24, 40, 0.03);
   --selection-bg: rgba(78, 140, 255, 0.24);
+  --app-shell-max-width: 1440px;
+  --app-shell-gutter: 0.75rem;
+  --app-shell-section-gap: 0.75rem;
 }
 
 :root[data-theme='dark'],
@@ -60,6 +63,7 @@ body {
   transition:
     color 180ms ease-out,
     background-color 180ms ease-out;
+  overflow-x: hidden;
 }
 
 #root {
@@ -83,6 +87,27 @@ textarea {
   font: inherit;
 }
 
+@layer components {
+  .app-scroll-x {
+    @apply w-full overflow-x-auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .app-form-grid {
+    @apply grid grid-cols-1 gap-4 md:grid-cols-2;
+  }
+
+  .app-modal-panel {
+    width: min(100%, 42rem);
+    max-height: min(88dvh, 760px);
+    padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);
+  }
+
+  .app-modal-panel--wide {
+    width: min(100%, 72rem);
+  }
+}
+
 :focus-visible {
   outline: 2px solid var(--ring-brand);
   outline-offset: 2px;
@@ -95,5 +120,19 @@ textarea {
   body {
     background: var(--surface-page);
     background-size: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --app-shell-gutter: 1rem;
+    --app-shell-section-gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --app-shell-gutter: 1.5rem;
+    --app-shell-section-gap: 1.5rem;
   }
 }

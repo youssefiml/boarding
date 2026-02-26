@@ -611,7 +611,7 @@ export function AppointmentsPage() {
 
               <div className="space-y-3 rounded-xl border border-slate-200 bg-slate-50/70 p-3 dark:border-slate-700 dark:bg-slate-800/50">
                 <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-500 dark:text-slate-300">Schedule</p>
-                <div className="grid gap-3 sm:grid-cols-2">
+                <div className="grid gap-3 md:grid-cols-2">
                   <Input label="Date" type="date" {...register('date')} error={errors.date?.message} />
                   <Input label="Time" type="time" {...register('time')} error={errors.time?.message} />
                 </div>

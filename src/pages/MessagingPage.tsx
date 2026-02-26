@@ -695,7 +695,7 @@ export function MessagingPage() {
     <div>
       <PageHeader title="Messaging" subtitle="Keep placement conversations calm, clear, and action oriented." />
 
-      <div className="grid gap-3 sm:gap-4 lg:grid-cols-[minmax(260px,0.34fr)_minmax(0,1fr)] 2xl:grid-cols-[minmax(260px,0.25fr)_minmax(0,0.5fr)_minmax(280px,0.25fr)]">
+      <div className="grid gap-3 sm:gap-4 lg:grid-cols-[minmax(260px,0.34fr)_minmax(0,1fr)] xl:grid-cols-[minmax(260px,0.25fr)_minmax(0,0.5fr)_minmax(280px,0.25fr)]">
         <Card className={cn('lg:min-h-[620px] min-w-0 p-3 sm:p-4', shouldShowThreadList ? 'block' : 'hidden lg:block')}>
           <div className="mb-4 space-y-3">
             <div>
@@ -852,7 +852,7 @@ export function MessagingPage() {
                 </div>
               </div>
 
-              <details className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-800/70 2xl:hidden">
+              <details className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-800/70 xl:hidden">
                 <summary className="cursor-pointer text-sm font-semibold text-slate-900 dark:text-slate-100">Conversation context</summary>
                 <div className="mt-3">{contextPanelBody}</div>
               </details>
@@ -864,7 +864,7 @@ export function MessagingPage() {
                     setShowJumpToLatest(false);
                   }
                 }}
-                className="relative mt-4 pr-1 lg:flex-1 lg:overflow-y-auto"
+                className="relative mt-4 max-h-[52dvh] overflow-y-auto pr-1 lg:flex-1 lg:max-h-none"
               >
                 {isLoadingMessages ? (
                   <div className="space-y-2">
@@ -1011,11 +1011,12 @@ export function MessagingPage() {
                 </div>
 
                 <form className="space-y-2" onSubmit={handleSubmit(onSend)}>
-                  <div className="flex items-end gap-2">
+                  <div className="grid gap-2 sm:flex sm:items-end">
                     <Button
                       type="button"
                       variant="ghost"
                       size="sm"
+                      className="w-full sm:w-auto"
                       onClick={() => {
                         toast('File attachment will be available soon.');
                       }}
@@ -1045,7 +1046,7 @@ export function MessagingPage() {
                       />
                     </label>
 
-                    <Button type="submit" className="shrink-0" isLoading={isSubmitting}>
+                    <Button type="submit" className="w-full shrink-0 sm:w-auto" isLoading={isSubmitting}>
                       Send
                     </Button>
                   </div>
@@ -1065,7 +1066,7 @@ export function MessagingPage() {
           )}
         </Card>
 
-        <Card className="hidden min-w-0 p-3 sm:p-4 2xl:block 2xl:min-h-[620px]">
+        <Card className="hidden min-w-0 p-3 sm:p-4 xl:block xl:min-h-[620px]">
           <div className="mb-3">
             <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">Context</h2>
             <p className="text-xs text-slate-500 dark:text-slate-300">Keep placement details visible while you chat.</p>

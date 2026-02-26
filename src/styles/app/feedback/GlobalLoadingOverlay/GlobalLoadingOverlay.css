@@ -1,5 +1,5 @@
 .global-loading-overlay {
-  @apply pointer-events-none fixed inset-0 z-50 flex items-end justify-center p-4 sm:items-start sm:justify-end;
+  @apply pointer-events-none fixed inset-0 z-50 flex items-start justify-center p-3 sm:justify-end sm:p-4;
 }
 
 .global-loading-overlay__content {
