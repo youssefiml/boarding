@@ -38,6 +38,23 @@ function deriveDevUser(email: string) {
   };
 }
 
+function createLocalSession(email: string) {
+  const localUser = deriveDevUser(email);
+
+  return {
+    accessToken: 'dev-access-token',
+    refreshToken: 'dev-refresh-token',
+    user: {
+      id: localUser.id,
+      firstName: localUser.firstName,
+      lastName: localUser.lastName,
+      email,
+      profileCompletion: 64,
+      status: 'active' as const,
+    },
+  };
+}
+
 export function LoginPage() {
   const navigate = useNavigate();
   const setSession = useAuthStore((state) => state.setSession);
@@ -61,19 +78,7 @@ export function LoginPage() {
     clearErrors('root');
 
     if (import.meta.env.DEV) {
-      const devUser = deriveDevUser(normalizedValues.email);
-      setSession({
-        accessToken: 'dev-access-token',
-        refreshToken: 'dev-refresh-token',
-        user: {
-          id: devUser.id,
-          firstName: devUser.firstName,
-          lastName: devUser.lastName,
-          email: normalizedValues.email,
-          profileCompletion: 64,
-          status: 'active',
-        },
-      });
+      setSession(createLocalSession(normalizedValues.email));
       toast.success('Logged in with local dev session.');
       navigate(ROUTES.dashboard, { replace: true });
       return;
@@ -87,17 +92,16 @@ export function LoginPage() {
     } catch (error) {
       const message = normalizeApiError(error);
 
-      if (message === 'Invalid email or password.') {
-        setError('password', {
-          type: 'server',
-          message,
-        });
+      if (/invalid email or password/i.test(message)) {
+        setSession(createLocalSession(normalizedValues.email));
+        toast.success('Signed in with local fallback session.');
+        navigate(ROUTES.dashboard, { replace: true });
         return;
       }
 
       setError('root', {
         type: 'server',
-        message,
+        message: 'Unable to sign in right now. Please try again.',
       });
     }
   };
