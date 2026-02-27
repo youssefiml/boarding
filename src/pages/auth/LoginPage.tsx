@@ -15,10 +15,28 @@ import { loginSchema } from '@/features/auth/schemas';
 import type { LoginFormValues } from '@/features/auth/schemas';
 import { useAuthStore } from '@/stores/auth.store';
 
-const DEV_QUICK_LOGIN = {
-  email: 'student@boarding.dev',
-  password: 'admin1234',
-} as const;
+function toTitleCase(value: string) {
+  if (!value) {
+    return '';
+  }
+
+  return `${value.charAt(0).toUpperCase()}${value.slice(1).toLowerCase()}`;
+}
+
+function deriveDevUser(email: string) {
+  const localPart = email.split('@')[0] ?? 'demo.user';
+  const sanitized = localPart.replace(/[^a-zA-Z0-9._-]/g, ' ').replace(/[._-]+/g, ' ').trim();
+  const segments = sanitized.length > 0 ? sanitized.split(/\s+/).filter(Boolean) : [];
+  const firstName = toTitleCase(segments[0] ?? 'Demo');
+  const lastName = toTitleCase(segments.slice(1).join(' ') || 'User');
+  const normalizedId = localPart.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 24) || 'user';
+
+  return {
+    id: `dev-${normalizedId}`,
+    firstName,
+    lastName,
+  };
+}
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -42,24 +60,21 @@ export function LoginPage() {
     const normalizedValues = normalizeLoginPayload(values);
     clearErrors('root');
 
-    if (
-      import.meta.env.DEV &&
-      normalizedValues.email === DEV_QUICK_LOGIN.email &&
-      normalizedValues.password === DEV_QUICK_LOGIN.password
-    ) {
+    if (import.meta.env.DEV) {
+      const devUser = deriveDevUser(normalizedValues.email);
       setSession({
         accessToken: 'dev-access-token',
         refreshToken: 'dev-refresh-token',
         user: {
-          id: 'dev-student-1',
-          firstName: 'Demo',
-          lastName: 'Student',
-          email: DEV_QUICK_LOGIN.email,
+          id: devUser.id,
+          firstName: devUser.firstName,
+          lastName: devUser.lastName,
+          email: normalizedValues.email,
           profileCompletion: 64,
           status: 'active',
         },
       });
-      toast.success('Logged in with local dev account.');
+      toast.success('Logged in with local dev session.');
       navigate(ROUTES.dashboard, { replace: true });
       return;
     }
@@ -132,9 +147,8 @@ export function LoginPage() {
 
       {import.meta.env.DEV ? (
         <div className="mt-5 rounded-xl border border-brand-200 bg-brand-50 px-3 py-2.5 text-xs text-brand-900">
-          <p className="font-semibold uppercase tracking-wide">Dev quick login</p>
-          <p>Email: {DEV_QUICK_LOGIN.email}</p>
-          <p>Password: {DEV_QUICK_LOGIN.password}</p>
+          <p className="font-semibold uppercase tracking-wide">Development sign-in</p>
+          <p>Any valid email and password (8+ characters) signs in locally.</p>
         </div>
       ) : null}
     </AuthFormShell>

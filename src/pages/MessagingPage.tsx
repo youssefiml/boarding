@@ -697,7 +697,7 @@ export function MessagingPage() {
         <PageHeader title="Messaging" subtitle="Keep placement conversations calm, clear, and action oriented." />
       </div>
 
-      <div className="grid gap-3 sm:gap-4 lg:grid-cols-[minmax(260px,0.34fr)_minmax(0,1fr)] xl:grid-cols-[minmax(260px,0.25fr)_minmax(0,0.5fr)_minmax(280px,0.25fr)]">
+      <div className="grid gap-3 sm:gap-4 lg:grid-cols-[minmax(260px,0.34fr)_minmax(0,0.66fr)] 2xl:grid-cols-[minmax(240px,0.22fr)_minmax(0,0.56fr)_minmax(220px,0.22fr)]">
         <Card className={cn('lg:min-h-[620px] min-w-0 p-3 sm:p-4', shouldShowThreadList ? 'block' : 'hidden lg:block')}>
           <div className="mb-4 space-y-3">
             <div>
@@ -714,14 +714,14 @@ export function MessagingPage() {
               placeholder="Company or message"
             />
 
-            <div className="grid w-full grid-cols-2 gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1 sm:flex sm:items-center sm:overflow-x-auto dark:border-slate-700 dark:bg-slate-800/70">
+            <div className="grid w-full grid-cols-2 gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1 md:grid-cols-4 dark:border-slate-700 dark:bg-slate-800/70">
               {threadTabs.map((tab) => (
                 <button
                   key={tab.id}
                   type="button"
                   onClick={() => setThreadTab(tab.id)}
                   className={cn(
-                    'w-full rounded-lg px-2.5 py-1.5 text-center text-xs font-semibold uppercase tracking-[0.08em] whitespace-nowrap transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white sm:w-auto sm:shrink-0 dark:focus-visible:ring-offset-slate-900',
+                    'w-full rounded-lg px-2.5 py-1.5 text-center text-xs font-semibold uppercase tracking-[0.08em] whitespace-nowrap transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900',
                     threadTab === tab.id
                       ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-slate-100'
                       : 'text-slate-500 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100'
@@ -816,8 +816,8 @@ export function MessagingPage() {
         <Card className={cn('lg:min-h-[620px] min-w-0 p-3 sm:p-4', shouldShowConversation ? 'flex flex-col' : 'hidden lg:flex lg:flex-col')}>
           {selectedThread ? (
             <>
-              <div className="flex flex-col gap-3 border-b border-slate-200 pb-3 dark:border-slate-700 md:flex-row md:items-start md:justify-between">
-                <div className="flex min-w-0 items-start gap-3">
+              <div className="flex flex-col gap-3 border-b border-slate-200 pb-3 dark:border-slate-700">
+                <div className="flex min-w-0 flex-wrap items-start gap-2.5 sm:flex-nowrap sm:gap-3">
                   {!isDesktop ? (
                     <Button
                       type="button"
@@ -835,8 +835,8 @@ export function MessagingPage() {
                     {companyInitials(selectedThread.companyName)}
                   </div>
 
-                  <div className="min-w-0">
-                    <h2 className="truncate text-base font-semibold text-slate-900 dark:text-slate-100">{selectedThread.companyName}</h2>
+                  <div className="min-w-0 flex-1">
+                    <h2 className="text-base font-semibold leading-6 text-slate-900 break-words dark:text-slate-100">{selectedThread.companyName}</h2>
                     <div className="mt-1 flex flex-wrap items-center gap-2">
                       <Badge variant={conversationStatus.variant}>{conversationStatus.label}</Badge>
                       <p className="hidden text-xs text-slate-500 dark:text-slate-400 sm:block">
@@ -846,17 +846,17 @@ export function MessagingPage() {
                   </div>
                 </div>
 
-                <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-2 md:w-auto md:grid-cols-1">
-                  <Button type="button" variant="outline" size="sm" className="hidden w-full sm:inline-flex md:w-auto" onClick={openCompanyDetails}>
+                <div className="grid gap-2 sm:flex sm:flex-wrap sm:items-center">
+                  <Button type="button" variant="outline" size="sm" className="w-full sm:min-w-[9.5rem] sm:w-auto" onClick={openCompanyDetails}>
                     View company
                   </Button>
-                  <Button type="button" size="sm" className="w-full md:w-auto" onClick={openInterviewBooking}>
+                  <Button type="button" size="sm" className="w-full sm:min-w-[9.5rem] sm:w-auto" onClick={openInterviewBooking}>
                     Book interview
                   </Button>
                 </div>
               </div>
 
-              <details className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-800/70 xl:hidden">
+              <details className="mt-3 rounded-xl border border-slate-200 bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-800/70 2xl:hidden">
                 <summary className="cursor-pointer text-sm font-semibold text-slate-900 dark:text-slate-100">Conversation context</summary>
                 <div className="mt-3">{contextPanelBody}</div>
               </details>
@@ -905,7 +905,7 @@ export function MessagingPage() {
                         <article
                           key={entry.key}
                           className={cn(
-                            'group max-w-[86%] rounded-xl border px-3 py-2 transition-shadow sm:max-w-[75%] lg:max-w-[70%]',
+                            'group max-w-[92%] rounded-xl border px-3 py-2 transition-shadow sm:max-w-[88%] lg:max-w-[92%] 2xl:max-w-[78%]',
                             isStudent
                               ? 'ml-auto border-brand-500/60 bg-brand-600 text-white'
                               : 'mr-auto border-slate-200 bg-slate-50 text-slate-900 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-100',
@@ -1070,7 +1070,7 @@ export function MessagingPage() {
           )}
         </Card>
 
-        <Card className="hidden min-w-0 p-3 sm:p-4 xl:block xl:min-h-[620px]">
+        <Card className="hidden min-w-0 p-3 sm:p-4 2xl:block 2xl:min-h-[620px]">
           <div className="mb-3">
             <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">Context</h2>
             <p className="text-xs text-slate-500 dark:text-slate-300">Keep placement details visible while you chat.</p>
