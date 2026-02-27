@@ -652,12 +652,12 @@ export function MessagingPage() {
         <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">{selectedMatch?.location ?? 'Location information pending'}</p>
       </div>
 
-      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-800/70">
+      <div className="flex flex-col gap-2 sm:flex-row lg:flex-col">
+        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 sm:flex-1 dark:border-slate-700 dark:bg-slate-800/70">
           <p className="text-xs text-slate-500 dark:text-slate-400">Match score</p>
           <p className="mt-1 text-base font-semibold text-slate-900 dark:text-slate-100">{selectedMatch ? `${selectedMatch.score}%` : 'N/A'}</p>
         </div>
-        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-800/70">
+        <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 sm:flex-1 dark:border-slate-700 dark:bg-slate-800/70">
           <p className="text-xs text-slate-500 dark:text-slate-400">Application status</p>
           <p className="mt-1 text-base font-semibold text-slate-900 dark:text-slate-100">
             {selectedMatch ? applicationStatusLabels[selectedMatch.status] : 'Awaiting match sync'}
@@ -697,8 +697,13 @@ export function MessagingPage() {
         <PageHeader title="Messaging" subtitle="Keep placement conversations calm, clear, and action oriented." />
       </div>
 
-      <div className="grid gap-3 sm:gap-4 lg:grid-cols-[minmax(260px,0.34fr)_minmax(0,0.66fr)] 2xl:grid-cols-[minmax(240px,0.22fr)_minmax(0,0.56fr)_minmax(220px,0.22fr)]">
-        <Card className={cn('lg:min-h-[620px] min-w-0 p-3 sm:p-4', shouldShowThreadList ? 'block' : 'hidden lg:block')}>
+      <div className="flex flex-col gap-3 sm:gap-4 lg:flex-row lg:items-start">
+        <Card
+          className={cn(
+            'min-w-0 p-3 sm:p-4 lg:min-h-[620px] lg:basis-[34%] lg:flex-none lg:max-w-[34%] 2xl:basis-[22%] 2xl:max-w-[22%]',
+            shouldShowThreadList ? 'block' : 'hidden lg:block'
+          )}
+        >
           <div className="mb-4 space-y-3">
             <div>
               <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">Inbox</h2>
@@ -714,14 +719,14 @@ export function MessagingPage() {
               placeholder="Company or message"
             />
 
-            <div className="grid w-full grid-cols-2 gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1 md:grid-cols-4 dark:border-slate-700 dark:bg-slate-800/70">
+            <div className="flex w-full flex-wrap gap-1 rounded-xl border border-slate-200 bg-slate-50 p-1 dark:border-slate-700 dark:bg-slate-800/70">
               {threadTabs.map((tab) => (
                 <button
                   key={tab.id}
                   type="button"
                   onClick={() => setThreadTab(tab.id)}
                   className={cn(
-                    'w-full rounded-lg px-2.5 py-1.5 text-center text-xs font-semibold uppercase tracking-[0.08em] whitespace-nowrap transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900',
+                    'min-w-0 grow basis-[calc(50%-0.125rem)] rounded-lg px-2.5 py-1.5 text-center text-xs font-semibold uppercase tracking-[0.08em] whitespace-nowrap transition md:basis-[calc(25%-0.125rem)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900',
                     threadTab === tab.id
                       ? 'bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-slate-100'
                       : 'text-slate-500 hover:text-slate-900 dark:text-slate-300 dark:hover:text-slate-100'
@@ -813,7 +818,12 @@ export function MessagingPage() {
           ) : null}
         </Card>
 
-        <Card className={cn('lg:min-h-[620px] min-w-0 p-3 sm:p-4', shouldShowConversation ? 'flex flex-col' : 'hidden lg:flex lg:flex-col')}>
+        <Card
+          className={cn(
+            'min-w-0 p-3 sm:p-4 lg:min-h-[620px] lg:min-w-0 lg:flex-1 2xl:basis-[56%] 2xl:flex-none 2xl:max-w-[56%]',
+            shouldShowConversation ? 'flex flex-col' : 'hidden lg:flex lg:flex-col'
+          )}
+        >
           {selectedThread ? (
             <>
               <div className="flex flex-col gap-3 border-b border-slate-200 pb-3 dark:border-slate-700">
@@ -831,7 +841,7 @@ export function MessagingPage() {
                     </Button>
                   ) : null}
 
-                  <div className="grid h-10 w-10 place-items-center rounded-full border border-slate-300 bg-slate-100 text-sm font-semibold text-slate-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-slate-100 text-sm font-semibold text-slate-700 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100">
                     {companyInitials(selectedThread.companyName)}
                   </div>
 
@@ -846,7 +856,7 @@ export function MessagingPage() {
                   </div>
                 </div>
 
-                <div className="grid gap-2 sm:flex sm:flex-wrap sm:items-center">
+                <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
                   <Button type="button" variant="outline" size="sm" className="w-full sm:min-w-[9.5rem] sm:w-auto" onClick={openCompanyDetails}>
                     View company
                   </Button>
@@ -1015,7 +1025,7 @@ export function MessagingPage() {
                 </div>
 
                 <form className="space-y-2" onSubmit={handleSubmit(onSend)}>
-                  <div className="grid gap-2 sm:flex sm:items-end">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
                     <Button
                       type="button"
                       variant="ghost"
@@ -1070,7 +1080,7 @@ export function MessagingPage() {
           )}
         </Card>
 
-        <Card className="hidden min-w-0 p-3 sm:p-4 2xl:block 2xl:min-h-[620px]">
+        <Card className="hidden min-w-0 p-3 sm:p-4 2xl:block 2xl:min-h-[620px] 2xl:basis-[22%] 2xl:flex-none 2xl:max-w-[22%]">
           <div className="mb-3">
             <h2 className="text-base font-semibold text-slate-900 dark:text-slate-100">Context</h2>
             <p className="text-xs text-slate-500 dark:text-slate-300">Keep placement details visible while you chat.</p>
