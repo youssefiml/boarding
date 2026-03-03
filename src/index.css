@@ -49,11 +49,14 @@ body,
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  scrollbar-gutter: stable;
 }
 
 body {
   margin: 0;
   font-family: 'Public Sans', 'Segoe UI', sans-serif;
+  line-height: 1.5;
   color: var(--ink-primary);
   background:
     radial-gradient(circle at 8% 0%, var(--surface-radial-brand), transparent 42%),
@@ -134,5 +137,20 @@ textarea {
   :root {
     --app-shell-gutter: 1.5rem;
     --app-shell-section-gap: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

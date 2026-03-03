@@ -1,5 +1,5 @@
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ import { Pagination } from '@/ui/Pagination/Pagination';
 import { Select } from '@/ui/Select/Select';
 import { Skeleton } from '@/ui/Skeleton/Skeleton';
 import { cn } from '@/lib/cn';
+import { useDebouncedValue } from '@/hooks/useDebouncedValue';
 import { useAuthStore } from '@/stores/auth.store';
 import type { ProfileResponse } from '@/types/api';
 import type { CompanyMatch } from '@/types/domain';
@@ -164,10 +165,14 @@ export function MatchingPage() {
   const [isCompareOpen, setIsCompareOpen] = useState(false);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [profileSummary, setProfileSummary] = useState<ProfileResponse | null>(null);
+  const requestIdRef = useRef(0);
+  const debouncedSearch = useDebouncedValue(search, 220);
+  const isSearchSettling = debouncedSearch.trim() !== search.trim();
 
   const profileStrength = user?.profileCompletion ?? profileSummary?.completion ?? 72;
 
   const loadMatches = useCallback(async () => {
+    const requestId = ++requestIdRef.current;
     setIsLoading(true);
     setLoadError(false);
 
@@ -175,19 +180,29 @@ export function MatchingPage() {
       const data = await matchingApi.listMatches({
         page: 1,
         pageSize: 60,
-        search: search.trim() || undefined,
+        search: debouncedSearch.trim() || undefined,
         industry: industry === 'all' ? undefined : industry,
         minScore,
       });
 
+      if (requestId !== requestIdRef.current) {
+        return;
+      }
+
       setMatches(data.items);
     } catch {
+      if (requestId !== requestIdRef.current) {
+        return;
+      }
+
       setMatches([]);
       setLoadError(true);
     } finally {
-      setIsLoading(false);
+      if (requestId === requestIdRef.current) {
+        setIsLoading(false);
+      }
     }
-  }, [industry, minScore, search]);
+  }, [debouncedSearch, industry, minScore]);
 
   useEffect(() => {
     void loadMatches();
@@ -540,7 +555,10 @@ export function MatchingPage() {
           </div>
 
           <div className="sticky top-20 z-20 mb-4 hidden sm:block">
-            <Card className="p-4">{filters()}</Card>
+            <Card className="p-4">
+              {filters()}
+              {isSearchSettling ? <p className="mt-2 text-xs text-slate-500 dark:text-slate-300">Updating results...</p> : null}
+            </Card>
           </div>
 
           {isLoading ? (

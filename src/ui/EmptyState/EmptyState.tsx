@@ -1,4 +1,5 @@
 import '@/styles/ui/EmptyState/EmptyState.css';
+import { cn } from '@/lib/cn';
 import { Button } from '@/ui/Button/Button';
 
 interface EmptyStateProps {
@@ -6,11 +7,12 @@ interface EmptyStateProps {
   description: string;
   actionLabel?: string;
   onAction?: () => void;
+  tone?: 'neutral' | 'warning' | 'danger';
 }
 
-export function EmptyState({ title, description, actionLabel, onAction }: EmptyStateProps) {
+export function EmptyState({ title, description, actionLabel, onAction, tone = 'neutral' }: EmptyStateProps) {
   return (
-    <div className="empty-state">
+    <div className={cn('empty-state', `empty-state--${tone}`)} role="status" aria-live="polite">
       <h3 className="empty-state__title">{title}</h3>
       <p className="empty-state__description">{description}</p>
       {actionLabel && onAction ? (

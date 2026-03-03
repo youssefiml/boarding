@@ -35,7 +35,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         {...props}
       />
       {helperMessage ? (
-        <span id={messageId} className={cn('input-field__message', stateClass)}>
+        <span
+          id={messageId}
+          role={hasError ? 'alert' : 'status'}
+          aria-live={hasError ? 'assertive' : 'polite'}
+          className={cn('input-field__message', stateClass)}
+        >
           {helperMessage}
         </span>
       ) : null}

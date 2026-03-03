@@ -19,6 +19,7 @@ export function AppProviders({ children }: AppProvidersProps) {
   const clearError = useUiStore((state) => state.clearError);
   const themeMode = useThemeStore((state) => state.mode);
   const [isCompactViewport, setIsCompactViewport] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const isAuthRoute = location.pathname.startsWith(ROUTES.login) || location.pathname.startsWith(ROUTES.register);
   const appliedThemeMode: ThemeMode = isAuthRoute ? 'light' : themeMode;
 
@@ -58,6 +59,27 @@ export function AppProviders({ children }: AppProvidersProps) {
     return () => media.removeListener(onChange);
   }, []);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(media.matches);
+
+    const onChange = (event: MediaQueryListEvent) => {
+      setPrefersReducedMotion(event.matches);
+    };
+
+    if (typeof media.addEventListener === 'function') {
+      media.addEventListener('change', onChange);
+      return () => media.removeEventListener('change', onChange);
+    }
+
+    media.addListener(onChange);
+    return () => media.removeListener(onChange);
+  }, []);
+
   const toastStyle = getToastStyle(appliedThemeMode);
 
   return (
@@ -65,6 +87,7 @@ export function AppProviders({ children }: AppProvidersProps) {
       {children}
       <Toaster
         position={isCompactViewport ? 'top-center' : 'top-right'}
+        gutter={8}
         containerStyle={
           isCompactViewport
             ? {
@@ -78,7 +101,17 @@ export function AppProviders({ children }: AppProvidersProps) {
               }
         }
         toastOptions={{
-          duration: 3500,
+          duration: prefersReducedMotion ? 2200 : 3200,
+          ariaProps: {
+            role: 'status',
+            'aria-live': 'polite',
+          },
+          success: {
+            duration: prefersReducedMotion ? 1800 : 2600,
+          },
+          error: {
+            duration: prefersReducedMotion ? 2600 : 4200,
+          },
           style: toastStyle,
         }}
       />

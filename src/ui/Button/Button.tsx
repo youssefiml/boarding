@@ -11,6 +11,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   isLoading?: boolean;
+  loadingLabel?: string;
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
@@ -28,7 +29,7 @@ const sizeClasses: Record<ButtonSize, string> = {
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { className, children, variant = 'primary', size = 'md', disabled, isLoading = false, ...props },
+  { className, children, variant = 'primary', size = 'md', disabled, isLoading = false, loadingLabel = 'Loading', ...props },
   ref
 ) {
   const isDisabled = disabled || isLoading;
@@ -39,12 +40,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       className={cn('ui-button', variantClasses[variant], sizeClasses[size], className)}
       disabled={isDisabled}
       aria-busy={isLoading}
+      aria-disabled={isDisabled}
+      data-loading={isLoading ? 'true' : 'false'}
       {...props}
     >
       {isLoading ? (
         <>
           <span className="ui-button__spinner" aria-hidden />
-          <span>Loading</span>
+          <span>{loadingLabel}</span>
         </>
       ) : (
         children

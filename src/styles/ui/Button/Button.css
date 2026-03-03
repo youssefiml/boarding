@@ -9,6 +9,10 @@
     transform 150ms ease-out;
 }
 
+.ui-button[data-loading='true'] {
+  cursor: progress;
+}
+
 .ui-button:active {
   transform: translateY(1px);
 }

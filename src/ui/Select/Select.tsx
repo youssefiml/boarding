@@ -37,7 +37,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
         {children}
       </select>
       {helperMessage ? (
-        <span id={messageId} className={cn('select-field__message', stateClass)}>
+        <span
+          id={messageId}
+          role={hasError ? 'alert' : 'status'}
+          aria-live={hasError ? 'assertive' : 'polite'}
+          className={cn('select-field__message', stateClass)}
+        >
           {helperMessage}
         </span>
       ) : null}

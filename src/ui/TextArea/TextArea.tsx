@@ -35,7 +35,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(function 
         {...props}
       />
       {helperMessage ? (
-        <span id={messageId} className={cn('textarea-field__message', stateClass)}>
+        <span
+          id={messageId}
+          role={hasError ? 'alert' : 'status'}
+          aria-live={hasError ? 'assertive' : 'polite'}
+          className={cn('textarea-field__message', stateClass)}
+        >
           {helperMessage}
         </span>
       ) : null}

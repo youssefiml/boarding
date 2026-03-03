@@ -57,7 +57,7 @@ function normalizeApiError(error: unknown) {
     const code = normalizeErrorCode(payload?.code);
 
     if (!error.response || error.code === 'ERR_NETWORK') {
-      return 'Network error. Retry.';
+      return 'Network connection issue. Check your internet and try again.';
     }
 
     if (status === 401 || code === 'INVALID_CREDENTIALS' || code === 'AUTH_INVALID_CREDENTIALS') {
@@ -65,7 +65,7 @@ function normalizeApiError(error: unknown) {
     }
 
     if (status === 409 || code === 'EMAIL_EXISTS' || code === 'AUTH_EMAIL_EXISTS') {
-      return 'Email already exists. Try logging in.';
+      return 'This email is already registered. Sign in instead.';
     }
 
     if (status === 400 || code === 'VALIDATION_ERROR') {
@@ -81,7 +81,7 @@ function normalizeApiError(error: unknown) {
     }
 
     if (status && status >= 500) {
-      return 'Server error. Try later.';
+      return 'Server is temporarily unavailable. Please try again shortly.';
     }
 
     if (typeof responseData === 'string' && responseData.trim().length > 0) {
@@ -101,7 +101,7 @@ function normalizeApiError(error: unknown) {
     }
   }
 
-  return 'Unexpected error. Please try again.';
+  return 'Something unexpected happened. Please try again.';
 }
 
 function parseErrorPayload(value: unknown): ApiErrorPayload | null {
