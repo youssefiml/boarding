@@ -171,8 +171,8 @@
 }
 
 .app-sidebar.is-collapsed .app-sidebar__tooltip {
-  @apply pointer-events-none absolute left-[calc(100%+12px)] top-1/2 z-50 inline-flex rounded-md bg-slate-900 px-2.5 py-2 text-xs font-semibold text-white opacity-0 shadow-lg transition-all duration-200 dark:bg-slate-100 dark:text-slate-900;
-  transform: translate(-8px, -50%);
+  @apply pointer-events-none absolute left-[calc(100%+12px)] top-1/2 z-50 inline-flex rounded-md bg-slate-900 px-2.5 py-2 text-xs font-semibold text-white opacity-0 shadow-lg transition-all duration-150 dark:bg-slate-100 dark:text-slate-900;
+  transform: translate(-4px, -50%);
   white-space: nowrap;
   line-height: 1;
 }

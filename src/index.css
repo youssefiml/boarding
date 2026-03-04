@@ -18,6 +18,10 @@
   --app-shell-max-width: 1440px;
   --app-shell-gutter: 0.75rem;
   --app-shell-section-gap: 0.75rem;
+  --motion-ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --motion-duration-fast: 150ms;
+  --motion-duration-base: 220ms;
+  --motion-duration-slow: 250ms;
 }
 
 :root[data-theme='dark'],
@@ -109,6 +113,145 @@ textarea {
   .app-modal-panel--wide {
     width: min(100%, 72rem);
   }
+
+  .motion-page-enter {
+    @apply transform-gpu;
+    transition:
+      opacity var(--motion-duration-base) var(--motion-ease-premium),
+      transform var(--motion-duration-base) var(--motion-ease-premium);
+  }
+
+  .motion-page-enter.is-pre-enter {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+
+  .motion-page-enter.is-entered {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .motion-backdrop-enter {
+    animation: motionBackdropIn 180ms var(--motion-ease-premium) both;
+  }
+
+  .motion-modal-enter {
+    transform-origin: top center;
+    animation: motionModalIn var(--motion-duration-base) var(--motion-ease-premium) both;
+  }
+
+  .motion-drawer-enter {
+    transform-origin: top right;
+    animation: motionDrawerIn 200ms var(--motion-ease-premium) both;
+  }
+
+  .motion-popover-enter {
+    transform-origin: top center;
+    animation: motionPopoverIn var(--motion-duration-fast) var(--motion-ease-premium) both;
+  }
+
+  .motion-toast-enter {
+    animation: motionToastIn 180ms var(--motion-ease-premium) both;
+  }
+
+  .motion-toast-exit {
+    animation: motionToastOut 180ms var(--motion-ease-premium) both;
+  }
+
+  .motion-alert-enter {
+    animation: motionFadeIn 180ms var(--motion-ease-premium) both;
+  }
+
+  .motion-list-reveal {
+    --motion-delay: 0ms;
+    transform: translate3d(0, 8px, 0);
+    opacity: 0;
+    animation: motionListReveal var(--motion-duration-base) var(--motion-ease-premium) var(--motion-delay) both;
+  }
+}
+
+@keyframes motionFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes motionBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes motionModalIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes motionDrawerIn {
+  from {
+    opacity: 0;
+    transform: translate3d(12px, 0, 0) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes motionPopoverIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -4px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes motionToastIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes motionToastOut {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+}
+
+@keyframes motionListReveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 :focus-visible {
@@ -152,5 +295,24 @@ textarea {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .motion-page-enter.is-pre-enter,
+  .motion-page-enter.is-entered {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .motion-backdrop-enter,
+  .motion-modal-enter,
+  .motion-drawer-enter,
+  .motion-popover-enter,
+  .motion-toast-enter,
+  .motion-toast-exit,
+  .motion-alert-enter,
+  .motion-list-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

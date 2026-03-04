@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -263,6 +263,7 @@ export function ResourcesPage() {
   const [savedResourceIds, setSavedResourceIds] = useState<string[]>([]);
   const [checklistProgress, setChecklistProgress] = useState<Record<string, string[]>>({});
   const [previewResourceId, setPreviewResourceId] = useState<string | null>(null);
+  const [hasListRevealPlayed, setHasListRevealPlayed] = useState(false);
 
   const loadData = useCallback(async () => {
     setIsLoading(true);
@@ -315,6 +316,20 @@ export function ResourcesPage() {
 
     window.localStorage.setItem(STORAGE_KEYS.checklist, JSON.stringify(checklistProgress));
   }, [checklistProgress]);
+
+  useEffect(() => {
+    if (isLoading || loadError || hasListRevealPlayed) {
+      return undefined;
+    }
+
+    const timeout = window.setTimeout(() => {
+      setHasListRevealPlayed(true);
+    }, 280);
+
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [hasListRevealPlayed, isLoading, loadError]);
 
   const currentStage = useMemo(() => inferJourneyStage(journeyMilestones), [journeyMilestones]);
 
@@ -579,7 +594,7 @@ export function ResourcesPage() {
                   </Card>
                 ) : (
                   <div className="grid gap-3 md:grid-cols-2">
-                    {essentialResources.map((item) => {
+                    {essentialResources.map((item, index) => {
                       const isSaved = savedResourceIds.includes(item.resource.id);
                       const isRecommended = recommendedResourceIds.has(item.resource.id);
                       const category = categoryMeta[item.resource.category];
@@ -596,7 +611,11 @@ export function ResourcesPage() {
                               setPreviewResourceId(item.resource.id);
                             }
                           }}
-                          className="min-w-0 cursor-pointer rounded-xl border border-brand-200 bg-brand-50/50 p-4 shadow-sm transition hover:-translate-y-[1px] hover:shadow-md dark:border-brand-400/40 dark:bg-brand-500/10"
+                          className={cn(
+                            'min-w-0 cursor-pointer rounded-xl border border-brand-200 bg-brand-50/50 p-4 shadow-sm transition hover:-translate-y-[1px] hover:shadow-md dark:border-brand-400/40 dark:bg-brand-500/10',
+                            !hasListRevealPlayed && 'motion-list-reveal'
+                          )}
+                          style={!hasListRevealPlayed ? ({ '--motion-delay': `${Math.min(index, 5) * 40}ms` } as CSSProperties) : undefined}
                         >
                           <div className="flex flex-wrap items-start justify-between gap-2">
                             <div className="flex min-w-0 flex-wrap items-center gap-2">
@@ -649,7 +668,7 @@ export function ResourcesPage() {
                   </Card>
                 ) : (
                   <div className="grid gap-3 md:grid-cols-2">
-                    {duringInternshipResources.map((item) => {
+                    {duringInternshipResources.map((item, index) => {
                       const category = categoryMeta[item.resource.category];
                       const isSaved = savedResourceIds.includes(item.resource.id);
                       const isRecommended = recommendedResourceIds.has(item.resource.id);
@@ -666,7 +685,11 @@ export function ResourcesPage() {
                               setPreviewResourceId(item.resource.id);
                             }
                           }}
-                          className="min-w-0 cursor-pointer rounded-xl border border-slate-200 bg-white p-4 transition hover:-translate-y-[1px] hover:shadow-sm dark:border-slate-700 dark:bg-slate-900/85"
+                          className={cn(
+                            'min-w-0 cursor-pointer rounded-xl border border-slate-200 bg-white p-4 transition hover:-translate-y-[1px] hover:shadow-sm dark:border-slate-700 dark:bg-slate-900/85',
+                            !hasListRevealPlayed && 'motion-list-reveal'
+                          )}
+                          style={!hasListRevealPlayed ? ({ '--motion-delay': `${Math.min(index, 5) * 40}ms` } as CSSProperties) : undefined}
                         >
                           <div className="flex flex-wrap items-start justify-between gap-2">
                             <div className="flex min-w-0 flex-wrap items-center gap-2">
@@ -717,7 +740,7 @@ export function ResourcesPage() {
                   </Card>
                 ) : (
                   <div className="grid gap-3 md:grid-cols-2">
-                    {emergencyResources.map((item) => {
+                    {emergencyResources.map((item, index) => {
                       const category = categoryMeta[item.resource.category];
                       const isSaved = savedResourceIds.includes(item.resource.id);
 
@@ -733,7 +756,11 @@ export function ResourcesPage() {
                               setPreviewResourceId(item.resource.id);
                             }
                           }}
-                          className="min-w-0 cursor-pointer rounded-xl border border-rose-200 bg-rose-50/30 p-4 transition hover:-translate-y-[1px] hover:shadow-sm dark:border-rose-500/35 dark:bg-rose-500/10"
+                          className={cn(
+                            'min-w-0 cursor-pointer rounded-xl border border-rose-200 bg-rose-50/30 p-4 transition hover:-translate-y-[1px] hover:shadow-sm dark:border-rose-500/35 dark:bg-rose-500/10',
+                            !hasListRevealPlayed && 'motion-list-reveal'
+                          )}
+                          style={!hasListRevealPlayed ? ({ '--motion-delay': `${Math.min(index, 5) * 40}ms` } as CSSProperties) : undefined}
                         >
                           <div className="flex flex-wrap items-start justify-between gap-2">
                             <div className="flex min-w-0 flex-wrap items-center gap-2">
@@ -832,12 +859,12 @@ export function ResourcesPage() {
         <div className="fixed inset-0 z-50 md:hidden" role="dialog" aria-modal="true" aria-label="Filters">
           <button
             type="button"
-            className="absolute inset-0 bg-slate-950/60"
+            className="motion-backdrop-enter absolute inset-0 bg-slate-950/60"
             onClick={() => setMobileFiltersOpen(false)}
             aria-label="Close filters"
           />
 
-          <div className="absolute inset-x-0 bottom-0 max-h-[78vh] overflow-y-auto rounded-t-2xl border border-slate-700 bg-slate-900 p-4 pb-[calc(env(safe-area-inset-bottom)+1rem)] shadow-2xl">
+          <div className="motion-drawer-enter absolute inset-x-0 bottom-0 max-h-[78vh] overflow-y-auto rounded-t-2xl border border-slate-700 bg-slate-900 p-4 pb-[calc(env(safe-area-inset-bottom)+1rem)] shadow-2xl">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="text-base font-semibold text-slate-100">Filters</h2>
               <Button type="button" variant="ghost" size="sm" onClick={() => setMobileFiltersOpen(false)}>
@@ -904,12 +931,12 @@ export function ResourcesPage() {
         <div className="fixed inset-0 z-[60] p-3 md:p-4" role="dialog" aria-modal="true" aria-label="Resource preview">
           <button
             type="button"
-            className="absolute inset-0 bg-slate-950/70"
+            className="motion-backdrop-enter absolute inset-0 bg-slate-950/70"
             onClick={() => setPreviewResourceId(null)}
             aria-label="Close resource preview"
           />
 
-          <div className="app-modal-panel relative mx-auto mt-4 overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl dark:border-slate-700 dark:bg-slate-900 sm:mt-8 sm:p-5">
+          <div className="app-modal-panel motion-modal-enter relative mx-auto mt-4 overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl dark:border-slate-700 dark:bg-slate-900 sm:mt-8 sm:p-5">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <div className="flex min-w-0 flex-wrap items-center gap-2">

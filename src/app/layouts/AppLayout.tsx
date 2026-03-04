@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 import { AppSidebar } from '@/app/layout/AppSidebar/AppSidebar';
 import { AppTopbar } from '@/app/layout/AppTopbar/AppTopbar';
+import { RouteTransition } from '@/app/layout/RouteTransition';
 
 export function AppLayout() {
   return (
@@ -10,8 +11,10 @@ export function AppLayout() {
         <AppSidebar />
         <div className="flex min-h-0 min-w-0 flex-1 flex-col">
           <AppTopbar />
-          <main className="mt-2 flex-1 overflow-x-hidden p-3 pb-5 animate-fade-in-up transition-colors md:mt-4 md:rounded-3xl md:border md:border-slate-200/90 md:bg-white/95 md:p-5 md:shadow-panel lg:p-6 dark:md:border-slate-700/90 dark:md:bg-slate-900/90">
-            <Outlet />
+          <main className="mt-2 flex-1 overflow-x-hidden p-3 pb-5 transition-colors md:mt-4 md:rounded-3xl md:border md:border-slate-200/90 md:bg-white/95 md:p-5 md:shadow-panel lg:p-6 dark:md:border-slate-700/90 dark:md:bg-slate-900/90">
+            <RouteTransition>
+              <Outlet />
+            </RouteTransition>
           </main>
         </div>
       </div>

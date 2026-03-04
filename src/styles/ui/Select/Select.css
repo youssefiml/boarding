@@ -36,8 +36,10 @@
 
 .select-field__message.is-error {
   @apply font-medium text-rose-700 dark:text-rose-300;
+  animation: motionFadeIn 180ms var(--motion-ease-premium) both;
 }
 
 .select-field__message.is-success {
   @apply font-medium text-emerald-700 dark:text-emerald-300;
+  animation: motionFadeIn 180ms var(--motion-ease-premium) both;
 }

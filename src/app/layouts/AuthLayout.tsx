@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
 import boardingLogo from '@/assets/boarding-logo.png';
+import { RouteTransition } from '@/app/layout/RouteTransition';
 import { APP_NAME } from '@/lib/constants';
 
 const authBenefits = [
@@ -39,7 +40,9 @@ export function AuthLayout() {
               </div>
 
               <div>
-                <Outlet />
+                <RouteTransition>
+                  <Outlet />
+                </RouteTransition>
               </div>
 
               <p className="mt-6 text-center text-xs text-slate-500">

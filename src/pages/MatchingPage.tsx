@@ -1,5 +1,5 @@
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
@@ -168,6 +168,7 @@ export function MatchingPage() {
   const requestIdRef = useRef(0);
   const debouncedSearch = useDebouncedValue(search, 220);
   const isSearchSettling = debouncedSearch.trim() !== search.trim();
+  const [hasListRevealPlayed, setHasListRevealPlayed] = useState(false);
 
   const profileStrength = user?.profileCompletion ?? profileSummary?.completion ?? 72;
 
@@ -253,6 +254,20 @@ export function MatchingPage() {
       window.removeEventListener('keydown', onEscape);
     };
   }, [isCompareOpen, isMobileFilterOpen]);
+
+  useEffect(() => {
+    if (isLoading || loadError || hasListRevealPlayed) {
+      return undefined;
+    }
+
+    const timeout = window.setTimeout(() => {
+      setHasListRevealPlayed(true);
+    }, 280);
+
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [hasListRevealPlayed, isLoading, loadError]);
 
   const enhanced = useMemo<EnhancedMatch[]>(() => {
     return matches.map((match, index) => ({
@@ -599,12 +614,16 @@ export function MatchingPage() {
                   </Card>
                 ) : (
                   <div className="space-y-3">
-                    {featured.map((item) => {
+                    {featured.map((item, index) => {
                       const isSaved = savedIds.includes(item.match.id);
                       const isCompared = compareIds.includes(item.match.id);
 
                       return (
-                        <Card key={item.match.id} className="p-4 transition-shadow duration-200 hover:shadow-md dark:hover:shadow-none">
+                        <Card
+                          key={item.match.id}
+                          className={cn('p-4 transition-shadow duration-200 hover:shadow-md dark:hover:shadow-none', !hasListRevealPlayed && 'motion-list-reveal')}
+                          style={!hasListRevealPlayed ? ({ '--motion-delay': `${Math.min(index, 5) * 40}ms` } as CSSProperties) : undefined}
+                        >
                           <div className="flex flex-wrap items-start justify-between gap-3">
                             <div>
                               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-brand-700 dark:text-brand-300">Featured match</p>
@@ -684,12 +703,16 @@ export function MatchingPage() {
                 ) : (
                   <>
                     <div className="grid gap-3 lg:grid-cols-2">
-                      {regularPage.map((item) => {
+                      {regularPage.map((item, index) => {
                         const isSaved = savedIds.includes(item.match.id);
                         const isCompared = compareIds.includes(item.match.id);
 
                         return (
-                          <Card key={item.match.id} className="p-4 transition-shadow duration-200 hover:shadow-md dark:hover:shadow-none">
+                          <Card
+                            key={item.match.id}
+                            className={cn('p-4 transition-shadow duration-200 hover:shadow-md dark:hover:shadow-none', !hasListRevealPlayed && 'motion-list-reveal')}
+                            style={!hasListRevealPlayed ? ({ '--motion-delay': `${Math.min(index, 5) * 40}ms` } as CSSProperties) : undefined}
+                          >
                             <div className="flex items-start justify-between gap-3">
                               <div>
                                 <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100">{item.match.companyName}</h3>
@@ -784,12 +807,12 @@ export function MatchingPage() {
         <div className="fixed inset-0 z-50 sm:hidden" role="dialog" aria-modal="true" aria-label="Filters">
           <button
             type="button"
-            className="absolute inset-0 bg-slate-950/60"
+            className="motion-backdrop-enter absolute inset-0 bg-slate-950/60"
             onClick={() => setIsMobileFilterOpen(false)}
             aria-label="Close filters"
           />
 
-          <div className="absolute inset-x-0 bottom-0 max-h-[82vh] overflow-y-auto rounded-t-2xl border border-slate-700 bg-slate-900 p-4 pb-[calc(env(safe-area-inset-bottom)+1rem)] shadow-2xl">
+          <div className="motion-drawer-enter absolute inset-x-0 bottom-0 max-h-[82vh] overflow-y-auto rounded-t-2xl border border-slate-700 bg-slate-900 p-4 pb-[calc(env(safe-area-inset-bottom)+1rem)] shadow-2xl">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="text-base font-semibold text-slate-100">Filters</h2>
               <Button type="button" variant="ghost" size="sm" onClick={() => setIsMobileFilterOpen(false)}>
@@ -805,12 +828,12 @@ export function MatchingPage() {
         <div className="fixed inset-0 z-[60] p-3 sm:p-4" role="dialog" aria-modal="true" aria-label="Compare matches">
           <button
             type="button"
-            className="absolute inset-0 bg-slate-950/70"
+            className="motion-backdrop-enter absolute inset-0 bg-slate-950/70"
             onClick={() => setIsCompareOpen(false)}
             aria-label="Close comparison"
           />
 
-          <div className="app-modal-panel app-modal-panel--wide relative mx-auto mt-4 overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl dark:border-slate-700 dark:bg-slate-900 sm:mt-6 sm:p-5">
+          <div className="app-modal-panel app-modal-panel--wide motion-modal-enter relative mx-auto mt-4 overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-2xl dark:border-slate-700 dark:bg-slate-900 sm:mt-6 sm:p-5">
             <div className="mb-3 flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-100">Compare matches</h2>

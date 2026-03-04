@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import { Toaster, toast } from 'react-hot-toast';
+import { ToastBar, Toaster, toast } from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
 
 import { GlobalLoadingOverlay } from '@/app/feedback/GlobalLoadingOverlay/GlobalLoadingOverlay';
@@ -106,6 +106,7 @@ export function AppProviders({ children }: AppProvidersProps) {
             role: 'status',
             'aria-live': 'polite',
           },
+          className: 'app-toast',
           success: {
             duration: prefersReducedMotion ? 1800 : 2600,
           },
@@ -114,7 +115,17 @@ export function AppProviders({ children }: AppProvidersProps) {
           },
           style: toastStyle,
         }}
-      />
+      >
+        {(toastItem) => (
+          <ToastBar
+            toast={toastItem}
+            style={{
+              ...toastItem.style,
+              animation: toastItem.visible ? 'motionToastIn 180ms var(--motion-ease-premium) both' : 'motionToastOut 180ms var(--motion-ease-premium) both',
+            }}
+          />
+        )}
+      </Toaster>
       <GlobalLoadingOverlay />
     </>
   );

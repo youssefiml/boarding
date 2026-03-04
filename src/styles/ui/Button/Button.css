@@ -5,6 +5,7 @@
     background-color 150ms ease-out,
     border-color 150ms ease-out,
     color 150ms ease-out,
+    opacity 150ms ease-out,
     box-shadow 150ms ease-out,
     transform 150ms ease-out;
 }
@@ -14,7 +15,13 @@
 }
 
 .ui-button:active {
-  transform: translateY(1px);
+  transform: translate3d(0, 0, 0) scale(0.98);
+}
+
+@media (hover: hover) {
+  .ui-button:not(:disabled):hover {
+    transform: translate3d(0, -1px, 0);
+  }
 }
 
 .ui-button--primary {
