@@ -74,7 +74,6 @@ export function SwipeCardStack<T>({
 
   useEffect(() => {
     if (!outgoing) return;
-    setOutgoingPhase('start');
     let raf2 = 0;
     const raf1 = window.requestAnimationFrame(() => {
       raf2 = window.requestAnimationFrame(() => setOutgoingPhase('end'));
@@ -106,6 +105,7 @@ export function SwipeCardStack<T>({
     const startX = dragXRef.current !== 0 ? dragXRef.current : direction * 80;
     const startY = dragYRef.current;
     setSkipActiveTransition(true);
+    setOutgoingPhase('start');
     setOutgoing({ index: currentIndex, direction, startX, startY });
     setCurrentIndex((i) => (i + 1) % total);
     setDragX(0);

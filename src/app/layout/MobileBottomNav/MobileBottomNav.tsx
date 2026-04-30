@@ -28,7 +28,7 @@ export function MobileBottomNav() {
 
   return (
     <nav
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200/90 bg-white/95 px-2 pb-[calc(env(safe-area-inset-bottom)+8px)] pt-2 shadow-lg backdrop-blur xl:hidden dark:border-slate-700/90 dark:bg-slate-900/95"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200/90 bg-white/95 px-2 pb-[calc(env(safe-area-inset-bottom)+8px)] pt-2 shadow-lg backdrop-blur lg:hidden dark:border-slate-700/90 dark:bg-slate-900/95"
       aria-label="Mobile navigation"
     >
       <ul className="mx-auto grid w-full max-w-2xl grid-cols-5 gap-1">

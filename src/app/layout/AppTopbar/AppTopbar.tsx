@@ -96,7 +96,7 @@ export function AppTopbar() {
 
             <button
               type="button"
-              className="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 bg-slate-50 text-slate-700 transition-colors hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700 xl:hidden dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-brand-400 dark:hover:bg-slate-700 dark:hover:text-brand-200"
+              className="grid h-11 w-11 place-items-center rounded-xl border border-slate-200 bg-slate-50 text-slate-700 transition-colors hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700 lg:hidden dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-brand-400 dark:hover:bg-slate-700 dark:hover:text-brand-200"
               onClick={() => setIsMenuOpen(true)}
               aria-label="Open navigation menu"
               aria-expanded={isMenuOpen}
@@ -109,7 +109,7 @@ export function AppTopbar() {
 
             <Link
               to={ROUTES.profile}
-              className="hidden h-11 w-11 place-items-center overflow-hidden rounded-full border border-slate-200 bg-slate-50 text-sm font-semibold text-slate-700 transition-colors hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700 xl:grid dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-brand-400 dark:hover:bg-slate-700 dark:hover:text-brand-200"
+              className="hidden h-11 w-11 place-items-center overflow-hidden rounded-full border border-slate-200 bg-slate-50 text-sm font-semibold text-slate-700 transition-colors hover:border-brand-200 hover:bg-brand-50 hover:text-brand-700 lg:grid dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-brand-400 dark:hover:bg-slate-700 dark:hover:text-brand-200"
               aria-label="Open profile"
               title="Open profile"
             >
@@ -133,10 +133,10 @@ export function AppTopbar() {
 
       {isMenuOpen ? (
         <>
-          <button type="button" className="motion-backdrop-enter fixed inset-0 z-40 bg-slate-900/45 xl:hidden" onClick={() => setIsMenuOpen(false)} aria-label="Close navigation menu" />
+          <button type="button" className="motion-backdrop-enter fixed inset-0 z-40 bg-slate-900/45 lg:hidden" onClick={() => setIsMenuOpen(false)} aria-label="Close navigation menu" />
           <aside
             id="mobile-navigation-menu"
-            className="motion-drawer-enter fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-slate-200 bg-white p-4 shadow-panel xl:hidden dark:border-slate-700 dark:bg-slate-900"
+            className="motion-drawer-enter fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-slate-200 bg-white p-4 shadow-panel lg:hidden dark:border-slate-700 dark:bg-slate-900"
             style={{ width: 'min(420px, 100vw)', maxWidth: '100vw', paddingTop: 'max(1rem, env(safe-area-inset-top))', paddingBottom: 'calc(env(safe-area-inset-bottom) + 1rem)' }}
             role="dialog"
             aria-modal="true"

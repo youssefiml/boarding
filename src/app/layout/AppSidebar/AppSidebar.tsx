@@ -225,19 +225,23 @@ export function AppSidebar() {
     navigate(ROUTES.login, { replace: true });
   };
 
+  const sidebarLeft = isCollapsed
+    ? 'max(var(--app-shell-gutter), calc((100vw - var(--app-shell-max-width)) / 2 + var(--app-shell-gutter)))'
+    : 'max(0px, calc((100vw - var(--app-shell-max-width)) / 2))';
+
   return (
     <aside
-      className={cn('relative z-30 hidden shrink-0 self-start xl:flex', isCollapsed ? 'w-[78px]' : 'w-[260px]')}
+      className={cn('relative z-30 hidden shrink-0 self-start lg:flex', isCollapsed ? 'w-[78px]' : 'w-72')}
       aria-label="Primary navigation"
       ref={sidebarRef}
       onKeyDown={handleArrowNavigation}
     >
       <div
         className={cn(
-          'fixed flex w-full flex-col overflow-hidden rounded-3xl border border-slate-200/90 bg-white/95 shadow-panel transition-colors dark:border-slate-700/90 dark:bg-slate-900/90',
-          isCollapsed ? 'w-[78px] overflow-visible' : 'w-[260px]'
+          'fixed flex flex-col overflow-hidden rounded-3xl border border-slate-200/90 bg-white/95 shadow-panel transition-colors dark:border-slate-700/90 dark:bg-slate-900/90',
+          isCollapsed ? 'w-[78px] overflow-visible' : 'w-[calc(18rem+var(--app-shell-gutter))]'
         )}
-        style={{ top: '1rem', bottom: '1rem', left: 'max(var(--app-shell-gutter), calc((100vw - var(--app-shell-max-width)) / 2 + var(--app-shell-gutter)))' }}
+        style={{ top: '1rem', bottom: '1rem', left: sidebarLeft }}
       >
         <Link
           to={ROUTES.dashboard}

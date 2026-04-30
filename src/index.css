@@ -406,13 +406,4 @@ textarea {
     --sidebar-border: #9498C4;
     --sidebar-ring: #2B35AF;
   }
-  * {
-    @apply border-border outline-ring;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
-  }
 }
