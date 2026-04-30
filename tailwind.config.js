@@ -5,6 +5,57 @@ export default {
   theme: {
     extend: {
       colors: {
+        border: 'var(--border)',
+        input: 'var(--input)',
+        ring: 'var(--ring)',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        primary: {
+          DEFAULT: 'var(--primary)',
+          foreground: 'var(--primary-foreground)',
+        },
+        secondary: {
+          DEFAULT: 'var(--secondary)',
+          foreground: 'var(--secondary-foreground)',
+        },
+        destructive: {
+          DEFAULT: 'var(--destructive)',
+          foreground: 'var(--destructive-foreground)',
+        },
+        muted: {
+          DEFAULT: 'var(--muted)',
+          foreground: 'var(--muted-foreground)',
+        },
+        accent: {
+          DEFAULT: 'var(--accent)',
+          foreground: 'var(--accent-foreground)',
+        },
+        popover: {
+          DEFAULT: 'var(--popover)',
+          foreground: 'var(--popover-foreground)',
+        },
+        card: {
+          DEFAULT: 'var(--card)',
+          foreground: 'var(--card-foreground)',
+        },
+        sidebar: {
+          DEFAULT: 'var(--sidebar)',
+          foreground: 'var(--sidebar-foreground)',
+          primary: 'var(--sidebar-primary)',
+          'primary-foreground': 'var(--sidebar-primary-foreground)',
+          accent: 'var(--sidebar-accent)',
+          'accent-foreground': 'var(--sidebar-accent-foreground)',
+          border: 'var(--sidebar-border)',
+          ring: 'var(--sidebar-ring)',
+        },
+        boarding: {
+          navy: '#1A1F5C',
+          blue: '#2B35AF',
+          sand: '#F5ECD7',
+          charcoal: '#1A1A2E',
+          mist: '#9498C4',
+          sunset: '#FF6B35',
+        },
         brand: {
           50: '#eef4ff',
           100: '#dbe8ff',
@@ -31,8 +82,9 @@ export default {
         },
       },
       fontFamily: {
-        body: ['Public Sans', 'Segoe UI', 'sans-serif'],
-        display: ['Space Grotesk', 'Public Sans', 'sans-serif'],
+        body: ['Outfit', 'Segoe UI', 'sans-serif'],
+        display: ['Syne', 'Outfit', 'sans-serif'],
+        mono: ['Space Mono', 'ui-monospace', 'monospace'],
       },
       boxShadow: {
         panel: '0 24px 60px -36px rgba(15, 23, 42, 0.38)',
@@ -47,10 +99,15 @@ export default {
           '0%, 100%': { opacity: 1 },
           '50%': { opacity: 0.7 },
         },
+        landingFloat: {
+          '0%, 100%': { transform: 'translate3d(0, 0, 0)' },
+          '50%': { transform: 'translate3d(0, -8px, 0)' },
+        },
       },
       animation: {
         'fade-in-up': 'fadeInUp 0.45s ease-out both',
         'pulse-soft': 'pulseSoft 1.6s ease-in-out infinite',
+        'landing-float': 'landingFloat 6s ease-in-out infinite',
       },
     },
   },

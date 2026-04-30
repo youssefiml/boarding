@@ -1,4 +1,3 @@
-import '@/styles/app/feedback/GlobalLoadingOverlay/GlobalLoadingOverlay.css';
 import { useEffect, useRef, useState } from 'react';
 import { useUiStore } from '@/stores/ui.store';
 
@@ -69,10 +68,10 @@ export function GlobalLoadingOverlay() {
   }
 
   return (
-    <div className="global-loading-overlay">
-      <div className="global-loading-overlay__content">
-        <span className="global-loading-overlay__spinner" aria-hidden />
-        <span className="global-loading-overlay__text">Updating workspace...</span>
+    <div className="pointer-events-none fixed inset-0 z-50 flex items-start justify-center p-3 sm:justify-end sm:p-4">
+      <div className="pointer-events-auto inline-flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-2.5 shadow-panel motion-toast-enter dark:border-slate-700 dark:bg-slate-900">
+        <span className="h-4 w-4 animate-spin rounded-full border-2 border-brand-600 border-t-transparent" aria-hidden />
+        <span className="text-sm font-medium text-slate-700 dark:text-slate-200">Updating workspace...</span>
       </div>
     </div>
   );

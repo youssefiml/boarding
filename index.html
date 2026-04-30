@@ -4,15 +4,23 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/boarding-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Michroma&display=swap"
+      rel="stylesheet"
+    />
     <title>BOARDING AGENCY</title>
     <script>
       (() => {
         const key = 'boarding-theme';
         const path = window.location.pathname;
         const forceLightAuth = path.startsWith('/login') || path.startsWith('/register');
-        let mode = forceLightAuth ? 'light' : 'dark';
+        const forceLightLanding = path === '/' || path.startsWith('/landing');
+        const forceLight = forceLightAuth || forceLightLanding;
+        let mode = forceLight ? 'light' : 'dark';
 
-        if (!forceLightAuth) {
+        if (!forceLight) {
           try {
             const stored = localStorage.getItem(key);
             if (stored) {

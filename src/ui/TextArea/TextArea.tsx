@@ -1,4 +1,3 @@
-import '@/styles/ui/TextArea/TextArea.css';
 import { forwardRef, useId } from 'react';
 import type { TextareaHTMLAttributes } from 'react';
 
@@ -21,17 +20,30 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(function 
   const hasError = Boolean(error);
   const hasSuccess = Boolean(success) && !hasError;
   const helperMessage = hasError ? error : hasSuccess ? success : hint;
-  const stateClass = hasError ? 'is-error' : hasSuccess ? 'is-success' : 'is-default';
+  const controlStateClass = hasError
+    ? 'border-rose-400 bg-rose-50/30 focus:border-rose-500 focus:ring-rose-100 dark:border-rose-500/70 dark:bg-rose-500/10 dark:focus:border-rose-400 dark:focus:ring-rose-500/30'
+    : hasSuccess
+      ? 'border-emerald-400 bg-emerald-50/30 focus:border-emerald-500 focus:ring-emerald-100 dark:border-emerald-500/70 dark:bg-emerald-500/10 dark:focus:border-emerald-400 dark:focus:ring-emerald-500/30'
+      : 'border-slate-300 focus:border-brand-500 focus:ring-brand-100 dark:border-slate-600 dark:focus:border-brand-400 dark:focus:ring-brand-500/30';
+  const messageStateClass = hasError
+    ? 'font-medium text-rose-700 dark:text-rose-300'
+    : hasSuccess
+      ? 'font-medium text-emerald-700 dark:text-emerald-300'
+      : 'text-slate-500 dark:text-slate-400';
 
   return (
-    <label className="textarea-field" htmlFor={textAreaId}>
-      <span className="textarea-field__label">{label}</span>
+    <label className="flex w-full flex-col gap-2" htmlFor={textAreaId}>
+      <span className="text-sm font-semibold tracking-tight text-slate-800 dark:text-slate-200">{label}</span>
       <textarea
         ref={ref}
         id={textAreaId}
         aria-invalid={hasError}
         aria-describedby={helperMessage ? messageId : undefined}
-        className={cn('textarea-field__control', stateClass, className)}
+        className={cn(
+          'min-h-[140px] w-full rounded-xl border bg-white px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 shadow-sm transition-[border-color,box-shadow,background-color] duration-150 ease-out focus:outline-none focus:ring-4 md:text-sm dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-500 dark:disabled:border-slate-700 dark:disabled:bg-slate-800 dark:disabled:text-slate-500',
+          controlStateClass,
+          className
+        )}
         {...props}
       />
       {helperMessage ? (
@@ -39,7 +51,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(function 
           id={messageId}
           role={hasError ? 'alert' : 'status'}
           aria-live={hasError ? 'assertive' : 'polite'}
-          className={cn('textarea-field__message', stateClass)}
+          className={cn('text-xs leading-5', messageStateClass)}
         >
           {helperMessage}
         </span>

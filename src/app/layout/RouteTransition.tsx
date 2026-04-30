@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { cn } from '@/lib/cn';
 
 interface RouteTransitionProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
@@ -14,7 +15,7 @@ function reducedMotionPreferred() {
 
 export function RouteTransition({ children, className }: RouteTransitionProps) {
   const location = useLocation();
-  const [isEntered, setIsEntered] = useState(false);
+  const [isEntered, setIsEntered] = useState(() => reducedMotionPreferred());
   const [reduceMotion, setReduceMotion] = useState(() => reducedMotionPreferred());
 
   useEffect(() => {
@@ -38,17 +39,22 @@ export function RouteTransition({ children, className }: RouteTransitionProps) {
 
   useEffect(() => {
     if (reduceMotion) {
-      setIsEntered(true);
       return undefined;
     }
 
-    setIsEntered(false);
-    const frame = window.requestAnimationFrame(() => {
-      setIsEntered(true);
+    let exitFrame = 0;
+    let enterFrame = 0;
+
+    exitFrame = window.requestAnimationFrame(() => {
+      setIsEntered(false);
+      enterFrame = window.requestAnimationFrame(() => {
+        setIsEntered(true);
+      });
     });
 
     return () => {
-      window.cancelAnimationFrame(frame);
+      window.cancelAnimationFrame(exitFrame);
+      window.cancelAnimationFrame(enterFrame);
     };
   }, [location.pathname, reduceMotion]);
 

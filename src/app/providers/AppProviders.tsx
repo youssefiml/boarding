@@ -18,8 +18,20 @@ export function AppProviders({ children }: AppProvidersProps) {
   const lastError = useUiStore((state) => state.lastError);
   const clearError = useUiStore((state) => state.clearError);
   const themeMode = useThemeStore((state) => state.mode);
-  const [isCompactViewport, setIsCompactViewport] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isCompactViewport, setIsCompactViewport] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    return window.matchMedia('(max-width: 767px)').matches;
+  });
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
   const isAuthRoute = location.pathname.startsWith(ROUTES.login) || location.pathname.startsWith(ROUTES.register);
   const appliedThemeMode: ThemeMode = isAuthRoute ? 'light' : themeMode;
 
@@ -44,7 +56,6 @@ export function AppProviders({ children }: AppProvidersProps) {
     }
 
     const media = window.matchMedia('(max-width: 767px)');
-    setIsCompactViewport(media.matches);
 
     const onChange = (event: MediaQueryListEvent) => {
       setIsCompactViewport(event.matches);
@@ -65,7 +76,6 @@ export function AppProviders({ children }: AppProvidersProps) {
     }
 
     const media = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(media.matches);
 
     const onChange = (event: MediaQueryListEvent) => {
       setPrefersReducedMotion(event.matches);

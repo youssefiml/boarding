@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@800&display=swap');
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 @tailwind base;
 @tailwind components;
@@ -59,7 +61,7 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Public Sans', 'Segoe UI', sans-serif;
+  font-family: 'Outfit', 'Segoe UI', sans-serif;
   line-height: 1.5;
   color: var(--ink-primary);
   background:
@@ -262,6 +264,14 @@ textarea {
 ::selection {
   background: var(--selection-bg);
 }
+
+.host-grotesk-regular,
+.host-grotesk-regular * {
+  font-family: 'Host Grotesk', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
 @media (max-width: 767px) {
   body {
     background: var(--surface-page);
@@ -314,5 +324,95 @@ textarea {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+@layer base {
+  .theme {
+    --font-heading: 'Syne', 'Outfit', sans-serif;
+    --font-sans: 'Outfit', 'Segoe UI', sans-serif;
+    --font-mono: 'Space Mono', ui-monospace, monospace;
+  }
+  :root {
+    --font-heading: 'Syne', 'Outfit', sans-serif;
+    --font-sans: 'Outfit', 'Segoe UI', sans-serif;
+    --font-mono: 'Space Mono', ui-monospace, monospace;
+
+    --background: #1A1F5C;
+    --foreground: #F5ECD7;
+    --card: #1A1A2E;
+    --card-foreground: #F5ECD7;
+    --popover: #1A1A2E;
+    --popover-foreground: #F5ECD7;
+    --primary: #1A1F5C;
+    --primary-foreground: #F5ECD7;
+    --secondary: #2B35AF;
+    --secondary-foreground: #F5ECD7;
+    --muted: #9498C4;
+    --muted-foreground: #F5ECD7;
+    --accent: #2B35AF;
+    --accent-foreground: #F5ECD7;
+    --destructive: #FF6B35;
+    --destructive-foreground: #F5ECD7;
+    --border: #9498C4;
+    --input: #9498C4;
+    --ring: #2B35AF;
+    --chart-1: #1A1F5C;
+    --chart-2: #2B35AF;
+    --chart-3: #9498C4;
+    --chart-4: #FF6B35;
+    --chart-5: #1A1A2E;
+    --radius: 0.625rem;
+    --sidebar: #1A1A2E;
+    --sidebar-foreground: #F5ECD7;
+    --sidebar-primary: #1A1F5C;
+    --sidebar-primary-foreground: #F5ECD7;
+    --sidebar-accent: #2B35AF;
+    --sidebar-accent-foreground: #F5ECD7;
+    --sidebar-border: #9498C4;
+    --sidebar-ring: #2B35AF;
+  }
+  .dark {
+    --background: #171B4D;
+    --foreground: #F5ECD7;
+    --card: #14162A;
+    --card-foreground: #F5ECD7;
+    --popover: #14162A;
+    --popover-foreground: #F5ECD7;
+    --primary: #2B35AF;
+    --primary-foreground: #F5ECD7;
+    --secondary: #1A1F5C;
+    --secondary-foreground: #F5ECD7;
+    --muted: #9498C4;
+    --muted-foreground: #F5ECD7;
+    --accent: #2B35AF;
+    --accent-foreground: #F5ECD7;
+    --destructive: #FF6B35;
+    --destructive-foreground: #F5ECD7;
+    --border: #9498C4;
+    --input: #9498C4;
+    --ring: #2B35AF;
+    --chart-1: #2B35AF;
+    --chart-2: #9498C4;
+    --chart-3: #FF6B35;
+    --chart-4: #F5ECD7;
+    --chart-5: #1A1A2E;
+    --sidebar: #14162A;
+    --sidebar-foreground: #F5ECD7;
+    --sidebar-primary: #2B35AF;
+    --sidebar-primary-foreground: #F5ECD7;
+    --sidebar-accent: #1A1F5C;
+    --sidebar-accent-foreground: #F5ECD7;
+    --sidebar-border: #9498C4;
+    --sidebar-ring: #2B35AF;
+  }
+  * {
+    @apply border-border outline-ring;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
   }
 }

@@ -1,4 +1,3 @@
-import '@/styles/app/layout/AppSidebar/AppSidebar.css';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { KeyboardEvent } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
@@ -66,7 +65,13 @@ export function AppSidebar() {
   const isDarkMode = themeMode === 'dark';
   const sidebarRef = useRef<HTMLElement | null>(null);
 
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    return window.localStorage.getItem(SIDEBAR_STORAGE_KEY) === 'true';
+  });
   const [signals, setSignals] = useState<SidebarSignals>({
     unreadMessages: 0,
     pendingAppointments: 0,
@@ -83,11 +88,6 @@ export function AppSidebar() {
         .map((path) => itemMap.get(path))
         .filter((item): item is (typeof navigationItems)[number] => Boolean(item)),
     }));
-  }, []);
-
-  useEffect(() => {
-    const stored = window.localStorage.getItem(SIDEBAR_STORAGE_KEY);
-    setIsCollapsed(stored === 'true');
   }, []);
 
   useEffect(() => {
@@ -227,41 +227,69 @@ export function AppSidebar() {
 
   return (
     <aside
-      className={cn('app-sidebar', isCollapsed ? 'is-collapsed' : 'is-expanded')}
+      className={cn('relative z-30 hidden shrink-0 self-start xl:flex', isCollapsed ? 'w-[78px]' : 'w-[260px]')}
       aria-label="Primary navigation"
       ref={sidebarRef}
       onKeyDown={handleArrowNavigation}
     >
-      <div className="app-sidebar__panel">
-        <Link to={ROUTES.dashboard} className="app-sidebar__brand" aria-label="Go to dashboard" data-sidebar-focusable="true">
-          <img src={boardingLogo} alt="" className="app-sidebar__brand-image" />
-          <div className="app-sidebar__brand-copy">
-            <p className="app-sidebar__brand-title">Boarding</p>
-            <p className="app-sidebar__brand-subtitle">Student platform</p>
+      <div
+        className={cn(
+          'fixed flex w-full flex-col overflow-hidden rounded-3xl border border-slate-200/90 bg-white/95 shadow-panel transition-colors dark:border-slate-700/90 dark:bg-slate-900/90',
+          isCollapsed ? 'w-[78px] overflow-visible' : 'w-[260px]'
+        )}
+        style={{ top: '1rem', bottom: '1rem', left: 'max(var(--app-shell-gutter), calc((100vw - var(--app-shell-max-width)) / 2 + var(--app-shell-gutter)))' }}
+      >
+        <Link
+          to={ROUTES.dashboard}
+          className={cn(
+            'flex items-center gap-3 border-b border-slate-200/80 px-3 py-3 transition-colors hover:bg-slate-50 dark:border-slate-700/80 dark:hover:bg-slate-800/65',
+            isCollapsed && 'justify-center px-2'
+          )}
+          aria-label="Go to dashboard"
+          data-sidebar-focusable="true"
+        >
+          <img src={boardingLogo} alt="" className="h-10 w-10 object-cover [object-position:22%_50%]" />
+          <div className={cn('min-w-0', isCollapsed && 'hidden')}>
+            <p className="truncate text-sm font-semibold uppercase tracking-[0.12em] text-slate-900 dark:text-slate-100">Boarding</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Student platform</p>
           </div>
         </Link>
 
-        <div className="app-sidebar__toggle-row">
+        <div className={cn('px-2 py-2', isCollapsed && 'flex justify-center')}>
           <button
             type="button"
-            className="app-sidebar__collapse-toggle"
+            className={cn(
+              'inline-flex min-h-9 w-full items-center justify-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-2 text-xs font-semibold uppercase tracking-[0.08em] text-slate-600 transition-colors hover:border-slate-300 hover:bg-white hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:bg-slate-700 dark:hover:text-slate-100 dark:focus-visible:ring-offset-slate-900',
+              isCollapsed && 'h-9 w-9 rounded-xl px-0'
+            )}
             onClick={() => setIsCollapsed((current) => !current)}
             aria-label={isCollapsed ? 'Expand sidebar navigation' : 'Collapse sidebar navigation'}
             data-sidebar-focusable="true"
           >
-            <svg viewBox="0 0 24 24" className={cn('app-sidebar__collapse-icon', isCollapsed ? 'is-collapsed' : '')} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <svg
+              viewBox="0 0 24 24"
+              className={cn('h-4 w-4 transition-transform duration-200', isCollapsed && 'rotate-180')}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
               <path d="M15 5l-6 7 6 7" />
             </svg>
-            <span className="app-sidebar__collapse-label">{isCollapsed ? 'Expand' : 'Collapse'}</span>
+            <span className={cn(isCollapsed && 'hidden')}>{isCollapsed ? 'Expand' : 'Collapse'}</span>
           </button>
         </div>
 
-        <div className="app-sidebar__scroll">
-          <nav className="app-sidebar__nav" aria-label="Application navigation">
+        <div className={cn('flex-1 overflow-y-auto px-2 pb-2', isCollapsed && 'overflow-visible')}>
+          <nav className="flex flex-col gap-3" aria-label="Application navigation">
             {groupedItems.map((group) => (
-              <section key={group.id} className="app-sidebar__group" aria-label={group.label}>
-                <p className="app-sidebar__group-label">{group.label}</p>
-                <ul className="app-sidebar__list">
+              <section key={group.id} className="space-y-1.5" aria-label={group.label}>
+                <p className={cn('px-2.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-500 dark:text-slate-400', isCollapsed && 'sr-only')}>
+                  {group.label}
+                </p>
+                <ul className="space-y-1">
                   {group.items.map((item) => {
                     const badge = getBadge(item.path);
                     const hint = getHint(item.path, item.hint);
@@ -272,12 +300,21 @@ export function AppSidebar() {
                           to={item.path}
                           data-sidebar-focusable="true"
                           aria-label={`${item.label}${badge > 0 ? ` (${badge})` : ''}`}
-                          className={({ isActive }) => cn('app-sidebar__item', isActive ? 'is-active' : 'is-inactive')}
+                          className={({ isActive }) =>
+                            cn(
+                              'group relative flex min-h-11 items-center gap-2.5 rounded-xl border border-transparent px-2.5 py-2 text-slate-600 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-slate-300 dark:focus-visible:ring-offset-slate-900',
+                              isActive
+                                ? 'border-brand-200 bg-brand-50 text-brand-800 shadow-sm [box-shadow:inset_3px_0_0_0_rgb(37_99_235_/_0.95)] dark:border-brand-400/55 dark:bg-brand-500/20 dark:text-brand-100'
+                                : 'hover:border-slate-200 hover:bg-slate-50 hover:text-slate-900 dark:hover:border-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-100',
+                              isCollapsed && 'mx-auto h-11 w-11 justify-center px-0',
+                              isCollapsed && isActive && '[box-shadow:0_0_#0000]'
+                            )
+                          }
                         >
-                          <span className="app-sidebar__item-icon-wrap">
+                          <span className={cn('relative inline-flex h-8 w-8 shrink-0 basis-8 items-center justify-center', isCollapsed && 'h-9 w-9 basis-9')}>
                             <svg
                               viewBox="0 0 24 24"
-                              className="app-sidebar__item-icon"
+                              className={cn('h-[18px] w-[18px] shrink-0', isCollapsed && 'h-5 w-5')}
                               fill="none"
                               stroke="currentColor"
                               strokeWidth="1.8"
@@ -287,15 +324,28 @@ export function AppSidebar() {
                             >
                               <path d={getNavigationIconPath(item.icon)} />
                             </svg>
-                            {badge > 0 ? <span className="app-sidebar__item-badge">{badge > 99 ? '99+' : badge}</span> : null}
+                            {badge > 0 ? (
+                              <span className={cn('absolute right-0 top-0 m-0 inline-flex min-h-5 min-w-5 shrink-0 items-center justify-center rounded-full bg-brand-600 px-1 text-[10px] font-semibold text-white', isCollapsed && 'min-h-4 min-w-4 text-[9px]')}>
+                                {badge > 99 ? '99+' : badge}
+                              </span>
+                            ) : null}
                           </span>
 
-                          <span className="app-sidebar__item-copy">
-                            <span className="app-sidebar__item-label">{item.label}</span>
-                            <span className="app-sidebar__item-hint">{hint}</span>
+                          <span className={cn('flex min-w-0 flex-1 items-center justify-between gap-2', isCollapsed && 'hidden')}>
+                            <span className="truncate text-sm font-semibold">{item.label}</span>
+                            <span className="truncate text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-400 dark:text-slate-500">{hint}</span>
                           </span>
 
-                          <span className="app-sidebar__tooltip">{item.label}</span>
+                          <span
+                            className={cn(
+                              'hidden',
+                              isCollapsed &&
+                                "pointer-events-none absolute left-[calc(100%+12px)] top-1/2 z-50 inline-flex -translate-y-1/2 rounded-md bg-slate-900 px-2.5 py-2 text-xs font-semibold text-white opacity-0 shadow-lg transition-all duration-150 before:absolute before:left-[-6px] before:top-1/2 before:h-[10px] before:w-[6px] before:-translate-y-1/2 before:bg-slate-900 before:content-[''] before:[clip-path:polygon(100%_0,100%_100%,0_50%)] group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 dark:bg-slate-100 dark:text-slate-900 dark:before:bg-slate-100"
+                            )}
+                            style={isCollapsed ? { transform: 'translate(-4px, -50%)' } : undefined}
+                          >
+                            {item.label}
+                          </span>
                         </NavLink>
                       </li>
                     );
@@ -306,43 +356,67 @@ export function AppSidebar() {
           </nav>
         </div>
 
-        <div className="app-sidebar__footer">
+        <div className="mt-auto border-t border-slate-200/80 px-2 py-3 dark:border-slate-700/80">
           <button
             type="button"
-            className="app-sidebar__utility app-sidebar__utility--theme"
+            className={cn(
+              'group relative flex min-h-10 w-full items-center gap-2.5 rounded-xl border border-slate-200 bg-slate-50 px-2.5 text-slate-700 transition-colors hover:border-slate-300 hover:bg-white hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:border-slate-600 dark:hover:bg-slate-700 dark:hover:text-slate-100 dark:focus-visible:ring-offset-slate-900',
+              isCollapsed && 'mx-auto h-10 w-10 justify-center px-0'
+            )}
             data-mode={themeMode}
             onClick={toggleThemeMode}
             aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
             data-sidebar-focusable="true"
           >
             {isDarkMode ? (
-              <svg viewBox="0 0 24 24" className="app-sidebar__utility-icon" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <svg viewBox="0 0 24 24" className={cn('h-[18px] w-[18px] shrink-0', isCollapsed && 'h-5 w-5')} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <circle cx="12" cy="12" r="4.3" />
                 <path d="M12 2.8v2.4M12 18.8v2.4M21.2 12h-2.4M5.2 12H2.8M18.8 5.2l-1.7 1.7M6.9 17.1l-1.7 1.7M18.8 18.8l-1.7-1.7M6.9 6.9L5.2 5.2" />
               </svg>
             ) : (
-              <svg viewBox="0 0 24 24" className="app-sidebar__utility-icon" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <svg viewBox="0 0 24 24" className={cn('h-[18px] w-[18px] shrink-0', isCollapsed && 'h-5 w-5')} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
                 <path d="M21 12.8A8.8 8.8 0 1 1 11.2 3a7.1 7.1 0 1 0 9.8 9.8Z" />
               </svg>
             )}
-            <span className="app-sidebar__utility-label">{isDarkMode ? 'Light mode' : 'Dark mode'}</span>
-            <span className="app-sidebar__tooltip">{isDarkMode ? 'Light mode' : 'Dark mode'}</span>
+            <span className={cn('text-sm font-semibold', isCollapsed && 'hidden')}>{isDarkMode ? 'Light mode' : 'Dark mode'}</span>
+            <span
+              className={cn(
+                'hidden',
+                isCollapsed &&
+                  "pointer-events-none absolute left-[calc(100%+12px)] top-1/2 z-50 inline-flex -translate-y-1/2 rounded-md bg-slate-900 px-2.5 py-2 text-xs font-semibold text-white opacity-0 shadow-lg transition-all duration-150 before:absolute before:left-[-6px] before:top-1/2 before:h-[10px] before:w-[6px] before:-translate-y-1/2 before:bg-slate-900 before:content-[''] before:[clip-path:polygon(100%_0,100%_100%,0_50%)] group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 dark:bg-slate-100 dark:text-slate-900 dark:before:bg-slate-100"
+              )}
+              style={isCollapsed ? { transform: 'translate(-4px, -50%)' } : undefined}
+            >
+              {isDarkMode ? 'Light mode' : 'Dark mode'}
+            </span>
           </button>
 
           <button
             type="button"
-            className="app-sidebar__utility app-sidebar__utility--logout"
+            className={cn(
+              'group relative mt-1.5 flex min-h-10 w-full items-center gap-2.5 rounded-xl border border-transparent px-2.5 text-slate-500 transition-colors hover:bg-slate-50 hover:text-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-100 dark:focus-visible:ring-offset-slate-900',
+              isCollapsed && 'mx-auto h-10 w-10 justify-center px-0'
+            )}
             onClick={handleLogout}
             aria-label="Sign out"
             data-sidebar-focusable="true"
           >
-            <svg viewBox="0 0 24 24" className="app-sidebar__utility-icon" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+            <svg viewBox="0 0 24 24" className={cn('h-[18px] w-[18px] shrink-0', isCollapsed && 'h-5 w-5')} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
               <path d="M9 5H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3" strokeLinecap="round" strokeLinejoin="round" />
               <path d="M16 17l5-5-5-5" strokeLinecap="round" strokeLinejoin="round" />
               <path d="M21 12H9" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            <span className="app-sidebar__utility-label">Sign out</span>
-            <span className="app-sidebar__tooltip">Sign out</span>
+            <span className={cn('text-sm font-semibold', isCollapsed && 'hidden')}>Sign out</span>
+            <span
+              className={cn(
+                'hidden',
+                isCollapsed &&
+                  "pointer-events-none absolute left-[calc(100%+12px)] top-1/2 z-50 inline-flex -translate-y-1/2 rounded-md bg-slate-900 px-2.5 py-2 text-xs font-semibold text-white opacity-0 shadow-lg transition-all duration-150 before:absolute before:left-[-6px] before:top-1/2 before:h-[10px] before:w-[6px] before:-translate-y-1/2 before:bg-slate-900 before:content-[''] before:[clip-path:polygon(100%_0,100%_100%,0_50%)] group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100 dark:bg-slate-100 dark:text-slate-900 dark:before:bg-slate-100"
+              )}
+              style={isCollapsed ? { transform: 'translate(-4px, -50%)' } : undefined}
+            >
+              Sign out
+            </span>
           </button>
         </div>
       </div>

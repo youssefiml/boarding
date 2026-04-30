@@ -17,6 +17,7 @@ const AppointmentsPage = lazy(() => import('@/pages/AppointmentsPage').then((mod
 const MessagingPage = lazy(() => import('@/pages/MessagingPage').then((module) => ({ default: module.MessagingPage })));
 const JourneyPage = lazy(() => import('@/pages/JourneyPage').then((module) => ({ default: module.JourneyPage })));
 const ResourcesPage = lazy(() => import('@/pages/ResourcesPage').then((module) => ({ default: module.ResourcesPage })));
+const LandingPage = lazy(() => import('@/pages/LandingPage').then((module) => ({ default: module.LandingPage })));
 const LoginPage = lazy(() => import('@/pages/auth/LoginPage').then((module) => ({ default: module.LoginPage })));
 const RegisterPage = lazy(() => import('@/pages/auth/RegisterPage').then((module) => ({ default: module.RegisterPage })));
 const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })));
@@ -41,7 +42,7 @@ export function AppRouter() {
 
   return (
     <Routes>
-      <Route path={ROUTES.root} element={<Navigate to={accessToken ? ROUTES.dashboard : ROUTES.login} replace />} />
+      <Route path={ROUTES.root} element={accessToken ? <Navigate to={ROUTES.dashboard} replace /> : withSuspense(<LandingPage />)} />
 
       <Route element={<RequireGuest />}>
         <Route element={<AuthLayout />}>
