@@ -1,43 +1,15 @@
 import type { CSSProperties } from 'react';
 
 import boardingLogo from '@/assets/boarding-logo.png';
-import { AnimatedCounter } from '@/features/landing/components/AnimatedCounter';
-import { LandingNavbar } from '@/features/landing/components/LandingNavbar';
+import heroGlobeImage from '@/assets/hero-globe-cutout.png';
+import heroStudentImage from '@/assets/hero-student-cutout.png';
+import heroSpaceBackground from '@/assets/heroSpaceBackground.png';
 import { Reveal } from '@/features/landing/components/Reveal';
 import { SwipeCardStack } from '@/features/landing/components/SwipeCardStack';
 import { cn } from '@/lib/cn';
 
 const appointmentHref = 'mailto:lagenceboarding@gmail.com?subject=Rendez-vous%20gratuit%20Boarding';
 const contactHref = 'mailto:lagenceboarding@gmail.com?subject=Projet%20de%20stage%20a%20l%27etranger';
-
-const trustBadges = ['Stage garanti', 'Accompagnement 7j/7', 'Process guidé', 'Destinations sélectionnées'] as const;
-
-const proofStats = [
-  {
-    value: 500,
-    suffix: '+',
-    label: 'étudiants accompagnés',
-    note: 'Valeur de démonstration à remplacer',
-  },
-  {
-    value: 25,
-    suffix: '+',
-    label: 'destinations préparées',
-    note: 'Valeur de démonstration à remplacer',
-  },
-  {
-    value: 120,
-    suffix: '+',
-    label: 'entreprises partenaires',
-    note: 'Valeur de démonstration à remplacer',
-  },
-  {
-    value: 92,
-    suffix: '%',
-    label: 'satisfaction étudiant',
-    note: 'Valeur de démonstration à remplacer',
-  },
-] as const;
 
 const whyBoardingCards = [
   {
@@ -60,13 +32,6 @@ const whyBoardingCards = [
     title: 'Suivi jusqu’à l’intégration',
     description: 'Boarding reste présent avant, pendant et après ton arrivée pour sécuriser ton expérience sur place.',
   },
-] as const;
-
-const trustIndicators = [
-  'Accompagnement personnalisé',
-  'Entreprises vérifiées',
-  'Support avant et après le départ',
-  'Process clair et structuré',
 ] as const;
 
 const problemCards = [
@@ -219,8 +184,6 @@ const testimonials = [
   },
 ] as const;
 
-const partnerItems = ['Réseau d’entreprises partenaires', 'Écoles et centres de formation', 'Solutions logement', 'Communauté étudiante'] as const;
-
 const landingShellClass = 'mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8';
 const landingSectionClass = 'relative py-16 sm:py-20 lg:py-24 [scroll-margin-top:6rem]';
 const landingSectionHeadingClass = 'mx-auto max-w-3xl text-center';
@@ -236,130 +199,257 @@ const landingButtonLightClass =
   'border border-slate-200 bg-white text-[#07182f] hover:-translate-y-0.5 hover:border-[#cfdcec] hover:shadow-[0_10px_22px_-10px_rgba(15,23,42,0.18)]';
 const landingSurfaceCardClass = 'rounded-3xl border border-slate-200 bg-white shadow-[0_4px_14px_-8px_rgba(15,23,42,0.08)]';
 const heroMotionClass = 'motion-safe:animate-fade-in-up';
-const heroCardFloatClass = 'motion-safe:animate-[landingFloat_6s_ease-in-out_1.4s_infinite]';
 
-function HeroSection() {
+const heroStats = [
+  { value: '+500', label: 'Étudiants accompagnés', icon: 'network' },
+  { value: '+120', label: 'Entreprises partenaires', icon: 'building' },
+  { value: 'Maroc', label: 'Destination V1', icon: 'globe' },
+  { value: '92%', label: 'Taux de satisfaction', icon: 'heart' },
+] as const;
+
+const heroMoroccoCities = [
+  { label: 'Casablanca', className: 'city-casablanca', delay: '640ms' },
+  { label: 'Rabat', className: 'city-rabat', delay: '720ms' },
+  { label: 'Marrakech', className: 'city-marrakech', delay: '800ms' },
+] as const;
+
+const heroNavItems: ReadonlyArray<{ label: string; href: string }> = [
+  { label: 'À propos', href: '#concept' },
+  { label: 'Étapes', href: '#processus' },
+  { label: 'Bénéfices', href: '#destinations' },
+  { label: 'Témoignages', href: '#temoignages' },
+  { label: 'Contact', href: '#contact' },
+];
+
+function HeroStatIcon({ icon }: { icon: (typeof heroStats)[number]['icon'] }) {
+  const cls = 'h-7 w-7';
+
+  if (icon === 'building') {
+    return (
+      <svg viewBox="0 0 24 24" className={cls} fill="none" stroke="currentColor" strokeWidth="1.85" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M6 22V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v18" />
+        <path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2M4 22h16" />
+      </svg>
+    );
+  }
+
+  if (icon === 'globe') {
+    return (
+      <svg viewBox="0 0 24 24" className={cls} fill="none" stroke="currentColor" strokeWidth="1.85" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M3 12h18M12 3c2.4 2.6 3.6 5.6 3.6 9S14.4 18.4 12 21M12 3C9.6 5.6 8.4 8.6 8.4 12s1.2 6.4 3.6 9" />
+      </svg>
+    );
+  }
+
+  if (icon === 'heart') {
+    return (
+      <svg viewBox="0 0 24 24" className={cls} fill="none" stroke="currentColor" strokeWidth="1.85" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M20.8 5.6a5.2 5.2 0 0 0-7.4 0L12 7l-1.4-1.4a5.2 5.2 0 0 0-7.4 7.4L12 21l8.8-8a5.2 5.2 0 0 0 0-7.4Z" />
+      </svg>
+    );
+  }
+
   return (
-    <section
-      className="relative overflow-hidden bg-[radial-gradient(circle_at_82%_14%,rgba(78,140,255,0.18),transparent_36%),radial-gradient(circle_at_14%_30%,rgba(8,145,178,0.12),transparent_36%),linear-gradient(180deg,#eef7ff_0%,#f8fbff_55%,#ffffff_100%)] [scroll-margin-top:6rem] max-lg:min-h-0 lg:min-h-[760px]"
-      id="accueil"
-    >
-      <div className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-[rgba(78,140,255,0.18)] opacity-50 blur-3xl sm:h-96 sm:w-96" aria-hidden="true" />
-      <div className="pointer-events-none absolute -bottom-28 left-1/2 h-72 w-[34rem] -translate-x-1/2 rounded-full bg-[rgba(8,145,178,0.12)] opacity-40 blur-3xl" aria-hidden="true" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(248,251,255,0.4)_100%)]" aria-hidden="true" />
-
-      <LandingNavbar />
-
-      <div className={cn(landingShellClass, 'relative z-10 grid gap-8 pb-16 pt-10 sm:pt-14 lg:grid-cols-[minmax(0,0.98fr)_minmax(360px,0.72fr)] lg:items-center lg:pb-20 lg:pt-16')}>
-        <div className="max-w-3xl">
-          <p className={cn(landingKickerClass, heroMotionClass)} style={{ animationDelay: '80ms' }}>
-            Stage à l’étranger, sans confusion
-          </p>
-          <h1 className={cn('mt-5 max-w-4xl font-display text-5xl font-bold leading-[1.02] text-[#07182f] sm:text-6xl lg:text-7xl', heroMotionClass)} style={{ animationDelay: '160ms' }}>
-            Trouve ton stage à l’étranger, étape par étape.
-          </h1>
-          <p className={cn('mt-6 max-w-2xl text-lg leading-8 text-slate-600 sm:text-xl', heroMotionClass)} style={{ animationDelay: '240ms' }}>
-            Boarding accompagne les étudiants de A à Z : choix de la destination, matching avec l’entreprise, préparation du départ
-            et intégration sur place.
-          </p>
-
-          <div className={cn('mt-8 flex flex-col gap-3 sm:flex-row', heroMotionClass)} style={{ animationDelay: '320ms' }}>
-            <a href={appointmentHref} className={cn(landingButtonBaseClass, landingButtonLargeClass, landingButtonPrimaryClass)}>
-              Postuler maintenant
-            </a>
-            <a href="#processus" className={cn(landingButtonBaseClass, landingButtonLargeClass, landingButtonLightClass)}>
-              Voir comment ça marche
-            </a>
-          </div>
-
-          <div className={cn('mt-8 flex flex-wrap gap-2', heroMotionClass)} style={{ animationDelay: '400ms' }} aria-label="Garanties Boarding">
-            {trustBadges.map((badge) => (
-              <span key={badge} className="rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-[#07182f] shadow-sm backdrop-blur">
-                {badge}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className={cn('motion-safe:animate-fade-in-up lg:justify-self-end', heroCardFloatClass)} style={{ animationDelay: '460ms' }}>
-          <div
-            className="relative w-full rounded-[2rem] border border-slate-200 bg-white p-5 text-[#07182f] shadow-[0_24px_60px_-28px_rgba(15,23,42,0.18),0_1px_0_rgba(255,255,255,0.6)_inset] backdrop-blur"
-            style={{ width: 'min(100%, 28rem)' }}
-            aria-label="Aperçu du parcours étudiant Boarding"
-          >
-            <div className="absolute -left-4 top-8 h-24 w-2 rounded-full bg-gradient-to-b from-brand-600 to-cyan-600" aria-hidden="true" />
-
-            <div className="flex items-center justify-between border-b border-slate-100 pb-4 text-sm font-bold text-slate-500">
-              <span>Parcours Boarding</span>
-              <strong className="rounded-full bg-[#e0ecff] px-3 py-1 text-[#07182f]">Maroc</strong>
-            </div>
-
-            <div className="mt-5 flex items-center gap-3 rounded-2xl bg-[#eef4ff] p-4">
-              <span className="h-3 w-3 shrink-0 rounded-full bg-brand-600 shadow-[0_0_0_8px_rgba(29,79,208,0.12)]" />
-              <div className="flex min-w-0 flex-col">
-                <strong className="text-sm font-extrabold text-[#182f6d]">Matching en cours</strong>
-                <span className="text-sm text-[#182f6d]/70">3 entreprises adaptées à ton profil</span>
-              </div>
-            </div>
-
-            <div className="mt-4 grid grid-cols-2 gap-3">
-              <div className="rounded-2xl border border-slate-200 bg-white p-4">
-                <span className="text-sm text-slate-500">Destination</span>
-                <strong className="mt-1 block text-lg font-extrabold text-[#07182f]">Marrakech</strong>
-              </div>
-              <div className="rounded-2xl border border-slate-200 bg-white p-4">
-                <span className="text-sm text-slate-500">Appel équipe</span>
-                <strong className="mt-1 block text-lg font-extrabold text-[#07182f]">30 min</strong>
-              </div>
-            </div>
-
-            <ol className="mt-5 space-y-3 border-t border-slate-100 pt-5 text-sm text-slate-500">
-              <li className="flex items-center gap-3 before:h-2.5 before:w-2.5 before:shrink-0 before:rounded-full before:bg-emerald-500">Projet clarifié</li>
-              <li className="flex items-center gap-3 font-bold text-[#07182f] before:h-2.5 before:w-2.5 before:shrink-0 before:rounded-full before:bg-brand-600">Entreprise sélectionnée</li>
-              <li className="flex items-center gap-3 before:h-2.5 before:w-2.5 before:shrink-0 before:rounded-full before:bg-slate-300">Départ préparé</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section>
+    <svg viewBox="0 0 24 24" className={cls} fill="none" stroke="currentColor" strokeWidth="1.85" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8.5 8.6 15.4 15.5M15.5 8.5 8.6 15.4M12 3v3M12 18v3M3 12h3M18 12h3" />
+    </svg>
   );
 }
 
-function StatsSection() {
+function HeroSection() {
   return (
-    <section
-      className={cn(landingSectionClass, 'bg-[linear-gradient(180deg,#ffffff_0%,#f4faff_100%)] py-14 sm:py-16')}
-      aria-labelledby="stats-title"
-    >
-      <div className={landingShellClass}>
-        <Reveal className={landingSectionHeadingClass}>
-          <span className={landingKickerClass}>Preuves à valider</span>
-          <h2 id="stats-title" className="mt-3 font-display text-3xl font-bold leading-tight text-[#07182f] sm:text-4xl">
-            Des indicateurs pensés pour rassurer avant de passer à l’action.
-          </h2>
-          <p className="mt-4 text-sm leading-7 text-slate-500 sm:text-base">
-            Ces chiffres sont structurés comme données éditables. Remplace-les par les chiffres réels validés par l’équipe.
-          </p>
-        </Reveal>
+    <section className="hero relative isolate overflow-hidden bg-[#020817] text-white [scroll-margin-top:6rem] lg:min-h-[980px]" id="accueil">
+      <img
+        src={heroSpaceBackground}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-20 h-full w-full select-none object-cover opacity-[0.55]"
+        loading="eager"
+        decoding="async"
+      />
+      <div
+        className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(circle_at_78%_32%,rgba(42,124,255,0.35),transparent_43%),radial-gradient(circle_at_18%_18%,rgba(18,90,215,0.22),transparent_40%),linear-gradient(180deg,#030a1e_0%,#051333_48%,#041025_100%)]"
+        aria-hidden="true"
+      />
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-40 [background-image:radial-gradient(circle_at_18%_22%,rgba(255,255,255,0.7)_1px,transparent_1px),radial-gradient(circle_at_66%_68%,rgba(255,255,255,0.45)_1px,transparent_1px),radial-gradient(circle_at_88%_28%,rgba(255,255,255,0.5)_1px,transparent_1px)] [background-size:240px_240px,300px_300px,220px_220px]" aria-hidden="true" />
+      <div className="pointer-events-none absolute left-[6%] top-[22%] -z-10 h-72 w-72 rounded-full bg-[#1f5cff]/30 blur-3xl" aria-hidden="true" />
+      <div className="pointer-events-none absolute right-[8%] top-[40%] -z-10 h-[32rem] w-[32rem] rounded-full bg-[#1487ff]/20 blur-[150px]" aria-hidden="true" />
 
-        <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {proofStats.map((stat, index) => (
-            <Reveal
-              key={stat.label}
-              as="article"
-              className={cn(
-                landingSurfaceCardClass,
-                'rounded-3xl p-5 transition-all duration-200 hover:-translate-y-1 hover:border-[#cfdcec] hover:shadow-[0_12px_28px_-10px_rgba(29,79,208,0.18)]'
-              )}
-              delay={index * 70}
+      <div className="hero-inner relative z-20 mx-auto w-full max-w-[1536px] px-5 sm:px-8 lg:px-[56px] max-[1280px]:px-8">
+        <header className="header flex h-24 items-center justify-between gap-4">
+          <a href="#accueil" className="inline-flex shrink-0 items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b]" aria-label="Accueil Boarding">
+            <img src={boardingLogo} alt="" className="h-12 w-12 shrink-0 rounded-xl object-cover [object-position:50%_50%] [transform:scale(1.8)]" />
+            <span className="whitespace-nowrap text-3xl font-extrabold uppercase tracking-[0.01em] text-white max-[1100px]:text-[1.72rem]">BOARDING</span>
+          </a>
+
+          <nav className="nav mx-6 hidden flex-1 items-center justify-center gap-[44px] whitespace-nowrap lg:flex max-[1280px]:gap-8 max-[1100px]:gap-5" aria-label="Navigation principale">
+            {heroNavItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="whitespace-nowrap text-[1.08rem] font-bold text-white/90 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b] max-[1280px]:text-base max-[1100px]:text-[0.9rem]"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="header-actions flex shrink-0 items-center gap-3">
+            <a
+              href="/login"
+              className="hidden h-14 min-w-[172px] items-center justify-center rounded-xl border border-white/35 bg-white/[0.02] px-6 text-base font-bold text-white shadow-[0_20px_40px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b] sm:inline-flex max-[1280px]:h-12 max-[1280px]:min-w-[148px] max-[1280px]:px-4 max-[1280px]:text-sm max-[1100px]:min-w-[132px]"
             >
-              <strong className="block bg-gradient-to-r from-brand-600 to-cyan-600 bg-clip-text font-display text-4xl font-bold leading-none text-transparent sm:text-5xl">
-                <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-              </strong>
-              <span className="mt-3 block text-sm font-extrabold text-[#07182f]">{stat.label}</span>
-              <span className="mt-2 block text-xs font-semibold leading-5 text-slate-500">{stat.note}</span>
-            </Reveal>
-          ))}
+              Se connecter
+            </a>
+            <a
+              href={appointmentHref}
+              className="inline-flex h-14 min-w-[156px] items-center justify-center rounded-xl bg-gradient-to-br from-[#3f87ff] via-[#2d63f6] to-[#3348f1] px-6 text-base font-bold text-white shadow-[0_22px_46px_-24px_rgba(58,112,255,0.95)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_48px_-18px_rgba(58,112,255,0.95)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b] max-[1280px]:h-12 max-[1280px]:min-w-[140px] max-[1280px]:px-4 max-[1280px]:text-sm max-[1100px]:min-w-[126px]"
+            >
+              Candidater
+            </a>
+          </div>
+        </header>
+
+        <div className="hero-main relative grid items-center gap-10 pt-4 lg:min-h-[700px] lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:gap-12">
+          <div className="hero-content relative z-30 max-w-[560px]">
+            <p
+              className={cn(
+                'inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-5 py-2.5 text-sm font-bold text-white shadow-[0_18px_30px_-24px_rgba(0,0,0,0.9)] ring-1 ring-cyan-300/20 backdrop-blur-md',
+                heroMotionClass
+              )}
+              style={{ animationDelay: '80ms' }}
+            >
+              <svg viewBox="0 0 24 24" className="h-4 w-4 text-[#2bb0ff]" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18M12 3c2.4 2.6 3.6 5.6 3.6 9S14.4 18.4 12 21M12 3C9.6 5.6 8.4 8.6 8.4 12s1.2 6.4 3.6 9" />
+              </svg>
+              Stages au Maroc pour étudiants francophones
+            </p>
+
+            <h1 className={cn('hero-title mt-8 font-display text-5xl font-bold leading-[1.08] text-white sm:text-6xl lg:text-[clamp(56px,5vw,72px)]', heroMotionClass)} style={{ animationDelay: '160ms' }}>
+              <span className="block">Votre stage</span>
+              <span className="block bg-gradient-to-r from-[#3c8dff] via-[#35b9ff] to-[#20d3ff] bg-clip-text text-transparent">au Maroc</span>
+              <span className="block">commence ici.</span>
+            </h1>
+
+            <p className={cn('hero-description mt-6 max-w-[560px] text-base leading-[1.6] text-slate-200 sm:text-lg', heroMotionClass)} style={{ animationDelay: '240ms' }}>
+              Boarding aide les étudiants francophones à trouver un stage au Maroc grâce à une plateforme guidée, des opportunités qualifiées et un accompagnement personnalisé à chaque étape.
+            </p>
+
+            <div className={cn('hero-actions mt-10 flex flex-col gap-4 sm:flex-row sm:gap-4', heroMotionClass)} style={{ animationDelay: '320ms' }}>
+              <a
+                href={appointmentHref}
+                className="btn btn-primary group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b]"
+              >
+                <span className="btn-label">Déposer ma candidature</span>
+                <span className="btn-icon transition-transform group-hover:translate-x-0.5" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </a>
+              <a
+                href="#processus"
+                className="btn btn-secondary group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b]"
+              >
+                <span className="btn-label">Découvrir comment ça marche</span>
+                <span className="btn-icon transition-colors group-hover:bg-white/15" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" className="ml-0.5 h-3.5 w-3.5 fill-current">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <div className={cn('hero-visual relative h-[520px] w-full overflow-visible sm:h-[580px] lg:h-[700px] lg:translate-x-3 max-[1280px]:h-[620px] max-[1280px]:translate-x-0', heroMotionClass)} style={{ animationDelay: '420ms' }}>
+            <div className="pointer-events-none absolute right-[88px] top-[104px] z-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(49,144,255,0.58),rgba(29,95,215,0.24)_56%,transparent_78%)] blur-[78px] max-[1280px]:right-[60px] max-[1280px]:top-[92px] max-[1280px]:h-[340px] max-[1280px]:w-[340px]" aria-hidden="true" />
+
+            <img
+              src={heroGlobeImage}
+              alt=""
+              aria-hidden="true"
+              className="globe pointer-events-none absolute right-[102px] top-[80px] z-10 h-auto w-[clamp(590px,43vw,720px)] select-none bg-transparent object-contain [mix-blend-mode:normal] [filter:drop-shadow(0_0_56px_rgba(40,140,255,0.58))] max-[1280px]:right-[68px] max-[1280px]:top-[84px] max-[1280px]:w-[clamp(500px,39vw,620px)]"
+              loading="eager"
+              decoding="async"
+            />
+
+            <div className="flight-path" aria-hidden="true">
+              <svg viewBox="0 0 860 640">
+                <circle className="flight-start" cx="185" cy="455" r="5" />
+                <path className="flight-route" d="M185 455C246 356 332 350 421 346C551 340 575 181 674 150C724 135 765 146 800 178" />
+                <path className="flight-plane" d="M796 139 833 150 812 168 830 187 821 199 802 181 785 210 771 204 786 173 763 174 759 161 787 154 781 138Z" />
+              </svg>
+            </div>
+
+            <img
+              src={heroStudentImage}
+              alt="Etudiant Boarding avec ordinateur portable"
+              className="student pointer-events-none absolute right-[86px] top-[40px] z-30 h-[clamp(630px,49vw,760px)] w-auto select-none bg-transparent object-contain [mix-blend-mode:normal] [filter:drop-shadow(0_26px_56px_rgba(0,8,24,0.95))_drop-shadow(0_0_36px_rgba(56,151,255,0.22))] max-[1280px]:right-[72px] max-[1280px]:top-[48px] max-[1280px]:h-[clamp(520px,43vw,660px)]"
+              width={1024}
+              height={1536}
+              loading="eager"
+              decoding="async"
+            />
+
+            <article
+              className="morocco-card absolute z-40 hidden motion-safe:animate-hero-tag-float motion-safe:[animation-fill-mode:both] lg:flex max-[1024px]:hidden"
+              style={{ animationDelay: '560ms' } as CSSProperties}
+            >
+              <span className="morocco-flag" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 4.4 13.9 9.2h5.1l-4.1 3 1.6 4.9-4.4-3-4.4 3 1.6-4.9-4.1-3h5.1L12 4.4Z" />
+                </svg>
+              </span>
+              <span className="content">
+                <span className="destination-name">Maroc</span>
+                <span className="opportunity-line">
+                  <span className="count">+80</span>
+                  <span className="label">opportunités</span>
+                </span>
+              </span>
+            </article>
+
+            {heroMoroccoCities.map((city) => (
+              <span
+                key={city.label}
+                className={cn(
+                  'city-chip absolute z-40 hidden motion-safe:animate-hero-tag-float motion-safe:[animation-fill-mode:both] lg:inline-flex max-[1024px]:hidden',
+                  city.className
+                )}
+                style={{ animationDelay: city.delay } as CSSProperties}
+              >
+                {city.label}
+              </span>
+            ))}
+
+          </div>
+        </div>
+
+        <div className="trust-stats relative z-30 mt-[20px] h-auto rounded-[24px] border border-white/[0.1] bg-[rgba(6,18,38,0.65)] p-6 shadow-[0_44px_78px_-46px_rgba(0,0,0,0.94)] backdrop-blur-[18px] lg:h-[164px] lg:px-10 lg:py-8">
+          <dl className="grid h-full grid-cols-2 gap-y-7 lg:grid-cols-4 lg:items-center lg:gap-y-0" aria-label="Indicateurs clés">
+            {heroStats.map((stat, i) => (
+              <div
+                key={stat.label}
+                className={cn(
+                  'flex min-w-0 items-center gap-4 lg:px-6',
+                  i % 2 === 1 && 'border-l border-white/[0.12] pl-5',
+                  i >= 2 && 'border-t border-white/[0.12] pt-7 lg:border-t-0 lg:pt-0',
+                  i > 0 && 'lg:border-l lg:border-white/[0.12]'
+                )}
+              >
+                <span className="stat-icon grid h-14 w-14 shrink-0 place-items-center rounded-full border-2 border-[#2b7eff] text-[#2b7eff] shadow-[0_0_24px_-10px_rgba(43,126,255,0.9)]">
+                  <HeroStatIcon icon={stat.icon} />
+                </span>
+                <div className="min-w-0">
+                  <dd className="stat-number font-display text-4xl font-bold leading-none tracking-tight text-white">{stat.value}</dd>
+                  <dt className="stat-label mt-2 text-base font-medium leading-5 text-[#b9c8e4]">{stat.label}</dt>
+                </div>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
     </section>
@@ -368,67 +458,48 @@ function StatsSection() {
 
 function WhyBoardingSection() {
   return (
-    <section className={cn(landingSectionClass, 'bg-[linear-gradient(180deg,#f4faff_0%,#ffffff_100%)]')} aria-labelledby="why-title">
-      <div className={landingShellClass}>
-        <Reveal className={landingSectionHeadingClass}>
-          <span className={landingKickerClass}>Pourquoi Boarding ?</span>
-          <h2 id="why-title" className={landingSectionTitleClass}>
+    <section
+      className="relative isolate overflow-hidden bg-[linear-gradient(180deg,#f7fafd_0%,#f5f8fc_58%,#ffffff_100%)] px-0 py-20 sm:py-24 lg:pb-[120px] lg:pt-[100px]"
+      aria-labelledby="why-title"
+    >
+      <div
+        className="pointer-events-none absolute left-1/2 top-12 -z-10 h-72 w-[min(42rem,92vw)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(43,126,255,0.14)_0%,rgba(43,126,255,0.07)_42%,transparent_72%)] blur-2xl"
+        aria-hidden="true"
+      />
+
+      <div className="mx-auto w-full max-w-[1280px] px-5 sm:px-8 lg:px-10">
+        <Reveal className="mx-auto max-w-[900px] text-center">
+          <span className="inline-flex text-sm font-semibold uppercase tracking-[0.18em] text-[#1d67f0]">
+            Pourquoi Boarding ?
+          </span>
+          <h2
+            id="why-title"
+            className="mx-auto mt-5 max-w-[900px] font-display text-4xl font-bold leading-[1.1] text-[#081f3d] sm:text-5xl lg:text-[56px] xl:text-[60px]"
+          >
             Un service conçu pour enlever le doute et accélérer ton projet.
           </h2>
-          <p className={landingSectionParagraphClass}>
+          <p className="mx-auto mt-6 max-w-[760px] text-lg leading-[1.7] text-[#63728a] sm:text-xl">
             L’étudiant ne cherche pas seulement une entreprise. Il cherche un cadre, des réponses et une équipe capable de l’aider à
             avancer sans se disperser.
           </p>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-[60px] grid gap-5 sm:grid-cols-2 lg:gap-6 xl:grid-cols-4">
           {whyBoardingCards.map((card, index) => (
             <Reveal
               key={card.title}
               as="article"
-              className={cn(
-                landingSurfaceCardClass,
-                'relative overflow-hidden p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[#cfdcec] hover:shadow-[0_14px_30px_-12px_rgba(29,79,208,0.15)] before:pointer-events-none before:absolute before:inset-x-6 before:top-0 before:h-px before:bg-[linear-gradient(90deg,transparent_0%,#1d4fd0_50%,transparent_100%)] before:opacity-0 before:transition-opacity hover:before:opacity-100'
-              )}
+              className="group flex min-h-[260px] flex-col rounded-[24px] border border-[rgba(15,45,85,0.08)] bg-white p-8 shadow-[0_16px_40px_rgba(20,60,110,0.06)] transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-[rgba(43,126,255,0.26)] hover:shadow-[0_24px_56px_rgba(20,60,110,0.12)]"
               delay={index * 80}
             >
-              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-600 to-brand-500 text-xs font-extrabold text-white shadow-sm">
+              <span className="grid h-[42px] w-[42px] place-items-center rounded-[14px] bg-gradient-to-br from-[#1677ff] to-[#3157ff] text-sm font-bold text-white shadow-[0_12px_24px_rgba(43,126,255,0.22)] transition-transform duration-300 group-hover:scale-105">
                 {card.marker}
               </span>
-              <h3 className="mt-5 font-display text-xl font-bold leading-tight text-[#07182f]">{card.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-slate-500">{card.description}</p>
+              <h3 className="mt-7 font-display text-[22px] font-semibold leading-[1.3] text-[#081f3d]">{card.title}</h3>
+              <p className="mt-[18px] text-base leading-[1.75] text-[#63728a] sm:text-[17px]">{card.description}</p>
             </Reveal>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function TrustSection() {
-  return (
-    <section className={cn(landingSectionClass, 'bg-[linear-gradient(180deg,#f4faff_0%,#ffffff_100%)] py-12')} aria-labelledby="trust-title">
-      <div className={landingShellClass}>
-        <Reveal className="grid gap-6 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_14px_38px_-18px_rgba(15,23,42,0.18)] lg:grid-cols-[0.65fr_1fr] lg:items-center lg:p-8">
-          <div>
-            <span className={landingKickerClass}>Confiance</span>
-            <h2 id="trust-title" className="mt-2 font-display text-2xl font-bold leading-tight text-[#07182f] sm:text-3xl">
-              Un cadre clair pour partir avec plus de sérénité.
-            </h2>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-2">
-            {trustIndicators.map((item, index) => (
-              <span
-                key={item}
-                className="rounded-2xl border border-slate-200 bg-[#f4faff] px-4 py-3 text-sm font-extrabold text-[#07182f] transition-all duration-200 hover:-translate-y-0.5 hover:border-[#b9d3ff] hover:bg-[#eef4ff]"
-                style={{ '--indicator-delay': `${index * 70}ms` } as CSSProperties}
-              >
-                {item}
-              </span>
-            ))}
-          </div>
-        </Reveal>
       </div>
     </section>
   );
@@ -900,34 +971,6 @@ function TestimonialsSection() {
   );
 }
 
-function PartnersSection() {
-  return (
-    <section className={cn(landingSectionClass, 'py-10 sm:py-12')} aria-labelledby="partenaires-title">
-      <div className={landingShellClass}>
-        <div className="grid gap-6 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-[0_14px_38px_-18px_rgba(15,23,42,0.18)] lg:grid-cols-[0.6fr_1fr] lg:items-center lg:p-8">
-          <div>
-            <span className={landingKickerClass}>Ils nous font confiance</span>
-            <h2 id="partenaires-title" className="mt-2 font-display text-2xl font-bold text-[#07182f] sm:text-3xl">
-              Un réseau construit autour de l’étudiant.
-            </h2>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-2" aria-label="Indicateurs de confiance">
-            {partnerItems.map((item) => (
-              <span
-                key={item}
-                className="flex min-h-20 items-center justify-center rounded-2xl border border-dashed border-[#cfdcec] bg-[#f4faff] px-4 text-center text-sm font-bold text-slate-700"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function FinalCTA() {
   return (
     <section
@@ -1032,16 +1075,13 @@ export function LandingPage() {
     <div className="host-grotesk-regular isolate min-h-dvh overflow-hidden text-[#07182f] [color-scheme:light] [background:linear-gradient(180deg,#f8fbff_0%,#ffffff_22%,#f4faff_48%,#ffffff_70%,#eef7ff_90%,#f8fbff_100%)]">
       <main>
         <HeroSection />
-        <StatsSection />
         <WhyBoardingSection />
         <ProcessSection />
-        <TrustSection />
         <ProblemSolutionSection />
         <ConceptSection />
         <DestinationsSection />
         <PricingSection />
         <TestimonialsSection />
-        <PartnersSection />
         <FinalCTA />
       </main>
       <LandingFooter />
