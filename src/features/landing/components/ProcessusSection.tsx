@@ -23,16 +23,16 @@ const processSteps: ProcessStep[] = [
     id: 1,
     title: "Création du profil",
     description:
-      "Commence par créer ton profil en renseignant ton parcours, tes expériences, tes centres d&apos;intérêt ainsi que ta personnalité. Ces informations nous permettent de mieux comprendre qui tu es et de te proposer des opportunités réellement adaptées. Tu peux également ajouter ton CV afin d&apos;enrichir ton profil.",
+      "Commence par créer ton profil en renseignant ton parcours, tes expériences, tes centres d'intérêt ainsi que ta personnalité. Ces informations nous permettent de mieux comprendre qui tu es et de te proposer des opportunités réellement adaptées. Tu peux également ajouter ton CV afin d'enrichir ton profil.",
     image: step1Image,
-    imageAlt: "Étudiants préparant leur projet de stage à l&apos;étranger",
+    imageAlt: "Étudiants préparant leur projet de stage à l'étranger",
     iconKey: "profile",
   },
   {
     id: 2,
     title: "Choisis ton pack",
     description:
-      "Sélectionne le pack d&apos;accompagnement qui correspond à tes besoins : Economic, Business ou First Class.",
+      "Sélectionne le pack d'accompagnement qui correspond à tes besoins : Economic, Business ou First Class.",
     image: step2Image,
     imageAlt: "Étudiants en train de choisir leur accompagnement",
     iconKey: "pack",
@@ -43,14 +43,14 @@ const processSteps: ProcessStep[] = [
     description:
       "Une fois ton profil complété, notre système te propose rapidement une sélection de trois entreprises en adéquation avec ton profil. Tu peux consulter chaque opportunité, évaluer les compatibilités et choisir celle qui correspond le mieux à tes attentes.",
     image: step3Image,
-    imageAlt: "Groupe d&apos;étudiants collaborant autour d&apos;un ordinateur",
+    imageAlt: "Groupe d'étudiants collaborant autour d'un ordinateur",
     iconKey: "matching",
   },
   {
     id: 4,
     title: "Prise de contact",
     description:
-      "Après avoir identifié l&apos;entreprise qui te convient, tu peux directement prendre rendez-vous pour échanger avec elle. L&apos;objectif est de faciliter la mise en relation et de te permettre d&apos;avancer rapidement dans ton processus.",
+      "Après avoir identifié l'entreprise qui te convient, tu peux directement prendre rendez-vous pour échanger avec elle. L'objectif est de faciliter la mise en relation et de te permettre d'avancer rapidement dans ton processus.",
     image: step4Image,
     imageAlt: "Étudiants échangeant avant une mise en relation",
     iconKey: "contact",
@@ -59,7 +59,7 @@ const processSteps: ProcessStep[] = [
     id: 5,
     title: "Organisation du départ",
     description:
-      "En fonction du pack choisi, nous prenons en charge toute la logistique liée à ton arrivée : logement, transfert depuis l&apos;aéroport, accompagnement et conseils pratiques. Tout est pensé pour simplifier ton départ.",
+      "En fonction du pack choisi, nous prenons en charge toute la logistique liée à ton arrivée : logement, transfert depuis l'aéroport, accompagnement et conseils pratiques. Tout est pensé pour simplifier ton départ.",
     image: step5Image,
     imageAlt: "Étudiants préparant leur départ avec des valises",
     iconKey: "departure",
@@ -68,9 +68,9 @@ const processSteps: ProcessStep[] = [
     id: 6,
     title: "Intégration sur place",
     description:
-      "Tu arrives dans les meilleures conditions, avec un cadre déjà organisé. Tu peux ainsi te concentrer pleinement sur ton stage et ton expérience à l&apos;étranger. Tu rejoins aussi la communauté Boardi pour ne pas vivre cette expérience seul.",
+      "Tu arrives dans les meilleures conditions, avec un cadre déjà organisé. Tu peux ainsi te concentrer pleinement sur ton stage et ton expérience à l'étranger. Tu rejoins aussi la communauté Boardi pour ne pas vivre cette expérience seul.",
     image: step6Image,
-    imageAlt: "Communauté d&apos;étudiants intégrés sur place",
+    imageAlt: "Communauté d'étudiants intégrés sur place",
     iconKey: "community",
   },
 ];
@@ -142,7 +142,8 @@ function ProcessIcon({ iconKey }: { iconKey: ProcessIconKey | 'plane' | 'search'
   if (iconKey === 'plane') {
     return (
       <svg viewBox="0 0 24 24" className={cls} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        <path d="M17.8 19.2 16 11l3.5-2 1.7 5.4M6.4 18.4l-.8-4.8m2.3-5L7 10 5.1 5.1M6 5l6-1 4 2.18" />
+        <path d="M17 10c-.3-1-1.6-2-2.5-2s-2.2 1-2.5 2" />
       </svg>
     );
   }
@@ -279,7 +280,7 @@ function ProcessStepPair({
   return (
     <Reveal
       as="div"
-      className="grid items-start gap-8 md:grid-cols-[1fr_120px_1fr] lg:gap-12 xl:gap-16"
+      className="grid gap-8 md:grid-cols-[1fr_120px_1fr] md:items-start lg:gap-12 xl:gap-16"
       delay={rowIndex * 120}
     >
       {/* Left step - image and panel */}
@@ -288,13 +289,15 @@ function ProcessStepPair({
         <ProcessStepPanel step={left} />
       </div>
 
-      {/* Center connector */}
-      <ConnectorColumn iconKey={connectorIcon} />
+      {/* Center connector - hidden on mobile */}
+      <div className="hidden md:flex">
+        <ConnectorColumn iconKey={connectorIcon} />
+      </div>
 
-      {/* Right step - panel and image */}
+      {/* Right step - panel and image, stacked on mobile */}
       <div className="flex flex-col gap-6">
-        <ProcessStepPanel step={right} />
         <ProcessStepImage image={right.image} alt={right.imageAlt} />
+        <ProcessStepPanel step={right} />
       </div>
     </Reveal>
   );
@@ -302,12 +305,10 @@ function ProcessStepPair({
 
 function ProcessFooterPill() {
   return (
-    <Reveal className="mx-auto mt-20 flex max-w-[620px] items-center justify-center gap-3 rounded-full bg-[rgba(29,79,208,0.08)] px-8 py-4 text-center">
-      <span className="text-sm font-bold text-[#1d4fd0]">✨</span>
+    <Reveal className="mx-auto mt-20 flex max-w-[620px] items-center justify-center rounded-full bg-[rgba(29,79,208,0.08)] px-8 py-4 text-center">
       <p className="text-base font-semibold text-[#1d4fd0]">
         Un accompagnement humain, du premier clic jusqu&apos;à ton intégration.
       </p>
-      <span className="text-sm font-bold text-[#1d4fd0]">💙</span>
     </Reveal>
   );
 }
