@@ -5,6 +5,7 @@ import heroGlobeImage from '@/assets/hero-globe-cutout.webp';
 import heroStudentImage from '@/assets/hero-student-cutout.webp';
 import heroSpaceBackground from '@/assets/heroSpaceBackground.webp';
 import LightRays from '@/features/landing/components/LightRays';
+import { ProcessusSection } from '@/features/landing/components/ProcessusSection';
 import { Reveal } from '@/features/landing/components/Reveal';
 import { SwipeCardStack } from '@/features/landing/components/SwipeCardStack';
 import { cn } from '@/lib/cn';
@@ -70,24 +71,7 @@ const destinations = [
   },
 ] as const;
 
-const processSteps = [
-  {
-    title: 'Choisis ta destination',
-    description: 'On t’aide à identifier la ville et le cadre qui correspondent à ton profil, ton budget et ton objectif.',
-  },
-  {
-    title: 'Crée ton profil',
-    description: 'Tu partages ton parcours, tes attentes et ton énergie pour que le matching soit vraiment pertinent.',
-  },
-  {
-    title: 'Reçois ton matching',
-    description: 'Boarding sélectionne les entreprises adaptées à ton secteur, tes missions et ta personnalité.',
-  },
-  {
-    title: 'Prépare ton départ',
-    description: 'Entretien, logement, documents, arrivée et intégration : chaque étape est préparée avec notre équipe.',
-  },
-] as const;
+
 
 const pricingPlans = [
   {
@@ -669,65 +653,9 @@ function DestinationsSection() {
   );
 }
 
-interface ProcessStepProps {
-  index: number;
-  title: string;
-  description: string;
-}
 
-function ProcessStep({ index, title, description }: ProcessStepProps) {
-  return (
-    <Reveal
-      as="article"
-      className={cn(
-        landingSurfaceCardClass,
-        'relative p-5 transition-all duration-200 hover:-translate-y-1 hover:border-[#cfdcec] hover:shadow-[0_14px_30px_-12px_rgba(29,79,208,0.15)]'
-      )}
-      delay={index * 90}
-    >
-      <span className="relative z-10 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-600 to-brand-500 text-sm font-extrabold text-white shadow-sm">
-        {String(index + 1).padStart(2, '0')}
-      </span>
-      <div>
-        <h3 className="mt-5 font-display text-xl font-bold leading-tight text-[#07182f]">{title}</h3>
-        <p className="mt-3 text-sm leading-7 text-slate-500">{description}</p>
-      </div>
-    </Reveal>
-  );
-}
 
-function ProcessSection() {
-  return (
-    <section
-      className={cn(landingSectionClass, 'bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)]')}
-      id="processus"
-      aria-labelledby="processus-title"
-    >
-      <div className={landingShellClass}>
-        <Reveal className={landingSectionHeadingClass}>
-          <span className={landingKickerClass}>Comment ça marche ?</span>
-          <h2 id="processus-title" className={landingSectionTitleClass}>
-            Quatre étapes pour transformer ton projet en départ concret.
-          </h2>
-          <p className={landingSectionParagraphClass}>
-            Le parcours réduit la confusion : tu sais quoi faire, quand le faire, et comment Boarding t’accompagne.
-          </p>
-        </Reveal>
 
-        <div className="relative mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          <div
-            className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-6 hidden h-px xl:block"
-            style={{ background: 'linear-gradient(90deg, transparent 0%, #b9d3ff 50%, transparent 100%)' }}
-            aria-hidden="true"
-          />
-          {processSteps.map((step, index) => (
-            <ProcessStep key={step.title} index={index} {...step} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 interface PricingCardProps {
   name: string;
@@ -1125,7 +1053,7 @@ export function LandingPage() {
       <main>
         <HeroSection />
         <WhyBoardingSection />
-        <ProcessSection />
+        <ProcessusSection />
         <ProblemSolutionSection />
         <ConceptSection />
         <DestinationsSection />
