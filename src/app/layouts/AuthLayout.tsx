@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import boardingLogo from '@/assets/boarding-logo.png';
+import boardingLogo from '@/assets/boarding-logo.webp';
 import { RouteTransition } from '@/app/layout/RouteTransition';
 import { APP_NAME } from '@/lib/constants';
 

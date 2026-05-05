@@ -1,9 +1,10 @@
 import type { CSSProperties } from 'react';
 
-import boardingLogo from '@/assets/boarding-logo.png';
-import heroGlobeImage from '@/assets/hero-globe-cutout.png';
-import heroStudentImage from '@/assets/hero-student-cutout.png';
-import heroSpaceBackground from '@/assets/heroSpaceBackground.png';
+import boardingLogo from '@/assets/boarding-logo.webp';
+import heroGlobeImage from '@/assets/hero-globe-cutout.webp';
+import heroStudentImage from '@/assets/hero-student-cutout.webp';
+import heroSpaceBackground from '@/assets/heroSpaceBackground.webp';
+import LightRays from '@/features/landing/components/LightRays';
 import { Reveal } from '@/features/landing/components/Reveal';
 import { SwipeCardStack } from '@/features/landing/components/SwipeCardStack';
 import { cn } from '@/lib/cn';
@@ -57,7 +58,7 @@ const destinations = [
     city: 'Maroc',
     tags: ['Marrakech', 'Casablanca', 'Entreprises partenaires', 'Logements vérifiés'],
     description:
-      'Marrakech, Casablanca, Rabat... Le Maroc est au cœur de notre projet. Un véritable terrain d’opportunités, d’apprentissage et de développement personnel. Partenariats déjà en place avec des entreprises et restaurants de M Avenue.',
+      'Marrakech, Casablanca… Le Maroc est au cœur de notre projet. Un véritable terrain d’opportunités, d’apprentissage et de développement personnel. Partenariats déjà en place avec des entreprises et restaurants de M Avenue.',
     image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Marrakech%20skyline%20view.jpg',
   },
   {
@@ -209,7 +210,6 @@ const heroStats = [
 
 const heroMoroccoCities = [
   { label: 'Casablanca', className: 'city-casablanca', delay: '640ms' },
-  { label: 'Rabat', className: 'city-rabat', delay: '720ms' },
   { label: 'Marrakech', className: 'city-marrakech', delay: '800ms' },
 ] as const;
 
@@ -275,7 +275,7 @@ function HeroSection() {
       />
       <div className="pointer-events-none absolute inset-0 -z-10 opacity-40 [background-image:radial-gradient(circle_at_18%_22%,rgba(255,255,255,0.7)_1px,transparent_1px),radial-gradient(circle_at_66%_68%,rgba(255,255,255,0.45)_1px,transparent_1px),radial-gradient(circle_at_88%_28%,rgba(255,255,255,0.5)_1px,transparent_1px)] [background-size:240px_240px,300px_300px,220px_220px]" aria-hidden="true" />
       <div className="pointer-events-none absolute left-[6%] top-[22%] -z-10 h-72 w-72 rounded-full bg-[#1f5cff]/30 blur-3xl" aria-hidden="true" />
-      <div className="pointer-events-none absolute right-[8%] top-[40%] -z-10 h-[32rem] w-[32rem] rounded-full bg-[#1487ff]/20 blur-[150px]" aria-hidden="true" />
+      <div className="pointer-events-none absolute right-[8%] top-[40%] -z-10 h-[32rem] w-[32rem] rounded-full bg-[#1487ff]/20 blur-[110px]" aria-hidden="true" />
 
       <div className="hero-inner relative z-20 mx-auto w-full max-w-[1536px] px-5 sm:px-8 lg:px-[56px] max-[1280px]:px-8">
         <header className="header flex h-24 items-center justify-between gap-4">
@@ -325,25 +325,23 @@ function HeroSection() {
                 <circle cx="12" cy="12" r="9" />
                 <path d="M3 12h18M12 3c2.4 2.6 3.6 5.6 3.6 9S14.4 18.4 12 21M12 3C9.6 5.6 8.4 8.6 8.4 12s1.2 6.4 3.6 9" />
               </svg>
-              Stages au Maroc pour étudiants francophones
+              La startup créée par des jeunes pour des jeunes
             </p>
 
             <h1 className={cn('hero-title mt-8 font-display text-5xl font-bold leading-[1.08] text-white sm:text-6xl lg:text-[clamp(56px,5vw,72px)]', heroMotionClass)} style={{ animationDelay: '160ms' }}>
-              <span className="block">Votre stage</span>
-              <span className="block bg-gradient-to-r from-[#3c8dff] via-[#35b9ff] to-[#20d3ff] bg-clip-text text-transparent">au Maroc</span>
-              <span className="block">commence ici.</span>
+              Trouve ton stage à l’étranger, sans prise de tête
             </h1>
 
             <p className={cn('hero-description mt-6 max-w-[560px] text-base leading-[1.6] text-slate-200 sm:text-lg', heroMotionClass)} style={{ animationDelay: '240ms' }}>
-              Boarding aide les étudiants francophones à trouver un stage au Maroc grâce à une plateforme guidée, des opportunités qualifiées et un accompagnement personnalisé à chaque étape.
+              En choisissant Boarding, tu contribues directement à donner à un étudiant marocain défavorisé l’opportunité de poursuivre ses études.
             </p>
 
-            <div className={cn('hero-actions mt-10 flex flex-col gap-4 sm:flex-row sm:gap-4', heroMotionClass)} style={{ animationDelay: '320ms' }}>
+            <div className={cn('hero-actions mt-10 flex flex-col gap-4 lg:flex-row lg:gap-4', heroMotionClass)} style={{ animationDelay: '320ms' }}>
               <a
-                href={appointmentHref}
+                href="/register"
                 className="btn btn-primary group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b]"
               >
-                <span className="btn-label">Déposer ma candidature</span>
+                <span className="btn-label">Postuler maintenant</span>
                 <span className="btn-icon transition-transform group-hover:translate-x-0.5" aria-hidden="true">
                   <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M5 12h14M13 5l7 7-7 7" />
@@ -351,10 +349,13 @@ function HeroSection() {
                 </span>
               </a>
               <a
-                href="#processus"
+                href={appointmentHref}
                 className="btn btn-secondary group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b]"
               >
-                <span className="btn-label">Découvrir comment ça marche</span>
+                <span className="btn-label">
+                  <span className="block">Prendre rendez-vous</span>
+                  <span className="btn-subtext">30 minutes pour en savoir plus</span>
+                </span>
                 <span className="btn-icon transition-colors group-hover:bg-white/15" aria-hidden="true">
                   <svg viewBox="0 0 24 24" className="ml-0.5 h-3.5 w-3.5 fill-current">
                     <path d="M8 5v14l11-7z" />
@@ -365,13 +366,13 @@ function HeroSection() {
           </div>
 
           <div className={cn('hero-visual relative h-[520px] w-full overflow-visible sm:h-[580px] lg:h-[700px] lg:translate-x-3 max-[1280px]:h-[620px] max-[1280px]:translate-x-0', heroMotionClass)} style={{ animationDelay: '420ms' }}>
-            <div className="pointer-events-none absolute right-[88px] top-[104px] z-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(49,144,255,0.58),rgba(29,95,215,0.24)_56%,transparent_78%)] blur-[78px] max-[1280px]:right-[60px] max-[1280px]:top-[92px] max-[1280px]:h-[340px] max-[1280px]:w-[340px]" aria-hidden="true" />
+            <div className="pointer-events-none absolute right-[88px] top-[104px] z-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(49,144,255,0.58),rgba(29,95,215,0.24)_56%,transparent_78%)] blur-[56px] max-[1280px]:right-[60px] max-[1280px]:top-[92px] max-[1280px]:h-[340px] max-[1280px]:w-[340px]" aria-hidden="true" />
 
             <img
               src={heroGlobeImage}
               alt=""
               aria-hidden="true"
-              className="globe pointer-events-none absolute right-[102px] top-[80px] z-10 h-auto w-[clamp(590px,43vw,720px)] select-none bg-transparent object-contain [mix-blend-mode:normal] [filter:drop-shadow(0_0_56px_rgba(40,140,255,0.58))] max-[1280px]:right-[68px] max-[1280px]:top-[84px] max-[1280px]:w-[clamp(500px,39vw,620px)]"
+              className="globe pointer-events-none absolute right-[102px] top-[80px] z-10 h-auto w-[clamp(590px,43vw,720px)] select-none bg-transparent object-contain [mix-blend-mode:normal] [filter:drop-shadow(0_0_34px_rgba(40,140,255,0.5))] max-[1280px]:right-[68px] max-[1280px]:top-[84px] max-[1280px]:w-[clamp(500px,39vw,620px)]"
               loading="eager"
               decoding="async"
             />
@@ -387,7 +388,7 @@ function HeroSection() {
             <img
               src={heroStudentImage}
               alt="Etudiant Boarding avec ordinateur portable"
-              className="student pointer-events-none absolute right-[86px] top-[40px] z-30 h-[clamp(630px,49vw,760px)] w-auto select-none bg-transparent object-contain [mix-blend-mode:normal] [filter:drop-shadow(0_26px_56px_rgba(0,8,24,0.95))_drop-shadow(0_0_36px_rgba(56,151,255,0.22))] max-[1280px]:right-[72px] max-[1280px]:top-[48px] max-[1280px]:h-[clamp(520px,43vw,660px)]"
+              className="student pointer-events-none absolute right-[86px] top-[40px] z-30 h-[clamp(630px,49vw,760px)] w-auto select-none bg-transparent object-contain [mix-blend-mode:normal] [filter:drop-shadow(0_20px_42px_rgba(0,8,24,0.85))] max-[1280px]:right-[72px] max-[1280px]:top-[48px] max-[1280px]:h-[clamp(520px,43vw,660px)]"
               width={1024}
               height={1536}
               loading="eager"
@@ -428,7 +429,7 @@ function HeroSection() {
           </div>
         </div>
 
-        <div className="trust-stats relative z-30 mt-[20px] h-auto rounded-[24px] border border-white/[0.1] bg-[rgba(6,18,38,0.65)] p-6 shadow-[0_44px_78px_-46px_rgba(0,0,0,0.94)] backdrop-blur-[18px] lg:h-[164px] lg:px-10 lg:py-8">
+        <div className="trust-stats relative z-30 mt-[20px] h-auto rounded-[24px] border border-white/[0.1] bg-[rgba(6,18,38,0.65)] p-6 shadow-[0_32px_56px_-38px_rgba(0,0,0,0.9)] backdrop-blur-[12px] lg:h-[164px] lg:px-10 lg:py-8">
           <dl className="grid h-full grid-cols-2 gap-y-7 lg:grid-cols-4 lg:items-center lg:gap-y-0" aria-label="Indicateurs clés">
             {heroStats.map((stat, i) => (
               <div
@@ -606,6 +607,9 @@ function DestinationCard({ city, tags, description, image }: DestinationCardProp
           alt={city}
           className="h-full w-full transform-gpu object-cover transition-transform duration-500 ease-out group-hover:scale-105"
           loading="lazy"
+          decoding="async"
+          width={1254}
+          height={1254}
         />
       </div>
       <div
@@ -737,7 +741,7 @@ interface PricingCardProps {
 
 const pricingPreviewLimit = 7;
 
-function PricingCard({ name, price, suffix, description, cta, features, featured }: PricingCardProps) {
+function PricingCard({ name, price, suffix, description, cta: _cta, features, featured }: PricingCardProps) {
   const previewFeatures = features.slice(0, pricingPreviewLimit);
   const remainingCount = Math.max(0, features.length - previewFeatures.length);
 
@@ -747,14 +751,35 @@ function PricingCard({ name, price, suffix, description, cta, features, featured
       className={cn(
         'relative flex flex-col overflow-hidden rounded-[1.65rem] border bg-white p-0 shadow-[0_1px_3px_rgba(15,23,42,0.04),0_10px_32px_-12px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_4px_6px_rgba(15,23,42,0.04),0_24px_56px_-14px_rgba(15,23,42,0.14)]',
         featured
-          ? 'border-brand-600/25 shadow-[0_1px_3px_rgba(29,79,208,0.06),0_18px_52px_-14px_rgba(29,79,208,0.18)] lg:-translate-y-2 lg:hover:-translate-y-3 lg:hover:border-brand-600/35 lg:hover:shadow-[0_4px_6px_rgba(29,79,208,0.06),0_28px_60px_-16px_rgba(29,79,208,0.22)]'
+          ? 'border-brand-600/35 bg-[#06132a] shadow-[0_1px_3px_rgba(29,79,208,0.12),0_18px_52px_-14px_rgba(29,79,208,0.35)] lg:-translate-y-2 lg:hover:-translate-y-3 lg:hover:border-brand-500/60 lg:hover:shadow-[0_4px_6px_rgba(29,79,208,0.14),0_28px_60px_-16px_rgba(29,79,208,0.38)]'
           : 'border-slate-200 hover:border-[#cfdcec]'
       )}
       delay={featured ? 100 : 0}
     >
+      {featured ? (
+        <>
+          <div className="pointer-events-none absolute inset-0 z-0">
+            <LightRays
+              raysOrigin="top-center"
+              raysColor="#4ea2ff"
+              raysSpeed={0.95}
+              lightSpread={0.82}
+              rayLength={1.05}
+              fadeDistance={0.95}
+              saturation={0.95}
+              followMouse={false}
+              mouseInfluence={0}
+              noiseAmount={0.02}
+              distortion={0.01}
+            />
+          </div>
+          <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_0%,rgba(58,126,255,0.2),transparent_58%),linear-gradient(180deg,rgba(2,10,28,0.78)_0%,rgba(3,14,35,0.86)_38%,rgba(5,22,54,0.9)_100%)]" />
+        </>
+      ) : null}
+
       <div
         className={cn(
-          'h-1 w-full shrink-0',
+          'relative z-10 h-1 w-full shrink-0',
           featured
             ? 'bg-[linear-gradient(90deg,#1d4fd0_0%,#0891b2_50%,#1d4fd0_100%)]'
             : 'bg-[linear-gradient(90deg,#e2e8f0_0%,#cbd5e1_100%)]'
@@ -763,49 +788,48 @@ function PricingCard({ name, price, suffix, description, cta, features, featured
       />
 
       {featured ? (
-        <span className="mx-7 mt-6 inline-flex w-fit items-center rounded-full bg-gradient-to-br from-brand-600 to-brand-500 px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_2px_8px_-2px_rgba(29,79,208,0.4)]">
+        <span className="relative z-10 mx-7 mt-6 inline-flex w-fit items-center rounded-full bg-gradient-to-br from-brand-500 to-brand-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_4px_12px_-4px_rgba(78,162,255,0.55)]">
           Offre recommandée
         </span>
       ) : null}
 
-      <div className={cn('px-7 pb-0 pt-7', featured ? 'pt-5' : '')}>
-        <h3 className="text-[1.15rem] font-display font-bold leading-tight text-slate-700">{name}</h3>
-        <p className="mt-4 text-[2.35rem] font-extrabold leading-[1.05] text-[#07182f]">
+      <div className={cn('relative z-10 px-7 pb-0 pt-7', featured ? 'pt-5' : '')}>
+        <h3 className={cn('text-[1.15rem] font-display font-bold leading-tight', featured ? 'text-slate-100' : 'text-slate-700')}>{name}</h3>
+        <p className={cn('mt-4 text-[2.35rem] font-extrabold leading-[1.05]', featured ? 'text-white' : 'text-[#07182f]')}>
           {price}
-          {suffix ? <span className="ml-1 text-base font-semibold text-slate-500">{suffix}</span> : null}
+          {suffix ? <span className={cn('ml-1 text-base font-semibold', featured ? 'text-slate-300' : 'text-slate-500')}>{suffix}</span> : null}
         </p>
-        <p className="mt-4 text-[0.96rem] leading-7 text-slate-500">{description}</p>
+        <p className={cn('mt-4 text-[0.96rem] leading-7', featured ? 'text-slate-200' : 'text-slate-500')}>{description}</p>
       </div>
 
-      <a
-        href={`${appointmentHref}&body=Bonjour%20Boarding%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20le%20pack%20${name}.`}
-        className={cn(
-          'mx-7 mt-8 flex min-h-12 items-center justify-center rounded-xl border px-5 py-3.5 text-sm font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2',
-          featured
-            ? 'border-transparent bg-gradient-to-br from-brand-600 to-brand-500 text-white shadow-[0_4px_18px_-4px_rgba(29,79,208,0.4)] hover:shadow-[0_8px_24px_-4px_rgba(29,79,208,0.5)]'
-            : 'border-slate-200 bg-slate-100 text-[#07182f] hover:-translate-y-0.5 hover:bg-slate-200'
-        )}
-      >
-        {cta}
-      </a>
-
       <div
-        className="mx-7 mt-8 h-px shrink-0 bg-[linear-gradient(90deg,transparent_0%,rgba(15,23,42,0.08)_50%,transparent_100%)]"
+        className={cn(
+          'relative z-10 mx-7 mt-8 h-px shrink-0',
+          featured
+            ? 'bg-[linear-gradient(90deg,transparent_0%,rgba(191,219,254,0.38)_50%,transparent_100%)]'
+            : 'bg-[linear-gradient(90deg,transparent_0%,rgba(15,23,42,0.08)_50%,transparent_100%)]'
+        )}
         aria-hidden="true"
       />
 
-      <ul className="m-0 grid list-none gap-4 px-7 pb-8 pt-7">
+      <ul className="relative z-10 m-0 grid list-none gap-4 px-7 pb-8 pt-7">
         {previewFeatures.map((feature) => (
           <li
             key={feature.label}
             className={cn(
               'flex items-start gap-3 text-[0.96rem] font-medium leading-7',
-              feature.included ? 'text-slate-700' : 'text-slate-400'
+              feature.included
+                ? featured
+                  ? 'text-slate-100'
+                  : 'text-slate-700'
+                : featured
+                  ? 'text-slate-400'
+                  : 'text-slate-400'
             )}
           >
             {feature.included ? (
               <svg
-                className={cn('mt-1 shrink-0', featured ? 'text-emerald-600' : 'text-emerald-500')}
+                className={cn('mt-1 shrink-0', featured ? 'text-emerald-300' : 'text-emerald-500')}
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -820,7 +844,7 @@ function PricingCard({ name, price, suffix, description, cta, features, featured
               </svg>
             ) : (
               <svg
-                className="mt-1 shrink-0 text-slate-300"
+                className={cn('mt-1 shrink-0', featured ? 'text-slate-500' : 'text-slate-300')}
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -841,10 +865,29 @@ function PricingCard({ name, price, suffix, description, cta, features, featured
       </ul>
 
       {remainingCount > 0 ? (
-        <p className="mx-7 mb-7 mt-1 rounded-xl border border-dashed border-[#cfdcec] bg-[#f4faff] px-4 py-2 text-center text-xs font-semibold text-slate-500">
+        <p
+          className={cn(
+            'relative z-10 mx-7 mb-7 mt-1 rounded-xl border border-dashed px-4 py-2 text-center text-xs font-semibold',
+            featured
+              ? 'border-blue-300/35 bg-blue-500/10 text-slate-200'
+              : 'border-[#cfdcec] bg-[#f4faff] text-slate-500'
+          )}
+        >
           + {remainingCount} autres éléments dans le comparatif
         </p>
       ) : null}
+
+      <a
+        href={`${appointmentHref}&body=Bonjour%20Boarding%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20le%20pack%20${name}.`}
+        className={cn(
+          'relative z-10 mx-7 mb-7 mt-auto flex min-h-12 items-center justify-center rounded-xl border px-5 py-3.5 text-sm font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2',
+          featured
+            ? 'border-transparent bg-gradient-to-br from-[#5aa8ff] to-[#2a68ff] text-white shadow-[0_8px_22px_-8px_rgba(59,130,246,0.65)] hover:shadow-[0_12px_28px_-8px_rgba(59,130,246,0.75)]'
+            : 'border-slate-200 bg-slate-100 text-[#07182f] hover:-translate-y-0.5 hover:bg-slate-200'
+        )}
+      >
+        Embarquer maintenant
+      </a>
     </Reveal>
   );
 }
@@ -874,7 +917,7 @@ function PricingSection() {
           </p>
         </Reveal>
 
-        <div className="mx-auto mt-14 w-full max-w-md px-2 pb-10 sm:max-w-lg lg:mt-16 lg:max-w-xl">
+        <div className="mx-auto mt-14 w-full max-w-md px-2 pb-10 sm:max-w-lg lg:hidden">
           <SwipeCardStack
             items={pricingPlans}
             getKey={(plan) => plan.name}
@@ -883,6 +926,12 @@ function PricingSection() {
             previousLabel="Offre précédente"
             nextLabel="Offre suivante"
           />
+        </div>
+
+        <div className="mt-16 hidden grid-cols-3 gap-6 lg:grid">
+          {pricingPlans.map((plan) => (
+            <PricingCard key={plan.name} {...plan} />
+          ))}
         </div>
 
         <Reveal className="mx-auto mt-10 max-w-[1240px] rounded-[1.6rem] border border-slate-200 bg-white p-4 shadow-[0_14px_38px_-18px_rgba(15,23,42,0.12)] sm:p-6 lg:p-8" delay={180}>

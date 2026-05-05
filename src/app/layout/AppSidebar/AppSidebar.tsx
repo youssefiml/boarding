@@ -5,7 +5,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { appointmentsApi } from '@/api/modules/appointments.api';
 import { matchingApi } from '@/api/modules/matching.api';
 import { messagingApi } from '@/api/modules/messaging.api';
-import boardingLogo from '@/assets/boarding-logo.png';
+import boardingLogo from '@/assets/boarding-logo.webp';
 import { ROUTES } from '@/app/routes';
 import { getNavigationIconPath, navigationItems } from '@/app/layout/navigation';
 import { cn } from '@/lib/cn';
