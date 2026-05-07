@@ -4,7 +4,7 @@ Student-facing SPA for Boarding Agency, focused on a clear journey from account 
 
 ## Stack
 
-- React + Vite + TypeScript
+- Next.js App Router + React + TypeScript
 - React Router
 - Tailwind CSS
 - Axios
@@ -43,11 +43,11 @@ npm run build
 `.env.example`
 
 ```bash
-VITE_API_BASE_URL=http://localhost:5000/api
-VITE_DEMO_MODE=true
+NEXT_PUBLIC_API_BASE_URL=http://localhost:5000/api
+NEXT_PUBLIC_DEMO_MODE=true
 ```
 
-When `VITE_DEMO_MODE=true`, the app uses in-memory mock data and works without backend connectivity.
+When `NEXT_PUBLIC_DEMO_MODE=true`, the app uses in-memory mock data and works without backend connectivity.
 
 ## Architecture
 
@@ -68,6 +68,10 @@ src/
       journey.api.ts
       resources.api.ts
   app/
+    layout.tsx
+    page.tsx
+    [...spa]/
+    ClientOnlySpa.tsx
     App.tsx
     router.tsx
     routes.ts
@@ -83,7 +87,7 @@ src/
     onboarding/
   hooks/
   lib/
-  pages/
+  views/
     auth/
   stores/
   types/

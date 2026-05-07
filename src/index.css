@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Syne:wght@500;600;700;800&display=swap');
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import "../node_modules/tw-animate-css/dist/tw-animate.css";
+@import "../node_modules/shadcn/dist/tailwind.css";
 
 @tailwind base;
 @tailwind components;
@@ -61,7 +60,7 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Outfit', 'Segoe UI', sans-serif;
+  font-family: var(--font-outfit), 'Outfit', 'Segoe UI', sans-serif;
   line-height: 1.5;
   color: var(--ink-primary);
   background:
@@ -73,6 +72,7 @@ body {
     color 180ms ease-out,
     background-color 180ms ease-out;
   overflow-x: hidden;
+  isolation: isolate;
 }
 
 #root {
@@ -465,14 +465,14 @@ textarea {
 
 @layer base {
   .theme {
-    --font-heading: 'Syne', 'Outfit', sans-serif;
-    --font-sans: 'Outfit', 'Segoe UI', sans-serif;
-    --font-mono: 'Space Mono', ui-monospace, monospace;
+    --font-heading: var(--font-syne), 'Syne', 'Outfit', sans-serif;
+    --font-sans: var(--font-outfit), 'Outfit', 'Segoe UI', sans-serif;
+    --font-mono: var(--font-space-mono), 'Space Mono', ui-monospace, monospace;
   }
   :root {
-    --font-heading: 'Syne', 'Outfit', sans-serif;
-    --font-sans: 'Outfit', 'Segoe UI', sans-serif;
-    --font-mono: 'Space Mono', ui-monospace, monospace;
+    --font-heading: var(--font-syne), 'Syne', 'Outfit', sans-serif;
+    --font-sans: var(--font-outfit), 'Outfit', 'Segoe UI', sans-serif;
+    --font-mono: var(--font-space-mono), 'Space Mono', ui-monospace, monospace;
 
     --background: #1A1F5C;
     --foreground: #F5ECD7;

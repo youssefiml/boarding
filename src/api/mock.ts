@@ -33,7 +33,7 @@ import type {
   StudentUser,
 } from '@/types/domain';
 
-export const isDemoMode = import.meta.env.VITE_DEMO_MODE === 'true';
+export const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === 'true';
 
 type MockAxiosError = Error & {
   isAxiosError: true;
@@ -233,7 +233,7 @@ let appointmentStore: Appointment[] = [
   },
 ];
 
-let threadStore: MessageThread[] = [
+const threadStore: MessageThread[] = [
   {
     id: 'thread-1',
     companyName: 'Nord Stay Hotels',

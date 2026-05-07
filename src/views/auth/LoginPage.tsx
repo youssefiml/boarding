@@ -77,7 +77,7 @@ export function LoginPage() {
     const normalizedValues = normalizeLoginPayload(values);
     clearErrors('root');
 
-    if (import.meta.env.DEV) {
+    if (process.env.NODE_ENV === 'development') {
       setSession(createLocalSession(normalizedValues.email));
       toast.success('Logged in with local dev session.');
       navigate(ROUTES.dashboard, { replace: true });
@@ -149,7 +149,7 @@ export function LoginPage() {
         </AuthPrimaryButton>
       </form>
 
-      {import.meta.env.DEV ? (
+      {process.env.NODE_ENV === 'development' ? (
         <div className="mt-5 rounded-xl border border-brand-200 bg-brand-50 px-3 py-2.5 text-xs text-brand-900">
           <p className="font-semibold uppercase tracking-wide">Development sign-in</p>
           <p>Any valid email and password (8+ characters) signs in locally.</p>

@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: 'class',
-  content: ['./index.html', './src/**/*.{ts,tsx}'],
+  content: ['./src/**/*.{js,jsx,ts,tsx,mdx}'],
   theme: {
     extend: {
       colors: {
@@ -82,9 +82,9 @@ export default {
         },
       },
       fontFamily: {
-        body: ['Outfit', 'Segoe UI', 'sans-serif'],
-        display: ['Syne', 'Outfit', 'sans-serif'],
-        mono: ['Space Mono', 'ui-monospace', 'monospace'],
+        body: ['var(--font-outfit)', 'Outfit', 'Segoe UI', 'sans-serif'],
+        display: ['var(--font-syne)', 'Syne', 'Outfit', 'sans-serif'],
+        mono: ['var(--font-space-mono)', 'Space Mono', 'ui-monospace', 'monospace'],
       },
       boxShadow: {
         panel: '0 24px 60px -36px rgba(15, 23, 42, 0.38)',

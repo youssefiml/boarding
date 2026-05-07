@@ -15,6 +15,7 @@ import processPic1 from '@/assets/processus-pic1.webp';
 import processPic2 from '@/assets/processus-pic2.webp';
 import processPic3 from '@/assets/processus-pic3.webp';
 import processPic4 from '@/assets/processus-pic4.webp';
+import { assetUrl } from '@/lib/asset-url';
 
 /* ─── Data ──────────────────────────────────────────────────────────────────── */
 
@@ -23,37 +24,37 @@ const STEPS = [
     id: 1,
     title: 'Création du profil',
     desc: "Complète ton profil en quelques minutes : expériences, centres d'intérêt, personnalité et CV. Plus ton profil est complet, plus les opportunités te correspondent.",
-    img: processPic3,
+    img: assetUrl(processPic3),
   },
   {
     id: 2,
     title: 'Choisis ton pack',
     desc: "Sélectionne le pack qui te correspond : Economic, Business ou First Class. Compare les options et choisis l'accompagnement qui te convient le mieux.",
-    img: processPic1,
+    img: assetUrl(processPic1),
   },
   {
     id: 3,
     title: 'Matching avec les entreprises',
     desc: "Nous analysons ton profil et te proposons 3 entreprises qui matchent avec tes envies, tes compétences et tes objectifs.",
-    img: processPic2,
+    img: assetUrl(processPic2),
   },
   {
     id: 4,
     title: 'Prise de contact',
     desc: "Tu choisis l'entreprise qui t'intéresse le plus. On organise alors un échange pour apprendre à te connaître et valider l'opportunité ensemble.",
-    img: processPic4,
+    img: assetUrl(processPic4),
   },
   {
     id: 5,
     title: 'Organisation du départ',
     desc: "On s'occupe de tout : logement, transfert aéroport, accompagnement et conseils pratiques pour partir l'esprit tranquille.",
-    img: processPic1,
+    img: assetUrl(processPic1),
   },
   {
     id: 6,
     title: 'Intégration sur place',
     desc: "Arrive dans les meilleures conditions, découvre ta nouvelle vie et rejoins la communauté Boardi pour ne jamais être seul(e).",
-    img: processPic2,
+    img: assetUrl(processPic2),
   },
 ];
 
@@ -138,8 +139,8 @@ export default function ProcessSection() {
  
         {/* ── Decorative blobs bg ── */}
         <div className="ps-blob-bg" aria-hidden="true" />
-        <img src={moroccoStamp} alt="" className="ps-morocco-stamp" loading="lazy" decoding="async" aria-hidden="true" />
-        <img src={moroccoMap} alt="" className="ps-morocco-map" loading="lazy" decoding="async" aria-hidden="true" />
+        <img src={assetUrl(moroccoStamp)} alt="" className="ps-morocco-stamp" loading="lazy" decoding="async" aria-hidden="true" />
+        <img src={assetUrl(moroccoMap)} alt="" className="ps-morocco-map" loading="lazy" decoding="async" aria-hidden="true" />
 
         <div className="ps-container">
  
@@ -158,7 +159,7 @@ export default function ProcessSection() {
           {/* ── Steps ── */}
           <div className="ps-steps">
             <img
-              src={processCenterLine}
+              src={assetUrl(processCenterLine)}
               alt=""
               className="ps-path-line"
               loading="lazy"
@@ -206,7 +207,6 @@ export default function ProcessSection() {
  
 const CSS = `
   /* Google Fonts – loaded via @import (add to your index.html if already not there) */
-  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap');
  
   /* ── Section shell ── */
   .ps-section {
@@ -482,7 +482,7 @@ const CSS = `
     display: block;
     width: 44px;
     height: 44px;
-    background-image: url("${stepIconsSprite}");
+    background-image: url("${assetUrl(stepIconsSprite)}");
     background-size: 300% 200%;
     background-repeat: no-repeat;
     background-position: 0% 0%;

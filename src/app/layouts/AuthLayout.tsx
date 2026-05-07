@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 import boardingLogo from '@/assets/boarding-logo.webp';
 import { RouteTransition } from '@/app/layout/RouteTransition';
+import { assetUrl } from '@/lib/asset-url';
 import { APP_NAME } from '@/lib/constants';
 
 const authBenefits = [
@@ -36,7 +37,7 @@ export function AuthLayout() {
           <section className="bg-white/95 px-4 py-6 sm:px-8 sm:py-9 lg:px-10">
             <div className="mx-auto flex min-h-full w-full max-w-md flex-col justify-center">
               <div className="mb-6 text-center">
-                <img src={boardingLogo} alt={`${APP_NAME} logo`} className="mx-auto h-auto w-full max-w-[180px] object-contain sm:max-w-[210px]" />
+                <img src={assetUrl(boardingLogo)} alt={`${APP_NAME} logo`} className="mx-auto h-auto w-full max-w-[180px] object-contain sm:max-w-[210px]" />
               </div>
 
               <div>
@@ -58,4 +59,3 @@ export function AuthLayout() {
     </div>
   );
 }
-

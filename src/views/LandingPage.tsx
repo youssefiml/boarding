@@ -18,6 +18,7 @@ import LightRays from '@/features/landing/components/LightRays';
 import ProcessSection from '@/features/landing/components/ProcessSection';
 import { Reveal } from '@/features/landing/components/Reveal';
 import { SwipeCardStack } from '@/features/landing/components/SwipeCardStack';
+import { assetUrl } from '@/lib/asset-url';
 import { cn } from '@/lib/cn';
 
 const appointmentHref = 'mailto:lagenceboarding@gmail.com?subject=Rendez-vous%20gratuit%20Boarding';
@@ -27,7 +28,7 @@ const processusSteps = [
   {
     side: 'left',
     icon: 'profile',
-    image: processusPic1,
+    image: assetUrl(processusPic1),
     title: 'Création du profil',
     alt: 'Deux étudiantes avec des valises devant la tour Eiffel',
     description:
@@ -36,7 +37,7 @@ const processusSteps = [
   {
     side: 'right',
     icon: 'pack',
-    image: processusPic2,
+    image: assetUrl(processusPic2),
     title: 'Choisis ton pack',
     alt: 'Un groupe d’étudiants assis ensemble en discussion',
     description:
@@ -45,7 +46,7 @@ const processusSteps = [
   {
     side: 'left',
     icon: 'matching',
-    image: processusPic3,
+    image: assetUrl(processusPic3),
     title: 'Matching avec les entreprises',
     alt: 'Un groupe d’étudiants posant ensemble à l’extérieur',
     description:
@@ -54,7 +55,7 @@ const processusSteps = [
   {
     side: 'right',
     icon: 'contact',
-    image: processusPic4,
+    image: assetUrl(processusPic4),
     title: 'Prise de contact',
     alt: 'Deux étudiantes prennent une photo selfie près de la tour Eiffel',
     description:
@@ -63,7 +64,7 @@ const processusSteps = [
   {
     side: 'left',
     icon: 'departure',
-    image: processusPic2,
+    image: assetUrl(processusPic2),
     title: 'Organisation du départ',
     alt: 'Étudiants préparant leur départ autour d’un ordinateur',
     description:
@@ -72,7 +73,7 @@ const processusSteps = [
   {
     side: 'right',
     icon: 'integration',
-    image: processusPic3,
+    image: assetUrl(processusPic3),
     title: 'Intégration sur place',
     alt: 'Communauté d’étudiants réunie après leur arrivée',
     description:
@@ -288,7 +289,7 @@ function HeroSection() {
   return (
     <section className="hero relative isolate overflow-hidden bg-[#020817] text-white [scroll-margin-top:6rem] lg:min-h-[980px]" id="accueil">
       <img
-        src={heroSpaceBackground}
+        src={assetUrl(heroSpaceBackground)}
         alt=""
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-20 h-full w-full select-none object-cover opacity-[0.55]"
@@ -306,7 +307,7 @@ function HeroSection() {
       <div className="hero-inner relative z-20 mx-auto w-full max-w-[1536px] px-5 sm:px-8 lg:px-[56px] max-[1280px]:px-8">
         <header className="header flex h-24 items-center justify-between gap-4">
           <a href="#accueil" className="inline-flex shrink-0 items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b]" aria-label="Accueil Boarding">
-            <img src={boardingLogo} alt="" className="h-12 w-12 shrink-0 rounded-xl object-cover [object-position:50%_50%] [transform:scale(1.8)]" />
+            <img src={assetUrl(boardingLogo)} alt="" className="h-12 w-12 shrink-0 rounded-xl object-cover [object-position:50%_50%] [transform:scale(1.8)]" />
             <span className="whitespace-nowrap text-3xl font-extrabold uppercase tracking-[0.01em] text-white max-[1100px]:text-[1.72rem]">BOARDING</span>
           </a>
 
@@ -393,7 +394,7 @@ function HeroSection() {
             <div className="pointer-events-none absolute right-[88px] top-[104px] z-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(49,144,255,0.58),rgba(29,95,215,0.24)_56%,transparent_78%)] blur-[56px] max-[1280px]:right-[60px] max-[1280px]:top-[92px] max-[1280px]:h-[340px] max-[1280px]:w-[340px]" aria-hidden="true" />
 
             <img
-              src={heroGlobeImage}
+              src={assetUrl(heroGlobeImage)}
               alt=""
               aria-hidden="true"
               className="globe pointer-events-none absolute right-[102px] top-[80px] z-10 h-auto w-[clamp(590px,43vw,720px)] select-none bg-transparent object-contain [mix-blend-mode:normal] [filter:drop-shadow(0_0_34px_rgba(40,140,255,0.5))] max-[1280px]:right-[68px] max-[1280px]:top-[84px] max-[1280px]:w-[clamp(500px,39vw,620px)]"
@@ -417,7 +418,7 @@ function HeroSection() {
             </div>
 
             <img
-              src={heroStudentImage}
+              src={assetUrl(heroStudentImage)}
               alt="Etudiant Boarding avec ordinateur portable"
               className="student pointer-events-none absolute right-[86px] top-[40px] z-30 h-[clamp(630px,49vw,760px)] w-auto select-none bg-transparent object-contain [mix-blend-mode:normal] [filter:drop-shadow(0_20px_42px_rgba(0,8,24,0.85))] max-[1280px]:right-[72px] max-[1280px]:top-[48px] max-[1280px]:h-[clamp(520px,43vw,660px)]"
               width={1024}
@@ -668,7 +669,7 @@ function ProcessusNodeIcon({ icon }: { icon: (typeof processusSteps)[number]['ic
       aria-hidden="true"
       className="process-icon-sprite"
       style={{
-        backgroundImage: `url(${processVoyageIcons})`,
+        backgroundImage: `url(${assetUrl(processVoyageIcons)})`,
         backgroundPosition: `${col * 50}% ${row * 100}%`,
       }}
     />
@@ -748,18 +749,18 @@ function ProcessusStep({ step, index }: ProcessusStepProps) {
 
 function ProcessusSection() {
   const sparkleStyle: CSSProperties = {
-    backgroundImage: `url(${processVoyageIcons})`,
+    backgroundImage: `url(${assetUrl(processVoyageIcons)})`,
     backgroundPosition: '50% 0%',
   };
   const heartStyle: CSSProperties = {
-    backgroundImage: `url(${processVoyageIcons})`,
+    backgroundImage: `url(${assetUrl(processVoyageIcons)})`,
     backgroundPosition: '100% 100%',
   };
 
   return (
     <section id="processus" aria-labelledby="processus-title" className="process-story-section">
       <img
-        src={processBlueBlobs}
+        src={assetUrl(processBlueBlobs)}
         alt=""
         loading="lazy"
         decoding="async"
@@ -768,15 +769,15 @@ function ProcessusSection() {
       />
 
       <div className="pointer-events-none absolute inset-x-0 top-0 z-0 mx-auto h-full w-full max-w-[1370px]" aria-hidden="true">
-        <img src={processMoroccoStamp} alt="" loading="lazy" decoding="async" className="process-story-deco-stamp" />
+        <img src={assetUrl(processMoroccoStamp)} alt="" loading="lazy" decoding="async" className="process-story-deco-stamp" />
         <img
-          src={processMoroccoOutline}
+          src={assetUrl(processMoroccoOutline)}
           alt=""
           loading="lazy"
           decoding="async"
           className="process-story-deco-map-img"
         />
-        <div className="process-story-deco-leaf" style={{ backgroundImage: `url(${processVoyageIcons})` }} />
+        <div className="process-story-deco-leaf" style={{ backgroundImage: `url(${assetUrl(processVoyageIcons)})` }} />
       </div>
 
       <div className="process-story-shell relative z-[1] mx-auto w-full max-w-[1370px] px-4 sm:px-6 lg:px-8">
@@ -794,7 +795,7 @@ function ProcessusSection() {
           className="process-story-journey"
           aria-hidden="true"
           style={{
-            backgroundImage: `url(${processJourneyLine})`,
+            backgroundImage: `url(${assetUrl(processJourneyLine)})`,
           }}
         />
 
@@ -1170,7 +1171,7 @@ function LandingFooter() {
               aria-hidden="true"
               style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f4faff 100%)' }}
             >
-              <img src={boardingLogo} alt="" className="h-full w-full object-cover" style={{ objectPosition: '50% 50%', transform: 'scale(1.9)' }} />
+              <img src={assetUrl(boardingLogo)} alt="" className="h-full w-full object-cover" style={{ objectPosition: '50% 50%', transform: 'scale(1.9)' }} />
             </span>
             <span className="flex min-w-0 flex-col">
               <span className="text-base font-extrabold text-[#07182f]">Boarding</span>

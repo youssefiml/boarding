@@ -10,11 +10,16 @@ lerna-debug.log*
 dev-server.out
 dev-server.err
 dev-server.log
+next-dev.out
+next-dev.err
 
 node_modules
+.next
 dist
 dist-ssr
+out
 *.local
+*.tsbuildinfo
 
 # Editor directories and files
 .vscode/*
@@ -26,3 +31,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.env

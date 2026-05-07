@@ -8,6 +8,7 @@ import { messagingApi } from '@/api/modules/messaging.api';
 import boardingLogo from '@/assets/boarding-logo.webp';
 import { ROUTES } from '@/app/routes';
 import { getNavigationIconPath, navigationItems } from '@/app/layout/navigation';
+import { assetUrl } from '@/lib/asset-url';
 import { cn } from '@/lib/cn';
 import { useAuthStore } from '@/stores/auth.store';
 import { useThemeStore } from '@/stores/theme.store';
@@ -252,7 +253,7 @@ export function AppSidebar() {
           aria-label="Go to dashboard"
           data-sidebar-focusable="true"
         >
-          <img src={boardingLogo} alt="" className="h-10 w-10 object-cover [object-position:22%_50%]" />
+          <img src={assetUrl(boardingLogo)} alt="" className="h-10 w-10 object-cover [object-position:22%_50%]" />
           <div className={cn('min-w-0', isCollapsed && 'hidden')}>
             <p className="truncate text-sm font-semibold uppercase tracking-[0.12em] text-slate-900 dark:text-slate-100">Boarding</p>
             <p className="text-xs text-slate-500 dark:text-slate-400">Student platform</p>

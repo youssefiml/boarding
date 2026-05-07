@@ -13,7 +13,7 @@ import type {
 const warnedSources = new Set<string>();
 
 function warnInvalidPayload(source: string, details: unknown) {
-  if (!import.meta.env.DEV || warnedSources.has(source)) {
+  if (process.env.NODE_ENV !== 'development' || warnedSources.has(source)) {
     return;
   }
 

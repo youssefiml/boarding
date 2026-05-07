@@ -9,18 +9,18 @@ import { AuthLayout } from '@/app/layouts/AuthLayout';
 import { ROUTES } from '@/app/routes';
 import { useAuthStore } from '@/stores/auth.store';
 
-const DashboardPage = lazy(() => import('@/pages/DashboardPage').then((module) => ({ default: module.DashboardPage })));
-const OnboardingPage = lazy(() => import('@/pages/OnboardingPage').then((module) => ({ default: module.OnboardingPage })));
-const ProfilePage = lazy(() => import('@/pages/ProfilePage').then((module) => ({ default: module.ProfilePage })));
-const MatchingPage = lazy(() => import('@/pages/MatchingPage').then((module) => ({ default: module.MatchingPage })));
-const AppointmentsPage = lazy(() => import('@/pages/AppointmentsPage').then((module) => ({ default: module.AppointmentsPage })));
-const MessagingPage = lazy(() => import('@/pages/MessagingPage').then((module) => ({ default: module.MessagingPage })));
-const JourneyPage = lazy(() => import('@/pages/JourneyPage').then((module) => ({ default: module.JourneyPage })));
-const ResourcesPage = lazy(() => import('@/pages/ResourcesPage').then((module) => ({ default: module.ResourcesPage })));
-const LandingPage = lazy(() => import('@/pages/LandingPage').then((module) => ({ default: module.LandingPage })));
-const LoginPage = lazy(() => import('@/pages/auth/LoginPage').then((module) => ({ default: module.LoginPage })));
-const RegisterPage = lazy(() => import('@/pages/auth/RegisterPage').then((module) => ({ default: module.RegisterPage })));
-const NotFoundPage = lazy(() => import('@/pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })));
+const DashboardPage = lazy(() => import('@/views/DashboardPage').then((module) => ({ default: module.DashboardPage })));
+const OnboardingPage = lazy(() => import('@/views/OnboardingPage').then((module) => ({ default: module.OnboardingPage })));
+const ProfilePage = lazy(() => import('@/views/ProfilePage').then((module) => ({ default: module.ProfilePage })));
+const MatchingPage = lazy(() => import('@/views/MatchingPage').then((module) => ({ default: module.MatchingPage })));
+const AppointmentsPage = lazy(() => import('@/views/AppointmentsPage').then((module) => ({ default: module.AppointmentsPage })));
+const MessagingPage = lazy(() => import('@/views/MessagingPage').then((module) => ({ default: module.MessagingPage })));
+const JourneyPage = lazy(() => import('@/views/JourneyPage').then((module) => ({ default: module.JourneyPage })));
+const ResourcesPage = lazy(() => import('@/views/ResourcesPage').then((module) => ({ default: module.ResourcesPage })));
+const LandingPage = lazy(() => import('@/views/LandingPage').then((module) => ({ default: module.LandingPage })));
+const LoginPage = lazy(() => import('@/views/auth/LoginPage').then((module) => ({ default: module.LoginPage })));
+const RegisterPage = lazy(() => import('@/views/auth/RegisterPage').then((module) => ({ default: module.RegisterPage })));
+const NotFoundPage = lazy(() => import('@/views/NotFoundPage').then((module) => ({ default: module.NotFoundPage })));
 
 function RouteFallback() {
   return (
