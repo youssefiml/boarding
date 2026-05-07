@@ -213,7 +213,7 @@ const CSS = `
     position: relative;
     overflow: hidden;
     padding: 64px 0 72px;
-    background: #f5ecda;
+    background: #F5ECD7;
     font-family: 'Outfit', 'Segoe UI', sans-serif;
   }
  
@@ -473,7 +473,7 @@ const CSS = `
     height: 56px;
     width: 56px;
     border-radius: 999px;
-    background: #f5ecda;
+    background: #F5ECD7;
     box-shadow: 0 6px 14px rgba(35, 64, 128, 0.14);
   }
 

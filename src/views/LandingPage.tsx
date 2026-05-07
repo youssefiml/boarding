@@ -81,24 +81,6 @@ const processusSteps = [
   },
 ] as const;
 
-const problemCards = [
-  {
-    label: 'Recherche',
-    title: 'Trop d’informations dispersées',
-    description: 'Entre entreprises, logements, documents et entretiens, les étudiants perdent vite le fil.',
-  },
-  {
-    label: 'Stress',
-    title: 'Un départ difficile à organiser seul',
-    description: 'Administratif, budget, langue, arrivée sur place : chaque détail peut devenir une source d’inquiétude.',
-  },
-  {
-    label: 'Solution',
-    title: 'Un parcours clair et accompagné',
-    description: 'Boarding centralise les étapes, structure les décisions et garde un contact humain à chaque moment clé.',
-  },
-] as const;
-
 const destinations = [
   {
     city: 'Maroc',
@@ -241,11 +223,9 @@ const heroMoroccoCities = [
 ] as const;
 
 const heroNavItems: ReadonlyArray<{ label: string; href: string }> = [
-  { label: 'À propos', href: '#concept' },
-  { label: 'Étapes', href: '#processus' },
-  { label: 'Bénéfices', href: '#destinations' },
-  { label: 'Témoignages', href: '#temoignages' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Accueil', href: '#accueil' },
+  { label: 'Processus', href: '#processus' },
+  { label: 'À propos de nous', href: '#concept' },
 ];
 
 function HeroStatIcon({ icon }: { icon: (typeof heroStats)[number]['icon'] }) {
@@ -373,20 +353,6 @@ function HeroSection() {
                   <IoIosAirplane className="h-4 w-4" aria-hidden="true" />
                 </span>
               </a>
-              <a
-                href={appointmentHref}
-                className="btn btn-secondary group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b]"
-              >
-                <span className="btn-label">
-                  <span className="block">Prendre rendez-vous</span>
-                  <span className="btn-subtext">30 minutes pour en savoir plus</span>
-                </span>
-                <span className="btn-icon transition-colors group-hover:bg-white/15" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" className="ml-0.5 h-3.5 w-3.5 fill-current">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </span>
-              </a>
             </div>
           </div>
 
@@ -489,47 +455,6 @@ function HeroSection() {
   );
 }
 
-interface FeatureCardProps {
-  label: string;
-  title: string;
-  description: string;
-}
-
-function FeatureCard({ label, title, description }: FeatureCardProps) {
-  return (
-    <Reveal as="article" className={cn(landingSurfaceCardClass, 'p-6')}>
-      <span className="inline-flex text-sm font-extrabold text-brand-600">{label}</span>
-      <h3 className="mt-3 font-display text-xl font-bold leading-tight text-[#07182f]">{title}</h3>
-      <p className="mt-3 text-sm leading-7 text-slate-500">{description}</p>
-    </Reveal>
-  );
-}
-
-function ProblemSolutionSection() {
-  return (
-    <section className={cn(landingSectionClass, 'bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)]')} aria-labelledby="probleme-title">
-      <div className={landingShellClass}>
-        <div className={landingSectionHeadingClass}>
-          <span className={landingKickerClass}>Problème et solution</span>
-          <h2 id="probleme-title" className={landingSectionTitleClass}>
-            Partir à l’étranger doit être excitant, pas flou.
-          </h2>
-          <p className={landingSectionParagraphClass}>
-            La recherche d’un stage à l’étranger mélange souvent trop d’étapes, trop d’interlocuteurs et trop d’incertitudes.
-            Boarding transforme ce parcours en expérience guidée, centralisée et humaine.
-          </p>
-        </div>
-
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {problemCards.map((card) => (
-            <FeatureCard key={card.title} {...card} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function ConceptSection() {
   return (
     <section className={landingSectionClass} id="concept" aria-labelledby="concept-title">
@@ -626,7 +551,7 @@ function DestinationCard({ city, tags, description, image }: DestinationCardProp
 function DestinationsSection() {
   return (
     <section
-      className={cn(landingSectionClass, 'bg-[linear-gradient(180deg,#eef7ff_0%,#f4faff_100%)]')}
+      className={landingSectionClass}
       id="destinations"
       aria-labelledby="destinations-title"
     >
@@ -830,6 +755,7 @@ interface PricingCardProps {
 const pricingPreviewLimit = 7;
 
 function PricingCard({ name, price, suffix, description, cta: _cta, features, featured }: PricingCardProps) {
+  const isBusiness = name === 'Business Class';
   const previewFeatures = features.slice(0, pricingPreviewLimit);
   const remainingCount = Math.max(0, features.length - previewFeatures.length);
 
@@ -838,12 +764,38 @@ function PricingCard({ name, price, suffix, description, cta: _cta, features, fe
       as="article"
       className={cn(
         'relative flex flex-col overflow-hidden rounded-[1.65rem] border bg-white p-0 shadow-[0_1px_3px_rgba(15,23,42,0.04),0_10px_32px_-12px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_4px_6px_rgba(15,23,42,0.04),0_24px_56px_-14px_rgba(15,23,42,0.14)]',
-        featured
+        isBusiness
+          ? 'border-[#a9cfe9] bg-[#fbfdff] shadow-[0_1px_3px_rgba(26,31,92,0.08),0_18px_48px_-18px_rgba(26,31,92,0.24)] hover:border-[#7db7de] hover:shadow-[0_4px_8px_rgba(26,31,92,0.08),0_28px_64px_-20px_rgba(26,31,92,0.3)]'
+          : featured
           ? 'border-brand-600/35 bg-[#06132a] shadow-[0_1px_3px_rgba(29,79,208,0.12),0_18px_52px_-14px_rgba(29,79,208,0.35)] lg:-translate-y-2 lg:hover:-translate-y-3 lg:hover:border-brand-500/60 lg:hover:shadow-[0_4px_6px_rgba(29,79,208,0.14),0_28px_60px_-16px_rgba(29,79,208,0.38)]'
           : 'border-slate-200 hover:border-[#cfdcec]'
       )}
       delay={featured ? 100 : 0}
     >
+      {isBusiness ? (
+        <>
+          <div
+            className="pointer-events-none absolute inset-x-0 top-0 z-0 h-44 opacity-[0.18]"
+            style={{
+              backgroundImage:
+                'linear-gradient(135deg, rgba(43,53,175,0.28) 12.5%, transparent 12.5%, transparent 50%, rgba(43,53,175,0.28) 50%, rgba(43,53,175,0.28) 62.5%, transparent 62.5%, transparent 100%)',
+              backgroundSize: '22px 22px',
+            }}
+            aria-hidden="true"
+          />
+          <div
+            className="pointer-events-none absolute inset-0 z-0 opacity-[0.055]"
+            style={{
+              backgroundImage: `url(${assetUrl(processVoyageIcons)})`,
+              backgroundRepeat: 'repeat',
+              backgroundSize: '168px 112px',
+            }}
+            aria-hidden="true"
+          />
+          <div className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0.96)_32%,#ffffff_100%)]" aria-hidden="true" />
+        </>
+      ) : null}
+
       {featured ? (
         <>
           <div className="pointer-events-none absolute inset-0 z-0">
@@ -867,10 +819,12 @@ function PricingCard({ name, price, suffix, description, cta: _cta, features, fe
 
       <div
         className={cn(
-          'relative z-10 h-1 w-full shrink-0',
+          'relative z-10 w-full shrink-0',
           featured
-            ? 'bg-[linear-gradient(90deg,#1d4fd0_0%,#0891b2_50%,#1d4fd0_100%)]'
-            : 'bg-[linear-gradient(90deg,#e2e8f0_0%,#cbd5e1_100%)]'
+            ? 'h-1 bg-[linear-gradient(90deg,#1d4fd0_0%,#0891b2_50%,#1d4fd0_100%)]'
+            : isBusiness
+              ? 'h-1.5 bg-[linear-gradient(90deg,#b7dcf3_0%,#2B35AF_52%,#FF6B35_100%)]'
+              : 'h-1 bg-[linear-gradient(90deg,#e2e8f0_0%,#cbd5e1_100%)]'
         )}
         aria-hidden="true"
       />
@@ -881,13 +835,13 @@ function PricingCard({ name, price, suffix, description, cta: _cta, features, fe
         </span>
       ) : null}
 
-      <div className={cn('relative z-10 px-7 pb-0 pt-7', featured ? 'pt-5' : '')}>
-        <h3 className={cn('text-[1.15rem] font-display font-bold leading-tight', featured ? 'text-slate-100' : 'text-slate-700')}>{name}</h3>
-        <p className={cn('mt-4 text-[2.35rem] font-extrabold leading-[1.05]', featured ? 'text-white' : 'text-[#07182f]')}>
+      <div className={cn('relative z-10 px-7 pb-0 pt-7', featured ? 'pt-5' : '', isBusiness ? 'px-8 pt-8' : '')}>
+        <h3 className={cn('text-[1.15rem] font-display font-bold leading-tight', featured ? 'text-slate-100' : isBusiness ? 'text-[#1A1F5C]' : 'text-slate-700')}>{name}</h3>
+        <p className={cn('mt-4 text-[2.35rem] font-extrabold leading-[1.05]', featured ? 'text-white' : isBusiness ? 'text-[#06132a]' : 'text-[#07182f]')}>
           {price}
           {suffix ? <span className={cn('ml-1 text-base font-semibold', featured ? 'text-slate-300' : 'text-slate-500')}>{suffix}</span> : null}
         </p>
-        <p className={cn('mt-4 text-[0.96rem] leading-7', featured ? 'text-slate-200' : 'text-slate-500')}>{description}</p>
+        <p className={cn('mt-4 text-[0.96rem] leading-7', featured ? 'text-slate-200' : isBusiness ? 'text-[#526988]' : 'text-slate-500')}>{description}</p>
       </div>
 
       <div
@@ -895,12 +849,14 @@ function PricingCard({ name, price, suffix, description, cta: _cta, features, fe
           'relative z-10 mx-7 mt-8 h-px shrink-0',
           featured
             ? 'bg-[linear-gradient(90deg,transparent_0%,rgba(191,219,254,0.38)_50%,transparent_100%)]'
-            : 'bg-[linear-gradient(90deg,transparent_0%,rgba(15,23,42,0.08)_50%,transparent_100%)]'
+            : isBusiness
+              ? 'mx-8 bg-[linear-gradient(90deg,transparent_0%,rgba(43,53,175,0.16)_50%,transparent_100%)]'
+              : 'bg-[linear-gradient(90deg,transparent_0%,rgba(15,23,42,0.08)_50%,transparent_100%)]'
         )}
         aria-hidden="true"
       />
 
-      <ul className="relative z-10 m-0 grid list-none gap-4 px-7 pb-8 pt-7">
+      <ul className={cn('relative z-10 m-0 grid list-none gap-4 px-7 pb-8 pt-7', isBusiness ? 'px-8 pt-8' : '')}>
         {previewFeatures.map((feature) => (
           <li
             key={feature.label}
@@ -909,6 +865,8 @@ function PricingCard({ name, price, suffix, description, cta: _cta, features, fe
               feature.included
                 ? featured
                   ? 'text-slate-100'
+                  : isBusiness
+                    ? 'text-[#243b5a]'
                   : 'text-slate-700'
                 : featured
                   ? 'text-slate-400'
@@ -917,7 +875,7 @@ function PricingCard({ name, price, suffix, description, cta: _cta, features, fe
           >
             {feature.included ? (
               <svg
-                className={cn('mt-1 shrink-0', featured ? 'text-emerald-300' : 'text-emerald-500')}
+                className={cn('mt-1 shrink-0', featured ? 'text-emerald-300' : isBusiness ? 'text-[#FF6B35]' : 'text-emerald-500')}
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
@@ -958,7 +916,9 @@ function PricingCard({ name, price, suffix, description, cta: _cta, features, fe
             'relative z-10 mx-7 mb-7 mt-1 rounded-xl border border-dashed px-4 py-2 text-center text-xs font-semibold',
             featured
               ? 'border-blue-300/35 bg-blue-500/10 text-slate-200'
-              : 'border-[#cfdcec] bg-[#f4faff] text-slate-500'
+              : isBusiness
+                ? 'mx-8 border-[#a9cfe9] bg-[#eef7ff]/80 text-[#526988]'
+                : 'border-[#cfdcec] bg-[#f4faff] text-slate-500'
           )}
         >
           + {remainingCount} autres éléments dans le comparatif
@@ -971,7 +931,9 @@ function PricingCard({ name, price, suffix, description, cta: _cta, features, fe
           'relative z-10 mx-7 mb-7 mt-auto flex min-h-12 items-center justify-center rounded-xl border px-5 py-3.5 text-sm font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2',
           featured
             ? 'border-transparent bg-gradient-to-br from-[#5aa8ff] to-[#2a68ff] text-white shadow-[0_8px_22px_-8px_rgba(59,130,246,0.65)] hover:shadow-[0_12px_28px_-8px_rgba(59,130,246,0.75)]'
-            : 'border-slate-200 bg-slate-100 text-[#07182f] hover:-translate-y-0.5 hover:bg-slate-200'
+            : isBusiness
+              ? 'mx-8 border-transparent bg-[#1A1F5C] text-white shadow-[0_10px_24px_-12px_rgba(26,31,92,0.6)] hover:-translate-y-0.5 hover:bg-[#2B35AF]'
+              : 'border-slate-200 bg-slate-100 text-[#07182f] hover:-translate-y-0.5 hover:bg-slate-200'
         )}
       >
         Embarquer maintenant
@@ -985,10 +947,7 @@ function PricingSection() {
 
   return (
     <section
-      className={cn(
-        landingSectionClass,
-        'relative overflow-hidden bg-[linear-gradient(180deg,#f4faff_0%,#eef7ff_50%,#f8fbff_100%)] py-20 sm:py-24 lg:py-28'
-      )}
+      className={cn(landingSectionClass, 'relative overflow-hidden py-20 sm:py-24 lg:py-28')}
       id="offres"
       aria-labelledby="offres-title"
     >
@@ -1083,7 +1042,7 @@ function TestimonialCard({ quote, role }: TestimonialCardProps) {
 function TestimonialsSection() {
   return (
     <section
-      className={cn(landingSectionClass, 'bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)]')}
+      className={landingSectionClass}
       id="temoignages"
       aria-labelledby="temoignages-title"
     >
@@ -1111,7 +1070,7 @@ function TestimonialsSection() {
 function FinalCTA() {
   return (
     <section
-      className={cn(landingSectionClass, 'bg-[linear-gradient(180deg,#f8fbff_0%,#eef7ff_100%)] py-16 sm:py-20')}
+      className={cn(landingSectionClass, 'py-16 sm:py-20')}
       id="contact"
       aria-labelledby="contact-title"
     >
@@ -1158,12 +1117,12 @@ function FinalCTA() {
 
 function LandingFooter() {
   return (
-    <footer className="border-t border-slate-200 bg-[linear-gradient(180deg,#f4faff_0%,#eef7ff_100%)] py-12">
+  <footer className="border-t border-slate-200 bg-[#F5ECD7] py-12">
       <div className={cn(landingShellClass, 'grid gap-8 md:grid-cols-[1.1fr_0.55fr_0.55fr]')}>
         <div>
           <a
             href="#accueil"
-            className="inline-flex min-w-0 items-center gap-3 rounded-2xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-4 focus-visible:ring-offset-white"
+            className="inline-flex min-w-0 items-center gap-3 rounded-2xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-4 focus-visible:ring-offset-[#F5ECD7]"
             aria-label="Retour à l’accueil Boarding"
           >
             <span
@@ -1209,11 +1168,10 @@ function LandingFooter() {
 
 export function LandingPage() {
   return (
-    <div className="host-grotesk-regular isolate min-h-dvh overflow-hidden text-[#07182f] [color-scheme:light] [background:linear-gradient(180deg,#f8fbff_0%,#ffffff_22%,#f4faff_48%,#ffffff_70%,#eef7ff_90%,#f8fbff_100%)]">
+    <div className="host-grotesk-regular isolate min-h-dvh overflow-hidden text-[#07182f] [color-scheme:light] [background:#F5ECD7]">
       <main>
         <HeroSection />
         <ProcessSection />
-        <ProblemSolutionSection />
         <ConceptSection />
         <DestinationsSection />
         <PricingSection />
@@ -1224,3 +1182,4 @@ export function LandingPage() {
     </div>
   );
 }
+

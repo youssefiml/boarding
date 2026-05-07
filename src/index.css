@@ -698,15 +698,6 @@ textarea {
   white-space: normal;
 }
 
-.hero-actions .btn-subtext {
-  display: block;
-  margin-top: 3px;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 1.2;
-  color: rgba(226, 232, 240, 0.92);
-}
-
 .hero-actions .btn-icon {
   display: inline-flex;
   width: 34px;
@@ -735,26 +726,6 @@ textarea {
 .btn-primary .btn-icon {
   color: #fff;
   background: rgba(255, 255, 255, 0.14);
-}
-
-.btn-secondary {
-  width: min(100%, 320px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(8, 18, 38, 0.42);
-  box-shadow: 0 14px 34px rgba(0, 8, 26, 0.28);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-}
-
-.btn-secondary:hover {
-  border-color: rgba(255, 255, 255, 0.24);
-  background: rgba(12, 26, 54, 0.52);
-}
-
-.btn-secondary .btn-icon {
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.04);
 }
 
 /* Laptop desktop breakpoint: @media (max-width: 1366px), (max-height: 768px) */
@@ -850,16 +821,8 @@ textarea {
     width: 275px !important;
   }
 
-  .btn-secondary {
-    width: 300px !important;
-  }
-
   .hero-actions .btn-label {
     font-size: 16px;
-  }
-
-  .hero-actions .btn-subtext {
-    font-size: 12px;
   }
 
   .hero-actions .btn-icon {
@@ -1123,11 +1086,6 @@ textarea {
     font-size: 16px !important;
   }
 
-  .hero-actions .btn-subtext {
-    font-size: 12px !important;
-    margin-top: 2px;
-  }
-
   .hero-actions .btn-icon {
     width: 30px !important;
     min-width: 30px !important;
@@ -1170,7 +1128,7 @@ textarea {
   position: relative;
   overflow: hidden;
   padding: 88px 0 96px;
-  background: #f5ecda;
+  background: #F5ECD7;
 }
 
 .process-story-shell {
