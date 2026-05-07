@@ -5,15 +5,6 @@ import boardingLogo from '@/assets/boarding-logo.webp';
 import heroGlobeImage from '@/assets/hero-globe-cutout.webp';
 import heroStudentImage from '@/assets/hero-student-cutout.webp';
 import heroSpaceBackground from '@/assets/heroSpaceBackground.webp';
-import processusPic1 from '@/assets/processus-pic1.webp';
-import processusPic2 from '@/assets/processus-pic2.webp';
-import processusPic3 from '@/assets/processus-pic3.webp';
-import processusPic4 from '@/assets/processus-pic4.webp';
-import processBlueBlobs from '@/assets/ProcessSction/bg-decorative-shapes.webp';
-import processJourneyLine from '@/assets/ProcessSction/processLine.webp';
-import processMoroccoStamp from '@/assets/ProcessSction/moroccoBadge.webp';
-import processMoroccoOutline from '@/assets/ProcessSction/maroc-outline.webp';
-import processVoyageIcons from '@/assets/ProcessSction/ui-voyage-decorations.webp';
 import { PricingSection } from '@/features/landing/components/PricingSection';
 import ProcessSection from '@/features/landing/components/ProcessSection';
 import { Reveal } from '@/features/landing/components/Reveal';
@@ -22,63 +13,6 @@ import { cn } from '@/lib/cn';
 
 const appointmentHref = 'mailto:lagenceboarding@gmail.com?subject=Rendez-vous%20gratuit%20Boarding';
 const contactHref = 'mailto:lagenceboarding@gmail.com?subject=Projet%20de%20stage%20a%20l%27etranger';
-
-const processusSteps = [
-  {
-    side: 'left',
-    icon: 'profile',
-    image: assetUrl(processusPic1),
-    title: 'Création du profil',
-    alt: 'Deux étudiantes avec des valises devant la tour Eiffel',
-    description:
-      "Commence par créer ton profil en renseignant ton parcours, tes expériences, tes centres d’intérêt ainsi que ta personnalité. Ces informations nous permettent de mieux comprendre qui tu es et de te proposer des opportunités réellement adaptées. Tu peux également ajouter ton CV afin d’enrichir ton profil.",
-  },
-  {
-    side: 'right',
-    icon: 'pack',
-    image: assetUrl(processusPic2),
-    title: 'Choisis ton pack',
-    alt: 'Un groupe d’étudiants assis ensemble en discussion',
-    description:
-      "sélectionne le pack d’accompagnement qui correspond à tes besoins : Economic, Business ou First Class.",
-  },
-  {
-    side: 'left',
-    icon: 'matching',
-    image: assetUrl(processusPic3),
-    title: 'Matching avec les entreprises',
-    alt: 'Un groupe d’étudiants posant ensemble à l’extérieur',
-    description:
-      "Une fois ton profil complété, notre système te propose rapidement une sélection de trois entreprises en adéquation avec ton profil. Tu peux consulter chaque opportunité, évaluer les compatibilités et choisir celle qui correspond le mieux à tes attentes.",
-  },
-  {
-    side: 'right',
-    icon: 'contact',
-    image: assetUrl(processusPic4),
-    title: 'Prise de contact',
-    alt: 'Deux étudiantes prennent une photo selfie près de la tour Eiffel',
-    description:
-      "Après avoir identifié l’entreprise qui te convient, tu peux directement prendre rendez-vous pour échanger avec elle. L’objectif est de faciliter la mise en relation et de te permettre d’avancer rapidement dans ton processus.",
-  },
-  {
-    side: 'left',
-    icon: 'departure',
-    image: assetUrl(processusPic2),
-    title: 'Organisation du départ',
-    alt: 'Étudiants préparant leur départ autour d’un ordinateur',
-    description:
-      "En fonction du pack choisi, nous prenons en charge toute la logistique liée à ton arrivée : logement, transfert depuis l’aéroport, accompagnement et conseils pratiques. Tout est pensé pour simplifier ton départ.",
-  },
-  {
-    side: 'right',
-    icon: 'integration',
-    image: assetUrl(processusPic3),
-    title: 'Intégration sur place',
-    alt: 'Communauté d’étudiants réunie après leur arrivée',
-    description:
-      "Tu arrives dans les meilleures conditions, avec un cadre déjà organisé. Tu peux ainsi te concentrer pleinement sur ton stage et ton expérience à l’étranger. On s'intègre à la communauté boardi pour que tu ne sois pas tout seul.",
-  },
-] as const;
 
 const destinations = [
   {
@@ -115,16 +49,16 @@ const testimonials = [
 const landingShellClass = 'mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8';
 const landingSectionClass = 'relative py-12 sm:py-14 lg:py-16 [scroll-margin-top:6rem]';
 const landingSectionHeadingClass = 'mx-auto max-w-3xl text-center';
-const landingSectionTitleClass = 'mt-3 font-display text-2xl font-extrabold leading-tight text-[#07182f] sm:text-3xl lg:text-4xl';
+const landingSectionTitleClass = 'mt-3 text-lg font-extrabold leading-tight text-[#07182f]';
 const landingSectionParagraphClass = 'mt-4 text-base leading-7 text-slate-500 sm:text-lg';
 const landingKickerClass = 'inline-flex text-base font-extrabold uppercase tracking-[0.18em] text-brand-600 sm:text-lg';
 const landingButtonBaseClass =
-  'inline-flex min-h-11 w-full items-center justify-center rounded-full px-5 py-2.5 text-center text-sm font-bold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 sm:w-auto';
-const landingButtonLargeClass = 'min-h-12 px-6 text-base';
+  'inline-flex min-h-12 w-full items-center justify-center rounded-xl border px-5 py-2.5 text-center text-sm font-bold leading-5 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:w-auto';
+const landingButtonLargeClass = 'min-h-12 px-6 text-sm';
 const landingButtonPrimaryClass =
-  'bg-gradient-to-br from-brand-600 to-brand-500 text-white shadow-[0_8px_20px_-8px_rgba(29,79,208,0.45)] hover:-translate-y-0.5 hover:shadow-[0_14px_28px_-8px_rgba(29,79,208,0.55)]';
+  'border-[#2557D6] bg-[#2557D6] text-white shadow-[0_20px_36px_-22px_rgba(37,87,214,0.95)] hover:bg-[#224fc4] hover:shadow-[0_24px_40px_-20px_rgba(37,87,214,0.9)] focus-visible:ring-[#2557D6]/70';
 const landingButtonLightClass =
-  'border border-slate-200 bg-white text-[#07182f] hover:-translate-y-0.5 hover:border-[#cfdcec] hover:shadow-[0_10px_22px_-10px_rgba(15,23,42,0.18)]';
+  'border-slate-200 bg-white text-[#07182f] hover:border-[#cfdcec] hover:shadow-[0_10px_22px_-10px_rgba(15,23,42,0.18)] focus-visible:ring-brand-500';
 const landingSurfaceCardClass = 'rounded-3xl border border-slate-200 bg-white shadow-[0_4px_14px_-8px_rgba(15,23,42,0.08)]';
 const heroMotionClass = 'motion-safe:animate-fade-in-up';
 
@@ -230,7 +164,11 @@ function HeroSection() {
             </a>
             <a
               href={appointmentHref}
-              className="inline-flex h-14 min-w-[156px] items-center justify-center rounded-xl bg-gradient-to-br from-[#3f87ff] via-[#2d63f6] to-[#3348f1] px-6 text-base font-bold text-white shadow-[0_22px_46px_-24px_rgba(58,112,255,0.95)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_48px_-18px_rgba(58,112,255,0.95)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b] max-[1280px]:h-12 max-[1280px]:min-w-[140px] max-[1280px]:px-4 max-[1280px]:text-sm max-[1100px]:min-w-[126px]"
+              className={cn(
+                landingButtonBaseClass,
+                landingButtonPrimaryClass,
+                'h-14 min-w-[156px] px-6 text-base hover:translate-y-0 hover:bg-[#2557D6] hover:shadow-[0_20px_36px_-22px_rgba(37,87,214,0.95)] focus-visible:ring-offset-[#07152b] max-[1280px]:h-12 max-[1280px]:min-w-[140px] max-[1280px]:px-4 max-[1280px]:text-sm max-[1100px]:min-w-[126px]'
+              )}
             >
               Candidater
             </a>
@@ -253,7 +191,7 @@ function HeroSection() {
               La startup créée par des jeunes pour des jeunes
             </p>
 
-            <h1 className={cn('hero-title mt-8 font-display text-5xl font-bold leading-[1.08] text-white sm:text-6xl lg:text-[clamp(56px,5vw,72px)]', heroMotionClass)} style={{ animationDelay: '160ms' }}>
+            <h1 className={cn('hero-title mt-8 text-lg font-extrabold leading-tight text-white', heroMotionClass)} style={{ animationDelay: '160ms' }}>
               Trouve ton stage à l’étranger, sans prise de tête
             </h1>
 
@@ -264,7 +202,11 @@ function HeroSection() {
             <div className={cn('hero-actions mt-10 flex flex-col gap-4 lg:flex-row lg:gap-4', heroMotionClass)} style={{ animationDelay: '320ms' }}>
               <a
                 href="/register"
-                className="btn btn-primary group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b]"
+                className={cn(
+                  landingButtonBaseClass,
+                  landingButtonPrimaryClass,
+                  'group w-full sm:w-auto focus-visible:ring-offset-[#07152b]'
+                )}
               >
                 <span className="btn-label">Postuler maintenant</span>
                 <span className="btn-icon transition-transform group-hover:translate-x-0.5" aria-hidden="true">
@@ -361,7 +303,7 @@ function HeroSection() {
                   <HeroStatIcon icon={stat.icon} />
                 </span>
                 <div className="min-w-0">
-                  <dd className="stat-number font-display text-4xl font-bold leading-none tracking-tight text-white">{stat.value}</dd>
+                  <dd className="stat-number text-lg font-extrabold leading-tight text-white">{stat.value}</dd>
                   <dt className="stat-label mt-2 text-base font-medium leading-5 text-[#b9c8e4]">{stat.label}</dt>
                 </div>
               </div>
@@ -448,7 +390,7 @@ function DestinationCard({ city, tags, description, image }: DestinationCardProp
       />
 
       <div className="relative z-10 mt-auto flex flex-col gap-3 p-6">
-        <h3 className="font-display text-2xl font-bold leading-none text-white sm:text-4xl">{city}</h3>
+        <h3 className="text-lg font-extrabold leading-tight text-white">{city}</h3>
         <p className="text-sm leading-relaxed text-white/85">{description}</p>
 
         <div className="flex flex-wrap gap-2">
@@ -494,171 +436,6 @@ function DestinationsSection() {
     </section>
   );
 }
-
-const PROCESS_ICON_SPRITE_POSITIONS: Record<(typeof processusSteps)[number]['icon'], [number, number]> = {
-  profile: [1, 0],
-  pack: [0, 1],
-  matching: [2, 0],
-  contact: [2, 1],
-  departure: [0, 0],
-  integration: [1, 1],
-};
-
-function ProcessusNodeIcon({ icon }: { icon: (typeof processusSteps)[number]['icon'] }) {
-  const [col, row] = PROCESS_ICON_SPRITE_POSITIONS[icon];
-
-  return (
-    <span
-      aria-hidden="true"
-      className="process-icon-sprite"
-      style={{
-        backgroundImage: `url(${assetUrl(processVoyageIcons)})`,
-        backgroundPosition: `${col * 50}% ${row * 100}%`,
-      }}
-    />
-  );
-}
-
-interface ProcessusStepProps {
-  step: (typeof processusSteps)[number];
-  index: number;
-}
-
-function ProcessusStep({ step, index }: ProcessusStepProps) {
-  const isLeft = step.side === 'left';
-
-  return (
-    <Reveal as="article" delay={index * 90} className="process-story-row relative z-[2] grid gap-5 md:grid-cols-[1fr_84px_1fr] md:gap-0">
-      <div className={cn('hidden md:block', isLeft ? '' : 'opacity-0')} aria-hidden={isLeft ? undefined : true}>
-        {isLeft ? (
-          <div className="grid grid-cols-[minmax(0,1.06fr)_minmax(0,1fr)] items-center gap-4 lg:gap-5">
-            <div className={cn('process-story-image-shell process-story-image-shell-left', index % 4 === 0 ? 'process-story-blob-a' : 'process-story-blob-b')}>
-              <img src={step.image} alt={step.alt} loading="lazy" decoding="async" className="process-story-image" />
-            </div>
-            <div className="process-story-panel">
-              <header className="flex items-start gap-3">
-                <span className="process-story-badge">{String(index + 1)}</span>
-                <h3 className="process-story-title">{step.title}</h3>
-              </header>
-              <p className="process-story-description">{step.description}</p>
-            </div>
-          </div>
-        ) : null}
-      </div>
-
-      <div className="relative hidden items-center justify-center md:flex">
-        <span className="process-story-node">
-          <ProcessusNodeIcon icon={step.icon} />
-        </span>
-      </div>
-
-      <div className={cn('hidden md:block', isLeft ? 'opacity-0' : '')} aria-hidden={isLeft ? true : undefined}>
-        {!isLeft ? (
-          <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.06fr)] items-center gap-4 lg:gap-5">
-            <div className="process-story-panel">
-              <header className="flex items-start gap-3">
-                <span className="process-story-badge">{String(index + 1)}</span>
-                <h3 className="process-story-title">{step.title}</h3>
-              </header>
-              <p className="process-story-description">{step.description}</p>
-            </div>
-            <div className={cn('process-story-image-shell process-story-image-shell-right', index % 4 === 1 ? 'process-story-blob-c' : 'process-story-blob-d')}>
-              <img src={step.image} alt={step.alt} loading="lazy" decoding="async" className="process-story-image" />
-            </div>
-          </div>
-        ) : null}
-      </div>
-
-      <div className="md:hidden">
-        <div className="process-story-mobile">
-          <span className="process-story-mobile-node" aria-hidden="true">
-            <ProcessusNodeIcon icon={step.icon} />
-          </span>
-          <div className={cn('process-story-image-shell', index % 2 === 0 ? 'process-story-blob-a' : 'process-story-blob-d')}>
-            <img src={step.image} alt={step.alt} loading="lazy" decoding="async" className="process-story-image" />
-          </div>
-          <div className="process-story-panel">
-            <header className="flex items-start gap-3">
-              <span className="process-story-badge">{String(index + 1)}</span>
-              <h3 className="process-story-title">{step.title}</h3>
-            </header>
-            <p className="process-story-description">{step.description}</p>
-          </div>
-        </div>
-      </div>
-    </Reveal>
-  );
-}
-
-function ProcessusSection() {
-  const sparkleStyle: CSSProperties = {
-    backgroundImage: `url(${assetUrl(processVoyageIcons)})`,
-    backgroundPosition: '50% 0%',
-  };
-  const heartStyle: CSSProperties = {
-    backgroundImage: `url(${assetUrl(processVoyageIcons)})`,
-    backgroundPosition: '100% 100%',
-  };
-
-  return (
-    <section id="processus" aria-labelledby="processus-title" className="process-story-section">
-      <img
-        src={assetUrl(processBlueBlobs)}
-        alt=""
-        loading="lazy"
-        decoding="async"
-        aria-hidden="true"
-        className="process-story-deco-blobs"
-      />
-
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 mx-auto h-full w-full max-w-[1370px]" aria-hidden="true">
-        <img src={assetUrl(processMoroccoStamp)} alt="" loading="lazy" decoding="async" className="process-story-deco-stamp" />
-        <img
-          src={assetUrl(processMoroccoOutline)}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="process-story-deco-map-img"
-        />
-        <div className="process-story-deco-leaf" style={{ backgroundImage: `url(${assetUrl(processVoyageIcons)})` }} />
-      </div>
-
-      <div className="process-story-shell relative z-[1] mx-auto w-full max-w-[1370px] px-4 sm:px-6 lg:px-8">
-        <Reveal className="mx-auto max-w-[920px] text-center">
-          <span className="process-story-kicker">Processus</span>
-          <h2 id="processus-title" className="process-story-heading">
-            De ton profil a ton integration sur place
-          </h2>
-          <p className="process-story-subtitle">
-            Un parcours clair, humain et structure pour t'aider a trouver ton stage a l'etranger, avec un accompagnement concret a chaque etape.
-          </p>
-        </Reveal>
-
-        <div
-          className="process-story-journey"
-          aria-hidden="true"
-          style={{
-            backgroundImage: `url(${assetUrl(processJourneyLine)})`,
-          }}
-        />
-
-        <div className="process-story-steps">
-          {processusSteps.map((step, index) => (
-            <ProcessusStep key={step.title} step={step} index={index} />
-          ))}
-        </div>
-
-        <Reveal className="process-story-footer-pill mx-auto w-full max-w-[560px]" delay={320}>
-          <span className="process-story-pill-icon" style={sparkleStyle} aria-hidden="true" />
-          <p>Un accompagnement humain, du premier clic jusqu'a ton integration.</p>
-          <span className="process-story-pill-icon" style={heartStyle} aria-hidden="true" />
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-void ProcessusSection;
 
 interface TestimonialCardProps {
   quote: string;
@@ -720,7 +497,7 @@ function FinalCTA() {
             aria-hidden="true"
           />
           <span className={cn(landingKickerClass, 'relative z-10')}>Prêt à trouver ton stage à l’étranger ?</span>
-          <h2 id="contact-title" className="relative z-10 mt-3 font-display text-4xl font-bold leading-tight text-[#07182f] sm:text-5xl">
+          <h2 id="contact-title" className="relative z-10 mt-3 text-lg font-extrabold leading-tight text-[#07182f]">
             Passe de l’idée au départ avec un parcours clair.
           </h2>
           <p className="relative z-10 mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">

@@ -32,11 +32,15 @@ export function Reveal({ as = 'div', children, className = '', delay = 0, style,
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          window.setTimeout(() => setIsVisible(true), delay);
+          if (delay > 0) {
+            window.setTimeout(() => setIsVisible(true), delay);
+          } else {
+            setIsVisible(true);
+          }
           observer.disconnect();
         }
       },
-      { rootMargin: '0px 0px -12% 0px', threshold: 0.18 }
+      { rootMargin: '120px 0px', threshold: 0.01 }
     );
 
     observer.observe(element);

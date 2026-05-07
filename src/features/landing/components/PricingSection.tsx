@@ -146,7 +146,7 @@ function PricingCard({ plan }: { plan: Plan }) {
 
       <div className={cn('relative z-10', !plan.recommended && 'pt-8')}>
         <p className={cn('font-mono text-[0.68rem] font-normal uppercase tracking-[0.16em]', isEconomy ? 'text-white/72' : 'text-[#2B35AF]')}>{plan.name}</p>
-        <h3 className="mt-3 font-display text-4xl font-extrabold leading-none tracking-normal sm:text-[2.8rem]">{plan.price}</h3>
+        <h3 className="mt-3 text-lg font-extrabold leading-tight">{plan.price}</h3>
         <p className={cn('mt-5 min-h-[4.25rem] text-sm font-light uppercase leading-6 tracking-normal', isEconomy ? 'text-white/74' : 'text-[#526988]')}>{plan.subtitle}</p>
       </div>
 
@@ -188,7 +188,7 @@ export function PricingSection() {
 
       <div className="relative z-10 mx-auto w-full max-w-7xl">
         <div className="text-center">
-          <h2 id="pricing-title" className="mt-2 font-display text-2xl font-extrabold leading-none tracking-normal text-[#1A1F5C] sm:text-3xl lg:text-4xl">
+          <h2 id="pricing-title" className="mt-2 text-lg font-extrabold leading-tight text-[#1A1F5C]">
             PRICING
           </h2>
         </div>
