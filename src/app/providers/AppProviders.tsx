@@ -32,8 +32,9 @@ export function AppProviders({ children }: AppProvidersProps) {
 
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
-  const isAuthRoute = location.pathname.startsWith(ROUTES.login) || location.pathname.startsWith(ROUTES.register);
-  const appliedThemeMode: ThemeMode = isAuthRoute ? 'light' : themeMode;
+  const isLightRoute =
+    location.pathname === ROUTES.root || location.pathname.startsWith(ROUTES.login) || location.pathname.startsWith(ROUTES.register);
+  const appliedThemeMode: ThemeMode = isLightRoute ? 'light' : themeMode;
 
   useEffect(() => {
     if (!lastError) {
