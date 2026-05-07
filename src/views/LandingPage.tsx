@@ -53,7 +53,6 @@ const landingSectionParagraphClass = 'mt-4 text-base leading-7 text-slate-500 sm
 const landingKickerClass = 'inline-flex text-base font-extrabold uppercase tracking-[0.18em] text-brand-600 sm:text-lg';
 const landingButtonBaseClass =
   'inline-flex min-h-12 w-full items-center justify-center rounded-xl border px-5 py-2.5 text-center text-sm font-bold leading-5 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:w-auto';
-const landingButtonLargeClass = 'min-h-12 px-6 text-sm';
 const landingButtonPrimaryClass =
   'border-[#2557D6] bg-[#2557D6] text-white shadow-[0_20px_36px_-22px_rgba(37,87,214,0.95)] hover:bg-[#224fc4] hover:shadow-[0_24px_40px_-20px_rgba(37,87,214,0.9)] focus-visible:ring-[#2557D6]/70';
 const landingButtonLightClass =
