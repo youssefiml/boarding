@@ -7,7 +7,6 @@ import heroStudentImage from '@/assets/hero-student-cutout.webp';
 import heroSpaceBackground from '@/assets/heroSpaceBackground.webp';
 import { PricingSection } from '@/features/landing/components/PricingSection';
 import ProcessSection from '@/features/landing/components/ProcessSection';
-import { Reveal } from '@/features/landing/components/Reveal';
 import { assetUrl } from '@/lib/asset-url';
 import { cn } from '@/lib/cn';
 
