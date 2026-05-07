@@ -14,10 +14,9 @@ import processJourneyLine from '@/assets/ProcessSction/processLine.webp';
 import processMoroccoStamp from '@/assets/ProcessSction/moroccoBadge.webp';
 import processMoroccoOutline from '@/assets/ProcessSction/maroc-outline.webp';
 import processVoyageIcons from '@/assets/ProcessSction/ui-voyage-decorations.webp';
-import LightRays from '@/features/landing/components/LightRays';
+import { PricingSection } from '@/features/landing/components/PricingSection';
 import ProcessSection from '@/features/landing/components/ProcessSection';
 import { Reveal } from '@/features/landing/components/Reveal';
-import { SwipeCardStack } from '@/features/landing/components/SwipeCardStack';
 import { assetUrl } from '@/lib/asset-url';
 import { cn } from '@/lib/cn';
 
@@ -98,87 +97,6 @@ const destinations = [
   },
 ] as const;
 
-const pricingPlans = [
-  {
-    name: 'Economy Class',
-    price: '499€',
-    suffix: '',
-    description: 'L’essentiel pour démarrer avec un cadre clair et des bases solides.',
-    cta: 'Choisir Economy',
-    features: [
-      { label: 'Stage garanti', included: true },
-      { label: 'Appel avant départ', included: true },
-      { label: 'Guide de destination', included: true },
-      { label: 'Assistance 7j/7', included: true },
-      { label: 'Accès à la communauté', included: true },
-      { label: 'Test de personnalité', included: true },
-      { label: '100 % personnalisable', included: true },
-      { label: 'Logement garanti', included: false },
-      { label: 'Administratif', included: false },
-      { label: 'Échange monnaie', included: false },
-      { label: 'Transfert aller/retour', included: false },
-      { label: 'Carte promotionnelle', included: false },
-      { label: '2 cours de langue', included: false },
-      { label: 'Aide pour l’entretien', included: false },
-      { label: 'Guide tour', included: false },
-      { label: 'Welcome pack', included: false },
-    ],
-  },
-  {
-    name: 'First Class',
-    price: '999€',
-    suffix: '',
-    description:
-      'L’expérience complète pour partir l’esprit léger, avec un accompagnement total.',
-    cta: 'Postuler maintenant',
-    featured: true,
-    features: [
-      { label: 'Stage garanti', included: true },
-      { label: 'Appel avant départ', included: true },
-      { label: 'Guide de destination', included: true },
-      { label: 'Assistance 7j/7', included: true },
-      { label: 'Accès à la communauté', included: true },
-      { label: 'Test de personnalité', included: true },
-      { label: '100 % personnalisable', included: true },
-      { label: 'Logement garanti', included: true },
-      { label: 'Administratif', included: true },
-      { label: 'Échange monnaie', included: true },
-      { label: 'Transfert aller/retour', included: true },
-      { label: 'Carte promotionnelle', included: true },
-      { label: '2 cours de langue', included: true },
-      { label: 'Aide pour l’entretien', included: true },
-      { label: 'Guide tour', included: true },
-      { label: 'Welcome pack', included: true },
-    ],
-  },
-  {
-    name: 'Business Class',
-    price: '699€',
-    suffix: '',
-    description:
-      'Le pack équilibré pour avancer avec un accompagnement personnalisé et structuré.',
-    cta: 'Choisir Business',
-    features: [
-      { label: 'Stage garanti', included: true },
-      { label: 'Appel avant départ', included: true },
-      { label: 'Guide de destination', included: true },
-      { label: 'Assistance 7j/7', included: true },
-      { label: 'Accès à la communauté', included: true },
-      { label: 'Test de personnalité', included: true },
-      { label: '100 % personnalisable', included: true },
-      { label: 'Logement garanti', included: true },
-      { label: 'Administratif', included: true },
-      { label: 'Échange monnaie', included: true },
-      { label: 'Transfert aller/retour', included: true },
-      { label: 'Carte promotionnelle', included: true },
-      { label: '2 cours de langue', included: false },
-      { label: 'Aide pour l’entretien', included: false },
-      { label: 'Guide tour', included: false },
-      { label: 'Welcome pack', included: false },
-    ],
-  },
-] as const;
-
 const testimonials = [
   {
     quote: 'Boarding m’a aidé à comprendre toutes les étapes avant mon départ. Le processus était clair et rassurant.',
@@ -195,9 +113,9 @@ const testimonials = [
 ] as const;
 
 const landingShellClass = 'mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8';
-const landingSectionClass = 'relative py-16 sm:py-20 lg:py-24 [scroll-margin-top:6rem]';
+const landingSectionClass = 'relative py-12 sm:py-14 lg:py-16 [scroll-margin-top:6rem]';
 const landingSectionHeadingClass = 'mx-auto max-w-3xl text-center';
-const landingSectionTitleClass = 'mt-3 font-display text-3xl font-bold leading-tight text-[#07182f] sm:text-4xl lg:text-5xl';
+const landingSectionTitleClass = 'mt-3 font-display text-2xl font-extrabold leading-tight text-[#07182f] sm:text-3xl lg:text-4xl';
 const landingSectionParagraphClass = 'mt-4 text-base leading-7 text-slate-500 sm:text-lg';
 const landingKickerClass = 'inline-flex text-base font-extrabold uppercase tracking-[0.18em] text-brand-600 sm:text-lg';
 const landingButtonBaseClass =
@@ -742,289 +660,6 @@ function ProcessusSection() {
 
 void ProcessusSection;
 
-interface PricingCardProps {
-  name: string;
-  price: string;
-  suffix: string;
-  description: string;
-  cta: string;
-  features: readonly { label: string; included: boolean }[];
-  featured?: boolean;
-}
-
-const pricingPreviewLimit = 7;
-
-function PricingCard({ name, price, suffix, description, cta: _cta, features, featured }: PricingCardProps) {
-  const isBusiness = name === 'Business Class';
-  const previewFeatures = features.slice(0, pricingPreviewLimit);
-  const remainingCount = Math.max(0, features.length - previewFeatures.length);
-
-  return (
-    <Reveal
-      as="article"
-      className={cn(
-        'relative flex flex-col overflow-hidden rounded-[1.65rem] border bg-white p-0 shadow-[0_1px_3px_rgba(15,23,42,0.04),0_10px_32px_-12px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_4px_6px_rgba(15,23,42,0.04),0_24px_56px_-14px_rgba(15,23,42,0.14)]',
-        isBusiness
-          ? 'border-[#a9cfe9] bg-[#fbfdff] shadow-[0_1px_3px_rgba(26,31,92,0.08),0_18px_48px_-18px_rgba(26,31,92,0.24)] hover:border-[#7db7de] hover:shadow-[0_4px_8px_rgba(26,31,92,0.08),0_28px_64px_-20px_rgba(26,31,92,0.3)]'
-          : featured
-          ? 'border-brand-600/35 bg-[#06132a] shadow-[0_1px_3px_rgba(29,79,208,0.12),0_18px_52px_-14px_rgba(29,79,208,0.35)] lg:-translate-y-2 lg:hover:-translate-y-3 lg:hover:border-brand-500/60 lg:hover:shadow-[0_4px_6px_rgba(29,79,208,0.14),0_28px_60px_-16px_rgba(29,79,208,0.38)]'
-          : 'border-slate-200 hover:border-[#cfdcec]'
-      )}
-      delay={featured ? 100 : 0}
-    >
-      {isBusiness ? (
-        <>
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 z-0 h-44 opacity-[0.18]"
-            style={{
-              backgroundImage:
-                'linear-gradient(135deg, rgba(43,53,175,0.28) 12.5%, transparent 12.5%, transparent 50%, rgba(43,53,175,0.28) 50%, rgba(43,53,175,0.28) 62.5%, transparent 62.5%, transparent 100%)',
-              backgroundSize: '22px 22px',
-            }}
-            aria-hidden="true"
-          />
-          <div
-            className="pointer-events-none absolute inset-0 z-0 opacity-[0.055]"
-            style={{
-              backgroundImage: `url(${assetUrl(processVoyageIcons)})`,
-              backgroundRepeat: 'repeat',
-              backgroundSize: '168px 112px',
-            }}
-            aria-hidden="true"
-          />
-          <div className="pointer-events-none absolute inset-0 z-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0.96)_32%,#ffffff_100%)]" aria-hidden="true" />
-        </>
-      ) : null}
-
-      {featured ? (
-        <>
-          <div className="pointer-events-none absolute inset-0 z-0">
-            <LightRays
-              raysOrigin="top-center"
-              raysColor="#4ea2ff"
-              raysSpeed={0.95}
-              lightSpread={0.82}
-              rayLength={1.05}
-              fadeDistance={0.95}
-              saturation={0.95}
-              followMouse={false}
-              mouseInfluence={0}
-              noiseAmount={0.02}
-              distortion={0.01}
-            />
-          </div>
-          <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_0%,rgba(58,126,255,0.2),transparent_58%),linear-gradient(180deg,rgba(2,10,28,0.78)_0%,rgba(3,14,35,0.86)_38%,rgba(5,22,54,0.9)_100%)]" />
-        </>
-      ) : null}
-
-      <div
-        className={cn(
-          'relative z-10 w-full shrink-0',
-          featured
-            ? 'h-1 bg-[linear-gradient(90deg,#1d4fd0_0%,#0891b2_50%,#1d4fd0_100%)]'
-            : isBusiness
-              ? 'h-1.5 bg-[linear-gradient(90deg,#b7dcf3_0%,#2B35AF_52%,#FF6B35_100%)]'
-              : 'h-1 bg-[linear-gradient(90deg,#e2e8f0_0%,#cbd5e1_100%)]'
-        )}
-        aria-hidden="true"
-      />
-
-      {featured ? (
-        <span className="relative z-10 mx-7 mt-6 inline-flex w-fit items-center rounded-full bg-gradient-to-br from-brand-500 to-brand-600 px-3.5 py-1.5 text-xs font-bold text-white shadow-[0_4px_12px_-4px_rgba(78,162,255,0.55)]">
-          Offre recommandée
-        </span>
-      ) : null}
-
-      <div className={cn('relative z-10 px-7 pb-0 pt-7', featured ? 'pt-5' : '', isBusiness ? 'px-8 pt-8' : '')}>
-        <h3 className={cn('text-[1.15rem] font-display font-bold leading-tight', featured ? 'text-slate-100' : isBusiness ? 'text-[#1A1F5C]' : 'text-slate-700')}>{name}</h3>
-        <p className={cn('mt-4 text-[2.35rem] font-extrabold leading-[1.05]', featured ? 'text-white' : isBusiness ? 'text-[#06132a]' : 'text-[#07182f]')}>
-          {price}
-          {suffix ? <span className={cn('ml-1 text-base font-semibold', featured ? 'text-slate-300' : 'text-slate-500')}>{suffix}</span> : null}
-        </p>
-        <p className={cn('mt-4 text-[0.96rem] leading-7', featured ? 'text-slate-200' : isBusiness ? 'text-[#526988]' : 'text-slate-500')}>{description}</p>
-      </div>
-
-      <div
-        className={cn(
-          'relative z-10 mx-7 mt-8 h-px shrink-0',
-          featured
-            ? 'bg-[linear-gradient(90deg,transparent_0%,rgba(191,219,254,0.38)_50%,transparent_100%)]'
-            : isBusiness
-              ? 'mx-8 bg-[linear-gradient(90deg,transparent_0%,rgba(43,53,175,0.16)_50%,transparent_100%)]'
-              : 'bg-[linear-gradient(90deg,transparent_0%,rgba(15,23,42,0.08)_50%,transparent_100%)]'
-        )}
-        aria-hidden="true"
-      />
-
-      <ul className={cn('relative z-10 m-0 grid list-none gap-4 px-7 pb-8 pt-7', isBusiness ? 'px-8 pt-8' : '')}>
-        {previewFeatures.map((feature) => (
-          <li
-            key={feature.label}
-            className={cn(
-              'flex items-start gap-3 text-[0.96rem] font-medium leading-7',
-              feature.included
-                ? featured
-                  ? 'text-slate-100'
-                  : isBusiness
-                    ? 'text-[#243b5a]'
-                  : 'text-slate-700'
-                : featured
-                  ? 'text-slate-400'
-                  : 'text-slate-400'
-            )}
-          >
-            {feature.included ? (
-              <svg
-                className={cn('mt-1 shrink-0', featured ? 'text-emerald-300' : isBusiness ? 'text-[#FF6B35]' : 'text-emerald-500')}
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            ) : (
-              <svg
-                className={cn('mt-1 shrink-0', featured ? 'text-slate-500' : 'text-slate-300')}
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            )}
-            {feature.label}
-          </li>
-        ))}
-      </ul>
-
-      {remainingCount > 0 ? (
-        <p
-          className={cn(
-            'relative z-10 mx-7 mb-7 mt-1 rounded-xl border border-dashed px-4 py-2 text-center text-xs font-semibold',
-            featured
-              ? 'border-blue-300/35 bg-blue-500/10 text-slate-200'
-              : isBusiness
-                ? 'mx-8 border-[#a9cfe9] bg-[#eef7ff]/80 text-[#526988]'
-                : 'border-[#cfdcec] bg-[#f4faff] text-slate-500'
-          )}
-        >
-          + {remainingCount} autres éléments dans le comparatif
-        </p>
-      ) : null}
-
-      <a
-        href={`${appointmentHref}&body=Bonjour%20Boarding%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20le%20pack%20${name}.`}
-        className={cn(
-          'relative z-10 mx-7 mb-7 mt-auto flex min-h-12 items-center justify-center rounded-xl border px-5 py-3.5 text-sm font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2',
-          featured
-            ? 'border-transparent bg-gradient-to-br from-[#5aa8ff] to-[#2a68ff] text-white shadow-[0_8px_22px_-8px_rgba(59,130,246,0.65)] hover:shadow-[0_12px_28px_-8px_rgba(59,130,246,0.75)]'
-            : isBusiness
-              ? 'mx-8 border-transparent bg-[#1A1F5C] text-white shadow-[0_10px_24px_-12px_rgba(26,31,92,0.6)] hover:-translate-y-0.5 hover:bg-[#2B35AF]'
-              : 'border-slate-200 bg-slate-100 text-[#07182f] hover:-translate-y-0.5 hover:bg-slate-200'
-        )}
-      >
-        Embarquer maintenant
-      </a>
-    </Reveal>
-  );
-}
-
-function PricingSection() {
-  const comparisonRows = pricingPlans[0]?.features.map((feature) => feature.label) ?? [];
-
-  return (
-    <section
-      className={cn(landingSectionClass, 'relative overflow-hidden py-20 sm:py-24 lg:py-28')}
-      id="offres"
-      aria-labelledby="offres-title"
-    >
-      <div className={landingShellClass}>
-        <Reveal className="grid gap-6 max-md:text-center lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-          <div className="max-w-xl max-md:mx-auto">
-            <span className={landingKickerClass}>Offres</span>
-            <h2 id="offres-title" className={landingSectionTitleClass}>
-              Choisis l’accompagnement qui te convient.
-            </h2>
-          </div>
-          <p className="m-0 max-w-xl text-base leading-8 text-slate-500 max-md:mx-auto lg:text-lg">
-            Découvre nos formules d’accompagnement pour avancer étape par étape vers ton stage à l’étranger. Les tarifs peuvent évoluer selon la destination et la durée.
-          </p>
-        </Reveal>
-
-        <div className="mx-auto mt-14 w-full max-w-md px-2 pb-10 sm:max-w-lg lg:hidden">
-          <SwipeCardStack
-            items={pricingPlans}
-            getKey={(plan) => plan.name}
-            renderItem={(plan) => <PricingCard {...plan} />}
-            ariaLabel="Offres Boarding"
-            previousLabel="Offre précédente"
-            nextLabel="Offre suivante"
-          />
-        </div>
-
-        <div className="mt-16 hidden grid-cols-3 gap-6 lg:grid">
-          {pricingPlans.map((plan) => (
-            <PricingCard key={plan.name} {...plan} />
-          ))}
-        </div>
-
-        <Reveal className="mx-auto mt-10 max-w-[1240px] rounded-[1.6rem] border border-slate-200 bg-white p-4 shadow-[0_14px_38px_-18px_rgba(15,23,42,0.12)] sm:p-6 lg:p-8" delay={180}>
-          <h3 className="text-lg font-display font-bold text-[#07182f] sm:text-xl">Comparatif complet des options</h3>
-          <div className="mt-5 overflow-x-auto">
-            <table className="w-full min-w-[720px] border-separate border-spacing-0 overflow-hidden rounded-2xl border border-slate-200 bg-white">
-              <thead>
-                <tr>
-                  <th className="w-[44%] border-b border-slate-200 bg-slate-50 px-4 py-3 text-left text-sm font-bold text-slate-700">Options</th>
-                  {pricingPlans.map((plan) => (
-                    <th key={`${plan.name}-head`} className="border-b border-slate-200 bg-slate-50 px-4 py-3 text-left text-sm font-bold text-slate-700">
-                      {plan.name}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {comparisonRows.map((label) => (
-                  <tr key={label}>
-                    <th className="border-b border-slate-100 px-4 py-3 text-left text-sm font-semibold text-slate-700">{label}</th>
-                    {pricingPlans.map((plan) => {
-                      const status = plan.features.find((feature) => feature.label === label)?.included ?? false;
-                      return (
-                        <td
-                          key={`${plan.name}-${label}`}
-                          className={cn(
-                            'border-b border-slate-100 px-4 py-3 text-center text-base font-extrabold',
-                            status ? 'text-emerald-600' : 'text-slate-300'
-                          )}
-                          aria-label={`${plan.name} - ${label} : ${status ? 'inclus' : 'non inclus'}`}
-                        >
-                          {status ? '✓' : '✕'}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
 interface TestimonialCardProps {
   quote: string;
   role: string;
@@ -1070,7 +705,7 @@ function TestimonialsSection() {
 function FinalCTA() {
   return (
     <section
-      className={cn(landingSectionClass, 'py-16 sm:py-20')}
+      className={cn(landingSectionClass, 'py-12 sm:py-14 lg:py-16')}
       id="contact"
       aria-labelledby="contact-title"
     >
@@ -1168,7 +803,7 @@ function LandingFooter() {
 
 export function LandingPage() {
   return (
-    <div className="host-grotesk-regular isolate min-h-dvh overflow-hidden text-[#07182f] [color-scheme:light] [background:#F5ECD7]">
+    <div className="font-body isolate min-h-dvh overflow-hidden text-[#07182f] [color-scheme:light] [background:#F5ECD7]">
       <main>
         <HeroSection />
         <ProcessSection />
