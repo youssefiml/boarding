@@ -479,54 +479,6 @@ function TestimonialsSection() {
   );
 }
 
-function FinalCTA() {
-  return (
-    <section
-      className={cn(landingSectionClass, 'py-12 sm:py-14 lg:py-16')}
-      id="contact"
-      aria-labelledby="contact-title"
-    >
-      <div className={landingShellClass}>
-        <Reveal className="relative mx-auto max-w-4xl overflow-hidden rounded-[2rem] border border-slate-200 bg-[linear-gradient(180deg,#ffffff_0%,#f4faff_100%)] p-6 text-center text-[#07182f] shadow-[0_24px_60px_-28px_rgba(29,79,208,0.25)] sm:p-10">
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                'radial-gradient(circle at 20% 0%, rgba(29, 79, 208, 0.08), transparent 40%), radial-gradient(circle at 80% 100%, rgba(8, 145, 178, 0.06), transparent 40%)',
-            }}
-            aria-hidden="true"
-          />
-          <span className={cn(landingKickerClass, 'relative z-10')}>Prêt à trouver ton stage à l’étranger ?</span>
-          <h2 id="contact-title" className="relative z-10 mt-3 text-lg font-extrabold leading-tight text-[#07182f]">
-            Passe de l’idée au départ avec un parcours clair.
-          </h2>
-          <p className="relative z-10 mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-500 sm:text-lg sm:leading-8">
-            Postule maintenant et construisons ensemble ton projet, de la destination jusqu’à ton intégration sur place.
-          </p>
-
-          <div className="relative z-10 mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <a href={appointmentHref} className={cn(landingButtonBaseClass, landingButtonLargeClass, landingButtonPrimaryClass)}>
-              Postuler maintenant
-            </a>
-            <a href={contactHref} className={cn(landingButtonBaseClass, landingButtonLargeClass, landingButtonLightClass)}>
-              Nous contacter
-            </a>
-          </div>
-
-          <address className="relative z-10 mt-8 flex flex-col items-center justify-center gap-2 not-italic sm:flex-row sm:gap-5">
-            <a className="text-sm font-bold text-slate-700 transition-colors hover:text-[#07182f]" href="mailto:lagenceboarding@gmail.com">
-              lagenceboarding@gmail.com
-            </a>
-            <a href="https://www.boardingagence.com" target="_blank" rel="noreferrer">
-              www.boardingagence.com
-            </a>
-          </address>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
 function LandingFooter() {
   return (
   <footer className="border-t border-slate-200 bg-[#F5ECD7] py-12">
@@ -588,7 +540,6 @@ export function LandingPage() {
         <DestinationsSection />
         <PricingSection />
         <TestimonialsSection />
-        <FinalCTA />
       </main>
       <LandingFooter />
     </div>

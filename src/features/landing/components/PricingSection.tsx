@@ -145,9 +145,9 @@ function PricingCard({ plan }: { plan: Plan }) {
       ) : null}
 
       <div className={cn('relative z-10', !plan.recommended && 'pt-8')}>
-        <p className={cn('font-mono text-[0.68rem] font-normal uppercase tracking-[0.16em]', isEconomy ? 'text-white/72' : 'text-[#2B35AF]')}>{plan.name}</p>
-        <h3 className="mt-3 text-lg font-extrabold leading-tight">{plan.price}</h3>
-        <p className={cn('mt-5 min-h-[4.25rem] text-sm font-light uppercase leading-6 tracking-normal', isEconomy ? 'text-white/74' : 'text-[#526988]')}>{plan.subtitle}</p>
+        <p className={cn('font-mono text-[0.68rem] font-bold uppercase tracking-[0.16em]', isEconomy ? 'text-white/72' : 'text-[#2B35AF]')}>{plan.name}</p>
+        <h3 className="mt-3 text-3xl font-extrabold leading-none sm:text-4xl">{plan.price}</h3>
+        <p className={cn('mt-5 min-h-[4.25rem] text-sm font-bold uppercase leading-6 tracking-normal', isEconomy ? 'text-white/74' : 'text-[#526988]')}>{plan.subtitle}</p>
       </div>
 
       <div className={cn('relative z-10 my-7 h-px shrink-0', isEconomy ? 'bg-white/14' : 'bg-[#1A1F5C]/10')} aria-hidden="true" />

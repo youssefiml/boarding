@@ -17,6 +17,8 @@ import processusPic1 from '@/assets/processus-pic1.webp';
 import processusPic2 from '@/assets/processus-pic2.webp';
 import processusPic3 from '@/assets/processus-pic3.webp';
 import processusPic4 from '@/assets/processus-pic4.webp';
+import processusPic5 from '@/assets/processus-pic5.webp';
+import processusPic6 from '@/assets/processus-pic6.webp';
 import { Reveal } from '@/features/landing/components/Reveal';
 import { assetUrl } from '@/lib/asset-url';
 import { cn } from '@/lib/cn';
@@ -68,6 +70,8 @@ const STEPS: ProcessStep[] = [
     icon: Briefcase,
     iconAccent: 'sunset',
     imageKind: 'pricing',
+    imageSrc: assetUrl(processusPic2),
+    imageAlt: 'Choix du pack Boarding',
   },
   {
     index: 3,
@@ -79,6 +83,8 @@ const STEPS: ProcessStep[] = [
     icon: Users,
     iconAccent: 'navy',
     imageKind: 'matching',
+    imageSrc: assetUrl(processusPic3),
+    imageAlt: 'Matching avec les entreprises',
   },
   {
     index: 4,
@@ -104,7 +110,7 @@ const STEPS: ProcessStep[] = [
     icon: Send,
     iconAccent: 'navy',
     imageKind: 'departure',
-    imageSrc: assetUrl(processusPic2),
+    imageSrc: assetUrl(processusPic5),
     imageAlt: 'Préparation des bagages pour le stage à l’étranger',
     sticker: { line1: 'ALL SET', line2: 'FOR TAKE-OFF' },
   },
@@ -118,7 +124,7 @@ const STEPS: ProcessStep[] = [
     icon: Globe,
     iconAccent: 'sunset',
     imageKind: 'photo',
-    imageSrc: assetUrl(processusPic3),
+    imageSrc: assetUrl(processusPic6),
     imageAlt: 'Communauté Boarding réunie sur place',
     sticker: { line1: 'WELCOME TO', line2: 'THE BOARDING COMMUNITY' },
   },
@@ -376,19 +382,22 @@ function Sticker({ sticker }: { sticker: StickerBadge }) {
 function StepImage({ step }: { step: ProcessStep }) {
   return (
     <div className="relative h-full min-h-[200px] overflow-hidden rounded-[1.5rem] sm:min-h-[220px]">
-      {step.imageKind === 'photo' && step.imageSrc && step.imageAlt && (
+      {step.imageSrc && step.imageAlt && (
         <PhotoImage src={step.imageSrc} alt={step.imageAlt} />
       )}
-      {step.imageKind === 'pricing' && <PricingMock />}
-      {step.imageKind === 'matching' && <MatchingMock />}
-      {step.imageKind === 'meeting' && (
+      {!step.imageSrc && step.imageKind === 'pricing' && <PricingMock />}
+      {!step.imageSrc && step.imageKind === 'matching' && <MatchingMock />}
+      {!step.imageSrc && step.imageKind === 'meeting' && (
         <MeetingMock
           src={step.imageSrc ?? assetUrl(processusPic4)}
           alt={step.imageAlt ?? 'Visioconférence'}
         />
       )}
-      {step.imageKind === 'departure' && step.imageSrc && step.imageAlt && (
-        <DepartureMock src={step.imageSrc} alt={step.imageAlt} />
+      {!step.imageSrc && step.imageKind === 'departure' && (
+        <DepartureMock
+          src={assetUrl(processusPic5)}
+          alt={step.imageAlt ?? 'Préparation du départ'}
+        />
       )}
 
       {step.sticker && <Sticker sticker={step.sticker} />}
