@@ -1,0 +1,5 @@
+<svg width="520" height="160" viewBox="0 0 520 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dotted flight route">
+  <path d="M10 100C85 28 134 174 210 88C286 2 333 139 409 72C451 35 486 40 510 55" stroke="#D3B98A" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 12"/>
+  <circle cx="410" cy="72" r="5" fill="#F97316"/>
+  <path d="M492 37 512 53 488 62l5-12-1-13Z" fill="#D3B98A"/>
+</svg>

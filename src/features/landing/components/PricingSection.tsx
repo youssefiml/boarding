@@ -30,12 +30,12 @@ const serviceFeatures = [
   '2 cours de langue',
   "Aide pour l'entretien",
   'Guide tour',
-  'Welcome pack',
+  'Pack de bienvenue',
 ] as const;
 
 const plans = [
   {
-    name: 'ECONOMY CLASS',
+    name: 'CLASSE ÉCONOMIQUE',
     price: '€499',
     subtitle: "ÉCONOMIQUE ET INDISPENSABLE - L'essentiel pour ton départ en stage.",
     tone: 'economy',
@@ -44,7 +44,7 @@ const plans = [
     excluded: serviceFeatures,
   },
   {
-    name: 'FIRST CLASS',
+    name: 'PREMIÈRE CLASSE',
     price: '€999',
     subtitle: "LE PACK PREMIUM & SÉRÉNITÉ MAXIMALE - L'accompagnement complet pour un départ sans souci.",
     tone: 'business',
@@ -53,7 +53,7 @@ const plans = [
     excluded: [],
   },
   {
-    name: 'BUSINESS CLASS',
+    name: 'CLASSE AFFAIRES',
     price: '€699',
     subtitle: "LE PACK AVANTAGES & ACCOMPAGNEMENT - L'équilibre parfait entre service et prix.",
     tone: 'first',
@@ -66,7 +66,7 @@ const plans = [
       'Transfert aller/retour',
       'Carte promotionnelle',
     ],
-    excluded: ['2 cours de langue', "Aide pour l'entretien", 'Guide tour', 'Welcome pack'],
+    excluded: ['2 cours de langue', "Aide pour l'entretien", 'Guide tour', 'Pack de bienvenue'],
   },
 ] as const;
 
@@ -188,8 +188,8 @@ export function PricingSection() {
 
       <div className="relative z-10 mx-auto w-full max-w-7xl">
         <div className="text-center">
-          <h2 id="pricing-title" className="mt-2 text-lg font-extrabold leading-tight text-[#1A1F5C]">
-            PRICING
+          <h2 id="pricing-title" className="mt-2 text-[clamp(1.6rem,3.2vw,3.25rem)] font-extrabold leading-tight text-[#1A1F5C]">
+            OFFRES
           </h2>
         </div>
 

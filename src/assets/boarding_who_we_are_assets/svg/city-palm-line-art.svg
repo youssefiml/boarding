@@ -1,0 +1,11 @@
+<svg width="360" height="180" viewBox="0 0 360 180" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="City palm line art">
+  <g opacity=".5" stroke="#C8B28C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 154h320"/>
+    <path d="M44 154V84h42v70M58 98h14M58 116h14M58 134h14"/>
+    <path d="M110 154V104h48v50M122 120h24M122 136h24"/>
+    <path d="M184 154V64l34-30 34 30v90M202 78h32M202 98h32M202 118h32"/>
+    <path d="M285 154V78"/>
+    <path d="M285 82c-18-20-36-10-46 2M287 82c19-20 36-10 47 2M285 82c-6-25 10-38 26-43M285 82c6-25-10-38-26-43"/>
+    <path d="M8 154c34-35 62-35 98 0M126 154c32-30 70-30 101 0"/>
+  </g>
+</svg>

@@ -1,0 +1,5 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Compass icon">
+  <circle cx="48" cy="48" r="42" fill="#FFF8E8" stroke="#F2D7A6" stroke-width="2"/>
+  <path d="M64 30L55 59.5C54.7 60.5 54 61.3 53 61.7L24 72L34.2 43C34.6 42 35.4 41.3 36.4 41L64 30Z" fill="#EFF6FF" stroke="#2563EB" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M37 58L48 47" stroke="#F97316" stroke-width="4" stroke-linecap="round"/>
+</svg>

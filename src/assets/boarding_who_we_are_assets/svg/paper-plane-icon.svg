@@ -1,0 +1,5 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Paper plane icon">
+  <path d="M116 16 15 56c-5 2-5 9 .1 11.1L54 82l15 38.8c2 5.1 9 5.1 11.1.1L116 16Z" fill="#EFF6FF" stroke="#2563EB" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M54 82 116 16 69 121" stroke="#2563EB" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M15 56 116 16 54 82" stroke="white" stroke-width="4" opacity=".7"/>
+</svg>

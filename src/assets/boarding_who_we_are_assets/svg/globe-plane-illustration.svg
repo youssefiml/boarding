@@ -1,0 +1,9 @@
+<svg width="360" height="260" viewBox="0 0 360 260" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Globe and plane illustration">
+  <g opacity=".55">
+    <circle cx="225" cy="150" r="82" fill="#EFF6FF" stroke="#BFD7FF" stroke-width="3"/>
+    <path d="M143 150h164M225 68c28 24 42 51 42 82s-14 58-42 82M225 68c-28 24-42 51-42 82s14 58 42 82" stroke="#BFD7FF" stroke-width="3"/>
+    <path d="M165 95c34 17 85 17 120 0M165 205c34-17 85-17 120 0" stroke="#BFD7FF" stroke-width="3"/>
+    <path d="M58 58C107 18 145 78 112 111C79 144 129 178 171 125C213 72 264 105 260 154" stroke="#F97316" stroke-width="3" stroke-dasharray="7 10" stroke-linecap="round"/>
+    <path d="M72 42 105 56 72 70l9-14-9-14Z" fill="#2563EB" opacity=".75"/>
+  </g>
+</svg>

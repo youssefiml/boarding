@@ -48,7 +48,7 @@ interface ProcessStep {
 const STEPS: ProcessStep[] = [
   {
     index: 1,
-    label: 'STEP 01',
+    label: 'ÉTAPE 01',
     title: 'Création du profil',
     description:
       "Commence par créer ton profil en renseignant ton parcours, tes expériences, tes centres d'intérêt ainsi que ta personnalité. Ces informations nous permettent de mieux comprendre qui tu es et de te proposer des opportunités réellement adaptées. Tu peux également ajouter ton CV afin d'enrichir ton profil.",
@@ -58,25 +58,25 @@ const STEPS: ProcessStep[] = [
     imageKind: 'photo',
     imageSrc: assetUrl(processusPic1),
     imageAlt: 'Étudiante créant son profil sur Boarding',
-    sticker: { line1: 'BOARDING PASS', line2: 'PROFILE CREATED' },
+    sticker: { line1: 'PASS BOARDING', line2: 'PROFIL CRÉÉ' },
   },
   {
     index: 2,
-    label: 'STEP 02',
+    label: 'ÉTAPE 02',
     title: 'Choisis ton pack',
     description:
-      "Sélectionne le pack d'accompagnement qui correspond à tes besoins : Economic, Business ou First Class.",
+      "Sélectionne le pack d'accompagnement qui correspond à tes besoins : Économique, Classe Affaires ou Première Classe.",
     side: 'right',
     icon: Briefcase,
     iconAccent: 'sunset',
     imageKind: 'pricing',
     imageSrc: assetUrl(processusPic2),
     imageAlt: 'Choix du pack Boarding',
-    sticker: { line1: 'PACK SELECTED', line2: 'READY TO BOARD' },
+    sticker: { line1: 'PACK CHOISI', line2: 'PRÊT À COMMENCER' },
   },
   {
     index: 3,
-    label: 'STEP 03',
+    label: 'ÉTAPE 03',
     title: 'Matching avec\nles entreprises',
     description:
       "Une fois ton profil complété, notre système te propose rapidement une sélection de trois entreprises en adéquation avec ton profil. Tu peux consulter chaque opportunité, évaluer les compatibilités et choisir celle qui correspond le mieux à tes attentes.",
@@ -86,11 +86,11 @@ const STEPS: ProcessStep[] = [
     imageKind: 'matching',
     imageSrc: assetUrl(processusPic3),
     imageAlt: 'Matching avec les entreprises',
-    sticker: { line1: 'MATCH SCORE', line2: '3 OPTIONS' },
+    sticker: { line1: 'RÉSULTAT MATCHING', line2: '3 OPTIONS' },
   },
   {
     index: 4,
-    label: 'STEP 04',
+    label: 'ÉTAPE 04',
     title: 'Prise de contact',
     description:
       "Après avoir identifié l'entreprise qui te convient, tu peux directement prendre rendez-vous pour échanger avec elle. L'objectif est de faciliter la mise en relation et de te permettre d'avancer rapidement dans ton processus.",
@@ -100,11 +100,11 @@ const STEPS: ProcessStep[] = [
     imageKind: 'meeting',
     imageSrc: assetUrl(processusPic4),
     imageAlt: 'Visioconférence avec une entreprise partenaire',
-    sticker: { line1: 'MEETING', line2: 'SCHEDULED' },
+    sticker: { line1: 'RENDEZ-VOUS', line2: 'PLANIFIÉ' },
   },
   {
     index: 5,
-    label: 'STEP 05',
+    label: 'ÉTAPE 05',
     title: 'Organisation\ndu départ',
     description:
       "En fonction du pack choisi, nous prenons en charge toute la logistique liée à ton arrivée : logement, transfert depuis l'aéroport, accompagnement et conseils pratiques. Tout est pensé pour simplifier ton départ.",
@@ -114,11 +114,11 @@ const STEPS: ProcessStep[] = [
     imageKind: 'departure',
     imageSrc: assetUrl(processusPic5),
     imageAlt: 'Préparation des bagages pour le stage à l’étranger',
-    sticker: { line1: 'ALL SET', line2: 'FOR TAKE-OFF' },
+    sticker: { line1: 'PRÊT', line2: 'POUR LE DÉPART' },
   },
   {
     index: 6,
-    label: 'STEP 06',
+    label: 'ÉTAPE 06',
     title: 'Intégration sur place',
     description:
       "Tu arrives dans les meilleures conditions, avec un cadre déjà organisé. Tu peux ainsi te concentrer pleinement sur ton stage et ton expérience à l'étranger. Tu rejoins aussi la communauté Boarding pour que tu ne sois pas tout seul.",
@@ -128,7 +128,7 @@ const STEPS: ProcessStep[] = [
     imageKind: 'photo',
     imageSrc: assetUrl(processusPic6),
     imageAlt: 'Communauté Boarding réunie sur place',
-    sticker: { line1: 'WELCOME TO', line2: 'THE BOARDING COMMUNITY' },
+    sticker: { line1: 'BIENVENUE DANS', line2: 'LA COMMUNAUTÉ BOARDING' },
   },
 ];
 
@@ -141,7 +141,7 @@ function PricingMock() {
       <div className="flex flex-col rounded-xl bg-[#181E4A] p-2 sm:p-2.5">
         <Briefcase className="h-3.5 w-3.5 text-white/55" aria-hidden="true" />
         <p className="mt-2 font-mono text-[7px] font-normal uppercase tracking-[0.14em] text-white/55 sm:text-[8px]">
-          ECONOMIC
+          ÉCONOMIQUE
         </p>
         <ul className="mt-2 space-y-1 text-[7px] leading-[1.3] text-white/70 sm:text-[8px]">
           <li className="flex gap-1">
@@ -166,7 +166,7 @@ function PricingMock() {
         </span>
         <Star className="h-3.5 w-3.5 text-[#FF6B35]" aria-hidden="true" />
         <p className="mt-2 font-mono text-[7px] font-normal uppercase tracking-[0.14em] text-[#FF8E5C] sm:text-[8px]">
-          BUSINESS
+          AFFAIRES
         </p>
         <ul className="mt-2 space-y-1 text-[7px] leading-[1.3] text-white/85 sm:text-[8px]">
           <li className="flex gap-1">
@@ -188,7 +188,7 @@ function PricingMock() {
       <div className="flex flex-col rounded-xl bg-[#181E4A] p-2 sm:p-2.5">
         <Crown className="h-3.5 w-3.5 text-white/55" aria-hidden="true" />
         <p className="mt-2 font-mono text-[7px] font-normal uppercase tracking-[0.14em] text-white/55 sm:text-[8px]">
-          FIRST&nbsp;CLASS
+          PREMIÈRE&nbsp;CLASSE
         </p>
         <ul className="mt-2 space-y-1 text-[7px] leading-[1.3] text-white/70 sm:text-[8px]">
           <li className="flex gap-1">
@@ -498,7 +498,7 @@ export default function ProcessSection() {
               aria-hidden="true"
             />
             <span className="font-mono text-[10px] font-normal uppercase tracking-[0.3em] text-[#2B35AF] sm:text-xs">
-              Boarding Journey
+              Parcours Boarding
             </span>
             <Plane
               className="h-3.5 w-3.5 -rotate-12 text-[#2B35AF]"
@@ -512,7 +512,7 @@ export default function ProcessSection() {
 
           <h2
             id="processus-title"
-            className="mt-5 text-lg font-extrabold leading-tight text-[#1A1F5C]"
+            className="mt-5 text-[clamp(1.6rem,3.2vw,3.25rem)] font-extrabold leading-tight text-[#1A1F5C]"
           >
             Ton parcours Boarding, étape par étape
           </h2>

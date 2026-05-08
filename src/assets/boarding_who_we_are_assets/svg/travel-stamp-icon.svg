@@ -1,0 +1,8 @@
+<svg width="180" height="130" viewBox="0 0 180 130" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Travel stamp icon">
+  <g opacity=".75">
+    <circle cx="55" cy="65" r="44" fill="none" stroke="#E9C98F" stroke-width="3" stroke-dasharray="8 5"/>
+    <circle cx="55" cy="65" r="34" fill="none" stroke="#E9C98F" stroke-width="2"/>
+    <path d="M77 47 51 68M77 47l-11 36-15-15-20-8 46-13Z" stroke="#D8B878" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M100 38h64M95 55h70M100 72h64M95 89h70" stroke="#D8B878" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

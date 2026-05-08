@@ -1,0 +1,6 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map pin icon">
+  <circle cx="48" cy="48" r="42" fill="#FFF8E8" stroke="#F2D7A6" stroke-width="2"/>
+  <path d="M20 64L36 54L56 64L76 52V78L56 90L36 80L20 90V64Z" fill="white" stroke="#2563EB" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M56 40C56 51 44 63 44 63S32 51 32 40a12 12 0 1 1 24 0Z" fill="#FFE8D6" stroke="#F97316" stroke-width="4"/>
+  <circle cx="44" cy="40" r="4" fill="#F97316"/>
+</svg>
