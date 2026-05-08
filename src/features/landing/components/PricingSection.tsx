@@ -35,7 +35,7 @@ const serviceFeatures = [
 
 const plans = [
   {
-    name: 'CLASSE ÉCONOMIQUE',
+    name: 'ECONOMY CLASS',
     price: '€499',
     subtitle: "ÉCONOMIQUE ET INDISPENSABLE - L'essentiel pour ton départ en stage.",
     tone: 'economy',
@@ -44,7 +44,7 @@ const plans = [
     excluded: serviceFeatures,
   },
   {
-    name: 'PREMIÈRE CLASSE',
+    name: 'FIRST CLASS',
     price: '€999',
     subtitle: "LE PACK PREMIUM & SÉRÉNITÉ MAXIMALE - L'accompagnement complet pour un départ sans souci.",
     tone: 'business',
@@ -53,7 +53,7 @@ const plans = [
     excluded: [],
   },
   {
-    name: 'CLASSE AFFAIRES',
+    name: 'BUSINESS CLASS',
     price: '€699',
     subtitle: "LE PACK AVANTAGES & ACCOMPAGNEMENT - L'équilibre parfait entre service et prix.",
     tone: 'first',
@@ -188,7 +188,7 @@ export function PricingSection() {
 
       <div className="relative z-10 mx-auto w-full max-w-7xl">
         <div className="text-center">
-          <h2 id="pricing-title" className="mt-2 text-[clamp(1.6rem,3.2vw,3.25rem)] font-extrabold leading-tight text-[#1A1F5C]">
+          <h2 id="pricing-title" className="mt-2 inline-flex text-base font-extrabold uppercase tracking-[0.18em] text-brand-600 sm:text-lg">
             OFFRES
           </h2>
         </div>

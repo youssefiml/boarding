@@ -412,7 +412,7 @@ function StepImage({ step }: { step: ProcessStep }) {
 
 function StepText({ step }: { step: ProcessStep }) {
   return (
-    <div className="flex h-full flex-col justify-start overflow-hidden px-4 py-4 sm:px-5 sm:py-5">
+    <div className="flex h-full flex-col justify-start px-4 py-4 sm:px-5 sm:py-5">
       <p className="font-mono text-[10px] font-normal uppercase tracking-[0.22em] text-[#2B35AF] sm:text-[11px]">
         {step.label}
       </p>
@@ -423,7 +423,7 @@ function StepText({ step }: { step: ProcessStep }) {
         className="mt-2 block h-[3px] w-9 rounded-full bg-[#FF6B35]"
         aria-hidden="true"
       />
-      <p className="mt-2 overflow-hidden text-[0.82rem] leading-[1.5] text-[#1A1F5C]/70 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4] sm:text-[0.88rem]">
+      <p className="mt-2 text-sm leading-relaxed text-[#607089] sm:text-[0.88rem]">
         {step.description}
       </p>
     </div>
@@ -435,7 +435,7 @@ function StepCard({ step }: { step: ProcessStep }) {
   return (
     <div
       className={cn(
-        'relative mx-auto grid min-h-[190px] w-full max-w-[560px] overflow-hidden rounded-[1.4rem] border border-[#1A1F5C]/8 bg-white/95 shadow-[0_18px_44px_-26px_rgba(26,31,92,0.28)] backdrop-blur-sm sm:min-h-[200px] lg:mx-0 lg:h-[210px] lg:min-h-[210px] xl:h-[220px] xl:min-h-[220px]',
+        'relative mx-auto grid min-h-[190px] w-full max-w-[560px] overflow-hidden rounded-[1.4rem] border border-[#1A1F5C]/8 bg-white/95 shadow-[0_18px_44px_-26px_rgba(26,31,92,0.28)] backdrop-blur-sm sm:min-h-[200px] lg:mx-0 lg:min-h-[210px] xl:min-h-[220px]',
         'grid-cols-1 sm:grid-cols-[44%_1fr]'
       )}
     >
@@ -493,19 +493,11 @@ export default function ProcessSection() {
         {/* ───── Header ───── */}
         <Reveal className="mx-auto max-w-4xl text-center">
           <div className="inline-flex items-center justify-center gap-3">
-            <span
-              className="hidden h-px w-12 border-t border-dashed border-[#2B35AF]/45 sm:inline-block"
-              aria-hidden="true"
-            />
-            <span className="font-mono text-[10px] font-normal uppercase tracking-[0.3em] text-[#2B35AF] sm:text-xs">
+            <span className="inline-flex text-base font-extrabold uppercase tracking-[0.18em] text-brand-600 sm:text-lg">
               Parcours Boarding
             </span>
             <Plane
               className="h-3.5 w-3.5 -rotate-12 text-[#2B35AF]"
-              aria-hidden="true"
-            />
-            <span
-              className="hidden h-px w-12 border-t border-dashed border-[#2B35AF]/45 sm:inline-block"
               aria-hidden="true"
             />
           </div>

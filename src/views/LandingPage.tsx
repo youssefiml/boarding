@@ -575,7 +575,7 @@ function TestimonialsSection() {
         <div className="pointer-events-none absolute -bottom-24 right-6 hidden h-36 w-36 rounded-full bg-[#1d67f0]/10 blur-3xl lg:block" aria-hidden="true" />
 
         <div className={landingSectionHeadingClass}>
-          <span className="inline-flex text-[0.82rem] font-extrabold uppercase tracking-[0.26em] text-[#1d67f0] sm:text-sm">TÉMOIGNAGES</span>
+          <span className={landingKickerClass}>TÉMOIGNAGES</span>
           <h2 id="temoignages-title" className="mx-auto mt-4 max-w-4xl text-[clamp(1.6rem,3.2vw,3.25rem)] font-extrabold leading-[1.12] text-[#07182f]">
             Une expérience pensée pour donner confiance avant le départ.
           </h2>

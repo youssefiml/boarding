@@ -89,18 +89,17 @@ export function WhoWeAreSection() {
       />
 
       <div className="relative mx-auto w-full max-w-[1360px]">
-        <header className="relative mx-auto max-w-5xl text-center">
-          <TravelStampIcon className="pointer-events-none absolute -left-6 -top-8 hidden h-20 w-[110px] opacity-60 xl:block" />
-          <SparklesIcon className="pointer-events-none absolute left-10 top-12 hidden h-10 w-10 opacity-65 xl:block" />
-          <div className="pointer-events-none absolute -right-2 top-2 hidden xl:block" aria-hidden="true">
-            <MapPinRouteDecoration className="h-20 w-[180px] opacity-75" />
+        <header className="relative mx-auto max-w-5xl pb-1 text-center">
+          <TravelStampIcon className="pointer-events-none absolute -left-14 -top-6 hidden h-[96px] w-[150px] opacity-45 lg:block" />
+          <div className="pointer-events-none absolute -right-10 -top-4 hidden lg:block" aria-hidden="true">
+            <MapPinRouteDecoration className="h-[96px] w-[210px] opacity-50" />
           </div>
 
-          <p className="text-[0.9rem] font-extrabold uppercase tracking-[0.3em] text-[#1d67f0]">QUI SOMMES-NOUS ?</p>
+          <p className="inline-flex text-[0.78rem] font-extrabold uppercase tracking-[0.23em] text-[#1d67f0] sm:text-[0.84rem]">QUI SOMMES-NOUS ?</p>
           <h2 className="mx-auto mt-5 max-w-5xl text-[clamp(1.6rem,3.2vw,3.25rem)] font-black leading-[1.05] text-[#07182f]">
             Une startup créée par des jeunes, pour des jeunes.
           </h2>
-          <p className="mx-auto mt-6 max-w-[860px] text-[1.08rem] leading-8 text-[#607089] sm:text-xl sm:leading-9">
+          <p className="mx-auto mt-5 max-w-[790px] text-[0.98rem] leading-7 text-[#5f708b] sm:text-[1.06rem] sm:leading-8">
             Boarding accompagne les étudiants de A à Z pour trouver un stage à l’étranger, vivre une vraie expérience sur place et avancer avec plus de confiance.
           </p>
         </header>
@@ -135,7 +134,7 @@ export function WhoWeAreSection() {
 
           <article className="relative flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-[rgba(205,163,101,0.2)] bg-[#fffaf0] px-5 py-5 shadow-[0_18px_44px_-34px_rgba(7,24,47,0.45)] sm:px-6 sm:py-6 lg:px-7">
             <div className="relative z-10 grid grid-cols-[5rem_minmax(0,1fr)] items-start gap-x-4 sm:grid-cols-[6rem_minmax(0,1fr)] sm:gap-x-5">
-              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full border border-[#F2A15D] bg-[linear-gradient(140deg,#fff7e7_0%,#f4efe5_100%)] p-[3px] sm:h-24 sm:w-24">
+              <div className="relative h-20 w-20 shrink-0 translate-y-3 overflow-hidden rounded-full border border-[#F2A15D] bg-[linear-gradient(140deg,#fff7e7_0%,#f4efe5_100%)] p-[3px] sm:h-24 sm:w-24">
                 <img
                   src={assetUrl(saraAvatar)}
                   alt="Portrait de Sara El Kasmi, fondatrice de Boarding"
@@ -281,24 +280,14 @@ function QuoteIcon({ className }: { className?: string }) {
   );
 }
 
-function SparklesIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 128 128" className={className} fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M58 12 68 42l30 10-30 10-10 30-10-30-30-10 30-10 10-30Z" fill="#FFF8E8" stroke="#F97316" strokeWidth="4" strokeLinejoin="round" />
-      <path d="M98 78 104 94l16 6-16 6-6 16-6-16-16-6 16-6 6-16Z" fill="#EFF6FF" stroke="#2563EB" strokeWidth="4" strokeLinejoin="round" />
-      <path d="M24 80 28 91l11 4-11 4-4 11-4-11-11-4 11-4 4-11Z" fill="white" stroke="#F97316" strokeWidth="3" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 function TravelStampIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 180 130" className={className} fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <g opacity=".75">
-        <circle cx="55" cy="65" r="44" fill="none" stroke="#E9C98F" strokeWidth="3" strokeDasharray="8 5" />
-        <circle cx="55" cy="65" r="34" fill="none" stroke="#E9C98F" strokeWidth="2" />
-        <path d="M77 47 51 68M77 47l-11 36-15-15-20-8 46-13Z" stroke="#D8B878" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M100 38h64M95 55h70M100 72h64M95 89h70" stroke="#D8B878" strokeWidth="3" strokeLinecap="round" />
+      <g opacity=".58">
+        <circle cx="55" cy="65" r="44" fill="none" stroke="#EAD7B6" strokeWidth="2.1" strokeDasharray="7 5" />
+        <circle cx="55" cy="65" r="34" fill="none" stroke="#EAD7B6" strokeWidth="1.5" />
+        <path d="M77 47 51 68M77 47l-11 36-15-15-20-8 46-13Z" stroke="#D6B885" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M100 38h64M95 55h70M100 72h64M95 89h70" stroke="#D6B885" strokeWidth="2.1" strokeLinecap="round" />
       </g>
     </svg>
   );
@@ -344,9 +333,9 @@ function GlobePlaneIllustration({ className }: { className?: string }) {
 function MapPinRouteDecoration({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 260 120" className={className} fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M14 82C57 40 91 103 133 66C175 29 202 71 232 49" stroke="#D7B98D" strokeWidth="3" strokeLinecap="round" strokeDasharray="8 10" />
-      <path d="M229 35c0 8-9 16-16 22-7-6-16-14-16-22 0-9 7-16 16-16s16 7 16 16Z" fill="#F5B26F" />
-      <circle cx="213" cy="35" r="5" fill="#FFF6E8" />
+      <path d="M14 82C57 40 91 103 133 66C175 29 202 71 232 49" stroke="#D8BE97" strokeWidth="2.2" strokeLinecap="round" strokeDasharray="6 8" />
+      <path d="M229 35c0 8-9 16-16 22-7-6-16-14-16-22 0-9 7-16 16-16s16 7 16 16Z" fill="#EDBE86" />
+      <circle cx="213" cy="35" r="4.2" fill="#FFF7EA" />
     </svg>
   );
 }
