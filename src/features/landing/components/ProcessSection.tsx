@@ -524,7 +524,7 @@ export default function ProcessSection() {
         </Reveal>
 
         {/* ───── Steps grid ───── */}
-        <div className="relative mt-10 sm:mt-12 lg:mt-14">
+        <div className="relative mt-9 sm:mt-10 lg:mt-12">
           {/* central dashed path (desktop only) */}
           <svg
             className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
@@ -548,15 +548,15 @@ export default function ProcessSection() {
           </svg>
 
           {/* 6-step alternating timeline: one card per row */}
-          <div className="relative flex flex-col gap-y-8 lg:gap-y-14 xl:gap-y-16">
+          <div className="relative flex flex-col gap-y-6 lg:gap-y-10 xl:gap-y-11">
             {STEPS.map((step) => (
               <div
                 key={step.index}
-                className="grid grid-cols-1 gap-y-6 lg:grid-cols-[minmax(0,1fr)_7.5rem_minmax(0,1fr)] lg:items-center xl:grid-cols-[minmax(0,1fr)_9rem_minmax(0,1fr)] 2xl:grid-cols-[minmax(0,1fr)_10rem_minmax(0,1fr)]"
+                className="grid grid-cols-1 gap-y-4 lg:grid-cols-[minmax(0,1fr)_7.5rem_minmax(0,1fr)] lg:items-center xl:grid-cols-[minmax(0,1fr)_9rem_minmax(0,1fr)] 2xl:grid-cols-[minmax(0,1fr)_10rem_minmax(0,1fr)]"
               >
                 {/* Left-side step */}
                 {step.side === 'left' ? (
-                  <Reveal delay={0} className="lg:col-start-1 lg:flex lg:justify-end">
+                  <Reveal delay={0} className="hidden lg:col-start-1 lg:flex lg:justify-end">
                     <StepCard step={step} />
                   </Reveal>
                 ) : (
@@ -570,7 +570,7 @@ export default function ProcessSection() {
 
                 {/* Right-side step */}
                 {step.side === 'right' ? (
-                  <Reveal delay={0} className="lg:col-start-3 lg:flex lg:justify-start">
+                  <Reveal delay={0} className="hidden lg:col-start-3 lg:flex lg:justify-start">
                     <StepCard step={step} />
                   </Reveal>
                 ) : (
