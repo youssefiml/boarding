@@ -72,6 +72,7 @@ const STEPS: ProcessStep[] = [
     imageKind: 'pricing',
     imageSrc: assetUrl(processusPic2),
     imageAlt: 'Choix du pack Boarding',
+    sticker: { line1: 'PACK SELECTED', line2: 'READY TO BOARD' },
   },
   {
     index: 3,
@@ -85,6 +86,7 @@ const STEPS: ProcessStep[] = [
     imageKind: 'matching',
     imageSrc: assetUrl(processusPic3),
     imageAlt: 'Matching avec les entreprises',
+    sticker: { line1: 'MATCH SCORE', line2: '3 OPTIONS' },
   },
   {
     index: 4,
@@ -253,9 +255,9 @@ function MatchingMock() {
   return (
     <div className="flex h-full w-full flex-col gap-1.5 rounded-[1.25rem] bg-[#0E1233] p-2.5 sm:gap-2 sm:p-3">
       <div className="grid grid-cols-3 gap-1.5 sm:gap-2">
-        <MatchCard name="TechFlow" city="Barcelona" pct={95} hue="orange" />
-        <MatchCard name="BlueWave" city="Lisbonne" pct={92} hue="cyan" />
-        <MatchCard name="GreenPath" city="Berlin" pct={90} hue="green" />
+        <MatchCard name="TechFlow" city="Casablanca" pct={95} hue="orange" />
+        <MatchCard name="BlueWave" city="Rabat" pct={92} hue="cyan" />
+        <MatchCard name="GreenPath" city="Tanger" pct={90} hue="green" />
       </div>
       <div className="mt-auto flex items-center justify-center gap-1.5 rounded-md bg-[#FF6B35]/15 py-1.5 font-mono text-[7px] font-normal uppercase tracking-[0.14em] text-[#FF8E5C] sm:text-[8px]">
         <Sparkles className="h-2.5 w-2.5" aria-hidden="true" />3 opportunités trouvées pour toi
@@ -381,23 +383,26 @@ function Sticker({ sticker }: { sticker: StickerBadge }) {
 
 function StepImage({ step }: { step: ProcessStep }) {
   return (
-    <div className="relative h-full min-h-[200px] overflow-hidden rounded-[1.5rem] sm:min-h-[220px]">
-      {step.imageSrc && step.imageAlt && (
+    <div className="relative h-[190px] overflow-hidden rounded-[1.25rem] sm:h-[200px] lg:h-full">
+      {step.imageSrc && step.imageAlt ? (
         <PhotoImage src={step.imageSrc} alt={step.imageAlt} />
-      )}
-      {!step.imageSrc && step.imageKind === 'pricing' && <PricingMock />}
-      {!step.imageSrc && step.imageKind === 'matching' && <MatchingMock />}
-      {!step.imageSrc && step.imageKind === 'meeting' && (
-        <MeetingMock
-          src={step.imageSrc ?? assetUrl(processusPic4)}
-          alt={step.imageAlt ?? 'Visioconférence'}
-        />
-      )}
-      {!step.imageSrc && step.imageKind === 'departure' && (
-        <DepartureMock
-          src={assetUrl(processusPic5)}
-          alt={step.imageAlt ?? 'Préparation du départ'}
-        />
+      ) : (
+        <>
+          {step.imageKind === 'pricing' && <PricingMock />}
+          {step.imageKind === 'matching' && <MatchingMock />}
+          {step.imageKind === 'meeting' && (
+            <MeetingMock
+              src={step.imageSrc ?? assetUrl(processusPic4)}
+              alt={step.imageAlt ?? 'Visioconference'}
+            />
+          )}
+          {step.imageKind === 'departure' && (
+            <DepartureMock
+              src={step.imageSrc ?? assetUrl(processusPic5)}
+              alt={step.imageAlt ?? 'Preparation du depart'}
+            />
+          )}
+        </>
       )}
 
       {step.sticker && <Sticker sticker={step.sticker} />}
@@ -407,18 +412,18 @@ function StepImage({ step }: { step: ProcessStep }) {
 
 function StepText({ step }: { step: ProcessStep }) {
   return (
-    <div className="flex h-full flex-col justify-center px-5 py-5 sm:px-6 sm:py-6">
+    <div className="flex h-full flex-col justify-start overflow-hidden px-4 py-4 sm:px-5 sm:py-5">
       <p className="font-mono text-[10px] font-normal uppercase tracking-[0.22em] text-[#2B35AF] sm:text-[11px]">
         {step.label}
       </p>
-      <h3 className="mt-2 whitespace-pre-line text-lg font-extrabold leading-tight text-[#1A1F5C]">
+      <h3 className="mt-1.5 whitespace-pre-line text-lg font-extrabold leading-tight text-[#1A1F5C]">
         {step.title}
       </h3>
       <span
-        className="mt-3 block h-[3px] w-9 rounded-full bg-[#FF6B35]"
+        className="mt-2 block h-[3px] w-9 rounded-full bg-[#FF6B35]"
         aria-hidden="true"
       />
-      <p className="mt-3 text-[0.82rem] leading-[1.55] text-[#1A1F5C]/70 sm:text-[0.9rem]">
+      <p className="mt-2 overflow-hidden text-[0.82rem] leading-[1.5] text-[#1A1F5C]/70 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:4] sm:text-[0.88rem]">
         {step.description}
       </p>
     </div>
@@ -430,7 +435,7 @@ function StepCard({ step }: { step: ProcessStep }) {
   return (
     <div
       className={cn(
-        'relative grid overflow-hidden rounded-[1.75rem] border border-[#1A1F5C]/8 bg-white/95 shadow-[0_24px_56px_-30px_rgba(26,31,92,0.32)] backdrop-blur-sm',
+        'relative mx-auto grid min-h-[190px] w-full max-w-[560px] overflow-hidden rounded-[1.4rem] border border-[#1A1F5C]/8 bg-white/95 shadow-[0_18px_44px_-26px_rgba(26,31,92,0.28)] backdrop-blur-sm sm:min-h-[200px] lg:mx-0 lg:h-[210px] lg:min-h-[210px] xl:h-[220px] xl:min-h-[220px]',
         'grid-cols-1 sm:grid-cols-[44%_1fr]'
       )}
     >
@@ -453,48 +458,30 @@ function StepCard({ step }: { step: ProcessStep }) {
   );
 }
 
-function CenterMedallion({
-  step,
-  topPercent,
-}: {
-  step: ProcessStep;
-  topPercent: number;
-}) {
+function CenterMedallion({ step }: { step: ProcessStep }) {
   const Icon = step.icon;
   const isSunset = step.iconAccent === 'sunset';
   return (
-    <div
-      className="pointer-events-none absolute left-1/2 z-10 hidden -translate-x-1/2 lg:block"
-      style={{ top: `${topPercent}%` }}
+    <span
       aria-hidden="true"
+      className={cn(
+        'pointer-events-none relative z-10 grid h-11 w-11 place-items-center rounded-full text-white shadow-[0_10px_22px_-12px_rgba(26,31,92,0.45)] ring-[4px] ring-[#F5ECD7]',
+        isSunset ? 'bg-[#FF6B35]' : 'bg-[#1A1F5C]'
+      )}
     >
-      <span
-        className={cn(
-          'grid h-12 w-12 place-items-center rounded-full text-white shadow-[0_14px_28px_-12px_rgba(26,31,92,0.55)] ring-[5px] ring-[#F5ECD7]',
-          isSunset ? 'bg-[#FF6B35]' : 'bg-[#1A1F5C]'
-        )}
-      >
-        <Icon className="h-5 w-5" />
-      </span>
-    </div>
+      <Icon className="h-[18px] w-[18px]" />
+    </span>
   );
 }
 
 /* ─────────────────────────── Section ─────────────────────────── */
-
-const LEFT_STEPS = STEPS.filter((step) => step.side === 'left');
-const RIGHT_STEPS = STEPS.filter((step) => step.side === 'right');
-
-// Vertical positions (% of steps grid height) for the 6 medallions.
-// Computed so each medallion sits between its row's left and right cards.
-const MEDALLION_POSITIONS = [9, 23.5, 41.5, 56, 74, 89];
 
 export default function ProcessSection() {
   return (
     <section
       id="processus"
       aria-labelledby="processus-title"
-      className="relative overflow-hidden bg-[#F5ECD7] px-4 pb-16 pt-8 sm:px-6 sm:pb-20 sm:pt-10 lg:px-8 lg:pb-24 lg:pt-12 [scroll-margin-top:6rem]"
+      className="relative overflow-hidden bg-[#F5ECD7] px-4 pb-12 pt-8 sm:px-6 sm:pb-14 sm:pt-10 lg:px-8 lg:pb-16 lg:pt-10 [scroll-margin-top:6rem]"
     >
       {/* subtle dot grain background */}
       <div
@@ -537,8 +524,8 @@ export default function ProcessSection() {
         </Reveal>
 
         {/* ───── Steps grid ───── */}
-        <div className="relative mt-14 sm:mt-16 lg:mt-20">
-          {/* central serpentine dashed path (desktop only) */}
+        <div className="relative mt-10 sm:mt-12 lg:mt-14">
+          {/* central dashed path (desktop only) */}
           <svg
             className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
             viewBox="0 0 100 1000"
@@ -548,47 +535,53 @@ export default function ProcessSection() {
           >
             <path
               d="
-                M 50 10
-                C 64 90,  36 170, 50 250
-                C 64 330, 36 410, 50 490
-                C 64 570, 36 660, 50 740
-                C 64 820, 36 900, 50 990
+                M 50 0
+                C 56 165, 44 335, 50 500
+                C 56 665, 44 835, 50 1000
               "
-              stroke="#9498C4"
-              strokeOpacity="0.7"
-              strokeWidth="1.4"
-              strokeDasharray="4 7"
+              stroke="rgba(80, 95, 150, 0.3)"
+              strokeWidth="1.5"
+              strokeDasharray="3 6"
               strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
             />
           </svg>
 
-          {/* Two-column staircase: left col (01,03,05) and right col (02,04,06) offset down */}
-          <div className="relative grid grid-cols-1 gap-y-12 lg:grid-cols-2 lg:gap-x-20 lg:gap-y-0 xl:gap-x-28">
-            {/* LEFT COLUMN */}
-            <div className="flex flex-col gap-y-16 lg:gap-y-28">
-              {LEFT_STEPS.map((step) => (
-                <Reveal key={step.index} delay={0} className="block">
-                  <StepCard step={step} />
-                </Reveal>
-              ))}
-            </div>
-
-            {/* RIGHT COLUMN — staircase offset on desktop */}
-            <div className="flex flex-col gap-y-16 lg:gap-y-28 lg:pt-32">
-              {RIGHT_STEPS.map((step) => (
-                <Reveal key={step.index} delay={0} className="block">
-                  <StepCard step={step} />
-                </Reveal>
-              ))}
-            </div>
-
-            {/* Medallions positioned along the central path */}
-            {STEPS.map((step, i) => (
-              <CenterMedallion
+          {/* 6-step alternating timeline: one card per row */}
+          <div className="relative flex flex-col gap-y-8 lg:gap-y-14 xl:gap-y-16">
+            {STEPS.map((step) => (
+              <div
                 key={step.index}
-                step={step}
-                topPercent={MEDALLION_POSITIONS[i] ?? 50}
-              />
+                className="grid grid-cols-1 gap-y-6 lg:grid-cols-[minmax(0,1fr)_7.5rem_minmax(0,1fr)] lg:items-center xl:grid-cols-[minmax(0,1fr)_9rem_minmax(0,1fr)] 2xl:grid-cols-[minmax(0,1fr)_10rem_minmax(0,1fr)]"
+              >
+                {/* Left-side step */}
+                {step.side === 'left' ? (
+                  <Reveal delay={0} className="lg:col-start-1 lg:flex lg:justify-end">
+                    <StepCard step={step} />
+                  </Reveal>
+                ) : (
+                  <div className="hidden lg:block" aria-hidden="true" />
+                )}
+
+                {/* Center checkpoint */}
+                <div className="hidden lg:col-start-2 lg:flex lg:items-center lg:justify-center">
+                  <CenterMedallion step={step} />
+                </div>
+
+                {/* Right-side step */}
+                {step.side === 'right' ? (
+                  <Reveal delay={0} className="lg:col-start-3 lg:flex lg:justify-start">
+                    <StepCard step={step} />
+                  </Reveal>
+                ) : (
+                  <div className="hidden lg:block" aria-hidden="true" />
+                )}
+
+                {/* Mobile single-column card */}
+                <Reveal delay={0} className="lg:hidden">
+                  <StepCard step={step} />
+                </Reveal>
+              </div>
             ))}
           </div>
 
@@ -598,7 +591,6 @@ export default function ProcessSection() {
             aria-hidden="true"
           />
         </div>
-
       </div>
     </section>
   );

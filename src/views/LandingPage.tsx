@@ -153,10 +153,10 @@ function HeroSection() {
             ))}
           </nav>
 
-          <div className="header-actions flex shrink-0 items-center gap-3">
+          <div className="header-actions flex shrink-0 items-center gap-2">
             <a
               href="/login"
-              className="hidden h-14 min-w-[172px] items-center justify-center rounded-xl border border-white/35 bg-white/[0.02] px-6 text-base font-bold text-white shadow-[0_20px_40px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b] sm:inline-flex max-[1280px]:h-12 max-[1280px]:min-w-[148px] max-[1280px]:px-4 max-[1280px]:text-sm max-[1100px]:min-w-[132px]"
+              className="hidden h-10 w-[132px] items-center justify-center rounded-xl border border-white/35 bg-white/[0.02] px-4 text-sm font-bold text-white shadow-[0_20px_40px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b] sm:inline-flex"
             >
               Se connecter
             </a>
@@ -165,7 +165,7 @@ function HeroSection() {
               className={cn(
                 landingButtonBaseClass,
                 landingButtonPrimaryClass,
-                'h-14 min-w-[156px] px-6 text-base hover:translate-y-0 hover:bg-[#2557D6] hover:shadow-[0_20px_36px_-22px_rgba(37,87,214,0.95)] focus-visible:ring-offset-[#07152b] max-[1280px]:h-12 max-[1280px]:min-w-[140px] max-[1280px]:px-4 max-[1280px]:text-sm max-[1100px]:min-w-[126px]'
+                'h-9 w-[120px] px-3 text-sm hover:translate-y-0 hover:bg-[#2557D6] hover:shadow-[0_20px_36px_-22px_rgba(37,87,214,0.95)] focus-visible:ring-offset-[#07152b]'
               )}
             >
               Candidater
