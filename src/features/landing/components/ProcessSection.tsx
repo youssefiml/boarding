@@ -12,6 +12,7 @@ import {
   Users,
   type LucideIcon,
 } from 'lucide-react';
+import Image, { type StaticImageData } from 'next/image';
 
 import processusPic1 from '@/assets/processus-pic1.webp';
 import processusPic2 from '@/assets/processus-pic2.webp';
@@ -20,7 +21,6 @@ import processusPic4 from '@/assets/processus-pic4.webp';
 import processusPic5 from '@/assets/processus-pic5.webp';
 import processusPic6 from '@/assets/processus-pic6.webp';
 import { Reveal } from '@/features/landing/components/Reveal';
-import { assetUrl } from '@/lib/asset-url';
 import { cn } from '@/lib/cn';
 
 type StepSide = 'left' | 'right';
@@ -40,7 +40,7 @@ interface ProcessStep {
   icon: LucideIcon;
   iconAccent: 'navy' | 'sunset';
   imageKind: ImageKind;
-  imageSrc?: string;
+  imageSrc?: StaticImageData;
   imageAlt?: string;
   sticker?: StickerBadge;
 }
@@ -56,7 +56,7 @@ const STEPS: ProcessStep[] = [
     icon: User,
     iconAccent: 'navy',
     imageKind: 'photo',
-    imageSrc: assetUrl(processusPic1),
+    imageSrc: processusPic1,
     imageAlt: 'Étudiante créant son profil sur Boarding',
     sticker: { line1: 'PASS BOARDING', line2: 'PROFIL CRÉÉ' },
   },
@@ -70,7 +70,7 @@ const STEPS: ProcessStep[] = [
     icon: Briefcase,
     iconAccent: 'sunset',
     imageKind: 'pricing',
-    imageSrc: assetUrl(processusPic2),
+    imageSrc: processusPic2,
     imageAlt: 'Choix du pack Boarding',
     sticker: { line1: 'PACK CHOISI', line2: 'PRÊT À COMMENCER' },
   },
@@ -84,7 +84,7 @@ const STEPS: ProcessStep[] = [
     icon: Users,
     iconAccent: 'navy',
     imageKind: 'matching',
-    imageSrc: assetUrl(processusPic3),
+    imageSrc: processusPic3,
     imageAlt: 'Matching avec les entreprises',
     sticker: { line1: 'RÉSULTAT MATCHING', line2: '3 OPTIONS' },
   },
@@ -98,7 +98,7 @@ const STEPS: ProcessStep[] = [
     icon: Calendar,
     iconAccent: 'sunset',
     imageKind: 'meeting',
-    imageSrc: assetUrl(processusPic4),
+    imageSrc: processusPic4,
     imageAlt: 'Visioconférence avec une entreprise partenaire',
     sticker: { line1: 'RENDEZ-VOUS', line2: 'PLANIFIÉ' },
   },
@@ -112,7 +112,7 @@ const STEPS: ProcessStep[] = [
     icon: Send,
     iconAccent: 'navy',
     imageKind: 'departure',
-    imageSrc: assetUrl(processusPic5),
+    imageSrc: processusPic5,
     imageAlt: 'Préparation des bagages pour le stage à l’étranger',
     sticker: { line1: 'PRÊT', line2: 'POUR LE DÉPART' },
   },
@@ -126,7 +126,7 @@ const STEPS: ProcessStep[] = [
     icon: Globe,
     iconAccent: 'sunset',
     imageKind: 'photo',
-    imageSrc: assetUrl(processusPic6),
+    imageSrc: processusPic6,
     imageAlt: 'Communauté Boarding réunie sur place',
     sticker: { line1: 'BIENVENUE DANS', line2: 'LA COMMUNAUTÉ BOARDING' },
   },
@@ -266,7 +266,7 @@ function MatchingMock() {
   );
 }
 
-function MeetingMock({ src, alt }: { src: string; alt: string }) {
+function MeetingMock({ src, alt }: { src: StaticImageData; alt: string }) {
   return (
     <div className="grid h-full w-full grid-cols-[44%_1fr] gap-2 rounded-[1.25rem] bg-[#F5ECD7] p-2 sm:p-2.5">
       <div className="flex flex-col rounded-xl border border-[#1A1F5C]/10 bg-white p-2 shadow-sm">
@@ -305,20 +305,20 @@ function MeetingMock({ src, alt }: { src: string; alt: string }) {
         </div>
       </div>
 
-      <div className="relative overflow-hidden rounded-xl">
-        <img
+      <div className="relative min-h-[132px] overflow-hidden rounded-xl">
+        <Image
           src={src}
           alt={alt}
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover"
+          fill
+          sizes="(min-width: 640px) 18vw, 42vw"
+          className="object-cover"
         />
       </div>
     </div>
   );
 }
 
-function DepartureMock({ src, alt }: { src: string; alt: string }) {
+function DepartureMock({ src, alt }: { src: StaticImageData; alt: string }) {
   const items = [
     'Logement réservé',
     'Transfert aéroport',
@@ -327,13 +327,13 @@ function DepartureMock({ src, alt }: { src: string; alt: string }) {
   ];
   return (
     <div className="grid h-full w-full grid-cols-[1fr_44%] gap-2 rounded-[1.25rem] bg-[#0E1233] p-2 sm:p-2.5">
-      <div className="relative overflow-hidden rounded-xl">
-        <img
+      <div className="relative min-h-[132px] overflow-hidden rounded-xl">
+        <Image
           src={src}
           alt={alt}
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover"
+          fill
+          sizes="(min-width: 640px) 18vw, 44vw"
+          className="object-cover"
         />
       </div>
       <ul className="flex flex-col gap-1 self-center rounded-xl bg-[#181E4A] p-2 sm:gap-1.5 sm:p-2.5">
@@ -353,14 +353,14 @@ function DepartureMock({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-function PhotoImage({ src, alt }: { src: string; alt: string }) {
+function PhotoImage({ src, alt }: { src: StaticImageData; alt: string }) {
   return (
-    <img
+    <Image
       src={src}
       alt={alt}
-      loading="lazy"
-      decoding="async"
-      className="h-full w-full object-cover"
+      fill
+      sizes="(min-width: 1536px) 260px, (min-width: 1024px) 22vw, (min-width: 640px) 44vw, 100vw"
+      className="object-cover"
     />
   );
 }
@@ -383,7 +383,7 @@ function Sticker({ sticker }: { sticker: StickerBadge }) {
 
 function StepImage({ step }: { step: ProcessStep }) {
   return (
-    <div className="relative h-[190px] overflow-hidden rounded-[1.25rem] sm:h-[200px] lg:h-full">
+    <div className="relative h-[190px] overflow-hidden rounded-[1.25rem] sm:h-[200px] lg:h-full lg:min-h-[210px] xl:min-h-[220px]">
       {step.imageSrc && step.imageAlt ? (
         <PhotoImage src={step.imageSrc} alt={step.imageAlt} />
       ) : (
@@ -392,13 +392,13 @@ function StepImage({ step }: { step: ProcessStep }) {
           {step.imageKind === 'matching' && <MatchingMock />}
           {step.imageKind === 'meeting' && (
             <MeetingMock
-              src={step.imageSrc ?? assetUrl(processusPic4)}
+              src={step.imageSrc ?? processusPic4}
               alt={step.imageAlt ?? 'Visioconference'}
             />
           )}
           {step.imageKind === 'departure' && (
             <DepartureMock
-              src={step.imageSrc ?? assetUrl(processusPic5)}
+              src={step.imageSrc ?? processusPic5}
               alt={step.imageAlt ?? 'Preparation du depart'}
             />
           )}
