@@ -1,26 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import type { ComponentProps, ComponentType, ReactNode, SVGProps } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import { Controller, useForm, useWatch } from 'react-hook-form';
 import type { Control, FieldPath } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 import {
-  BrainCircuit,
-  BriefcaseBusiness,
-  CalendarDays,
   Check,
-  Globe2,
-  MapPin,
   Plane,
-  Send,
   ShieldCheck,
-  SmilePlus,
   Stamp,
 } from 'lucide-react';
 
-import travelAssets from '@/assets/boarding-form-travel-assets.png';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -28,7 +19,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Textarea } from '@/components/ui/textarea';
-import { assetUrl } from '@/lib/asset-url';
 import { cn } from '@/lib/utils';
 
 const requiredMessage = 'Ce champ est requis.';
@@ -81,7 +71,6 @@ type FormStep = {
   id: StepId;
   number: number;
   title: string;
-  icon: ComponentType<SVGProps<SVGSVGElement>>;
   fields: readonly ApplicationFieldName[];
 };
 
@@ -107,35 +96,30 @@ const formSteps = [
     id: 'personal',
     number: 1,
     title: 'Toi, en quelques mots',
-    icon: SmilePlus,
     fields: ['fullName', 'age', 'email', 'languages', 'soloTravel', 'comfortZone'],
   },
   {
     id: 'professional',
     number: 2,
     title: 'Ton mood pro',
-    icon: BriefcaseBusiness,
     fields: ['domains', 'internshipGoals', 'companyStyles', 'missionTypes'],
   },
   {
     id: 'workStyle',
     number: 3,
     title: 'Ton style au taf',
-    icon: BrainCircuit,
     fields: ['workMode', 'workAmbience', 'selfView'],
   },
   {
     id: 'travel',
     number: 4,
     title: 'Tes vibes de voyage',
-    icon: Globe2,
     fields: ['destinationPreference', 'englishLevel', 'travelAmbience'],
   },
   {
     id: 'practical',
     number: 5,
     title: 'Les infos pratiques',
-    icon: CalendarDays,
     fields: ['duration', 'startDate', 'hasHousingBudget', 'housingBudgetAmount', 'notes'],
   },
 ] as const satisfies readonly FormStep[];
@@ -186,6 +170,7 @@ export function RegisterPage() {
   const notesValue = useWatch({ control, name: 'notes' }) ?? '';
   const activeStep = formSteps[currentStep] ?? formSteps[0];
   const isLastStep = currentStep === formSteps.length - 1;
+  const canGoBack = currentStep > 0;
 
   const validateStep = async (stepIndex: number) => {
     const step = formSteps[stepIndex];
@@ -249,7 +234,7 @@ export function RegisterPage() {
                 <Input
                   id="fullName"
                   autoComplete="name"
-                  placeholder="Ex : Aya Benali"
+                  placeholder="Aya Benali"
                   aria-invalid={Boolean(errors.fullName)}
                   className={inputClassName}
                   {...register('fullName')}
@@ -264,7 +249,7 @@ export function RegisterPage() {
                 <Input
                   id="age"
                   inputMode="numeric"
-                  placeholder="Ex : 21"
+                  placeholder="21"
                   aria-invalid={Boolean(errors.age)}
                   className={inputClassName}
                   {...register('age')}
@@ -280,7 +265,7 @@ export function RegisterPage() {
                   id="email"
                   type="email"
                   autoComplete="email"
-                  placeholder="Ex : aya@email.com"
+                  placeholder="aya@email.com"
                   aria-invalid={Boolean(errors.email)}
                   className={inputClassName}
                   {...register('email')}
@@ -462,7 +447,7 @@ export function RegisterPage() {
               </FieldLabel>
               <Input
                 id="housingBudgetAmount"
-                placeholder="Ex : 300 € / mois"
+                placeholder="300 € / mois"
                 aria-invalid={Boolean(errors.housingBudgetAmount)}
                 className={inputClassName}
                 {...register('housingBudgetAmount')}
@@ -482,7 +467,10 @@ export function RegisterPage() {
                 maxLength={500}
                 placeholder="Dis-nous tout ! Toute info utile pour te trouver le stage parfait ✨"
                 aria-invalid={Boolean(errors.notes)}
-                className="min-h-20 resize-none rounded-xl border-[#DAD4C7] bg-white px-3.5 py-2.5 text-sm font-medium text-[#1A1F5C] shadow-sm placeholder:text-[#9498C4] focus-visible:border-[#2B35AF] focus-visible:ring-[#2B35AF]/20"
+                className={cn(
+                  'min-h-20 resize-none rounded-xl border-[#DAD4C7] bg-white px-3.5 py-2.5 text-sm font-medium text-[#1A1F5C] shadow-sm placeholder:text-[#9498C4] hover:border-[#BDB5A5]',
+                  controlFocusClassName
+                )}
                 {...register('notes')}
               />
               <FieldError message={errors.notes?.message} />
@@ -492,23 +480,56 @@ export function RegisterPage() {
     }
   };
 
+  const actionFooter = (
+    <div className={cn('grid gap-3 md:items-center md:gap-4', canGoBack ? 'md:grid-cols-[minmax(120px,150px)_1fr_auto]' : 'md:grid-cols-[1fr_auto]')}>
+      {canGoBack ? (
+        <Button
+          type="button"
+          variant="outline"
+          disabled={isSubmitting || isValidating}
+          className={secondaryActionButtonClassName}
+          onClick={handlePrevious}
+        >
+          ← Retour
+        </Button>
+      ) : null}
+
+      <p className="order-3 flex items-start gap-2.5 text-[0.72rem] font-medium leading-5 text-[#1A1F5C]/58 sm:text-xs md:order-none">
+        <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-full border border-[#0D4FE8]/10 bg-[#0D4FE8]/5 text-[#0D4FE8]/85">
+          <ShieldCheck className="size-4" strokeWidth={1.9} aria-hidden="true" />
+        </span>
+        Tes réponses sont confidentielles et utilisées uniquement pour te proposer le meilleur match.
+      </p>
+
+      <Button
+        type={isLastStep ? 'submit' : 'button'}
+        disabled={isSubmitting || isValidating}
+        className={primaryActionButtonClassName}
+        onClick={isLastStep ? undefined : () => void handleNext()}
+      >
+        {isLastStep ? 'Envoyer mon profil →' : 'Suivant →'}
+      </Button>
+    </div>
+  );
+
   return (
     <main className="relative min-h-dvh overflow-x-hidden bg-[#F5ECD7] px-4 py-8 text-[#1A1A2E] sm:px-6 sm:py-10 lg:px-8">
       <DecorativeLayer />
 
       <div className="relative z-10 mx-auto w-full max-w-[940px]">
         <header className="mx-auto max-w-3xl text-center">
-          <Badge
-            variant="outline"
-            className="mb-5 h-auto rounded-full border-[#2B35AF]/15 bg-white/60 px-4 py-1.5 font-mono text-[0.68rem] uppercase tracking-[0.18em] text-[#2B35AF]"
-          >
-            CANDIDATURE BOARDING
-          </Badge>
-          <p className="font-display text-sm font-semibold italic tracking-wide text-[#FF6B35] sm:text-base">
-            On est là pour t’aider à décoller ✈️
-          </p>
-          <h1 className="mt-3 font-display text-4xl font-bold leading-[0.98] tracking-[-0.04em] text-[#07164C] sm:text-5xl lg:text-6xl">
-            Parle-nous un peu de toi
+          <div className="mx-auto inline-flex items-center justify-center gap-3 text-[#FF6B35]">
+            <span className="inline-flex text-base font-extrabold uppercase tracking-[0.18em] sm:text-lg">
+              Parcours Boarding
+            </span>
+            <Plane
+              className="h-3.5 w-3.5 -rotate-12"
+              strokeWidth={1.8}
+              aria-hidden="true"
+            />
+          </div>
+          <h1 className="mt-5 text-[clamp(1.6rem,3.2vw,3.25rem)] font-extrabold leading-tight text-[#1A1F5C]">
+            Ton parcours Boarding, étape par étape
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-sm font-medium leading-7 text-[#1A1F5C]/75 sm:text-base">
             Ce petit formulaire nous aide à mieux te connaître pour te proposer le stage à l’étranger qui te correspond vraiment.
@@ -529,67 +550,47 @@ export function RegisterPage() {
           }
           noValidate
         >
-          <FormSection step={String(activeStep.number)} title={activeStep.title} icon={activeStep.icon}>
+          <FormSection step={activeStep} footer={actionFooter}>
             {renderStepFields()}
           </FormSection>
-
-          <Card className="relative grid gap-4 overflow-visible rounded-[1.5rem] border border-[#2B35AF]/15 bg-white/95 p-4 text-[#1A1F5C] shadow-[0_20px_55px_-35px_rgba(26,31,92,0.55)] md:grid-cols-[minmax(140px,190px)_1fr_minmax(190px,250px)] md:items-center md:p-5">
-            <Button
-              type="button"
-              variant="outline"
-              disabled={currentStep === 0 || isSubmitting || isValidating}
-              className="h-11 rounded-xl border-[#2B35AF] bg-white px-5 font-display text-sm font-bold text-[#2B35AF] hover:bg-[#2B35AF]/5 disabled:border-[#2B35AF]/20 disabled:bg-white/70 disabled:text-[#2B35AF]/35"
-              onClick={handlePrevious}
-            >
-              ← Retour
-            </Button>
-
-            <p className="flex items-start gap-3 text-xs font-medium leading-5 text-[#1A1F5C]/65 sm:text-sm">
-              <span className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full border border-[#2B35AF]/20 bg-[#2B35AF]/5 text-[#2B35AF]">
-                <ShieldCheck className="size-4" aria-hidden="true" />
-              </span>
-              Tes réponses sont confidentielles et utilisées uniquement pour te proposer le meilleur match.
-            </p>
-
-            <Button
-              type={isLastStep ? 'submit' : 'button'}
-              disabled={isSubmitting || isValidating}
-              className="h-11 rounded-xl bg-[#0D4FE8] px-6 font-display text-sm font-bold tracking-wide text-white shadow-[0_14px_28px_-18px_rgba(13,79,232,0.85)] hover:bg-[#2B35AF]"
-              onClick={isLastStep ? undefined : () => void handleNext()}
-            >
-              {isLastStep ? 'Envoyer mon profil →' : 'Suivant →'}
-            </Button>
-
-            <div
-              className="pointer-events-none absolute -bottom-7 -right-10 hidden size-36 select-none bg-contain bg-center bg-no-repeat xl:block"
-              style={{ backgroundImage: `url(${assetUrl(travelAssets)})` }}
-              aria-hidden="true"
-            />
-          </Card>
         </form>
       </div>
     </main>
   );
 }
 
-const inputClassName =
-  'h-10 rounded-xl border-[#DAD4C7] bg-white px-3.5 text-sm font-medium text-[#1A1F5C] shadow-sm placeholder:text-[#9498C4] focus-visible:border-[#2B35AF] focus-visible:ring-[#2B35AF]/20';
+const controlFocusClassName =
+  'focus-visible:border-[#2B35AF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B35AF]/20 focus-visible:ring-offset-0 aria-invalid:ring-1 aria-invalid:ring-[#C2412D]/15';
+
+const inputClassName = cn(
+  'h-10 rounded-xl border-[#DAD4C7] bg-white px-3.5 text-sm font-medium text-[#1A1F5C] shadow-sm placeholder:text-[#9498C4] hover:border-[#BDB5A5]',
+  controlFocusClassName
+);
+
+const actionButtonFocusClassName =
+  'focus-visible:border-[#2B35AF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B35AF]/20 focus-visible:ring-offset-0';
+
+const primaryActionButtonClassName = cn(
+  'order-1 h-11 w-auto min-w-[144px] justify-self-end rounded-xl border border-transparent bg-brand-600 px-5 font-display text-sm font-bold tracking-wide text-white shadow-[0_12px_24px_-20px_rgba(29,79,208,0.72)] transition-all hover:-translate-y-0.5 hover:bg-brand-700 hover:shadow-[0_16px_28px_-22px_rgba(29,79,208,0.78)] active:translate-y-px active:bg-brand-800 active:shadow-none disabled:translate-y-0 disabled:bg-brand-600/55 disabled:shadow-none md:order-none',
+  actionButtonFocusClassName
+);
+
+const secondaryActionButtonClassName = cn(
+  'order-2 h-11 w-auto min-w-[120px] justify-self-end rounded-xl border-[#2B35AF]/70 bg-white px-4 font-display text-sm font-bold text-[#2B35AF] shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#2B35AF] hover:bg-[#2B35AF]/5 active:translate-y-px active:bg-[#2B35AF]/10 disabled:translate-y-0 disabled:border-[#2B35AF]/20 disabled:bg-white disabled:text-[#2B35AF]/35 disabled:shadow-none md:order-none md:justify-self-start',
+  actionButtonFocusClassName
+);
 
 function DecorativeLayer() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-      <div className="absolute left-[-3rem] top-24 hidden h-32 w-44 rounded-[50%] border-2 border-dashed border-[#FF6B35]/30 sm:block" />
-      <Plane className="absolute left-[10%] top-24 hidden size-10 rotate-[-18deg] text-[#FF6B35]/35 md:block" />
-      <Send className="absolute left-[4%] top-44 hidden size-7 rotate-[-24deg] text-[#FF6B35]/35 lg:block" />
-
-      <div className="absolute right-[-4rem] top-28 hidden size-44 rounded-full border border-[#FF6B35]/20 lg:block" />
-      <Stamp className="absolute right-[8%] top-36 hidden size-20 rotate-[-12deg] text-[#FF6B35]/20 lg:block" />
-      <span className="absolute right-[8.7%] top-[10.2rem] hidden rotate-[-12deg] font-mono text-[0.62rem] font-bold uppercase tracking-[0.15em] text-[#FF6B35]/30 lg:block">
-        Ready for take-off
-      </span>
-
-      <MapPin className="absolute bottom-14 left-[3%] hidden size-11 text-[#FF6B35]/55 md:block" />
-      <div className="absolute bottom-20 left-[-2rem] hidden h-24 w-44 rounded-[50%] border-2 border-dashed border-[#FF6B35]/35 md:block" />
+      <Plane
+        className="absolute left-[7%] top-24 hidden size-9 -rotate-12 text-[#FF6B35]/25 lg:block"
+        strokeWidth={1.8}
+      />
+      <Stamp
+        className="absolute right-[8%] top-32 hidden size-16 -rotate-12 text-[#0D4FE8]/20 lg:block"
+        strokeWidth={1.8}
+      />
     </div>
   );
 }
@@ -605,7 +606,7 @@ function StepIndicator({
 }) {
   return (
     <nav className="mt-8 overflow-x-auto pb-2 sm:mt-10" aria-label="Progression du formulaire">
-      <ol className="mx-auto flex min-w-[700px] max-w-4xl items-start">
+      <ol className="mx-auto flex min-w-[680px] max-w-4xl items-start">
         {formSteps.map((step, index) => {
           const isCurrent = index === currentStep;
           const isCompleted = index < maxUnlockedStep && !isCurrent;
@@ -616,7 +617,7 @@ function StepIndicator({
           return (
             <li key={step.id} className="relative flex flex-1 flex-col items-center text-center">
               {index < formSteps.length - 1 ? (
-                <span className="absolute left-1/2 top-5 h-px w-full bg-[#CFC7B7]" aria-hidden="true">
+                <span className="absolute left-1/2 top-[18px] h-px w-full bg-[#CFC7B7]" aria-hidden="true">
                   <span className={cn('block h-full transition-colors', isConnectorComplete ? 'bg-[#0D4FE8]' : 'bg-[#CFC7B7]')} />
                 </span>
               ) : null}
@@ -624,18 +625,18 @@ function StepIndicator({
                 type="button"
                 disabled={!isClickable}
                 className={cn(
-                  'relative z-10 flex size-10 items-center justify-center rounded-full border bg-[#F5ECD7] font-mono text-sm font-bold transition-colors',
-                  isCurrent && 'border-[#0D4FE8] bg-[#0D4FE8] text-white shadow-[0_10px_22px_-14px_rgba(13,79,232,0.9)]',
+                  'relative z-10 flex size-9 items-center justify-center rounded-full border bg-[#F5ECD7] font-mono text-[0.8rem] font-bold transition-colors',
+                  isCurrent && 'border-[#0D4FE8] bg-[#0D4FE8] text-white shadow-[0_8px_18px_-14px_rgba(13,79,232,0.9)]',
                   isCompleted && 'border-[#0D4FE8] bg-[#0D4FE8] text-white',
                   !isCurrent && !isCompleted && 'border-[#A7ABCA] text-[#1A1F5C]/75',
-                  isClickable && 'hover:scale-[1.03] hover:border-[#0D4FE8]',
+                  isClickable && 'hover:border-[#0D4FE8]',
                   !isClickable && 'disabled:cursor-default'
                 )}
                 onClick={() => onStepSelect(index)}
                 aria-current={isCurrent ? 'step' : undefined}
                 aria-label={`Étape ${step.number}: ${step.title}`}
               >
-                {isCompleted ? <Check className="size-4" aria-hidden="true" /> : step.number}
+                {isCompleted ? <Check className="size-3.5" strokeWidth={2.2} aria-hidden="true" /> : step.number}
               </button>
               <span className={cn('mt-3 max-w-32 text-xs font-bold leading-4', isCurrent ? 'text-[#1A1F5C]' : 'text-[#1A1F5C]/60')}>
                 {step.title}
@@ -650,26 +651,30 @@ function StepIndicator({
 
 function FormSection({
   step,
-  title,
-  icon: Icon,
+  footer,
   children,
 }: {
-  step: string;
-  title: string;
-  icon: ComponentType<SVGProps<SVGSVGElement>>;
+  step: FormStep;
+  footer: ReactNode;
   children: ReactNode;
 }) {
   return (
-    <Card className="grid overflow-hidden rounded-[1.5rem] border border-[#2B35AF]/15 bg-white/95 p-0 text-[#1A1F5C] shadow-[0_20px_55px_-35px_rgba(26,31,92,0.55)] lg:grid-cols-[190px_minmax(0,1fr)]">
-      <aside className="flex items-center gap-4 border-b border-[#2B35AF]/10 p-5 sm:p-5 lg:flex lg:flex-col lg:items-start lg:gap-3.5 lg:border-b-0 lg:border-r lg:p-6">
-        <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#0D4FE8] font-mono text-sm font-bold text-white shadow-[0_10px_20px_-12px_rgba(13,79,232,0.9)]">
-          {step}
-        </span>
-        <Icon className="size-8 shrink-0 text-[#0D4FE8]" aria-hidden="true" />
-        <h2 className="font-display text-xl font-bold leading-tight tracking-[-0.03em] text-[#07164C] sm:text-2xl lg:text-[1.45rem]">{title}</h2>
-      </aside>
+    <Card className="overflow-hidden rounded-[1.5rem] border border-[#2B35AF]/15 bg-white/95 p-0 text-[#1A1F5C] shadow-[0_20px_55px_-35px_rgba(26,31,92,0.55)]">
+      <div className="mx-auto w-full max-w-[680px] p-5 sm:p-6 lg:p-7 lg:pb-6">
+        <div className="mb-5">
+          <p className="font-mono text-[0.68rem] font-bold uppercase tracking-[0.18em] text-[#9498C4]">
+            Étape {String(step.number).padStart(2, '0')}
+          </p>
+          <h2 className="mt-2 font-display text-2xl font-bold leading-tight tracking-[-0.03em] text-[#07164C] sm:text-3xl">
+            {step.title}
+          </h2>
+        </div>
 
-      <div className="mx-auto w-full max-w-[620px] space-y-5 p-5 sm:p-6 lg:p-7">{children}</div>
+        <div className="space-y-5">{children}</div>
+      </div>
+      <div className="border-t border-[#2B35AF]/10 bg-[#FBF8EF]/45">
+        <div className="mx-auto w-full max-w-[680px] px-5 py-4 sm:px-6 lg:px-7">{footer}</div>
+      </div>
     </Card>
   );
 }
@@ -738,6 +743,7 @@ function CheckboxGroup({
                       id={id}
                       checked={checked}
                       aria-invalid={Boolean(error)}
+                      className={optionControlClassName}
                       onCheckedChange={(nextChecked) => {
                         const nextValues = nextChecked
                           ? [...selectedValues, option.value]
@@ -789,7 +795,7 @@ function RadioOptions({
 
               return (
                 <Label key={option.value} htmlFor={id} className={cn(optionCardClassName, checked && 'border-[#2B35AF] bg-[#2B35AF]/5 text-[#07164C]')}>
-                  <RadioGroupItem id={id} value={option.value} aria-invalid={Boolean(error)} />
+                  <RadioGroupItem id={id} value={option.value} className={optionControlClassName} aria-invalid={Boolean(error)} />
                   <span>{option.label}</span>
                 </Label>
               );
@@ -821,8 +827,11 @@ function RatingScale({ control, error }: { control: Control<ApplicationFormValue
               const checked = field.value === value;
 
               return (
-                <div key={value} className="border-r border-[#E7DFD0] last:border-r-0">
-                  <RadioGroupItem id={id} value={value} className="sr-only" aria-invalid={Boolean(error)} />
+                <div
+                  key={value}
+                  className="border-r border-[#E7DFD0] last:border-r-0 focus-within:relative focus-within:z-10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[#2B35AF]/20"
+                >
+                  <RadioGroupItem id={id} value={value} className="sr-only focus-visible:ring-0" aria-invalid={Boolean(error)} />
                   <Label
                     htmlFor={id}
                     className={cn(
@@ -847,8 +856,11 @@ function RatingScale({ control, error }: { control: Control<ApplicationFormValue
   );
 }
 
+const optionControlClassName =
+  'focus-visible:border-[#2B35AF] focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 aria-invalid:ring-0';
+
 const optionCardClassName =
-  'min-h-10 cursor-pointer items-start gap-2.5 rounded-xl border border-[#DAD4C7] bg-white px-3 py-2 text-[0.82rem] font-semibold leading-5 text-[#1A1F5C]/78 shadow-sm transition-colors hover:border-[#2B35AF]/45 hover:bg-[#2B35AF]/5';
+  'min-h-10 cursor-pointer items-start gap-2.5 rounded-xl border border-[#DAD4C7] bg-white px-3 py-2 text-[0.82rem] font-semibold leading-5 text-[#1A1F5C]/78 shadow-sm transition-colors hover:border-[#BDB5A5] hover:bg-[#2B35AF]/5 focus-within:border-[#2B35AF] focus-within:outline-none focus-within:ring-2 focus-within:ring-[#2B35AF]/15 focus-within:ring-offset-0';
 
 function createFieldId(name: string, value: string) {
   return `${name}-${value
