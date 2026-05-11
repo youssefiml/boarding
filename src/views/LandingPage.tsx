@@ -314,13 +314,13 @@ function HeroSection() {
           </div>
         </div>
 
-        <div className="trust-stats relative z-40 mt-[20px] h-auto rounded-[24px] border border-white/[0.1] bg-[rgba(6,18,38,0.65)] p-6 shadow-[0_32px_56px_-38px_rgba(0,0,0,0.9)] backdrop-blur-[12px] lg:h-[164px] lg:px-10 lg:py-8">
-          <dl className="grid h-full grid-cols-2 gap-y-7 lg:grid-cols-4 lg:items-center lg:gap-y-0" aria-label="Indicateurs clés">
+        <div className="trust-stats relative z-40 mt-[20px] h-auto rounded-[24px] border border-white/[0.1] bg-[rgba(6,18,38,0.65)] p-6 shadow-[0_32px_56px_-38px_rgba(0,0,0,0.9)] backdrop-blur-[12px] lg:min-h-[136px] lg:px-10 lg:py-6">
+          <dl className="grid h-full grid-cols-2 items-center content-center gap-y-7 lg:grid-cols-4 lg:gap-y-0" aria-label="Indicateurs clés">
             {heroStats.map((stat, i) => (
               <div
                 key={stat.label}
                 className={cn(
-                  'flex min-w-0 items-center gap-4 lg:px-6',
+                  'flex min-w-0 items-center gap-4 py-0.5 lg:h-full lg:px-6',
                   i % 2 === 1 && 'border-l border-white/[0.12] pl-5',
                   i >= 2 && 'border-t border-white/[0.12] pt-7 lg:border-t-0 lg:pt-0',
                   i > 0 && 'lg:border-l lg:border-white/[0.12]'
@@ -330,8 +330,8 @@ function HeroSection() {
                   <HeroStatIcon icon={stat.icon} />
                 </span>
                 <div className="min-w-0">
-                  <dd className="stat-number text-lg font-extrabold leading-tight text-white">{stat.value}</dd>
-                  <dt className="stat-label mt-2 text-base font-medium leading-5 text-[#b9c8e4]">{stat.label}</dt>
+                  <dd className="stat-number text-lg font-extrabold leading-none text-white">{stat.value}</dd>
+                  <dt className="stat-label mt-1.5 text-base font-medium leading-tight text-[#b9c8e4]">{stat.label}</dt>
                 </div>
               </div>
             ))}
