@@ -241,7 +241,7 @@ export function RegisterPage() {
       case 'personal':
         return (
           <>
-            <div className="grid gap-5 lg:grid-cols-3">
+            <div className="space-y-5">
               <Field>
                 <FieldLabel htmlFor="fullName" required>
                   Prénom &amp; Nom
@@ -289,7 +289,7 @@ export function RegisterPage() {
               </Field>
             </div>
 
-            <div className="grid gap-5 lg:grid-cols-[1fr_1.1fr]">
+            <div className="space-y-5">
               <CheckboxGroup
                 control={control}
                 name="languages"
@@ -297,7 +297,6 @@ export function RegisterPage() {
                 options={toOptions(options.languages)}
                 error={errors.languages?.message}
                 required
-                className="grid-cols-2 sm:grid-cols-4 lg:grid-cols-4"
               />
 
               <RadioOptions
@@ -307,7 +306,6 @@ export function RegisterPage() {
                 options={toOptions(options.soloTravel)}
                 error={errors.soloTravel?.message}
                 required
-                className="sm:grid-cols-3"
               />
             </div>
 
@@ -317,7 +315,7 @@ export function RegisterPage() {
 
       case 'professional':
         return (
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="space-y-5">
             <CheckboxGroup
               control={control}
               name="domains"
@@ -325,7 +323,6 @@ export function RegisterPage() {
               options={toOptions(options.domains)}
               error={errors.domains?.message}
               required
-              className="sm:grid-cols-2"
             />
 
             <CheckboxGroup
@@ -344,7 +341,6 @@ export function RegisterPage() {
               options={toOptions(options.companyStyles)}
               error={errors.companyStyles?.message}
               required
-              className="sm:grid-cols-2"
             />
 
             <CheckboxGroup
@@ -354,14 +350,13 @@ export function RegisterPage() {
               options={toOptions(options.missionTypes)}
               error={errors.missionTypes?.message}
               required
-              className="sm:grid-cols-2"
             />
           </div>
         );
 
       case 'workStyle':
         return (
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="space-y-5">
             <RadioOptions
               control={control}
               name="workMode"
@@ -393,7 +388,7 @@ export function RegisterPage() {
 
       case 'travel':
         return (
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="space-y-5">
             <RadioOptions
               control={control}
               name="destinationPreference"
@@ -425,7 +420,7 @@ export function RegisterPage() {
 
       case 'practical':
         return (
-          <div className="space-y-6">
+          <div className="space-y-5">
             <RadioOptions
               control={control}
               name="duration"
@@ -433,10 +428,9 @@ export function RegisterPage() {
               options={toOptions(options.duration)}
               error={errors.duration?.message}
               required
-              className="sm:grid-cols-2 xl:grid-cols-4"
             />
 
-            <div className="grid gap-5 lg:grid-cols-[1fr_1.3fr]">
+            <div className="space-y-5">
               <Field>
                 <FieldLabel htmlFor="startDate" required>
                   T’es dispo à partir de quand ?
@@ -459,7 +453,6 @@ export function RegisterPage() {
                 options={toOptions(options.hasHousingBudget)}
                 error={errors.hasHousingBudget?.message}
                 required
-                className="sm:grid-cols-2"
               />
             </div>
 
@@ -489,7 +482,7 @@ export function RegisterPage() {
                 maxLength={500}
                 placeholder="Dis-nous tout ! Toute info utile pour te trouver le stage parfait ✨"
                 aria-invalid={Boolean(errors.notes)}
-                className="min-h-24 resize-none rounded-2xl border-[#DAD4C7] bg-white px-4 py-3 text-sm font-medium text-[#1A1F5C] shadow-sm placeholder:text-[#9498C4] focus-visible:border-[#2B35AF] focus-visible:ring-[#2B35AF]/20"
+                className="min-h-20 resize-none rounded-xl border-[#DAD4C7] bg-white px-3.5 py-2.5 text-sm font-medium text-[#1A1F5C] shadow-sm placeholder:text-[#9498C4] focus-visible:border-[#2B35AF] focus-visible:ring-[#2B35AF]/20"
                 {...register('notes')}
               />
               <FieldError message={errors.notes?.message} />
@@ -503,7 +496,7 @@ export function RegisterPage() {
     <main className="relative min-h-dvh overflow-x-hidden bg-[#F5ECD7] px-4 py-8 text-[#1A1A2E] sm:px-6 sm:py-10 lg:px-8">
       <DecorativeLayer />
 
-      <div className="relative z-10 mx-auto w-full max-w-[1100px]">
+      <div className="relative z-10 mx-auto w-full max-w-[940px]">
         <header className="mx-auto max-w-3xl text-center">
           <Badge
             variant="outline"
@@ -525,7 +518,7 @@ export function RegisterPage() {
         <StepIndicator currentStep={currentStep} maxUnlockedStep={maxUnlockedStep} onStepSelect={(stepIndex) => void handleStepSelect(stepIndex)} />
 
         <form
-          className="mt-8 space-y-5 sm:mt-10 sm:space-y-6"
+          className="mt-7 space-y-4 sm:mt-9 sm:space-y-5"
           onSubmit={
             isLastStep
               ? handleSubmit(onSubmit)
@@ -540,12 +533,12 @@ export function RegisterPage() {
             {renderStepFields()}
           </FormSection>
 
-          <Card className="relative grid gap-5 overflow-visible rounded-[1.75rem] border border-[#2B35AF]/15 bg-white/95 p-5 text-[#1A1F5C] shadow-[0_20px_55px_-35px_rgba(26,31,92,0.55)] md:grid-cols-[minmax(160px,220px)_1fr_minmax(210px,290px)] md:items-center md:p-7">
+          <Card className="relative grid gap-4 overflow-visible rounded-[1.5rem] border border-[#2B35AF]/15 bg-white/95 p-4 text-[#1A1F5C] shadow-[0_20px_55px_-35px_rgba(26,31,92,0.55)] md:grid-cols-[minmax(140px,190px)_1fr_minmax(190px,250px)] md:items-center md:p-5">
             <Button
               type="button"
               variant="outline"
               disabled={currentStep === 0 || isSubmitting || isValidating}
-              className="h-12 rounded-xl border-[#2B35AF] bg-white px-6 font-display text-sm font-bold text-[#2B35AF] hover:bg-[#2B35AF]/5 disabled:border-[#2B35AF]/25 disabled:text-[#2B35AF]/35"
+              className="h-11 rounded-xl border-[#2B35AF] bg-white px-5 font-display text-sm font-bold text-[#2B35AF] hover:bg-[#2B35AF]/5 disabled:border-[#2B35AF]/20 disabled:bg-white/70 disabled:text-[#2B35AF]/35"
               onClick={handlePrevious}
             >
               ← Retour
@@ -561,7 +554,7 @@ export function RegisterPage() {
             <Button
               type={isLastStep ? 'submit' : 'button'}
               disabled={isSubmitting || isValidating}
-              className="h-12 rounded-xl bg-[#0D4FE8] px-7 font-display text-sm font-bold tracking-wide text-white shadow-[0_14px_28px_-18px_rgba(13,79,232,0.85)] hover:bg-[#2B35AF]"
+              className="h-11 rounded-xl bg-[#0D4FE8] px-6 font-display text-sm font-bold tracking-wide text-white shadow-[0_14px_28px_-18px_rgba(13,79,232,0.85)] hover:bg-[#2B35AF]"
               onClick={isLastStep ? undefined : () => void handleNext()}
             >
               {isLastStep ? 'Envoyer mon profil →' : 'Suivant →'}
@@ -580,7 +573,7 @@ export function RegisterPage() {
 }
 
 const inputClassName =
-  'h-11 rounded-2xl border-[#DAD4C7] bg-white px-4 text-sm font-medium text-[#1A1F5C] shadow-sm placeholder:text-[#9498C4] focus-visible:border-[#2B35AF] focus-visible:ring-[#2B35AF]/20';
+  'h-10 rounded-xl border-[#DAD4C7] bg-white px-3.5 text-sm font-medium text-[#1A1F5C] shadow-sm placeholder:text-[#9498C4] focus-visible:border-[#2B35AF] focus-visible:ring-[#2B35AF]/20';
 
 function DecorativeLayer() {
   return (
@@ -667,27 +660,27 @@ function FormSection({
   children: ReactNode;
 }) {
   return (
-    <Card className="grid overflow-hidden rounded-[1.75rem] border border-[#2B35AF]/15 bg-white/95 p-0 text-[#1A1F5C] shadow-[0_20px_55px_-35px_rgba(26,31,92,0.55)] lg:grid-cols-[220px_minmax(0,1fr)]">
-      <aside className="flex items-center gap-4 border-b border-[#2B35AF]/10 p-5 sm:p-6 lg:block lg:border-b-0 lg:border-r lg:p-8">
-        <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#0D4FE8] font-mono text-sm font-bold text-white shadow-[0_10px_20px_-12px_rgba(13,79,232,0.9)]">
+    <Card className="grid overflow-hidden rounded-[1.5rem] border border-[#2B35AF]/15 bg-white/95 p-0 text-[#1A1F5C] shadow-[0_20px_55px_-35px_rgba(26,31,92,0.55)] lg:grid-cols-[190px_minmax(0,1fr)]">
+      <aside className="flex items-center gap-4 border-b border-[#2B35AF]/10 p-5 sm:p-5 lg:flex lg:flex-col lg:items-start lg:gap-3.5 lg:border-b-0 lg:border-r lg:p-6">
+        <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#0D4FE8] font-mono text-sm font-bold text-white shadow-[0_10px_20px_-12px_rgba(13,79,232,0.9)]">
           {step}
         </span>
-        <Icon className="size-9 shrink-0 text-[#0D4FE8] lg:mt-7" aria-hidden="true" />
-        <h2 className="font-display text-2xl font-bold leading-tight tracking-[-0.04em] text-[#07164C] lg:mt-6 lg:text-3xl">{title}</h2>
+        <Icon className="size-8 shrink-0 text-[#0D4FE8]" aria-hidden="true" />
+        <h2 className="font-display text-xl font-bold leading-tight tracking-[-0.03em] text-[#07164C] sm:text-2xl lg:text-[1.45rem]">{title}</h2>
       </aside>
 
-      <div className="space-y-7 p-5 sm:p-7 lg:p-8">{children}</div>
+      <div className="mx-auto w-full max-w-[620px] space-y-5 p-5 sm:p-6 lg:p-7">{children}</div>
     </Card>
   );
 }
 
 function Field({ children, className }: { children: ReactNode; className?: string }) {
-  return <div className={cn('space-y-2', className)}>{children}</div>;
+  return <div className={cn('space-y-2.5', className)}>{children}</div>;
 }
 
 function FieldLabel({ children, required, optional, className, ...props }: ComponentProps<typeof Label> & { required?: boolean; optional?: boolean }) {
   return (
-    <Label className={cn('text-xs font-extrabold leading-5 text-[#07164C]', className)} {...props}>
+    <Label className={cn('text-sm font-bold leading-5 text-[#07164C]', className)} {...props}>
       <span>{children}</span>
       {required ? <span className="text-[#FF6B35]">*</span> : null}
       {optional ? <span className="text-[0.68rem] font-semibold italic text-[#1A1F5C]/45">(optionnel)</span> : null}
@@ -730,7 +723,7 @@ function CheckboxGroup({
           const selectedValues = Array.isArray(field.value) ? field.value : [];
 
           return (
-            <div className={cn('grid gap-2', className)}>
+            <div className={cn('space-y-2.5', className)}>
               {checkboxOptions.map((option) => {
                 const id = createFieldId(name, option.value);
                 const checked = selectedValues.includes(option.value);
@@ -789,7 +782,7 @@ function RadioOptions({
         control={control}
         name={name}
         render={({ field }) => (
-          <RadioGroup value={field.value} onValueChange={field.onChange} className={cn('grid gap-2', className)} aria-invalid={Boolean(error)}>
+          <RadioGroup value={field.value} onValueChange={field.onChange} className={cn('space-y-2.5', className)} aria-invalid={Boolean(error)}>
             {radioOptions.map((option) => {
               const id = createFieldId(name, option.value);
               const checked = field.value === option.value;
@@ -820,7 +813,7 @@ function RatingScale({ control, error }: { control: Control<ApplicationFormValue
           <RadioGroup
             value={field.value}
             onValueChange={field.onChange}
-            className="grid grid-cols-5 overflow-hidden rounded-2xl border border-[#DAD4C7] bg-white shadow-sm"
+            className="grid grid-cols-5 overflow-hidden rounded-xl border border-[#DAD4C7] bg-white shadow-sm"
             aria-invalid={Boolean(error)}
           >
             {ratingValues.map((value) => {
@@ -833,7 +826,7 @@ function RatingScale({ control, error }: { control: Control<ApplicationFormValue
                   <Label
                     htmlFor={id}
                     className={cn(
-                      'flex h-11 items-center justify-center font-mono text-sm font-bold text-[#1A1F5C] transition-colors hover:bg-[#2B35AF]/5',
+                      'flex h-10 items-center justify-center font-mono text-sm font-bold text-[#1A1F5C] transition-colors hover:bg-[#2B35AF]/5',
                       checked && 'bg-[#2B35AF] text-white hover:bg-[#2B35AF]'
                     )}
                   >
@@ -855,7 +848,7 @@ function RatingScale({ control, error }: { control: Control<ApplicationFormValue
 }
 
 const optionCardClassName =
-  'min-h-11 cursor-pointer rounded-xl border border-[#DAD4C7] bg-white px-3 py-2.5 text-xs font-bold leading-5 text-[#1A1F5C]/78 shadow-sm transition-colors hover:border-[#2B35AF]/45 hover:bg-[#2B35AF]/5';
+  'min-h-10 cursor-pointer items-start gap-2.5 rounded-xl border border-[#DAD4C7] bg-white px-3 py-2 text-[0.82rem] font-semibold leading-5 text-[#1A1F5C]/78 shadow-sm transition-colors hover:border-[#2B35AF]/45 hover:bg-[#2B35AF]/5';
 
 function createFieldId(name: string, value: string) {
   return `${name}-${value
