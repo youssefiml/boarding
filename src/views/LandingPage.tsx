@@ -7,6 +7,7 @@ import heroGlobeImage from '@/assets/hero-globe-cutout.webp';
 import heroStudentImage from '@/assets/hero-student-cutout.webp';
 import heroSpaceBackground from '@/assets/heroSpaceBackground.webp';
 import saraAvatar from '@/assets/Sara.webp';
+import ShinyText from '@/components/ui/shiny-text';
 import { LandingFooter } from '@/features/landing/components/LandingFooter';
 import { PricingSection } from '@/features/landing/components/PricingSection';
 import ProcessSection from '@/features/landing/components/ProcessSection';
@@ -203,7 +204,18 @@ function HeroSection() {
                 <circle cx="12" cy="12" r="9" />
                 <path d="M3 12h18M12 3c2.4 2.6 3.6 5.6 3.6 9S14.4 18.4 12 21M12 3C9.6 5.6 8.4 8.6 8.4 12s1.2 6.4 3.6 9" />
               </svg>
-              La startup créée par des jeunes pour des jeunes
+              <ShinyText
+                text="La startup créée par des jeunes pour des jeunes"
+                speed={2.8}
+                delay={0.8}
+                color="rgba(219,234,254,0.86)"
+                shineColor="#ffffff"
+                spread={110}
+                direction="left"
+                yoyo={false}
+                pauseOnHover={false}
+                className="font-semibold"
+              />
             </p>
 
             <h1 className={cn('hero-title mt-8 text-lg font-extrabold leading-tight text-white', heroMotionClass)} style={{ animationDelay: '160ms' }}>
