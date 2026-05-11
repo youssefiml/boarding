@@ -45,9 +45,10 @@ export function AppRouter() {
       <Route path={ROUTES.root} element={accessToken ? <Navigate to={ROUTES.dashboard} replace /> : withSuspense(<LandingPage />)} />
 
       <Route element={<RequireGuest />}>
+        <Route path={ROUTES.register} element={withSuspense(<RegisterPage />)} />
+
         <Route element={<AuthLayout />}>
           <Route path={ROUTES.login} element={withSuspense(<LoginPage />)} />
-          <Route path={ROUTES.register} element={withSuspense(<RegisterPage />)} />
         </Route>
       </Route>
 
