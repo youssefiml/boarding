@@ -7,6 +7,7 @@ import heroGlobeImage from '@/assets/hero-globe-cutout.webp';
 import heroStudentImage from '@/assets/hero-student-cutout.webp';
 import heroSpaceBackground from '@/assets/heroSpaceBackground.webp';
 import saraAvatar from '@/assets/Sara.webp';
+import { LandingFooter } from '@/features/landing/components/LandingFooter';
 import { PricingSection } from '@/features/landing/components/PricingSection';
 import ProcessSection from '@/features/landing/components/ProcessSection';
 import { WhoWeAreSection } from '@/features/landing/components/WhoWeAreSection';
@@ -14,7 +15,6 @@ import { assetUrl } from '@/lib/asset-url';
 import { cn } from '@/lib/cn';
 
 const appointmentHref = 'mailto:lagenceboarding@gmail.com?subject=Rendez-vous%20gratuit%20Boarding';
-const contactHref = 'mailto:lagenceboarding@gmail.com?subject=Projet%20de%20stage%20a%20l%27etranger';
 
 const destinations = [
   {
@@ -71,6 +71,8 @@ const landingButtonPrimaryClass =
   'border-[#2557D6] bg-[#2557D6] text-white shadow-[0_20px_36px_-22px_rgba(37,87,214,0.95)] hover:bg-[#224fc4] hover:shadow-[0_24px_40px_-20px_rgba(37,87,214,0.9)] focus-visible:ring-[#2557D6]/70';
 const landingSurfaceCardClass = 'rounded-3xl border border-slate-200 bg-white shadow-[0_4px_14px_-8px_rgba(15,23,42,0.08)]';
 const heroMotionClass = 'motion-safe:animate-fade-in-up';
+const navActionButtonBaseClass =
+  'inline-flex items-center justify-center whitespace-nowrap rounded-[14px] px-7 text-[15px] font-semibold leading-none transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b] lg:h-12 max-[1366px]:h-11 max-[1366px]:px-5 max-[1366px]:text-sm';
 
 const heroStats = [
   { value: '+500', label: 'Étudiants accompagnés', icon: 'network' },
@@ -129,7 +131,7 @@ function HeroStatIcon({ icon }: { icon: (typeof heroStats)[number]['icon'] }) {
 
 function HeroSection() {
   return (
-    <section className="hero relative isolate overflow-hidden bg-[#020817] text-white [scroll-margin-top:6rem] lg:min-h-[980px]" id="accueil">
+    <section className="hero relative isolate overflow-hidden bg-[#020817] text-white [scroll-margin-top:6rem] lg:min-h-[min(96vh,980px)]" id="accueil">
       <img
         src={assetUrl(heroSpaceBackground)}
         alt=""
@@ -168,16 +170,19 @@ function HeroSection() {
           <div className="header-actions flex shrink-0 items-center gap-2">
             <a
               href="/login"
-              className="hidden h-10 w-[132px] items-center justify-center rounded-xl border border-white/35 bg-white/[0.02] px-4 text-sm font-bold text-white shadow-[0_20px_40px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#07152b] sm:inline-flex"
+              className={cn(
+                navActionButtonBaseClass,
+                'hidden min-w-[150px] border border-white/35 bg-white/[0.02] text-white shadow-[0_20px_40px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md transition-colors hover:bg-white/10 focus-visible:ring-brand-300 sm:inline-flex'
+              )}
             >
               Se connecter
             </a>
             <a
               href={appointmentHref}
               className={cn(
-                landingButtonBaseClass,
+                navActionButtonBaseClass,
                 landingButtonPrimaryClass,
-                'h-9 w-[120px] px-3 text-sm hover:translate-y-0 hover:bg-[#2557D6] hover:shadow-[0_20px_36px_-22px_rgba(37,87,214,0.95)] focus-visible:ring-offset-[#07152b]'
+                'min-w-[132px] hover:translate-y-0 hover:bg-[#2557D6] hover:shadow-[0_20px_36px_-22px_rgba(37,87,214,0.95)]'
               )}
             >
               Candidater
@@ -185,7 +190,7 @@ function HeroSection() {
           </div>
         </header>
 
-        <div className="hero-main relative grid items-center gap-10 pt-4 lg:min-h-[700px] lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:gap-12">
+        <div className="hero-main relative grid items-center gap-10 pt-4 lg:min-h-[min(64vh,700px)] lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:gap-12">
           <div className="hero-content relative z-30 max-w-[560px]">
             <p
               className={cn(
@@ -226,8 +231,8 @@ function HeroSection() {
             </div>
           </div>
 
-          <div className={cn('hero-visual relative h-[520px] w-full overflow-visible sm:h-[580px] lg:h-[700px] lg:translate-x-3 max-[1280px]:h-[620px] max-[1280px]:translate-x-0', heroMotionClass)} style={{ animationDelay: '420ms' }}>
-            <div className="pointer-events-none absolute right-[88px] top-[104px] z-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(49,144,255,0.58),rgba(29,95,215,0.24)_56%,transparent_78%)] blur-[56px] max-[1280px]:right-[60px] max-[1280px]:top-[92px] max-[1280px]:h-[340px] max-[1280px]:w-[340px]" aria-hidden="true" />
+          <div className={cn('hero-visual relative h-[520px] w-full overflow-visible sm:h-[580px] lg:h-[clamp(560px,64vh,700px)] lg:translate-x-3 max-[1280px]:h-[clamp(520px,60vh,620px)] max-[1280px]:translate-x-0', heroMotionClass)} style={{ animationDelay: '420ms' }}>
+            <div className="hero-visual-glow pointer-events-none absolute right-[88px] top-[104px] z-0 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle_at_center,rgba(49,144,255,0.58),rgba(29,95,215,0.24)_56%,transparent_78%)] blur-[56px] max-[1280px]:right-[60px] max-[1280px]:top-[92px] max-[1280px]:h-[340px] max-[1280px]:w-[340px]" aria-hidden="true" />
 
             <img
               src={assetUrl(heroGlobeImage)}
@@ -297,7 +302,7 @@ function HeroSection() {
           </div>
         </div>
 
-        <div className="trust-stats relative z-30 mt-[20px] h-auto rounded-[24px] border border-white/[0.1] bg-[rgba(6,18,38,0.65)] p-6 shadow-[0_32px_56px_-38px_rgba(0,0,0,0.9)] backdrop-blur-[12px] lg:h-[164px] lg:px-10 lg:py-8">
+        <div className="trust-stats relative z-40 mt-[20px] h-auto rounded-[24px] border border-white/[0.1] bg-[rgba(6,18,38,0.65)] p-6 shadow-[0_32px_56px_-38px_rgba(0,0,0,0.9)] backdrop-blur-[12px] lg:h-[164px] lg:px-10 lg:py-8">
           <dl className="grid h-full grid-cols-2 gap-y-7 lg:grid-cols-4 lg:items-center lg:gap-y-0" aria-label="Indicateurs clés">
             {heroStats.map((stat, i) => (
               <div
@@ -591,57 +596,6 @@ function TestimonialsSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function LandingFooter() {
-  return (
-  <footer className="border-t border-slate-200 bg-[#F5ECD7] py-12">
-      <div className={cn(landingShellClass, 'grid gap-8 md:grid-cols-[1.1fr_0.55fr_0.55fr]')}>
-        <div>
-          <a
-            href="#accueil"
-            className="inline-flex min-w-0 items-center gap-3 rounded-2xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-4 focus-visible:ring-offset-[#F5ECD7]"
-            aria-label="Retour à l’accueil Boarding"
-          >
-            <span
-              className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-[#d8eaf7] shadow-sm"
-              aria-hidden="true"
-              style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f4faff 100%)' }}
-            >
-              <img src={assetUrl(boardingLogo)} alt="" className="h-full w-full object-cover" style={{ objectPosition: '50% 50%', transform: 'scale(1.9)' }} />
-            </span>
-            <span className="flex min-w-0 flex-col">
-              <span className="text-base font-extrabold text-[#07182f]">Boarding</span>
-              <span className="hidden text-xs font-semibold text-slate-500 sm:block">Stages à l’étranger</span>
-            </span>
-          </a>
-          <p className="mt-4 max-w-md text-sm leading-6 text-slate-500">
-            Boarding accompagne les étudiants dans leur recherche de stage à l’étranger avec un parcours clair, humain et guidé.
-          </p>
-        </div>
-
-        <div className="flex flex-col gap-3 text-sm font-semibold text-slate-700" aria-label="Liens rapides">
-          <a href="#concept">Concept</a>
-          <a href="#destinations">Destinations</a>
-          <a href="#processus">Processus</a>
-          <a href="#offres">Offres</a>
-        </div>
-
-        <div className="flex flex-col gap-3 text-sm font-semibold text-slate-700" aria-label="Contact">
-          <a href="mailto:lagenceboarding@gmail.com">Email</a>
-          <a href="https://www.boardingagence.com" target="_blank" rel="noreferrer">
-            Site web
-          </a>
-          <a href={contactHref}>Contact</a>
-          <span className="text-slate-500">Instagram</span>
-        </div>
-      </div>
-
-      <div className={cn(landingShellClass, 'mt-8 border-t border-slate-200 pt-6 text-sm text-slate-500')}>
-        <span>© {new Date().getFullYear()} Boarding. Tous droits réservés.</span>
-      </div>
-    </footer>
   );
 }
 
