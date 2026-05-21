@@ -10,4 +10,9 @@ export const ROUTES = {
   messaging: '/messaging',
   journey: '/journey',
   resources: '/resources',
+  adminBackoffice: '/admin',
+  adminCompanies: '/admin/companies',
+  adminCompanyCreate: '/admin/companies/new',
+  adminCompanyEdit: (companyId: string) => `/admin/companies/${companyId}/edit`,
+  adminInternships: '/admin/internships',
 };

@@ -254,6 +254,7 @@ function companyToForm(company: AdminCompany): CompanyFormState {
 
 function formToPayload(form: CompanyFormState): AdminCompanyPayload {
   const capacity = Number(form.studentCapacity);
+  const hasCapacity = form.studentCapacity.trim().length > 0;
 
   return {
     name: form.name.trim(),
@@ -261,7 +262,7 @@ function formToPayload(form: CompanyFormState): AdminCompanyPayload {
     city: form.city,
     location: nullableText(form.location),
     description: nullableText(form.description),
-    studentCapacity: Number.isFinite(capacity) && capacity > 0 ? capacity : undefined,
+    studentCapacity: hasCapacity && Number.isFinite(capacity) && capacity >= 0 ? capacity : undefined,
     idealDuration: nullableText(form.idealDuration),
     periods: csvToList(form.periods),
     skills: csvToList(form.skills),

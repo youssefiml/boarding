@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 import { adminApi } from '@/api/modules/admin.api';
+import { ROUTES } from '@/app/routes';
 import { adminBadgeClass, adminTheme, formatDateLabel } from '@/app/layouts/admin-theme';
 import { AdminPageHeader } from '@/app/layouts/AdminPageHeader';
 import { useAdminSearch } from '@/app/layouts/admin-search-context';
@@ -98,7 +99,7 @@ export function AdminCompaniesPage() {
               <RefreshCw className="size-4" />
               Rafraîchir
             </Button>
-            <Button type="button" className="h-10 rounded-xl bg-slate-950 text-white hover:bg-slate-800" onClick={() => navigate('/admin/companies/new')}>
+            <Button type="button" className="h-10 rounded-xl bg-slate-950 text-white hover:bg-slate-800" onClick={() => navigate(ROUTES.adminCompanyCreate)}>
               <Plus className="size-4" />
               Nouvelle entreprise
             </Button>
@@ -116,7 +117,7 @@ export function AdminCompaniesPage() {
               </div>
               <h2 className="mt-4 text-lg font-semibold text-slate-950">Aucune entreprise partenaire</h2>
               <p className="mt-2 text-sm leading-6 text-slate-600">Ajoutez une première entreprise pour commencer à alimenter le matching.</p>
-              <Button type="button" className="mt-5 h-10 rounded-xl bg-slate-950 text-white hover:bg-slate-800" onClick={() => navigate('/admin/companies/new')}>
+              <Button type="button" className="mt-5 h-10 rounded-xl bg-slate-950 text-white hover:bg-slate-800" onClick={() => navigate(ROUTES.adminCompanyCreate)}>
                 <Plus className="size-4" />
                 Nouvelle entreprise
               </Button>
@@ -194,7 +195,7 @@ export function AdminCompaniesPage() {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-44">
-                    <DropdownMenuItem onSelect={() => navigate(`/admin/companies/${company.id}/edit`)}>
+                    <DropdownMenuItem onSelect={() => navigate(ROUTES.adminCompanyEdit(company.id))}>
                       <Pencil className="size-4" />
                       Modifier
                     </DropdownMenuItem>
