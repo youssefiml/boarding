@@ -242,7 +242,7 @@ function companyToForm(company: AdminCompany): CompanyFormState {
     city: cityOptions.includes(company.city as (typeof cityOptions)[number]) ? company.city ?? 'Casablanca' : 'Casablanca',
     location: company.location ?? '',
     description: company.description ?? '',
-    studentCapacity: company.studentCapacity ? String(company.studentCapacity) : '',
+    studentCapacity: company.studentCapacity != null ? String(company.studentCapacity) : '',
     idealDuration: company.idealDuration ?? '',
     periods: company.periods?.join(', ') ?? '',
     skills: company.skills?.join(', ') ?? '',
