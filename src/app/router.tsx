@@ -5,6 +5,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { RequireAuth } from '@/app/guards/RequireAuth';
 import { RequireGuest } from '@/app/guards/RequireGuest';
 import { AppLayout } from '@/app/layouts/AppLayout';
+import { AdminSearchProvider } from '@/app/layouts/admin-search-context';
 import { AuthLayout } from '@/app/layouts/AuthLayout';
 import { ROUTES } from '@/app/routes';
 import { useAuthStore } from '@/stores/auth.store';
@@ -21,6 +22,11 @@ const LandingPage = lazy(() => import('@/views/LandingPage').then((module) => ({
 const LoginPage = lazy(() => import('@/views/auth/LoginPage').then((module) => ({ default: module.LoginPage })));
 const RegisterPage = lazy(() => import('@/views/auth/RegisterPage').then((module) => ({ default: module.RegisterPage })));
 const NotFoundPage = lazy(() => import('@/views/NotFoundPage').then((module) => ({ default: module.NotFoundPage })));
+const AdminBackofficePage = lazy(() => import('@/views/admin/AdminBackofficePage').then((module) => ({ default: module.AdminBackofficePage })));
+const AdminCompaniesPage = lazy(() => import('@/views/admin/AdminCompaniesPage').then((module) => ({ default: module.AdminCompaniesPage })));
+const AdminCreateCompanyPage = lazy(() => import('@/views/admin/AdminCreateCompanyPage').then((module) => ({ default: module.AdminCreateCompanyPage })));
+const AdminEditCompanyPage = lazy(() => import('@/views/admin/AdminEditCompanyPage').then((module) => ({ default: module.AdminEditCompanyPage })));
+const AdminInternshipsPage = lazy(() => import('@/views/admin/AdminInternshipsPage').then((module) => ({ default: module.AdminInternshipsPage })));
 
 function RouteFallback() {
   return (
@@ -63,6 +69,20 @@ export function AppRouter() {
           <Route path={`${ROUTES.messaging}/:threadId`} element={withSuspense(<MessagingPage />)} />
           <Route path={ROUTES.journey} element={withSuspense(<JourneyPage />)} />
           <Route path={ROUTES.resources} element={withSuspense(<ResourcesPage />)} />
+          <Route
+            path={ROUTES.adminBackoffice}
+            element={withSuspense(<AdminSearchProvider><AdminBackofficePage /></AdminSearchProvider>)}
+          />
+          <Route
+            path={ROUTES.adminCompanies}
+            element={withSuspense(<AdminSearchProvider><AdminCompaniesPage /></AdminSearchProvider>)}
+          />
+          <Route path={ROUTES.adminCompanyCreate} element={withSuspense(<AdminCreateCompanyPage />)} />
+          <Route path="/admin/companies/:companyId/edit" element={withSuspense(<AdminEditCompanyPage />)} />
+          <Route
+            path={ROUTES.adminInternships}
+            element={withSuspense(<AdminSearchProvider><AdminInternshipsPage /></AdminSearchProvider>)}
+          />
         </Route>
       </Route>
 

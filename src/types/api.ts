@@ -109,3 +109,82 @@ export type MessageThreadsResponse = PaginatedResponse<MessageThread>;
 export type MessagesResponse = PaginatedResponse<ChatMessage>;
 
 export type ResourcesResponse = PaginatedResponse<ResourceItem>;
+
+export interface AdminAppointmentSummary {
+  id: string;
+  title?: string;
+  date?: string;
+  status?: string;
+}
+
+export interface AdminPaymentSummary {
+  status?: string;
+  updatedAt?: string;
+}
+
+export interface AdminStudentProfile {
+  id: string;
+  firstName?: string;
+  lastName?: string;
+  fullName?: string;
+  email?: string;
+  phone?: string;
+  accountStatus?: string;
+  latestPayment?: AdminPaymentSummary | null;
+  questionnaireStatus?: string;
+  contactStatus?: string;
+  nextRelevantAppointment?: AdminAppointmentSummary | null;
+  createdAt?: string;
+}
+
+export interface AdminCompany {
+  id: string;
+  name: string;
+  sector?: string;
+  city?: string;
+  location?: string;
+  description?: string;
+  studentCapacity?: number;
+  internshipCount?: number;
+  idealDuration?: string;
+  periods?: string[];
+  skills?: string[];
+  requirements?: string;
+  cultureTags?: string[];
+  internshipNeeds?: string;
+  createdAt?: string;
+}
+
+export interface AdminCompanyPayload {
+  name: string;
+  sector?: string;
+  city?: string;
+  location?: string;
+  description?: string;
+  studentCapacity?: number;
+  idealDuration?: string;
+  periods?: string[];
+  skills?: string[];
+  requirements?: string;
+  cultureTags?: string[];
+  internshipNeeds?: string;
+}
+
+export interface AdminInternshipOffer {
+  id: string;
+  title: string;
+  companyName?: string;
+  company?: Pick<AdminCompany, 'id' | 'name' | 'sector' | 'city' | 'location'> | null;
+  sector?: string;
+  domain?: string;
+  location?: string;
+  missions?: string;
+  criteria?: string;
+  createdAt?: string;
+}
+
+export type AdminStudentsResponse = AdminStudentProfile[] | PaginatedResponse<AdminStudentProfile>;
+
+export type AdminCompaniesResponse = AdminCompany[] | PaginatedResponse<AdminCompany>;
+
+export type AdminInternshipsResponse = AdminInternshipOffer[] | PaginatedResponse<AdminInternshipOffer>;
